@@ -5,8 +5,8 @@ import networkx as nx
 from copy import deepcopy
 from slither.slither import Slither
 
-# fn = 'ge-sc/data/reentrancy/source_code/simple_dao'
-fn = 'ge-sc/data/reentrancy/source_code/Bank'
+# fn = 'data/reentrancy/source_code/simple_dao'
+fn = 'data/reentrancy/source_code/Bank'
 
 slither = Slither(fn + '.sol')
 

@@ -1,4 +1,6 @@
 digraph "" {
+	Bank_wallet_0	[label="Node Type: ENTRY_POINT 0
+"];
 	Bank_wallet_1	[label="Node Type: RETURN 1
 
 EXPRESSION:
@@ -7,12 +9,12 @@ this.balance
 IRs:
 REF_0 -> BALANCE this
 RETURN REF_0"];
-	Bank_wallet_0	[label="Node Type: ENTRY_POINT 0
-"];
 	Bank_wallet_0 -> Bank_wallet_1	[key=0];
 	"Bank_wallet_function.name"	[contract=Bank,
 		label=Bank_wallet];
 	"Bank_wallet_function.name" -> Bank_wallet_0	[key=0];
+	Bank_recharge_0	[label="Node Type: ENTRY_POINT 0
+"];
 	Bank_recharge_1	[label="Node Type: EXPRESSION 1
 
 EXPRESSION:
@@ -22,8 +24,6 @@ IRs:
 REF_1(uint256) -> balances[msg.sender]
 REF_1(-> balances) = \
 REF_1 + msg.value"];
-	Bank_recharge_0	[label="Node Type: ENTRY_POINT 0
-"];
 	Bank_recharge_0 -> Bank_recharge_1	[key=0];
 	"Bank_recharge_function.name"	[contract=Bank,
 		label=Bank_recharge];
@@ -42,6 +42,9 @@ TMP_1(bool) = LOW_LEVEL_CALL, dest:msg.sender, function:call, arguments:[] value
 TMP_2(None) = SOLIDITY_CALL \
 require(bool)(TMP_1)"];
 	Bank_withdraw_0 -> Bank_withdraw_1	[key=0];
+	"Bank_withdraw_function.name"	[contract=Bank,
+		label=Bank_withdraw];
+	"Bank_withdraw_function.name" -> Bank_withdraw_0	[key=0];
 	Bank_withdraw_2	[label="Node Type: EXPRESSION 2
 
 EXPRESSION:
@@ -52,9 +55,8 @@ REF_5(uint256) -> balances[msg.sender]
 REF_5 (->balances) := \
 0(uint256)"];
 	Bank_withdraw_1 -> Bank_withdraw_2	[key=0];
-	"Bank_withdraw_function.name"	[contract=Bank,
-		label=Bank_withdraw];
-	"Bank_withdraw_function.name" -> Bank_withdraw_0	[key=0];
+	Attacker_constructor_0	[label="Node Type: ENTRY_POINT 0
+"];
 	Attacker_constructor_1	[label="Node Type: EXPRESSION 1
 
 EXPRESSION:
@@ -62,8 +64,6 @@ bankAddr = _bank
 
 IRs:
 bankAddr(address) := _bank(address)"];
-	Attacker_constructor_0	[label="Node Type: ENTRY_POINT 0
-"];
 	Attacker_constructor_0 -> Attacker_constructor_1	[key=0];
 	"Attacker_constructor_function.name"	[contract=Attacker,
 		label=Attacker_constructor];
@@ -78,6 +78,16 @@ attackCount = 0
 IRs:
 attackCount(uint256) := 0(uint256)"];
 	Attacker_attack_0 -> Attacker_attack_1	[key=0];
+	Attacker_attack_4	[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+bank.withdraw()
+
+IRs:
+HIGH_LEVEL_CALL, dest:bank(Bank), function:withdraw, arguments:[]  "];
+	"Attacker_attack_function.name"	[contract=Attacker,
+		label=Attacker_attack];
+	"Attacker_attack_function.name" -> Attacker_attack_0	[key=0];
 	Attacker_attack_2	[label="Node Type: NEW VARIABLE 2
 
 EXPRESSION:
@@ -95,19 +105,9 @@ bank.recharge.value(msg.value)()
 IRs:
 HIGH_LEVEL_CALL, dest:bank(Bank), function:recharge, \
 arguments:[] value:msg.value "];
-	Attacker_attack_2 -> Attacker_attack_3	[key=0];
-	Attacker_attack_4	[label="Node Type: EXPRESSION 4
-
-EXPRESSION:
-bank.withdraw()
-
-IRs:
-HIGH_LEVEL_CALL, dest:bank(Bank), function:withdraw, arguments:[]  "];
 	Attacker_attack_3 -> Attacker_attack_4	[key=0];
-	"Attacker_attack_function.name"	[contract=Attacker,
-		label=Attacker_attack];
-	"Attacker_attack_function.name" -> Attacker_attack_0	[key=0];
-	Attacker_fallback_5	[label="Node Type: END_IF 5
+	Attacker_attack_2 -> Attacker_attack_3	[key=0];
+	Attacker_fallback_0	[label="Node Type: ENTRY_POINT 0
 "];
 	Attacker_fallback_1	[label="Node Type: IF 1
 
@@ -120,6 +120,20 @@ TMP_8(bool) = \
 attackCount < 5
 TMP_9(bool) = TMP_7 && TMP_8
 CONDITION TMP_9"];
+	Attacker_fallback_0 -> Attacker_fallback_1	[key=0];
+	Attacker_fallback_4	[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+bank.withdraw()
+
+IRs:
+HIGH_LEVEL_CALL, dest:bank(Bank), function:withdraw, arguments:[]  "];
+	Attacker_fallback_5	[label="Node Type: END_IF 5
+"];
+	Attacker_fallback_4 -> Attacker_fallback_5	[key=0];
+	"Attacker_fallback_function.name"	[contract=Attacker,
+		label=Attacker_fallback];
+	"Attacker_fallback_function.name" -> Attacker_fallback_0	[key=0];
 	Attacker_fallback_1 -> Attacker_fallback_5	[key=0,
 		label=False];
 	Attacker_fallback_2	[label="Node Type: EXPRESSION 2
@@ -131,9 +145,6 @@ IRs:
 attackCount(uint256) = attackCount + 1"];
 	Attacker_fallback_1 -> Attacker_fallback_2	[key=0,
 		label=True];
-	Attacker_fallback_0	[label="Node Type: ENTRY_POINT 0
-"];
-	Attacker_fallback_0 -> Attacker_fallback_1	[key=0];
 	Attacker_fallback_3	[label="Node Type: NEW VARIABLE 3
 
 EXPRESSION:
@@ -142,19 +153,10 @@ bank = Bank(bankAddr)
 IRs:
 TMP_10 = CONVERT bankAddr to Bank
 bank(Bank) := TMP_10(Bank)"];
-	Attacker_fallback_2 -> Attacker_fallback_3	[key=0];
-	Attacker_fallback_4	[label="Node Type: EXPRESSION 4
-
-EXPRESSION:
-bank.withdraw()
-
-IRs:
-HIGH_LEVEL_CALL, dest:bank(Bank), function:withdraw, arguments:[]  "];
 	Attacker_fallback_3 -> Attacker_fallback_4	[key=0];
-	"Attacker_fallback_function.name"	[contract=Attacker,
-		label=Attacker_fallback];
-	"Attacker_fallback_function.name" -> Attacker_fallback_0	[key=0];
-	Attacker_fallback_4 -> Attacker_fallback_5	[key=0];
+	Attacker_fallback_2 -> Attacker_fallback_3	[key=0];
+	Attacker_wallet_0	[label="Node Type: ENTRY_POINT 0
+"];
 	Attacker_wallet_1	[label="Node Type: RETURN 1
 
 EXPRESSION:
@@ -163,8 +165,6 @@ this.balance
 IRs:
 REF_10 -> BALANCE this
 RETURN REF_10"];
-	Attacker_wallet_0	[label="Node Type: ENTRY_POINT 0
-"];
 	Attacker_wallet_0 -> Attacker_wallet_1	[key=0];
 	"Attacker_wallet_function.name"	[contract=Attacker,
 		label=Attacker_wallet];
