@@ -1,4 +1,4 @@
-data/*
+#data/*
 build/*
 node_modules/*
 package-lock.json
