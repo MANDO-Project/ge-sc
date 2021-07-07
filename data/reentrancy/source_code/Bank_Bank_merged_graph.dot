@@ -1,21 +1,46 @@
 digraph "" {
-	Bank_wallet_0	[label="Node Type: ENTRY_POINT 0
-"];
-	Bank_wallet_1	[label="Node Type: RETURN 1
+	node [label="\N"];
+	Bank_wallet_0	[contract_name=Bank,
+		function_fullname="wallet()",
+		label="Node Type: ENTRY_POINT
+",
+		node_expression=None,
+		node_irs=None,
+		node_type=ENTRY_POINT];
+	Bank_wallet_1	[contract_name=Bank,
+		function_fullname="wallet()",
+		label="Node Type: RETURN
 
 EXPRESSION:
 this.balance
 
 IRs:
 REF_0 -> BALANCE this
-RETURN REF_0"];
-	Bank_wallet_0 -> Bank_wallet_1	[key=0];
-	"Bank_wallet_function.name"	[contract=Bank,
-		label=Bank_wallet];
-	"Bank_wallet_function.name" -> Bank_wallet_0	[key=0];
-	Bank_recharge_0	[label="Node Type: ENTRY_POINT 0
-"];
-	Bank_recharge_1	[label="Node Type: EXPRESSION 1
+RETURN REF_0",
+		node_expression="this.balance",
+		node_irs="REF_0 -> BALANCE this
+RETURN REF_0",
+		node_type=RETURN];
+	Bank_wallet_0 -> Bank_wallet_1	[key=0,
+		edge_type=normal];
+	"Bank_wallet_function.name"	[contract_name=Bank,
+		function_fullname="wallet()",
+		label="Bank_wallet()",
+		node_expression=None,
+		node_irs=None,
+		node_type=FUNCTION_NAME];
+	"Bank_wallet_function.name" -> Bank_wallet_0	[key=0,
+		edge_type=normal];
+	Bank_recharge_0	[contract_name=Bank,
+		function_fullname="recharge()",
+		label="Node Type: ENTRY_POINT
+",
+		node_expression=None,
+		node_irs=None,
+		node_type=ENTRY_POINT];
+	Bank_recharge_1	[contract_name=Bank,
+		function_fullname="recharge()",
+		label="Node Type: EXPRESSION
 
 EXPRESSION:
 balances[msg.sender] += msg.value
@@ -23,14 +48,31 @@ balances[msg.sender] += msg.value
 IRs:
 REF_1(uint256) -> balances[msg.sender]
 REF_1(-> balances) = \
-REF_1 + msg.value"];
-	Bank_recharge_0 -> Bank_recharge_1	[key=0];
-	"Bank_recharge_function.name"	[contract=Bank,
-		label=Bank_recharge];
-	"Bank_recharge_function.name" -> Bank_recharge_0	[key=0];
-	Bank_withdraw_0	[label="Node Type: ENTRY_POINT 0
-"];
-	Bank_withdraw_1	[label="Node Type: EXPRESSION 1
+REF_1 + msg.value",
+		node_expression="balances[msg.sender] += msg.value",
+		node_irs="REF_1(uint256) -> balances[msg.sender]
+REF_1(-> balances) = REF_1 + msg.value",
+		node_type=EXPRESSION];
+	Bank_recharge_0 -> Bank_recharge_1	[key=0,
+		edge_type=normal];
+	"Bank_recharge_function.name"	[contract_name=Bank,
+		function_fullname="recharge()",
+		label="Bank_recharge()",
+		node_expression=None,
+		node_irs=None,
+		node_type=FUNCTION_NAME];
+	"Bank_recharge_function.name" -> Bank_recharge_0	[key=0,
+		edge_type=normal];
+	Bank_withdraw_0	[contract_name=Bank,
+		function_fullname="withdraw()",
+		label="Node Type: ENTRY_POINT
+",
+		node_expression=None,
+		node_irs=None,
+		node_type=ENTRY_POINT];
+	Bank_withdraw_1	[contract_name=Bank,
+		function_fullname="withdraw()",
+		label="Node Type: EXPRESSION
 
 EXPRESSION:
 require(bool)(msg.sender.call.value(balances[msg.sender])())
@@ -40,19 +82,38 @@ REF_4(uint256) -> balances[\
 msg.sender]
 TMP_1(bool) = LOW_LEVEL_CALL, dest:msg.sender, function:call, arguments:[] value:REF_4 
 TMP_2(None) = SOLIDITY_CALL \
-require(bool)(TMP_1)"];
-	Bank_withdraw_0 -> Bank_withdraw_1	[key=0];
-	"Bank_withdraw_function.name"	[contract=Bank,
-		label=Bank_withdraw];
-	"Bank_withdraw_function.name" -> Bank_withdraw_0	[key=0];
-	Bank_withdraw_2	[label="Node Type: EXPRESSION 2
+require(bool)(TMP_1)",
+		node_expression="require(bool)(msg.sender.call.value(balances[msg.sender])())",
+		node_irs="REF_4(uint256) -> balances[msg.sender]
+TMP_1(bool) = LOW_LEVEL_CALL, dest:msg.sender, function:call, arguments:[] value:REF_4 
+TMP_\
+2(None) = SOLIDITY_CALL require(bool)(TMP_1)",
+		node_type=EXPRESSION];
+	Bank_withdraw_0 -> Bank_withdraw_1	[key=0,
+		edge_type=normal];
+	Bank_withdraw_2	[contract_name=Bank,
+		function_fullname="withdraw()",
+		label="Node Type: EXPRESSION
 
 EXPRESSION:
 balances[msg.sender] = 0
 
 IRs:
 REF_5(uint256) -> balances[msg.sender]
-REF_5 (->balances) := \
-0(uint256)"];
-	Bank_withdraw_1 -> Bank_withdraw_2	[key=0];
+REF_5 (->balances) := 0(\
+uint256)",
+		node_expression="balances[msg.sender] = 0",
+		node_irs="REF_5(uint256) -> balances[msg.sender]
+REF_5 (->balances) := 0(uint256)",
+		node_type=EXPRESSION];
+	Bank_withdraw_1 -> Bank_withdraw_2	[key=0,
+		edge_type=normal];
+	"Bank_withdraw_function.name"	[contract_name=Bank,
+		function_fullname="withdraw()",
+		label="Bank_withdraw()",
+		node_expression=None,
+		node_irs=None,
+		node_type=FUNCTION_NAME];
+	"Bank_withdraw_function.name" -> Bank_withdraw_0	[key=0,
+		edge_type=normal];
 }
