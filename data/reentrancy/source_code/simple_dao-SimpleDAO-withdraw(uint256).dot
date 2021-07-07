@@ -1,0 +1,38 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: IF 1
+
+EXPRESSION:
+credit[msg.sender] < amount
+
+IRs:
+REF_1(uint256) -> credit[msg.sender]
+TMP_0(bool) = REF_1 < amount
+CONDITION TMP_0"];
+1->2[label="True"];
+1->3[label="False"];
+2[label="Node Type: THROW 2
+"];
+3[label="Node Type: END_IF 3
+"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+require(bool)(msg.sender.call.value(amount)())
+
+IRs:
+TMP_2(bool) = LOW_LEVEL_CALL, dest:msg.sender, function:call, arguments:[] value:amount 
+TMP_3(None) = SOLIDITY_CALL require(bool)(TMP_2)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+credit[msg.sender] -= amount
+
+IRs:
+REF_4(uint256) -> credit[msg.sender]
+REF_4(-> credit) = REF_4 - amount"];
+}

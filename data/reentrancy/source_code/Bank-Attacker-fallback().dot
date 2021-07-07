@@ -1,0 +1,44 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: IF 1
+
+EXPRESSION:
+msg.sender == bankAddr && attackCount < 5
+
+IRs:
+TMP_7(bool) = msg.sender == bankAddr
+TMP_8(bool) = attackCount < 5
+TMP_9(bool) = TMP_7 && TMP_8
+CONDITION TMP_9"];
+1->2[label="True"];
+1->5[label="False"];
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+attackCount += 1
+
+IRs:
+attackCount(uint256) = attackCount + 1"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+
+EXPRESSION:
+bank = Bank(bankAddr)
+
+IRs:
+TMP_10 = CONVERT bankAddr to Bank
+bank(Bank) := TMP_10(Bank)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+bank.withdraw()
+
+IRs:
+HIGH_LEVEL_CALL, dest:bank(Bank), function:withdraw, arguments:[]  "];
+4->5;
+5[label="Node Type: END_IF 5
+"];
+}

@@ -1,0 +1,12 @@
+strict digraph {
+subgraph cluster_67_crossFunctionReentrancy {
+label = "crossFunctionReentrancy"
+"67_GetFirstWithdrawalBonus" [label="GetFirstWithdrawalBonus"]
+"67_WithdrawReward" [label="WithdrawReward"]
+"67_GetFirstWithdrawalBonus" -> "67_WithdrawReward"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool)" 
+"67_WithdrawReward" -> "require(bool)"
+}
+}

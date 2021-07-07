@@ -1,0 +1,13 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+credit[to] += msg.value
+
+IRs:
+REF_0(uint256) -> credit[to]
+REF_0(-> credit) = REF_0 + msg.value"];
+}

@@ -1,0 +1,49 @@
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true ];
+subgraph "clusterPrivate_Bank" {
+  graph [ label = "Private_Bank", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Private_Bank.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "Private_Bank.Deposit" [ label = "Deposit", color = "green" ];
+  "Private_Bank.CashOut" [ label = "CashOut", color = "green" ];
+  "Private_Bank.<Fallback>" [ label = "<Fallback>", color = "green" ];
+}
+
+subgraph "clusterLog" {
+  graph [ label = "Log", color = "lightgray", style = "filled", bgcolor = "lightgray" ];
+  "Log.AddMessage" [ label = "AddMessage" ];
+}
+
+  "Private_Bank.Deposit";
+  "Log.AddMessage";
+  "Private_Bank.CashOut";
+  "Private_Bank.Deposit" -> "Log.AddMessage" [ color = "orange" ];
+  "Private_Bank.CashOut" -> "Log.AddMessage" [ color = "orange" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="green"]
+key:i2:e -> key2:i2:w [color="orange"]
+}
+}
+

@@ -1,0 +1,7 @@
+digraph{
+0[label="ENTRY_POINT
+id: 0"];
+1[label="EXPRESSION credit[to] += msg.value
+id: 1"];
+0->1;
+}

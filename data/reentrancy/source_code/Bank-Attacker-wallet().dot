@@ -1,0 +1,13 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+this.balance
+
+IRs:
+REF_10 -> BALANCE this
+RETURN REF_10"];
+}

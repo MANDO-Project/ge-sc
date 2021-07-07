@@ -1,0 +1,23 @@
+digraph{
+0[label="ENTRY_POINT
+id: 0"];
+1[label="IF msg.sender == bankAddr && attackCount < 5
+id: 1
+dominance frontier: [5]"];
+0->1;
+2[label="EXPRESSION attackCount += 1
+id: 2
+dominance frontier: [5]"];
+1->2;
+3[label="NEW VARIABLE bank = Bank(bankAddr)
+id: 3
+dominance frontier: [5]"];
+2->3;
+4[label="EXPRESSION bank.withdraw()
+id: 4
+dominance frontier: [5]"];
+3->4;
+5[label="END_IF
+id: 5"];
+1->5;
+}

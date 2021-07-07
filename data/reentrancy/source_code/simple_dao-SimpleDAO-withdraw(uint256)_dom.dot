@@ -1,0 +1,19 @@
+digraph{
+0[label="ENTRY_POINT
+id: 0"];
+1[label="IF credit[msg.sender] < amount
+id: 1"];
+0->1;
+2[label="THROW
+id: 2"];
+1->2;
+3[label="END_IF
+id: 3"];
+1->3;
+4[label="EXPRESSION require(bool)(msg.sender.call.value(amount)())
+id: 4"];
+3->4;
+5[label="EXPRESSION credit[msg.sender] -= amount
+id: 5"];
+4->5;
+}

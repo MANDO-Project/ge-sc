@@ -1,0 +1,71 @@
+digraph "" {
+	donate_0	[label="Node Type: ENTRY_POINT 0
+"];
+	donate_1	[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+credit[to] += msg.value
+
+IRs:
+REF_0(uint256) -> credit[to]
+REF_0(-> credit) = REF_0 + msg.value"];
+	donate_0 -> donate_1	[key=0];
+	"donate_function.name"	[label=donate];
+	"donate_function.name" -> donate_0	[key=0];
+	withdraw_0	[label="Node Type: ENTRY_POINT 0
+"];
+	withdraw_1	[label="Node Type: IF 1
+
+EXPRESSION:
+credit[msg.sender] < amount
+
+IRs:
+REF_1(uint256) -> credit[msg.sender]
+TMP_0(bool) = REF_1 < amount
+\
+CONDITION TMP_0"];
+	withdraw_0 -> withdraw_1	[key=0];
+	withdraw_2	[label="Node Type: THROW 2
+"];
+	"withdraw_function.name"	[label=withdraw];
+	"withdraw_function.name" -> withdraw_0	[key=0];
+	withdraw_4	[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+require(bool)(msg.sender.call.value(amount)())
+
+IRs:
+TMP_2(bool) = LOW_LEVEL_CALL, dest:msg.sender, \
+function:call, arguments:[] value:amount 
+TMP_3(None) = SOLIDITY_CALL require(bool)(TMP_2)"];
+	withdraw_5	[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+credit[msg.sender] -= amount
+
+IRs:
+REF_4(uint256) -> credit[msg.sender]
+REF_4(-> credit) = \
+REF_4 - amount"];
+	withdraw_4 -> withdraw_5	[key=0];
+	withdraw_3	[label="Node Type: END_IF 3
+"];
+	withdraw_3 -> withdraw_4	[key=0];
+	withdraw_1 -> withdraw_2	[key=0,
+		label=True];
+	withdraw_1 -> withdraw_3	[key=0,
+		label=False];
+	queryCredit_0	[label="Node Type: ENTRY_POINT 0
+"];
+	queryCredit_1	[label="Node Type: RETURN 1
+
+EXPRESSION:
+credit[to]
+
+IRs:
+REF_5(uint256) -> credit[to]
+RETURN REF_5"];
+	queryCredit_0 -> queryCredit_1	[key=0];
+	"queryCredit_function.name"	[label=queryCredit];
+	"queryCredit_function.name" -> queryCredit_0	[key=0];
+}

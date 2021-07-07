@@ -1,0 +1,4 @@
+digraph "" {
+SimpleDAO[shape="box"label=< <TABLE border="0"><TR><TD align="center"><B>SimpleDAO</B></TD></TR><TR><TD align="left"><I>Public Functions:</I></TD></TR><TR><TD align="left">    donate(address)</TD></TR><TR><TD align="left">    withdraw(uint256)</TD></TR><TR><TD align="left">    queryCredit(address)</TD></TR><TR><TD align="left"><I>Public Variables:</I></TD></TR><TR><TD align="left">    credit</TD></TR></TABLE> >];
+
+}

@@ -1,0 +1,10 @@
+digraph{
+0[label="ENTRY_POINT
+id: 0"];
+1[label="EXPRESSION require(bool)(msg.sender.call.value(balances[msg.sender])())
+id: 1"];
+0->1;
+2[label="EXPRESSION balances[msg.sender] = 0
+id: 2"];
+1->2;
+}

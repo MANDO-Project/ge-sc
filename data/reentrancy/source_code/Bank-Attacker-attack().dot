@@ -1,0 +1,37 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+attackCount = 0
+
+IRs:
+attackCount(uint256) := 0(uint256)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+bank = Bank(bankAddr)
+
+IRs:
+TMP_3 = CONVERT bankAddr to Bank
+bank(Bank) := TMP_3(Bank)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+bank.recharge.value(msg.value)()
+
+IRs:
+HIGH_LEVEL_CALL, dest:bank(Bank), function:recharge, arguments:[] value:msg.value "];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+bank.withdraw()
+
+IRs:
+HIGH_LEVEL_CALL, dest:bank(Bank), function:withdraw, arguments:[]  "];
+}

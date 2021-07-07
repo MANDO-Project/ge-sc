@@ -1,0 +1,58 @@
+digraph "" {
+	Bank_wallet_1	[label="Node Type: RETURN 1
+
+EXPRESSION:
+this.balance
+
+IRs:
+REF_0 -> BALANCE this
+RETURN REF_0"];
+	Bank_wallet_0	[label="Node Type: ENTRY_POINT 0
+"];
+	Bank_wallet_0 -> Bank_wallet_1	[key=0];
+	"Bank_wallet_function.name"	[contract=Bank,
+		label=Bank_wallet];
+	"Bank_wallet_function.name" -> Bank_wallet_0	[key=0];
+	Bank_recharge_1	[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+balances[msg.sender] += msg.value
+
+IRs:
+REF_1(uint256) -> balances[msg.sender]
+REF_1(-> balances) = \
+REF_1 + msg.value"];
+	Bank_recharge_0	[label="Node Type: ENTRY_POINT 0
+"];
+	Bank_recharge_0 -> Bank_recharge_1	[key=0];
+	"Bank_recharge_function.name"	[contract=Bank,
+		label=Bank_recharge];
+	"Bank_recharge_function.name" -> Bank_recharge_0	[key=0];
+	Bank_withdraw_0	[label="Node Type: ENTRY_POINT 0
+"];
+	Bank_withdraw_1	[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool)(msg.sender.call.value(balances[msg.sender])())
+
+IRs:
+REF_4(uint256) -> balances[\
+msg.sender]
+TMP_1(bool) = LOW_LEVEL_CALL, dest:msg.sender, function:call, arguments:[] value:REF_4 
+TMP_2(None) = SOLIDITY_CALL \
+require(bool)(TMP_1)"];
+	Bank_withdraw_0 -> Bank_withdraw_1	[key=0];
+	Bank_withdraw_2	[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+balances[msg.sender] = 0
+
+IRs:
+REF_5(uint256) -> balances[msg.sender]
+REF_5 (->balances) := \
+0(uint256)"];
+	Bank_withdraw_1 -> Bank_withdraw_2	[key=0];
+	"Bank_withdraw_function.name"	[contract=Bank,
+		label=Bank_withdraw];
+	"Bank_withdraw_function.name" -> Bank_withdraw_0	[key=0];
+}

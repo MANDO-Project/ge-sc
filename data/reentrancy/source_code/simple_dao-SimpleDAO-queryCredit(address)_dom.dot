@@ -1,0 +1,7 @@
+digraph{
+0[label="ENTRY_POINT
+id: 0"];
+1[label="RETURN credit[to]
+id: 1"];
+0->1;
+}

@@ -1,0 +1,16 @@
+digraph{
+0[label="ENTRY_POINT
+id: 0"];
+1[label="EXPRESSION attackCount = 0
+id: 1"];
+0->1;
+2[label="NEW VARIABLE bank = Bank(bankAddr)
+id: 2"];
+1->2;
+3[label="EXPRESSION bank.recharge.value(msg.value)()
+id: 3"];
+2->3;
+4[label="EXPRESSION bank.withdraw()
+id: 4"];
+3->4;
+}

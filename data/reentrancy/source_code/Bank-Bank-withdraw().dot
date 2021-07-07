@@ -1,0 +1,23 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool)(msg.sender.call.value(balances[msg.sender])())
+
+IRs:
+REF_4(uint256) -> balances[msg.sender]
+TMP_1(bool) = LOW_LEVEL_CALL, dest:msg.sender, function:call, arguments:[] value:REF_4 
+TMP_2(None) = SOLIDITY_CALL require(bool)(TMP_1)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+balances[msg.sender] = 0
+
+IRs:
+REF_5(uint256) -> balances[msg.sender]
+REF_5 (->balances) := 0(uint256)"];
+}

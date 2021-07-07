@@ -1,0 +1,19 @@
+digraph{
+0[label="ENTRY_POINT
+id: 0"];
+1[label="IF credit[msg.sender] >= amount
+id: 1
+dominance frontier: [4]"];
+0->1;
+2[label="EXPRESSION credit[msg.sender] -= amount
+id: 2
+dominance frontier: [4]"];
+1->2;
+3[label="EXPRESSION require(bool)(msg.sender.call.value(amount)())
+id: 3
+dominance frontier: [4]"];
+2->3;
+4[label="END_IF
+id: 4"];
+1->4;
+}

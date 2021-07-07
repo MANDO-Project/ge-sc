@@ -1,0 +1,12 @@
+strict digraph {
+subgraph cluster_63_SimpleDAO {
+label = "SimpleDAO"
+"63_queryCredit" [label="queryCredit"]
+"63_donate" [label="donate"]
+"63_withdraw" [label="withdraw"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool)" 
+"63_withdraw" -> "require(bool)"
+}
+}

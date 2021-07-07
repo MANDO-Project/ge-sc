@@ -1,0 +1,12 @@
+strict digraph {
+subgraph cluster_134_Attacker {
+label = "Attacker"
+"134_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"134_attack" [label="attack"]
+"134_fallback" [label="fallback"]
+"134_wallet" [label="wallet"]
+"134_constructor" [label="constructor"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

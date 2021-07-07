@@ -1,0 +1,12 @@
+strict digraph {
+subgraph cluster_51_Bank {
+label = "Bank"
+"51_wallet" [label="wallet"]
+"51_withdraw" [label="withdraw"]
+"51_recharge" [label="recharge"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool)" 
+"51_withdraw" -> "require(bool)"
+}
+}
