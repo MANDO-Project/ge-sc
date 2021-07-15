@@ -51,7 +51,7 @@ for contract in slither.contracts:
                     nx_g.add_edge(node.node_id, false_node.node_id, edge_type='if_false', label='False')
             else:
                 for son in node.sons:
-                    nx_g.add_edge(node.node_id, son.node_id, edge_type='normal')
+                    nx_g.add_edge(node.node_id, son.node_id, edge_type='next', label='Next')
             
         
         # filename = "{}-{}-{}.dot".format(fn, contract.name, function.full_name)
@@ -78,7 +78,7 @@ for contract in slither.contracts:
         nx_graph.add_node('function.name', label=contract.name + '_' + function.full_name,
                           node_type='FUNCTION_NAME', node_expression=None, node_irs=None,
                           function_fullname=function.full_name, contract_name=contract.name)
-        nx_graph.add_edge('function.name', 0, edge_type='normal')
+        nx_graph.add_edge('function.name', 0, edge_type='next', label='Next')
 
         print(nx_graph.edges(data=True))
 

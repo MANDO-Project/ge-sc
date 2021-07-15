@@ -22,7 +22,8 @@ RETURN REF_0",
 RETURN REF_0",
 		node_type=RETURN];
 	Bank_wallet_0 -> Bank_wallet_1	[key=0,
-		edge_type=normal];
+		edge_type=next,
+		label=Next];
 	"Bank_wallet_function.name"	[contract_name=Bank,
 		function_fullname="wallet()",
 		label="Bank_wallet()",
@@ -30,7 +31,8 @@ RETURN REF_0",
 		node_irs=None,
 		node_type=FUNCTION_NAME];
 	"Bank_wallet_function.name" -> Bank_wallet_0	[key=0,
-		edge_type=normal];
+		edge_type=next,
+		label=Next];
 	Bank_recharge_0	[contract_name=Bank,
 		function_fullname="recharge()",
 		label="Node Type: ENTRY_POINT
@@ -54,7 +56,8 @@ REF_1 + msg.value",
 REF_1(-> balances) = REF_1 + msg.value",
 		node_type=EXPRESSION];
 	Bank_recharge_0 -> Bank_recharge_1	[key=0,
-		edge_type=normal];
+		edge_type=next,
+		label=Next];
 	"Bank_recharge_function.name"	[contract_name=Bank,
 		function_fullname="recharge()",
 		label="Bank_recharge()",
@@ -62,7 +65,8 @@ REF_1(-> balances) = REF_1 + msg.value",
 		node_irs=None,
 		node_type=FUNCTION_NAME];
 	"Bank_recharge_function.name" -> Bank_recharge_0	[key=0,
-		edge_type=normal];
+		edge_type=next,
+		label=Next];
 	Bank_withdraw_0	[contract_name=Bank,
 		function_fullname="withdraw()",
 		label="Node Type: ENTRY_POINT
@@ -90,7 +94,8 @@ TMP_\
 2(None) = SOLIDITY_CALL require(bool)(TMP_1)",
 		node_type=EXPRESSION];
 	Bank_withdraw_0 -> Bank_withdraw_1	[key=0,
-		edge_type=normal];
+		edge_type=next,
+		label=Next];
 	Bank_withdraw_2	[contract_name=Bank,
 		function_fullname="withdraw()",
 		label="Node Type: EXPRESSION
@@ -107,7 +112,8 @@ uint256)",
 REF_5 (->balances) := 0(uint256)",
 		node_type=EXPRESSION];
 	Bank_withdraw_1 -> Bank_withdraw_2	[key=0,
-		edge_type=normal];
+		edge_type=next,
+		label=Next];
 	"Bank_withdraw_function.name"	[contract_name=Bank,
 		function_fullname="withdraw()",
 		label="Bank_withdraw()",
@@ -115,5 +121,6 @@ REF_5 (->balances) := 0(uint256)",
 		node_irs=None,
 		node_type=FUNCTION_NAME];
 	"Bank_withdraw_function.name" -> Bank_withdraw_0	[key=0,
-		edge_type=normal];
+		edge_type=next,
+		label=Next];
 }
