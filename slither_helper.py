@@ -7,6 +7,7 @@ from slither.slither import Slither
 
 from slither.core.cfg.node import Node, NodeType
 
+# Source code smart contract file
 # fn = 'data/reentrancy/source_code/simple_dao'
 fn = 'data/reentrancy/source_code/Bank'
 
@@ -103,25 +104,7 @@ for contract in slither.contracts:
 
 print(nx.info(merge_contract_graph))
 print(merged_graph.edges(data=True))
+
+# Dump CFG graph to gpickle and DOT file
 nx.nx_agraph.write_dot(merge_contract_graph, fn + '_merge_contract_graph.dot')
 nx.write_gpickle(merge_contract_graph, fn + '_merge_contract_graph.gpickle')
-
-# Combine Call Graph and CFGs
-# gv_graph = pgv.AGraph(fn + '.sol' + '.all_contracts.call-graph.dot')
-# for subgraph in gv_graph.subgraphs():
-#     print(subgraph.get_name())
-#     print(subgraph.nodes())
-
-# print(gv_graph.nodes())
-# print(gv_graph.edges())
-
-# temp_graph = nx.MultiDiGraph()
-# for node in merge_contract_graph.nodes(data=True):
-#     if 'function.name' in node[0]:
-#         cluster_name = node[1]['contract_name']
-#         for subgraph in gv_graph.subgraphs():
-#             if cluster_name in subgraph.get_name():
-#                 print(subgraph.nodes())
-#                 print(subgraph.get_name())
-#                 print(node)
-                

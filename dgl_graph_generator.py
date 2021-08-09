@@ -78,11 +78,6 @@ nx_graph = nx.convert_node_labels_to_integers(nx_graph)
 nx_g_data = generate_hetero_graph_data(nx_graph)
 print(nx_g_data)
 
-# num_nodes_dict = {
-#     'ENTRY_POINT': 7,
-#     'END_IF': 1
-# }
-# dgl_hete_graph = dgl.heterograph(nx_g_data, num_nodes_dict=num_nodes_dict)
 dgl_hete_graph = dgl.heterograph(nx_g_data)
 print(dgl_hete_graph)
 print(dgl_hete_graph.ntypes, dgl_hete_graph.num_nodes())
@@ -117,11 +112,12 @@ print(dgl_hete_graph.etypes, dgl_hete_graph.num_edges())
 # print(temp)
 
 # Test heterograph
-# graph_data = {
-#    ('drug', 'interacts', 'drug'): (torch.tensor([0, 1]), torch.tensor([1, 2])),
-#    ('drug', 'interacts', 'gene'): (torch.tensor([0, 1]), torch.tensor([2, 3])),
-#    ('drug', 'treats', 'disease'): (torch.tensor([1]), torch.tensor([2]))
-# }
+graph_data = {
+   ('drug', 'interacts', 'drug'): (torch.tensor([0, 1]), torch.tensor([1, 2])),
+   ('drug', 'interacts', 'gene'): (torch.tensor([0, 1]), torch.tensor([2, 3])),
+   ('drug', 'treats', 'disease'): (torch.tensor([1]), torch.tensor([2])),
+   ('drug', 'treats', 'abc'): (torch.tensor([], dtype=torch.int32), torch.tensor([], dtype=torch.int32))
+}
 
 # graph_data = {
 #    ('drug', 'interacts', 'drug'): (torch.tensor([0, 1]), torch.tensor([1, 2])),
@@ -129,12 +125,18 @@ print(dgl_hete_graph.etypes, dgl_hete_graph.num_edges())
 #    ('drug', 'treats', 'disease'): (torch.tensor([1]), torch.tensor([2]))
 # }
 
-# hg = dgl.heterograph(graph_data)
-# print(hg)
-# print(hg.ntypes)
-# print(hg.etypes)
+hg = dgl.heterograph(graph_data, idtype=torch.int32)
+print(hg)
+print(hg.ntypes)
+print(hg.etypes)
 
-# g = dgl.to_homogeneous(hg)
+# g = dgl.to_homogeneous(dgl_hete_graph)
 # print(g)
 # print('nodes:', g.nodes(), g.ndata)
 # print('edges:', g.edges(), g.edata)
+
+# g = dgl.to_homogeneous(graph_data)
+# print(g)
+# print('nodes:', g.nodes(), g.ndata)
+# print('edges:', g.edges(), g.edata)
+
