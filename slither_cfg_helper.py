@@ -103,7 +103,7 @@ for contract in slither.contracts:
         merge_contract_graph = nx.union(merge_contract_graph, merged_graph)
 
 print(nx.info(merge_contract_graph))
-print(merged_graph.edges(data=True))
+print(merge_contract_graph.edges(data=True))
 
 # Dump CFG graph to gpickle and DOT file
 nx.nx_agraph.write_dot(merge_contract_graph, fn + '_merge_contract_graph.dot')
