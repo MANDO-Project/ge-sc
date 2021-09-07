@@ -11,6 +11,7 @@ from slither.core.cfg.node import NodeType
 def compress_full_smart_contracts(smart_contracts, output):
     full_graph = None
     for sc in tqdm(smart_contracts):
+        file_name_sc = sc.split('/')[-1:][0]
         slither = Slither(sc)
         merge_contract_graph = None
         for contract in slither.contracts:
@@ -33,7 +34,7 @@ def compress_full_smart_contracts(smart_contracts, output):
                         node_irs = None
                     nx_g.add_node(node.node_id, label=node_label,
                                 node_type=node_type, node_expression=node_expression, node_irs=node_irs,
-                                function_fullname=function.full_name, contract_name=contract.name)
+                                function_fullname=function.full_name, contract_name=contract.name, source_file=file_name_sc)
                     
                     if node.type in [NodeType.IF, NodeType.IFLOOP]:
                         true_node = node.son_true
@@ -48,10 +49,11 @@ def compress_full_smart_contracts(smart_contracts, output):
 
                 nx_graph = nx_g
                 # add FUNCTION_NAME node
-                nx_graph.add_node('function.name', label=contract.name + '_' + function.full_name,
+                node_function_name = file_name_sc + '_' + contract.name + '_' + function.full_name
+                nx_graph.add_node(node_function_name, label=node_function_name,
                                 node_type='FUNCTION_NAME', node_expression=None, node_irs=None,
-                                function_fullname=function.full_name, contract_name=contract.name)
-                nx_graph.add_edge('function.name', 0, edge_type='next', label='Next')
+                                function_fullname=function.full_name, contract_name=contract.name, source_file=file_name_sc)
+                nx_graph.add_edge(node_function_name, 0, edge_type='next', label='Next')
 
                 if merged_graph is None:
                     nx_graph = nx.relabel_nodes(nx_graph, lambda x: contract.name + '_' + function.name + '_' + str(x), copy=False)
@@ -71,11 +73,11 @@ def compress_full_smart_contracts(smart_contracts, output):
             full_graph = nx.disjoint_union(full_graph, merge_contract_graph)
     
     nx.nx_agraph.write_dot(full_graph, join(output, 'compress_graphs.dot'))
-    nx.write_gpickle(merge_contract_graph, join(output, 'compress_graphs.gpickle'))
+    nx.write_gpickle(full_graph, join(output, 'compress_graphs.gpickle'))
 
 
 if __name__ == '__main__':
-    smart_contract_path = '/home/minhnn/minhnn/ICSE/datasets/Etherscan_Contract/extracted_source_code' 
-    output_path = '/home/minhnn/minhnn/ICSE/datasets/Etherscan_Contract/compressed_smart_contracts'
+    smart_contract_path = 'data/extracted_source_code' 
+    output_path = 'data/extracted_source_code'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path)]
     compress_full_smart_contracts(smart_contracts, output_path)
