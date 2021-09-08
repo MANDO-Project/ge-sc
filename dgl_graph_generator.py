@@ -68,7 +68,7 @@ def generate_hetero_graph_data(nx_graph):
 
     return dict_three_cannonical_egdes
 
-nx_graph = nx.read_gpickle('data/reentrancy/source_code/Bank_merge_contract_graph.gpickle')
+nx_graph = nx.read_gpickle('data/extracted_source_code/compress_graphs.gpickle')
 print(nx.info(nx_graph))
 # nx_graph, list_node_type = add_node_type_feature(nx_graph)
 # print(list_node_type)
@@ -112,12 +112,12 @@ print(dgl_hete_graph.etypes, dgl_hete_graph.num_edges())
 # print(temp)
 
 # Test heterograph
-graph_data = {
-   ('drug', 'interacts', 'drug'): (torch.tensor([0, 1]), torch.tensor([1, 2])),
-   ('drug', 'interacts', 'gene'): (torch.tensor([0, 1]), torch.tensor([2, 3])),
-   ('drug', 'treats', 'disease'): (torch.tensor([1]), torch.tensor([2])),
-   ('drug', 'treats', 'abc'): (torch.tensor([], dtype=torch.int32), torch.tensor([], dtype=torch.int32))
-}
+# graph_data = {
+#    ('drug', 'interacts', 'drug'): (torch.tensor([0, 1]), torch.tensor([1, 2])),
+#    ('drug', 'interacts', 'gene'): (torch.tensor([0, 1]), torch.tensor([2, 3])),
+#    ('drug', 'treats', 'disease'): (torch.tensor([1]), torch.tensor([2])),
+#    ('drug', 'treats', 'abc'): (torch.tensor([], dtype=torch.int32), torch.tensor([], dtype=torch.int32))
+# }
 
 # graph_data = {
 #    ('drug', 'interacts', 'drug'): (torch.tensor([0, 1]), torch.tensor([1, 2])),
@@ -125,10 +125,10 @@ graph_data = {
 #    ('drug', 'treats', 'disease'): (torch.tensor([1]), torch.tensor([2]))
 # }
 
-hg = dgl.heterograph(graph_data, idtype=torch.int32)
-print(hg)
-print(hg.ntypes)
-print(hg.etypes)
+# hg = dgl.heterograph(graph_data, idtype=torch.int32)
+# print(hg)
+# print(hg.ntypes)
+# print(hg.etypes)
 
 # g = dgl.to_homogeneous(dgl_hete_graph)
 # print(g)
