@@ -3,7 +3,7 @@ import dgl
 import networkx as nx
 import numpy as np
 
-def add_hetero_id(nx_graph):
+def add_hetero_ids(nx_graph):
     nx_g = nx_graph
     dict_hetero_id = {}
 
@@ -91,7 +91,7 @@ print(nx.info(nx_graph))
 # nx_graph, list_edge_type = add_edge_type_feature(nx_graph)
 # print(list_edge_type)
 nx_graph = nx.convert_node_labels_to_integers(nx_graph)
-nx_graph = add_hetero_id(nx_graph)
+nx_graph = add_hetero_ids(nx_graph)
 # print(nx_graph.nodes(data=True))
 
 nx_g_data = generate_hetero_graph_data(nx_graph)
