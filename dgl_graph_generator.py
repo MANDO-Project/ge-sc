@@ -3,6 +3,22 @@ import dgl
 import networkx as nx
 import numpy as np
 
+def add_hetero_id(nx_graph):
+    nx_g = nx_graph
+    dict_hetero_id = {}
+
+    for node, node_data in nx_g.nodes(data=True):
+        if node_data['node_type'] not in dict_hetero_id:
+            dict_hetero_id[node_data['node_type']] = 0
+        else:
+            dict_hetero_id[node_data['node_type']] += 1
+        
+        nx_g.nodes[node]['node_hetero_id'] = dict_hetero_id[node_data['node_type']]
+
+    # print(dict_hetero_id)
+
+    return nx_g
+
 def add_node_type_feature(nx_graph):
     nx_g = nx_graph
     list_node_type = []
@@ -57,10 +73,10 @@ def generate_hetero_graph_data(nx_graph):
         # print(dict_three_cannonical_egdes)
         # print(three_cannonical_egde, source, target)
         if three_cannonical_egde not in dict_three_cannonical_egdes.keys():
-            dict_three_cannonical_egdes[three_cannonical_egde] = [(source, target)]
+            dict_three_cannonical_egdes[three_cannonical_egde] = [(nx_g.nodes[source]['node_hetero_id'], nx_g.nodes[target]['node_hetero_id'])]
         else:
             current_val = dict_three_cannonical_egdes[three_cannonical_egde]
-            temp_edge = (source, target)
+            temp_edge = (nx_g.nodes[source]['node_hetero_id'], nx_g.nodes[target]['node_hetero_id'])
             current_val.append(temp_edge)
             dict_three_cannonical_egdes[three_cannonical_egde] = current_val
     
@@ -75,13 +91,19 @@ print(nx.info(nx_graph))
 # nx_graph, list_edge_type = add_edge_type_feature(nx_graph)
 # print(list_edge_type)
 nx_graph = nx.convert_node_labels_to_integers(nx_graph)
+nx_graph = add_hetero_id(nx_graph)
+# print(nx_graph.nodes(data=True))
+
 nx_g_data = generate_hetero_graph_data(nx_graph)
-print(nx_g_data)
+# print(nx_g_data)
 
 dgl_hete_graph = dgl.heterograph(nx_g_data)
 print(dgl_hete_graph)
-print(dgl_hete_graph.ntypes, dgl_hete_graph.num_nodes())
-print(dgl_hete_graph.etypes, dgl_hete_graph.num_edges())
+# print(dgl_hete_graph.ntypes, dgl_hete_graph.num_nodes())
+# print(dgl_hete_graph.etypes, dgl_hete_graph.num_edges())
+# for ntype in dgl_hete_graph.ntypes:
+#     print(ntype,dgl_hete_graph.num_nodes(ntype))
+
 
 # homo_g = dgl.to_homogeneous(dgl_hete_graph)
 # print(homo_g)
