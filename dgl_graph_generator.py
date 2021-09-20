@@ -15,7 +15,7 @@ def add_hetero_ids(nx_graph):
         
         nx_g.nodes[node]['node_hetero_id'] = dict_hetero_id[node_data['node_type']]
 
-    # print(dict_hetero_id)
+    print(dict_hetero_id)
 
     return nx_g
 
