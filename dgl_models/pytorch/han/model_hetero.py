@@ -111,7 +111,7 @@ class HAN(nn.Module):
 
 
 class HANVulClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, filename_mapping, in_size, hidden_size, out_size, num_heads, dropout, device):
+    def __init__(self, compressed_global_graph_path, filename_mapping, in_size=16, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
         super(HANVulClassifier, self).__init__()
         self.filename_mapping = filename_mapping
         self.device = device

@@ -7,10 +7,10 @@ from dgl.data import DGLDataset
 
 
 class EthIdsDataset(DGLDataset):
-    _label = './dataset/ijcai2020/labels.json'
-    _data_path = './dataset/ijcai2020/source_code'
-    _compressed_graph = './dataset/ijcai2020/compressed_graphs.gpickle'
-    def __init__(self, raw_dir=None, force_reload=False, verbose=False):
+    def __init__(self, data_path, compressed_graph, label, raw_dir=None, force_reload=True, verbose=False):
+        self._data_path = data_path
+        self._compressed_graph = compressed_graph
+        self._label = label
         super(EthIdsDataset, self).__init__(name='ethscids',
                                             raw_dir=raw_dir,
                                             force_reload=force_reload,
