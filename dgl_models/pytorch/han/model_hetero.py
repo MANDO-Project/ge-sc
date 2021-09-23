@@ -10,9 +10,12 @@ labels.
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+import networkx as nx
 import dgl
 from dgl.nn.pytorch import GATConv
+
+from graph_utils import add_hetero_ids, generate_hetero_graph_data, get_number_of_nodes
+
 
 class SemanticAttention(nn.Module):
     def __init__(self, in_size, hidden_size=128):
@@ -30,6 +33,7 @@ class SemanticAttention(nn.Module):
         beta = beta.expand((z.shape[0],) + beta.shape) # (N, M, 1)
 
         return (beta * z).sum(1)                       # (N, D * K)
+
 
 class HANLayer(nn.Module):
     """
@@ -87,6 +91,7 @@ class HANLayer(nn.Module):
 
         return self.semantic_attention(semantic_embeddings)                            # (N, D * K)
 
+
 class HAN(nn.Module):
     def __init__(self, meta_paths, in_size, hidden_size, out_size, num_heads, dropout):
         super(HAN, self).__init__()
@@ -103,3 +108,89 @@ class HAN(nn.Module):
             h = gnn(g, h)
 
         return self.predict(h)
+
+
+class HANVulClassifier(nn.Module):
+    def __init__(self, compressed_global_graph_path, filename_mapping, in_size, hidden_size, out_size, num_heads, dropout, device):
+        super(HANVulClassifier, self).__init__()
+        self.filename_mapping = filename_mapping
+        self.device = device
+        # Get Global graph
+        nx_graph = nx.read_gpickle(compressed_global_graph_path)
+        nx_graph = nx.convert_node_labels_to_integers(nx_graph)
+        nx_graph = add_hetero_ids(nx_graph)
+        nx_g_data, _node_tracker = generate_hetero_graph_data(nx_graph, filename_mapping)
+
+        # Reflect graph data
+        self.symmetrical_global_graph_data = self.reflect_graph(nx_g_data)
+        self.number_of_nodes = get_number_of_nodes(nx_graph)
+        self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
+        self.symmetrical_global_graph.ndata['filename'] = _node_tracker
+        self.meta_paths = self.get_symmatrical_metapaths()
+        self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
+        self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
+        features = {}
+        for ntype in self.symmetrical_global_graph.ntypes:
+            features[ntype] = self.nodetype2onehot(ntype).repeat(self.symmetrical_global_graph.num_nodes(ntype), 1)
+        self.symmetrical_global_graph.ndata['feat'] = features
+
+        # Init Model
+        self.layers = nn.ModuleList()
+        self.layers.append(HANLayer([self.meta_paths[0]], in_size, hidden_size, num_heads, dropout))
+        for meta_path in self.meta_paths[1:]:
+            self.layers.append(HANLayer([meta_path], in_size, hidden_size, num_heads, dropout))
+        self.features = {}
+        for han in self.layers:
+            ntype = han.meta_paths[0][0][0]
+            self.features[ntype] = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype])
+
+        self.classify = nn.Linear(hidden_size * num_heads , out_size)
+
+    # HAN defined metapaths are the path between the same type nodes.
+    # We need undirect the global graph.
+    def reflect_graph(self, nx_g_data):
+        symmetrical_data = {}
+        for metapath, value in nx_g_data.items():
+            if metapath[0] == metapath[-1]:
+                symmetrical_data[metapath] = (torch.cat((value[0], value[1])), torch.cat((value[1], value[0])))
+            else:
+                if metapath not in symmetrical_data.keys():
+                    symmetrical_data[metapath] = value
+                else:
+                    symmetrical_data[metapath] = (torch.cat((symmetrical_data[metapath][0], value[0])), torch.cat((symmetrical_data[metapath][1], value[1])))
+                if metapath[::-1] not in symmetrical_data.keys():
+                    symmetrical_data[metapath[::-1]] = (value[1], value[0])
+                else:
+                    symmetrical_data[metapath[::-1]] = (torch.cat((symmetrical_data[metapath[::-1]][0], value[1])), torch.cat((symmetrical_data[metapath[::-1]][1], value[0])))
+        return symmetrical_data
+    
+    # Get all the pair of symmetrical metapath from the symmetrical graph. 
+    def get_symmatrical_metapaths(self):
+        meta_paths = []
+        for mt in self.symmetrical_global_graph.canonical_etypes:
+            if mt[0] == mt[1]:
+                ref_mt = [mt]
+            else:
+                ref_mt = [mt, mt[::-1]]
+            if ref_mt not in meta_paths:
+                meta_paths.append(ref_mt)
+        return meta_paths
+
+    def nodetype2onehot(self, ntype):
+        feature = torch.zeros(len(self.ntypes_dict), dtype=torch.float)
+        feature[self.ntypes_dict[ntype]] = 1
+        return feature
+
+    def forward(self, batched_g_name):
+        batched_graph_embedded = []
+        for g_name in batched_g_name:
+            file_ids = self.filename_mapping[g_name]
+            graph_embedded = 0
+            for node_type in self.node_types:
+                file_mask = self.symmetrical_global_graph.ndata['filename'][node_type] == file_ids
+                if file_mask.sum().item() != 0:
+                    graph_embedded += self.features[node_type][file_mask].mean(0)
+            batched_graph_embedded.append(graph_embedded.tolist())
+        batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
+        output = self.classify(batched_graph_embedded)
+        return output

@@ -4,3 +4,8 @@ node_modules/*
 package-lock.json
 *.pyc
 *.pth
+
+outputs/*
+logs/*
+*.ipynb
+*.txt

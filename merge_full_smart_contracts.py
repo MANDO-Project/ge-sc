@@ -103,7 +103,7 @@ def compress_full_smart_contracts(smart_contracts, output):
 
 
 if __name__ == '__main__':
-    smart_contract_path = 'data/extracted_source_code' 
-    output_path = 'data/extracted_source_code'
+    smart_contract_path = '/home/minhnn/minhnn/ICSE/datasets/Etherscan_Contract/extracted_source_code' 
+    output_path = 'output/'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
     compress_full_smart_contracts(smart_contracts, output_path)
