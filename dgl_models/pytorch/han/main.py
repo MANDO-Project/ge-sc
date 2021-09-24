@@ -102,8 +102,8 @@ def main(args):
         val_subsampler = torch.utils.data.SubsetRandomSampler(val_ids)
         train_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=train_subsampler)
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
-        print('Start training fold {} with {}/{} train/val smart contracts'.format(fold, len(train_dataloader), len(val_dataloader)))
-        total_steps = len(train_dataloader) * epochs
+        print('Start training fold {} with {}/{} train/val smart contracts'.format(fold, len(train_subsampler), len(val_subsampler)))
+        total_steps = epochs
         model = HANVulClassifier(args['compressed_graph'], ethdataset.filename_mapping, in_size=16, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device=device)
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
@@ -118,6 +118,7 @@ def main(args):
             val_loss, val_micro_f1, val_macro_f1, val_acc = validate(args, model, val_dataloader, loss_fcn)
             print('Val Loss:   {:.4f} | Val Micro f1:   {:.4f} | Val Macro f1:   {:.4f} | Val Accuracy:   {:.4f}'.format(
                     epoch, val_loss, val_micro_f1, val_macro_f1, val_acc))
+            scheduler.step()
             train_results[fold]['loss'].append(train_loss)
             train_results[fold]['micro_f1'].append(train_micro_f1)
             train_results[fold]['macro_f1'].append(train_macro_f1)
@@ -130,7 +131,7 @@ def main(args):
             val_results[fold]['acc'].append(val_acc)
 
         print('Saving model fold {}'.format(fold))
-        save_path = f'./models/model_han_fold_{fold}.pth'
+        save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
         torch.save(model.state_dict(), save_path)
     return train_results, val_results
 
@@ -163,13 +164,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser('HAN')
     parser.add_argument('-s', '--seed', type=int, default=1,
                         help='Random seed')
-    parser.add_argument('-ld', '--log-dir', type=str, default='./logs/HAN_CrossVal',
+    parser.add_argument('-ld', '--log-dir', type=str, default='./logs/ijcai2020_dataset',
                         help='Dir for saving training results')
-    parser.add_argument('--compressed_graph', type=str, default='./dataset/ijcai2020/compressed_graphs.gpickle')
-    parser.add_argument('--dataset', type=str, default='./dataset/ijcai2020/source_code')
+    parser.add_argument('--compressed_graph', type=str, default='./dataset/aggregate/compressed_graph/compressed_graphs.gpickle')
+    parser.add_argument('--dataset', type=str, default='./dataset/aggregate/source_code')
     parser.add_argument('--testset', type=str, default='./dataset/smartbugs/source_code')
-    parser.add_argument('--label', type=str, default='./dataset/ijcai2020/labels.json')
-    parser.add_argument('--checkpoint', type=str, default='./models/model_han_fold_0.pth')
+    parser.add_argument('--label', type=str, default='./dataset/aggregate/labels.json')
+    parser.add_argument('--output_models', type=str, default='./models/ijcai2020_smartbugs')
+    parser.add_argument('--checkpoint', type=str, default='./models/ijcai2020_smartbugs/han_fold_1.pth')
 
     parser.add_argument('--k_folds', type=int, default=5)
     parser.add_argument('--test', action='store_true')
