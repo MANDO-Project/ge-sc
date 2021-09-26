@@ -104,7 +104,7 @@ def main(args):
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
         print('Start training fold {} with {}/{} train/val smart contracts'.format(fold, len(train_subsampler), len(val_subsampler)))
         total_steps = epochs
-        model = HANVulClassifier(args['compressed_graph'], ethdataset.filename_mapping, in_size=16, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device=device)
+        model = HANVulClassifier(args['compressed_graph'], ethdataset.filename_mapping, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device=device)
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=0.0005)
@@ -190,7 +190,7 @@ if __name__ == '__main__':
     'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
     }
     args.update(default_configure)
-
+    torch.manual_seed(args['seed'])
     # Training
     if not args['test']:
         print('Training phase')
@@ -204,7 +204,7 @@ if __name__ == '__main__':
         ethdataset = EthIdsDataset(args['dataset'], args['compressed_graph'], args['label'])
         smartbugs_ids = [ethdataset.filename_mapping[sc] for sc in os.listdir(args['testset'])]
         test_dataloader = GraphDataLoader(ethdataset, batch_size=8, drop_last=False, sampler=smartbugs_ids)
-        model = HANVulClassifier(args['compressed_graph'], ethdataset.filename_mapping, in_size=16, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device=args['device'])
+        model = HANVulClassifier(args['compressed_graph'], ethdataset.filename_mapping, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device=args['device'])
         model.load_state_dict(torch.load(args['checkpoint']))
         model.to(args['device'])
         test_micro_f1, test_macro_f1, test_acc = test(args, model, test_dataloader)

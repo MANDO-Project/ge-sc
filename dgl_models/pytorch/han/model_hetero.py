@@ -13,6 +13,8 @@ import torch.nn.functional as F
 import networkx as nx
 import dgl
 from dgl.nn.pytorch import GATConv
+from torch.nn.modules.sparse import Embedding
+from torch_geometric.nn import MetaPath2Vec
 
 from graph_utils import add_hetero_ids, generate_hetero_graph_data, get_number_of_nodes
 
@@ -111,7 +113,7 @@ class HAN(nn.Module):
 
 
 class HANVulClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, filename_mapping, in_size=16, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
+    def __init__(self, compressed_global_graph_path, filename_mapping, node_feature='metatpath2vec', hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
         super(HANVulClassifier, self).__init__()
         self.filename_mapping = filename_mapping
         self.device = device
@@ -130,15 +132,32 @@ class HANVulClassifier(nn.Module):
         self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
         self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
         features = {}
-        for ntype in self.symmetrical_global_graph.ntypes:
-            features[ntype] = self.nodetype2onehot(ntype).repeat(self.symmetrical_global_graph.num_nodes(ntype), 1)
+        if node_feature == 'nodetype':
+            for ntype in self.symmetrical_global_graph.ntypes:
+                features[ntype] = self._nodetype2onehot(ntype).repeat(self.symmetrical_global_graph.num_nodes(ntype), 1)
+            self.in_size = len(self.node_types)
+        elif node_feature == 'metatpath2vec':
+            embedding_dim = 128
+            self.in_size = embedding_dim
+            for metapath in self.meta_paths:
+                _metapath_embedding = MetaPath2Vec(self.symmetrical_global_graph_data, embedding_dim=embedding_dim,
+                        metapath=metapath, walk_length=50, context_size=7,
+                        walks_per_node=5, num_negative_samples=5, num_nodes_dict=None,
+                        sparse=True)
+                ntype = metapath[0][0]
+                if ntype not in features.keys():
+                    features[ntype] = _metapath_embedding(ntype).unsqueeze(0)
+                else:
+                    features[ntype] = torch.cat((features[ntype], _metapath_embedding(ntype).unsqueeze(0)))
+            features = {k: torch.mean(v, dim=0) for k, v in features.items()}
+        
         self.symmetrical_global_graph.ndata['feat'] = features
 
         # Init Model
         self.layers = nn.ModuleList()
-        self.layers.append(HANLayer([self.meta_paths[0]], in_size, hidden_size, num_heads, dropout))
+        self.layers.append(HANLayer([self.meta_paths[0]], self.in_size, hidden_size, num_heads, dropout))
         for meta_path in self.meta_paths[1:]:
-            self.layers.append(HANLayer([meta_path], in_size, hidden_size, num_heads, dropout))
+            self.layers.append(HANLayer([meta_path], self.in_size, hidden_size, num_heads, dropout))
         self.features = {}
         for han in self.layers:
             ntype = han.meta_paths[0][0][0]
@@ -176,7 +195,7 @@ class HANVulClassifier(nn.Module):
                 meta_paths.append(ref_mt)
         return meta_paths
 
-    def nodetype2onehot(self, ntype):
+    def _nodetype2onehot(self, ntype):
         feature = torch.zeros(len(self.ntypes_dict), dtype=torch.float)
         feature[self.ntypes_dict[ntype]] = 1
         return feature
