@@ -29,11 +29,11 @@ def get_node_info(node, list_vulnerabilities_info_in_sc):
     return node_label, node_type, node_expression, node_irs, node_info_vulnerabilities
 
 def get_vulnerabilities(file_name_sc, vulnerabilities):
-
     list_vulnerability_in_sc = None
-    for vul_item in vulnerabilities:
-        if file_name_sc == vul_item['name']:
-            list_vulnerability_in_sc = vul_item['vulnerabilities']
+    if vulnerabilities is not None:
+        for vul_item in vulnerabilities:
+            if file_name_sc == vul_item['name']:
+                list_vulnerability_in_sc = vul_item['vulnerabilities']
             
     return list_vulnerability_in_sc
 
@@ -65,11 +65,9 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
         except Exception as e:
             print(e)
             continue
-        
-        if vulnerabilities is not None:
-            list_vul_info_sc = get_vulnerabilities(file_name_sc, vulnerabilities)
-        else:
-            list_vul_info_sc = None
+
+        list_vul_info_sc = get_vulnerabilities(file_name_sc, vulnerabilities)
+
         print(file_name_sc, list_vul_info_sc)
 
         merge_contract_graph = None
@@ -149,9 +147,9 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
         elif merge_contract_graph is not None:
             full_graph = nx.disjoint_union(full_graph, merge_contract_graph)
 
-    # for node, node_data in full_graph.nodes(data=True):
-    #     if node_data['node_info_vulnerabilities'] is not None:
-    #         print('Node has vulnerabilities:', node, node_data)
+    for node, node_data in full_graph.nodes(data=True):
+        if node_data['node_info_vulnerabilities'] is not None:
+            print('Node has vulnerabilities:', node, node_data)
 
     nx.nx_agraph.write_dot(full_graph, join(output, 'compress_graphs.dot'))
     nx.write_gpickle(full_graph, join(output, 'compress_graphs.gpickle'))
