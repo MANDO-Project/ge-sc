@@ -147,9 +147,9 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
         elif merge_contract_graph is not None:
             full_graph = nx.disjoint_union(full_graph, merge_contract_graph)
 
-    for node, node_data in full_graph.nodes(data=True):
-        if node_data['node_info_vulnerabilities'] is not None:
-            print('Node has vulnerabilities:', node, node_data)
+    # for node, node_data in full_graph.nodes(data=True):
+    #     if node_data['node_info_vulnerabilities'] is not None:
+    #         print('Node has vulnerabilities:', node, node_data)
 
     nx.nx_agraph.write_dot(full_graph, join(output, 'compress_graphs.dot'))
     nx.write_gpickle(full_graph, join(output, 'compress_graphs.gpickle'))

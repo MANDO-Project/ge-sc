@@ -1,6 +1,7 @@
 import os
 
 import logging
+import json
 import pygraphviz as pgv
 import networkx as nx
 
@@ -27,13 +28,18 @@ def _edge(from_node, to_node, edge_type, label):
     
 
 # return unique id for contract function to use as node name
-def _function_node(contract, function, filename_input):
+def _function_node(contract, function, filename_input, tuple_vulnerabilities_in_sc):
+    node_function_source_code_lines = function.source_mapping['lines']
+    vulnerabilities_in_sc = revert_vulnerabilities_in_sc_from_tuple(tuple_vulnerabilities_in_sc)
+    node_function_info_vulnerabilities = get_vulnerabilities_of_node_by_source_code_line(node_function_source_code_lines, vulnerabilities_in_sc)
+
     node_info = {
         'node_id': f"{filename_input}_{contract.id}_{contract.name}_{function.full_name}",
         'label': f"{filename_input}_{contract.name}_{function.full_name}",
         'function_fullname': function.full_name, 
         'contract_name': contract.name, 
-        'source_file': filename_input
+        'source_file': filename_input,
+        'node_function_info_vulnerabilities': parse_vulnerabilities_in_sc_to_tuple(node_function_info_vulnerabilities)
     }
 
     # return f"{filename_input}_{contract.id}_{contract.name}_{function.full_name}"
@@ -46,7 +52,8 @@ def _solidity_function_node(solidity_function):
         'label': f"[Solidity]_{solidity_function.full_name}",
         'function_fullname': solidity_function.full_name,
         'contract_name': None,
-        'source_file': None
+        'source_file': None,
+        'node_function_info_vulnerabilities': None
     }
     # return f"[Solidity]_{solidity_function.full_name}"
     return node_info
@@ -63,6 +70,11 @@ def _get_node_info(tuple_node):
         contract_name = tuple_node[3][1]
     if tuple_node[4][0] == 'source_file':
         source_file = tuple_node[4][1]
+    if tuple_node[5][0] == 'node_function_info_vulnerabilities':
+        node_function_info_vulnerabilities = revert_vulnerabilities_in_sc_from_tuple(tuple_node[5][1])
+    
+    if len(node_function_info_vulnerabilities) == 0:
+        node_function_info_vulnerabilities = None
 
     if 'fallback' in node_id:
         node_type = 'fallback_function'
@@ -71,25 +83,27 @@ def _get_node_info(tuple_node):
     else:
         node_type = 'contract_function'
     
-    return node_id, node_label, node_type, function_fullname, contract_name, source_file
+    return node_id, node_label, node_type, function_fullname, contract_name, source_file, node_function_info_vulnerabilities
 
 # return edge info from a contract call tuple
 def _add_edge_info_to_nxgraph(contract_call, nx_graph):
     source = contract_call[0]
-    source_node_id, source_label, source_type, source_function_fullname, source_contract_name, source_source_file = _get_node_info(source)
+    source_node_id, source_label, source_type, source_function_fullname, source_contract_name, source_source_file, source_node_function_info_vulnerabilities = _get_node_info(source)
 
     if source_node_id not in nx_graph.nodes():
-        nx_graph.add_node(source_node_id, label=source_label, node_type=source_type, 
-                            function_fullname=source_function_fullname, contract_name=source_contract_name,
-                            source_file=source_source_file)
+        nx_graph.add_node(source_node_id, label=source_label, node_type=source_type,
+                          node_info_vulnerabilities=source_node_function_info_vulnerabilities,
+                          function_fullname=source_function_fullname, contract_name=source_contract_name,
+                          source_file=source_source_file)
 
     target = contract_call[1]
-    target_node_id, target_label, target_type, target_function_fullname, target_contract_name, target_source_file = _get_node_info(target)
+    target_node_id, target_label, target_type, target_function_fullname, target_contract_name, target_source_file, target_node_function_info_vulnerabilities = _get_node_info(target)
 
     if target_node_id not in nx_graph.nodes():
-        nx_graph.add_node(target_node_id, label=target_label, node_type=target_type, 
-                            function_fullname=target_function_fullname, contract_name=target_contract_name,
-                            source_file=target_source_file)
+        nx_graph.add_node(target_node_id, label=target_label, node_type=target_type,
+                          node_info_vulnerabilities=target_node_function_info_vulnerabilities,
+                          function_fullname=target_function_fullname, contract_name=target_contract_name,
+                          source_file=target_source_file)
 
     edge_type = contract_call[2]
     edge_label = contract_call[3]
@@ -104,14 +118,16 @@ def _process_internal_call(
     contract_calls,
     solidity_functions,
     solidity_calls,
-    filename_input
+    filename_input,
+    vulnerabilities_in_sc=[]
 ):
+    tuple_vulnerabilities_in_sc = parse_vulnerabilities_in_sc_to_tuple(vulnerabilities_in_sc)
     if isinstance(internal_call, (Function)):
         # print('tuple:', tuple(_function_node(contract, function, filename_input).items()))
         contract_calls[contract].add(
             _edge(
-                tuple(_function_node(contract, function, filename_input).items()),
-                tuple(_function_node(contract, internal_call, filename_input).items()),
+                tuple(_function_node(contract, function, filename_input, tuple_vulnerabilities_in_sc).items()),
+                tuple(_function_node(contract, internal_call, filename_input, tuple_vulnerabilities_in_sc).items()),
                 edge_type='internal_call',
                 label='internal_call'
             )
@@ -121,7 +137,7 @@ def _process_internal_call(
         solidity_functions.add(tuple(_solidity_function_node(internal_call).items()))
         solidity_calls.add(
             _edge(
-                tuple(_function_node(contract, function, filename_input).items()),
+                tuple(_function_node(contract, function, filename_input, tuple_vulnerabilities_in_sc).items()),
                 tuple(_solidity_function_node(internal_call).items()),
                 edge_type='solidity_call',
                 label='solidity_call'
@@ -135,23 +151,25 @@ def _process_external_call(
     contract_functions,
     external_calls,
     all_contracts,
-    filename_input
+    filename_input,
+    vulnerabilities_in_sc=[]
 ):
+    tuple_vulnerabilities_in_sc = parse_vulnerabilities_in_sc_to_tuple(vulnerabilities_in_sc)
     external_contract, external_function = external_call
-
+    
     if not external_contract in all_contracts:
         return
 
     # add variable as node to respective contract
     if isinstance(external_function, (Variable)):
         contract_functions[external_contract].add(tuple(
-                _function_node(external_contract, external_function, filename_input).items()))
+                _function_node(external_contract, external_function, filename_input, tuple_vulnerabilities_in_sc).items()))
 
 
     external_calls.add(
         _edge(
-            tuple(_function_node(contract, function, filename_input).items()),
-            tuple(_function_node(external_contract, external_function, filename_input).items()),
+            tuple(_function_node(contract, function, filename_input, tuple_vulnerabilities_in_sc).items()),
+            tuple(_function_node(external_contract, external_function, filename_input, tuple_vulnerabilities_in_sc).items()),
             edge_type='external_call',
             label='external_call'
         )
@@ -160,9 +178,10 @@ def _process_external_call(
 def _render_internal_calls(nx_graph, contract, contract_functions, contract_calls):
     if len(contract_functions[contract]) > 0:
         for contract_function in contract_functions[contract]:     
-            node_id, node_label, node_type, function_fullname, contract_name, source_file = _get_node_info(contract_function)
+            node_id, node_label, node_type, function_fullname, contract_name, source_file, node_function_info_vulnerabilities = _get_node_info(contract_function)
 
-            nx_graph.add_node(node_id, label=node_label, node_type=node_type, 
+            nx_graph.add_node(node_id, label=node_label, node_type=node_type,
+                              node_info_vulnerabilities=node_function_info_vulnerabilities,
                               function_fullname=function_fullname, contract_name=contract_name,
                               source_file=source_file)
     
@@ -175,9 +194,10 @@ def _render_solidity_calls(nx_graph, solidity_functions, solidity_calls):
     if len(solidity_functions) > 0:
         for solidity_function in solidity_functions:
             # print(solidity_function)
-            node_id, node_label, node_type, function_fullname, contract_name, source_file = _get_node_info(solidity_function)
+            node_id, node_label, node_type, function_fullname, contract_name, source_file, node_function_info_vulnerabilities = _get_node_info(solidity_function)
 
-            nx_graph.add_node(node_id, label=node_label, node_type=node_type, 
+            nx_graph.add_node(node_id, label=node_label, node_type=node_type,
+                              node_info_vulnerabilities=node_function_info_vulnerabilities,
                               function_fullname=function_fullname, contract_name=contract_name,
                               source_file=source_file)
     
@@ -199,10 +219,12 @@ def _process_function(
     solidity_calls,
     external_calls,
     all_contracts,
-    filename_input
+    filename_input,
+    vulnerabilities_in_sc=[]
 ):  
+    tuple_vulnerabilities_in_sc = parse_vulnerabilities_in_sc_to_tuple(vulnerabilities_in_sc)
     contract_functions[contract].add(tuple(
-        _function_node(contract, function, filename_input).items())
+        _function_node(contract, function, filename_input, tuple_vulnerabilities_in_sc).items())
     )
 
     for internal_call in function.internal_calls:
@@ -213,7 +235,8 @@ def _process_function(
             contract_calls,
             solidity_functions,
             solidity_calls,
-            filename_input
+            filename_input,
+            vulnerabilities_in_sc
         )
 
     for external_call in function.high_level_calls:
@@ -224,10 +247,11 @@ def _process_function(
             contract_functions,
             external_calls,
             all_contracts,
-            filename_input
+            filename_input,
+            vulnerabilities_in_sc
         )
 
-def _process_functions(functions, filename_input):
+def _process_functions(functions, filename_input, vulnerabilities_in_sc=None):
     contract_functions = defaultdict(set)  # contract -> contract functions nodes
     contract_calls = defaultdict(set)  # contract -> contract calls edges
 
@@ -250,7 +274,8 @@ def _process_functions(functions, filename_input):
             solidity_calls,
             external_calls,
             all_contracts,
-            filename_input
+            filename_input,
+            vulnerabilities_in_sc
         )
 
     # print('contract_functions:', contract_functions)
@@ -270,14 +295,81 @@ def _process_functions(functions, filename_input):
 
     return all_contracts_graph
 
+def parse_vulnerabilities_in_sc_to_tuple(vulnerabilities_in_sc):
+    vul_info = list()
 
-def compress_full_smart_contracts(smart_contracts, output):
+    if vulnerabilities_in_sc is not None:
+        for vul in vulnerabilities_in_sc:
+            for key, value in vul.items():
+                if key == 'lines':
+                    vul[key] = tuple(value)
+        
+        for vul in vulnerabilities_in_sc:
+            vul_info.append(tuple(vul.items()))
+
+    vul_info = tuple(vul_info)
+    return vul_info
+
+def revert_vulnerabilities_in_sc_from_tuple(tuple_vulnerabilities_in_sc):
+    vulnerabilities_in_sc = list(tuple_vulnerabilities_in_sc)
+
+    vul_info = []
+    if len(vulnerabilities_in_sc) > 0:
+        for vul in vulnerabilities_in_sc:
+            dct = dict((x, y) for x, y in vul)
+            for key, val in dct.items():
+                if key == 'lines':
+                    dct[key] = list(val)
+
+            vul_info.append(dct)
+
+    return vul_info
+
+
+def get_vulnerabilities(file_name_sc, vulnerabilities):
+    list_vulnerability_in_sc = []
+    if vulnerabilities is not None:
+        for vul_item in vulnerabilities:
+            if file_name_sc == vul_item['name']:
+                list_vulnerability_in_sc = vul_item['vulnerabilities']
+            
+    return list_vulnerability_in_sc
+
+def get_vulnerabilities_of_node_by_source_code_line(source_code_lines, list_vul_info_sc):
+    if list_vul_info_sc is not None:
+        list_vulnerability = []
+        for vul_info_sc in list_vul_info_sc:
+            vulnerabilities_lines = vul_info_sc['lines']
+            for source_code_line in source_code_lines:
+                for vulnerabilities_line in vulnerabilities_lines:
+                    if source_code_line == vulnerabilities_line:
+                        list_vulnerability.append(vul_info_sc)
+    else:
+        list_vulnerability = None
+    
+    if list_vulnerability is None or len(list_vulnerability) == 0:
+        node_info_vulnerabilities = None
+    else:
+        node_info_vulnerabilities = list_vulnerability
+
+    return node_info_vulnerabilities
+
+def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None):
     full_graph = None
     for sc in tqdm(smart_contracts):
         file_name_sc = sc.split('/')[-1:][0]
-        slither = Slither(sc)
-        call_graph_printer = GESCPrinters(slither, file_name_sc, logger)
-        print(call_graph_printer.filename)
+        try:
+            slither = Slither(sc)
+        except Exception as e:
+            print(e)
+            continue
+
+        vulnerabilities_info_in_sc = get_vulnerabilities(file_name_sc, vulnerabilities)
+
+        print(file_name_sc, vulnerabilities_info_in_sc)
+
+        call_graph_printer = GESCPrinters(slither, file_name_sc, logger, vulnerabilities_info_in_sc)
+        # print(call_graph_printer.filename)
 
         all_contracts_call_graph = call_graph_printer.generate_all_contracts_call_graph()
         # call_graph_printer.output(file_name_sc + 'GESC')
@@ -288,6 +380,9 @@ def compress_full_smart_contracts(smart_contracts, output):
     
     print(nx.info(full_graph))
     # print('Full graph nodes:', full_graph.nodes(data=True))
+    # for node, node_data in full_graph.nodes(data=True):
+    #     if node_data['node_info_vulnerabilities'] is not None:
+    #         print(node, node_data)
     # print('=======================================================')
     # print('Full graph edges:', full_graph.edges(data=True))
 
@@ -307,9 +402,10 @@ class GESCPrinters(AbstractPrinter):
 
     WIKI = 'https://github.com/trailofbits/slither/wiki/Printer-documentation#call-graph'
 
-    def __init__(self, slither, filename, logger):
+    def __init__(self, slither, filename, logger, vulnerabilities_in_sc=None):
         super().__init__(slither, logger)
         self.filename = filename
+        self.vulnerabilities_in_sc = vulnerabilities_in_sc
 
     def generate_all_contracts_call_graph(self):
         # Avoid dupplicate funcitons due to different compilation unit
@@ -321,7 +417,7 @@ class GESCPrinters(AbstractPrinter):
             function.canonical_name: function for function in all_functions
         }
 
-        all_contracts_call_graph = _process_functions(all_functions_as_dict.values(), self.filename)
+        all_contracts_call_graph = _process_functions(all_functions_as_dict.values(), self.filename, self.vulnerabilities_in_sc)
 
         return all_contracts_call_graph
 
@@ -362,7 +458,14 @@ class GESCPrinters(AbstractPrinter):
         #     print('Dumped:', derived_output_filename + '.gpickle')
 
 if __name__ == '__main__':
-    smart_contract_path = 'data/extracted_source_code' 
-    output_path = 'data/extracted_source_code'
+    # smart_contract_path = 'data/extracted_source_code/' 
+    # output_path = 'data/extracted_source_code/'
+    smart_contract_path = 'data/smartbug-dataset/reentrancy' 
+    output_path = 'data/smartbug-dataset/reentrancy'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
-    compress_full_smart_contracts(smart_contracts, output_path)
+
+    data_vulnerabilities = None
+    with open('data/smartbug-dataset/vulnerabilities.json') as f:
+        data_vulnerabilities = json.load(f)
+
+    compress_full_smart_contracts(smart_contracts, output_path, vulnerabilities=data_vulnerabilities)
