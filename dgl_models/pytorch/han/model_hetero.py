@@ -16,7 +16,7 @@ from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
-from graph_utils import add_hetero_ids, generate_hetero_graph_data, get_number_of_nodes
+from graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping
 
 
 class SemanticAttention(nn.Module):
@@ -113,14 +113,15 @@ class HAN(nn.Module):
 
 
 class HANVulClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, filename_mapping, node_feature='metatpath2vec', hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
+    def __init__(self, compressed_global_graph_path, filename_mapping, feature_extractor=None, node_feature='han', hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
         super(HANVulClassifier, self).__init__()
+        self.compressed_global_graph_path = compressed_global_graph_path
+        self.hidden_size = hidden_size
+        self.num_heads = num_heads
         self.filename_mapping = filename_mapping
         self.device = device
         # Get Global graph
-        nx_graph = nx.read_gpickle(compressed_global_graph_path)
-        nx_graph = nx.convert_node_labels_to_integers(nx_graph)
-        nx_graph = add_hetero_ids(nx_graph)
+        nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
         nx_g_data, _node_tracker = generate_hetero_graph_data(nx_graph, filename_mapping)
 
         # Reflect graph data
@@ -134,9 +135,9 @@ class HANVulClassifier(nn.Module):
         features = {}
         if node_feature == 'nodetype':
             for ntype in self.symmetrical_global_graph.ntypes:
-                features[ntype] = self._nodetype2onehot(ntype).repeat(self.symmetrical_global_graph.num_nodes(ntype), 1)
+                features[ntype] = self._nodetype2onehot(ntype).repeat(self.symmetrical_global_graph.num_nodes(ntype), 1).to(self.device)
             self.in_size = len(self.node_types)
-        elif node_feature == 'metatpath2vec':
+        elif node_feature == 'metapath2vec':
             embedding_dim = 128
             self.in_size = embedding_dim
             for metapath in self.meta_paths:
@@ -149,8 +150,26 @@ class HANVulClassifier(nn.Module):
                     features[ntype] = _metapath_embedding(ntype).unsqueeze(0)
                 else:
                     features[ntype] = torch.cat((features[ntype], _metapath_embedding(ntype).unsqueeze(0)))
-            features = {k: torch.mean(v, dim=0) for k, v in features.items()}
-        
+            features = {k: torch.mean(v, dim=0).to(self.device) for k, v in features.items()}
+        elif node_feature == 'han':
+            assert feature_extractor is not None, "Please pass features extraction model"
+            nx_cfg_graph = load_hetero_nx_graph(feature_extractor.compressed_global_graph_path)
+            self.in_size = feature_extractor.hidden_size * feature_extractor.num_heads
+            nx_graph = add_cfg_mapping(nx_graph, nx_cfg_graph)
+            han_features = feature_extractor.get_node_features()
+            features = {}
+            for node, node_data in nx_graph.nodes(data=True):
+                han_mapping = node_data['cfg_mapping']
+                for k, v in han_mapping.items():
+                    # change torch operation to change the compressed method of cfg subgraph of a call node.
+                    node_features = torch.mean(han_features[k][v], dim=0).unsqueeze(0).to(self.device)
+                if node_data['node_type'] not in features.keys():
+                    features[node_data['node_type']] = node_features
+                else:
+                    features[node_data['node_type']] = torch.cat((features[node_data['node_type']], node_features))
+
+        # self.symmetrical_global_graph = self.symmetrical_global_graph.to('cpu')
+        self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.symmetrical_global_graph.ndata['feat'] = features
 
         # Init Model
@@ -158,11 +177,6 @@ class HANVulClassifier(nn.Module):
         self.layers.append(HANLayer([self.meta_paths[0]], self.in_size, hidden_size, num_heads, dropout))
         for meta_path in self.meta_paths[1:]:
             self.layers.append(HANLayer([meta_path], self.in_size, hidden_size, num_heads, dropout))
-        self.features = {}
-        for han in self.layers:
-            ntype = han.meta_paths[0][0][0]
-            self.features[ntype] = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype])
-
         self.classify = nn.Linear(hidden_size * num_heads , out_size)
 
     # HAN defined metapaths are the path between the same type nodes.
@@ -200,7 +214,18 @@ class HANVulClassifier(nn.Module):
         feature[self.ntypes_dict[ntype]] = 1
         return feature
 
+    def _han_feature_extractor(self, han_global_graph):
+        pass
+
+    def get_node_features(self):
+        features = {}
+        for han in self.layers:
+            ntype = han.meta_paths[0][0][0]
+            features[ntype] = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+        return features
+
     def forward(self, batched_g_name):
+        features = self.get_node_features()
         batched_graph_embedded = []
         for g_name in batched_g_name:
             file_ids = self.filename_mapping[g_name]
@@ -208,8 +233,28 @@ class HANVulClassifier(nn.Module):
             for node_type in self.node_types:
                 file_mask = self.symmetrical_global_graph.ndata['filename'][node_type] == file_ids
                 if file_mask.sum().item() != 0:
-                    graph_embedded += self.features[node_type][file_mask].mean(0)
+                    graph_embedded += features[node_type][file_mask].mean(0)
             batched_graph_embedded.append(graph_embedded.tolist())
         batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
         output = self.classify(batched_graph_embedded)
-        return output
+        return output, features
+
+
+if __name__ == '__main__':
+    from dataloader import EthIdsDataset
+    dataset = './dataset/aggregate/source_code'
+    compressed_graph = './dataset/call_graph/compressed_graph/compress_call_graphs_no_solidity_calls.gpickle'
+    labels = './dataset/aggregate/labels.json'
+    ethdataset = EthIdsDataset(dataset, compressed_graph, labels)
+    # Get feature extractor
+    print('Getting features')
+    feature_compressed_graph = './dataset/aggregate/compressed_graph/compressed_graphs.gpickle'
+    device = 'cuda:0'
+    han_model = HANVulClassifier(feature_compressed_graph, ethdataset.filename_mapping, node_feature='metatpath2vec', device=device)
+    feature_extractor = './models/metapath2vec/han_fold_1.pth'
+    han_model.load_state_dict(torch.load(feature_extractor))
+    han_model.to(device)
+    han_model.eval()
+
+    compressed_graph = './dataset/call_graph/compressed_graph/compress_call_graphs_no_solidity_calls.gpickle'
+    model = HANVulClassifier(compressed_graph, ethdataset.filename_mapping, feature_extractor=han_model, node_feature='han', device=device)

@@ -1,5 +1,5 @@
 import torch
-
+import networkx as nx
 
 def add_hetero_ids(nx_graph):
     nx_g = nx_graph
@@ -13,6 +13,29 @@ def add_hetero_ids(nx_graph):
         
         nx_g.nodes[node]['node_hetero_id'] = dict_hetero_id[node_data['node_type']]
     return nx_g
+
+
+def add_cfg_mapping(nx_call_graph, nx_cfg_graph):
+    nx_graph = nx_call_graph
+    for call_node, call_node_data in nx_graph.nodes(data=True):
+        cfg_mapping = {}
+        for cfg_node, cfg_data in nx_cfg_graph.nodes(data=True):
+            if call_node_data['function_fullname'] == cfg_data['function_fullname'] and \
+               call_node_data['contract_name'] == cfg_data['contract_name'] and \
+               call_node_data['source_file'] == cfg_data['source_file']:
+                if cfg_data['node_type'] not in cfg_mapping.keys():
+                    cfg_mapping[cfg_data['node_type']] = [cfg_data['node_hetero_id']]
+                else:
+                    cfg_mapping[cfg_data['node_type']].append(cfg_data['node_hetero_id'])
+        nx_graph.nodes[call_node]['cfg_mapping'] = cfg_mapping
+    return nx_graph
+
+
+def load_hetero_nx_graph(nx_graph_path):
+    nx_graph = nx.read_gpickle(nx_graph_path)
+    nx_graph = nx.convert_node_labels_to_integers(nx_graph)
+    nx_graph = add_hetero_ids(nx_graph)
+    return nx_graph
 
 
 def convert_edge_data_to_tensor(dict_egdes):
