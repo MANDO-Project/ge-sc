@@ -1,4 +1,5 @@
 import os
+from sys import abiflags
 
 import torch
 from torch.nn.functional import cross_entropy
@@ -35,7 +36,7 @@ def train(args, model, train_loader, optimizer, loss_fcn, epoch):
     for idx, (batched_graph, labels) in enumerate(train_loader):
         labels = labels.to(args['device'])
         optimizer.zero_grad()
-        logits = model(batched_graph)
+        logits, _ = model(batched_graph)
         loss = loss_fcn(logits, labels)
         train_acc, train_micro_f1, train_macro_f1 = score(logits, labels)
         loss.backward()
@@ -58,7 +59,7 @@ def validate(args, model, val_loader, loss_fcn):
     with torch.no_grad():
         for idx, (batched_graph, labels) in enumerate(val_loader):
             labels = labels.to(args['device'])
-            logits = model(batched_graph)
+            logits, _ = model(batched_graph)
             loss = loss_fcn(logits, labels)
             total_loss += loss.item()
             val_acc, val_micro_f1, val_macro_f1 = score(logits, labels)
@@ -95,6 +96,16 @@ def main(args):
     kfold = KFold(n_splits=k_folds, shuffle=True)
     train_results = {}
     val_results = {}
+    # Get feature extractor
+    print('Getting features')
+    if args['node_feature'] == 'han':
+        han_model = HANVulClassifier(args['feature_compressed_graph'], ethdataset.filename_mapping, node_feature='metapath2vec', hidden_size=16, device=args['device'])
+        han_model.load_state_dict(torch.load(args['feature_extractor']))
+        han_model.to(args['device'])
+        han_model.eval()
+    else:
+        han_model = None
+
     for fold, (train_ids, val_ids) in enumerate(kfold.split(range(ethdataset.num_graphs))):
         train_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'lrs': []}
         val_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': []}
@@ -104,7 +115,7 @@ def main(args):
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
         print('Start training fold {} with {}/{} train/val smart contracts'.format(fold, len(train_subsampler), len(val_subsampler)))
         total_steps = epochs
-        model = HANVulClassifier(args['compressed_graph'], ethdataset.filename_mapping, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device=device)
+        model = HANVulClassifier(args['compressed_graph'], ethdataset.filename_mapping, feature_extractor=han_model, node_feature=args['node_feature'], device=device)
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=0.0005)
@@ -114,10 +125,10 @@ def main(args):
             print('Fold {} - Epochs {}'.format(fold, epoch))
             train_loss, train_micro_f1, train_macro_f1, train_acc, lrs = train(args, model, train_dataloader, optimizer, loss_fcn, epoch)
             print('Train Loss: {:.4f} | Train Micro f1: {:.4f} | Train Macro f1: {:.4f} | Train Accuracy: {:.4f}'.format(
-                    epoch, train_loss, train_micro_f1, train_macro_f1, train_acc))
+                    train_loss, train_micro_f1, train_macro_f1, train_acc))
             val_loss, val_micro_f1, val_macro_f1, val_acc = validate(args, model, val_dataloader, loss_fcn)
             print('Val Loss:   {:.4f} | Val Micro f1:   {:.4f} | Val Macro f1:   {:.4f} | Val Accuracy:   {:.4f}'.format(
-                    epoch, val_loss, val_micro_f1, val_macro_f1, val_acc))
+                    val_loss, val_micro_f1, val_macro_f1, val_acc))
             scheduler.step()
             train_results[fold]['loss'].append(train_loss)
             train_results[fold]['micro_f1'].append(train_micro_f1)
@@ -142,7 +153,33 @@ def load_model(model_path):
     return model.eval()
 
 
-def visualize_tensorboard(args, train_results, val_results):
+def visualize_average_k_folds(args, train_results, val_results):
+    avg_train_result = {}
+    avg_train_result['acc'] = torch.mean(torch.tensor([train_results[fold]['acc'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_train_result['micro_f1'] = torch.mean(torch.tensor([train_results[fold]['micro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_train_result['macro_f1'] = torch.mean(torch.tensor([train_results[fold]['macro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_train_result['loss'] = torch.mean(torch.tensor([train_results[fold]['loss'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_train_result['lrs'] = torch.mean(torch.tensor([train_results[fold]['lrs'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_val_result = {}
+    avg_val_result['acc'] = torch.mean(torch.tensor([val_results[fold]['acc'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_val_result['micro_f1'] = torch.mean(torch.tensor([val_results[fold]['micro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_val_result['macro_f1'] = torch.mean(torch.tensor([val_results[fold]['macro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_val_result['loss'] = torch.mean(torch.tensor([val_results[fold]['loss'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    writer = SummaryWriter(args['log_dir'])
+    for idx in range(args['num_epochs']):
+        writer.add_scalars('Accuracy', {f'train_avg': avg_train_result['acc'][idx],
+                                        f'valid_avg': avg_val_result['acc'][idx]}, idx)
+        writer.add_scalars('Micro_f1', {f'train_avg': avg_train_result['micro_f1'][idx],
+                                    f'valid_avg': avg_val_result['micro_f1'][idx]}, idx)
+        writer.add_scalars('Macro_f1', {f'train_avg': avg_train_result['macro_f1'][idx],
+                                    f'valid_avg': avg_val_result['macro_f1'][idx]}, idx)
+        writer.add_scalars('Loss', {f'train_avg': avg_train_result['loss'][idx],
+                                    f'valid_avg': avg_val_result['loss'][idx]}, idx)
+    for idx, lr in enumerate(avg_train_result['lrs']):
+        writer.add_scalar('Learning rate', lr, idx)
+
+
+def visualize_k_folds(args, train_results, val_results):
     writer = SummaryWriter(args['log_dir'])
     for fold in range(args['k_folds']):
         for idx in range(args['num_epochs']):
@@ -164,15 +201,16 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser('HAN')
     parser.add_argument('-s', '--seed', type=int, default=1,
                         help='Random seed')
-    parser.add_argument('-ld', '--log-dir', type=str, default='./logs/ijcai2020_dataset',
-                        help='Dir for saving training results')
-    parser.add_argument('--compressed_graph', type=str, default='./dataset/aggregate/compressed_graph/compressed_graphs.gpickle')
+    parser.add_argument('-ld', '--log-dir', type=str, default='./logs/ijcai2020_smartbugs', help='Dir for saving training results')
+    parser.add_argument('--compressed_graph', type=str, default='./dataset/call_graph/compressed_graph/compress_call_graphs_no_solidity_calls.gpickle')
     parser.add_argument('--dataset', type=str, default='./dataset/aggregate/source_code')
     parser.add_argument('--testset', type=str, default='./dataset/smartbugs/source_code')
     parser.add_argument('--label', type=str, default='./dataset/aggregate/labels.json')
-    parser.add_argument('--output_models', type=str, default='./models/ijcai2020_smartbugs')
+    parser.add_argument('--output_models', type=str, default='./models/call_graph')
     parser.add_argument('--checkpoint', type=str, default='./models/ijcai2020_smartbugs/han_fold_1.pth')
-
+    parser.add_argument('--feature_compressed_graph', type=str, default='./dataset/aggregate/compressed_graph/compressed_graphs.gpickle')
+    parser.add_argument('--feature_extractor', type=str, default='./models/metapath2vec_cfg/han_fold_1.pth')
+    parser.add_argument('--node_feature', type=str, default='metapath2vec')
     parser.add_argument('--k_folds', type=int, default=5)
     parser.add_argument('--test', action='store_true')
     parser.add_argument('--non_visualize', action='store_true')
@@ -185,19 +223,23 @@ if __name__ == '__main__':
     'dropout': 0.6,
     'weight_decay': 0.001,
     'num_epochs': 100,
-    'batch_size': 64,
+    'batch_size': 256,
     'patience': 100,
     'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
     }
     args.update(default_configure)
     torch.manual_seed(args['seed'])
+
+    if not os.path.exists(args['output_models']):
+        os.makedirs(args['output_models'])
+
     # Training
     if not args['test']:
         print('Training phase')
         train_results, val_results = main(args)
         if not args['non_visualize']:
             print('Visualizing')
-            visualize_tensorboard(args, train_results, val_results)
+            visualize_average_k_folds(args, train_results, val_results)
     # Testing
     else:
         print('Testing phase')
