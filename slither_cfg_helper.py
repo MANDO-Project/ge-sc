@@ -9,7 +9,7 @@ from slither.core.cfg.node import Node, NodeType
 
 # Source code smart contract file
 # fn = 'data/reentrancy/source_code/simple_dao'
-fn = 'data/reentrancy/source_code/Bank'
+fn = '/home/minhnn/minhnn/ICSE/ge-sc/dgl_models/pytorch/han/dataset/aggregate/source_code/1123'
 
 slither = Slither(fn + '.sol')
 
@@ -88,7 +88,7 @@ for contract in slither.contracts:
             merged_graph = deepcopy(nx_graph)
         else:
             nx_graph = nx.relabel_nodes(nx_graph, lambda x: contract.name + '_' + function.name + '_' + str(x), copy=False)
-            merged_graph = nx.union(merged_graph, nx_graph)
+            merged_graph = nx.disjoint_union(merged_graph, nx_graph)
 
     print(nx.info(merged_graph))
 
@@ -100,11 +100,11 @@ for contract in slither.contracts:
     if merge_contract_graph is None:
         merge_contract_graph = deepcopy(merged_graph)
     else:
-        merge_contract_graph = nx.union(merge_contract_graph, merged_graph)
+        merge_contract_graph = nx.disjoint_union(merge_contract_graph, merged_graph)
 
 print(nx.info(merge_contract_graph))
 print(merge_contract_graph.edges(data=True))
 
 # Dump CFG graph to gpickle and DOT file
-nx.nx_agraph.write_dot(merge_contract_graph, fn + '_merge_contract_graph.dot')
-nx.write_gpickle(merge_contract_graph, fn + '_merge_contract_graph.gpickle')
+nx.nx_agraph.write_dot('/home/minhnn/minhnn/ICSE/ge-sc/data/reentrancy/control_flow_graphs/1123.dot')
+nx.write_gpickle('/home/minhnn/minhnn/ICSE/ge-sc/data/reentrancy/control_flow_graphs/1123.gpickle')
