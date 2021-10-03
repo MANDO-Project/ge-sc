@@ -134,42 +134,73 @@ def get_number_of_nodes(nx_graph):
     return number_of_nodes
 
 
-if __name__ == '__main__':
-    extracted_graph = '/home/minhnn/minhnn/ICSE/datasets/Etherscan_Contract/extracted_source_code'
-    filename_mapping = filename_mapping(extracted_graph)
-    nx_graph = nx.read_gpickle('/home/minhnn/minhnn/ICSE/datasets/Etherscan_Contract/compressed_graphs/compress_graphs.gpickle')
+def load_nx_graph(nx_graph_path):
+    nx_graph = nx.read_gpickle(nx_graph_path)
     nx_graph = nx.convert_node_labels_to_integers(nx_graph)
     nx_graph = add_hetero_ids(nx_graph)
-    nx_g_data, node_tracker = generate_hetero_graph_data(nx_graph, filename_mapping)
-    count_node = {}
-    max_node_id = {}
-    print('number of metapath: ', len(list(nx_g_data.keys())))
-    for k, v in nx_g_data.items():
-        if k[0] not in count_node.keys():
-            count_node[k[0]] = torch.unique(v[0])
-            max_node_id[k[0]] = torch.max(v[0]).item()
-        else:
-            count_node[k[0]] = torch.unique(torch.cat((count_node[k[0]], torch.unique(v[0]))))
-            max_node_id[k[0]] = max(max_node_id[k[0]], torch.max(v[0]).item())
-        if k[2] not in count_node.keys():
-            count_node[k[2]] = torch.unique(v[1])
-            max_node_id[k[2]] = torch.max(v[1])
-        else:
-            count_node[k[2]] = torch.unique(torch.cat((count_node[k[2]], torch.unique(v[1]))))
-            max_node_id[k[2]] = max(max_node_id[k[2]], torch.max(v[1]).item())
-    for k, v in count_node.items():
-        print(k, v.shape, end='--')
-    print()
-    print(max_node_id)
-    total_nodes = 0
-    for k, v in node_tracker.items():
-        print(f'{k} - {v.shape}')
-    # node_tracker['EXPRESSION'] = torch.cat((node_tracker['EXPRESSION'], torch.ones(4) * -1))
-    # node_tracker['FUNCTION_NAME'] = torch.cat((node_tracker['FUNCTION_NAME'], torch.ones(1465) * -1))
+    return nx_graph
 
-    number_of_nodes = get_number_of_nodes(nx_graph)
-    print('number of nodes: ', number_of_nodes)
-    dgl_hete_graph = dgl.heterograph(nx_g_data, num_nodes_dict=number_of_nodes)
-    print(dgl_hete_graph)
-    dgl_hete_graph.ndata['filename'] = node_tracker
-    # print(node_tracker)
+
+def add_cfg_mapping(nx_call_graph, nx_cfg_graph):
+    nx_graph = nx_call_graph
+    for call_node, call_node_data in nx_graph.nodes(data=True):
+        cfg_mapping = {}
+        for cfg_node, cfg_data in nx_cfg_graph.nodes(data=True):
+            if call_node_data['function_fullname'] == cfg_data['function_fullname'] and \
+               call_node_data['contract_name'] == cfg_data['contract_name'] and \
+               call_node_data['source_file'] == cfg_data['source_file']:
+                if cfg_data['node_type'] not in cfg_mapping.keys():
+                    cfg_mapping[cfg_data['node_type']] = [cfg_data['node_hetero_id']]
+                else:
+                    cfg_mapping[cfg_data['node_type']].append(cfg_data['node_hetero_id'])
+        nx_graph.nodes[call_node]['cfg_mapping'] = cfg_mapping
+    return nx_graph
+
+
+if __name__ == '__main__':
+    extracted_graph = './dgl_models/pytorch/han/dataset/aggregate/source_code'
+    filename_mapping = filename_mapping(extracted_graph)
+    call_graph_nx_graph = load_nx_graph('./dgl_models/pytorch/han/dataset/call_graph/compressed_graph/compress_call_graphs_no_solidity_calls.gpickle')
+    cfg_nx_graph = load_nx_graph('./dgl_models/pytorch/han/dataset/aggregate/compressed_graph/compressed_graphs.gpickle')
+    call_graph_nx_graph = add_cfg_mapping(call_graph_nx_graph, cfg_nx_graph)
+
+
+    # for n, data in call_graph_nx_graph.nodes(data=True):
+    #     print(f'{n} - {data.get("cfg_mapping", None)}')
+        
+    # print(count)
+    # nx_g_data, node_tracker = generate_hetero_graph_data(nx_graph, filename_mapping)
+    # count_node = {}
+    # max_node_id = {}
+    # print('number of metapath: ', len(list(nx_g_data.keys())))
+    # for k, v in nx_g_data.items():
+    #     if k[0] not in count_node.keys():
+    #         count_node[k[0]] = torch.unique(v[0])
+    #         max_node_id[k[0]] = torch.max(v[0]).item()
+    #     else:
+    #         count_node[k[0]] = torch.unique(torch.cat((count_node[k[0]], torch.unique(v[0]))))
+    #         max_node_id[k[0]] = max(max_node_id[k[0]], torch.max(v[0]).item())
+    #     if k[2] not in count_node.keys():
+    #         count_node[k[2]] = torch.unique(v[1])
+    #         max_node_id[k[2]] = torch.max(v[1])
+    #     else:
+    #         count_node[k[2]] = torch.unique(torch.cat((count_node[k[2]], torch.unique(v[1]))))
+    #         max_node_id[k[2]] = max(max_node_id[k[2]], torch.max(v[1]).item())
+    # print('count by unique node id')
+    # for k, v in count_node.items():
+    #     print(k, v.shape)
+    # print('count by max node id')
+    # print(max_node_id)
+    # total_nodes = 0
+    # print('node tracker')
+    # for k, v in node_tracker.items():
+    #     print(f'{k} - {v.shape}')
+    # # node_tracker['EXPRESSION'] = torch.cat((node_tracker['EXPRESSION'], torch.ones(4) * -1))
+    # # node_tracker['FUNCTION_NAME'] = torch.cat((node_tracker['FUNCTION_NAME'], torch.ones(1465) * -1))
+
+    # number_of_nodes = get_number_of_nodes(nx_graph)
+    # print('number of nodes: ', number_of_nodes)
+    # dgl_hete_graph = dgl.heterograph(nx_g_data, num_nodes_dict=number_of_nodes)
+    # print(dgl_hete_graph)
+    # dgl_hete_graph.ndata['filename'] = node_tracker
+    # # print(node_tracker)
