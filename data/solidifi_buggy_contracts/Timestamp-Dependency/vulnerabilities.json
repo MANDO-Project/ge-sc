@@ -1,0 +1,1983 @@
+[
+    {
+        "name": "buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_19.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    80,
+                    354,
+                    348,
+                    342,
+                    336,
+                    328,
+                    318,
+                    308,
+                    300,
+                    286,
+                    276,
+                    262,
+                    252,
+                    238,
+                    229,
+                    220,
+                    210,
+                    200,
+                    186,
+                    177,
+                    163,
+                    144,
+                    132,
+                    115,
+                    107,
+                    99,
+                    89,
+                    69,
+                    58
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_18.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    258,
+                    126,
+                    97,
+                    92,
+                    142,
+                    621,
+                    608,
+                    595,
+                    579,
+                    561,
+                    534,
+                    510,
+                    482,
+                    465,
+                    453,
+                    442,
+                    431,
+                    418,
+                    405,
+                    396,
+                    382,
+                    341,
+                    316,
+                    286,
+                    157,
+                    147,
+                    132,
+                    111,
+                    92,
+                    87,
+                    83,
+                    77,
+                    67,
+                    62,
+                    252,
+                    248,
+                    243,
+                    233,
+                    227,
+                    223,
+                    213,
+                    203,
+                    198,
+                    194,
+                    189
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_9.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    143,
+                    139,
+                    135,
+                    153,
+                    73,
+                    372,
+                    358,
+                    339,
+                    320,
+                    297,
+                    278,
+                    255,
+                    236,
+                    217,
+                    203,
+                    190,
+                    178,
+                    63,
+                    123,
+                    118,
+                    106,
+                    96,
+                    90,
+                    84,
+                    80,
+                    55
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_42.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    151,
+                    149,
+                    17,
+                    33,
+                    253,
+                    244,
+                    235,
+                    225,
+                    218,
+                    205,
+                    189,
+                    172,
+                    94,
+                    84,
+                    79,
+                    38,
+                    23,
+                    159,
+                    139,
+                    134,
+                    123,
+                    113,
+                    108,
+                    102,
+                    12,
+                    8
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_43.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    355,
+                    251,
+                    37,
+                    10,
+                    306,
+                    422,
+                    409,
+                    396,
+                    383,
+                    336,
+                    327,
+                    314,
+                    275,
+                    260,
+                    207,
+                    180,
+                    138,
+                    129,
+                    116,
+                    108,
+                    93,
+                    78,
+                    68,
+                    56,
+                    47,
+                    18,
+                    287,
+                    246,
+                    32,
+                    27
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_32.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    201,
+                    199,
+                    247,
+                    239,
+                    194,
+                    182,
+                    166,
+                    147,
+                    132,
+                    81,
+                    75,
+                    65,
+                    59,
+                    49,
+                    227,
+                    222,
+                    216,
+                    210,
+                    114,
+                    109,
+                    99
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_30.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    839,
+                    835,
+                    764,
+                    762,
+                    682,
+                    678,
+                    925,
+                    915,
+                    900,
+                    885,
+                    862,
+                    848,
+                    826,
+                    812,
+                    803,
+                    795,
+                    786,
+                    772,
+                    748,
+                    739,
+                    725,
+                    712,
+                    704,
+                    690,
+                    646,
+                    623,
+                    601,
+                    588,
+                    568,
+                    542,
+                    517,
+                    490,
+                    464,
+                    453,
+                    444,
+                    435,
+                    417,
+                    403,
+                    385,
+                    369,
+                    350,
+                    336,
+                    317,
+                    309,
+                    300
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_36.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    255,
+                    253,
+                    251,
+                    249,
+                    247,
+                    243,
+                    44,
+                    38,
+                    549,
+                    486,
+                    454,
+                    419,
+                    392,
+                    346,
+                    317,
+                    297,
+                    119,
+                    113,
+                    103,
+                    98,
+                    88,
+                    78,
+                    73,
+                    63,
+                    56,
+                    31,
+                    17,
+                    238,
+                    233,
+                    228,
+                    224,
+                    218,
+                    208,
+                    203,
+                    198,
+                    9
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_44.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    345,
+                    152,
+                    150,
+                    39,
+                    10,
+                    435,
+                    422,
+                    409,
+                    398,
+                    379,
+                    329,
+                    316,
+                    307,
+                    239,
+                    212,
+                    171,
+                    161,
+                    138,
+                    125,
+                    117,
+                    104,
+                    89,
+                    79,
+                    68,
+                    58,
+                    49,
+                    18,
+                    283,
+                    34,
+                    29
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_50.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    64,
+                    61,
+                    91,
+                    296,
+                    290,
+                    269,
+                    245,
+                    230,
+                    222,
+                    208,
+                    194,
+                    179,
+                    168,
+                    154,
+                    145,
+                    136,
+                    124,
+                    114,
+                    98,
+                    81,
+                    50,
+                    39,
+                    27,
+                    20,
+                    15,
+                    10
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_8.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    293,
+                    100,
+                    96,
+                    92,
+                    13,
+                    391,
+                    377,
+                    366,
+                    355,
+                    338,
+                    323,
+                    302,
+                    256,
+                    229,
+                    206,
+                    187,
+                    166,
+                    148,
+                    118,
+                    51,
+                    24,
+                    281,
+                    275,
+                    269,
+                    86,
+                    82,
+                    74,
+                    69,
+                    65,
+                    60,
+                    8
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_24.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    376,
+                    370,
+                    961,
+                    949,
+                    911,
+                    901,
+                    845,
+                    819,
+                    795,
+                    765,
+                    755,
+                    728,
+                    713,
+                    695,
+                    682,
+                    655,
+                    629,
+                    565,
+                    547,
+                    534,
+                    516,
+                    493,
+                    457,
+                    424,
+                    408,
+                    401,
+                    386,
+                    357,
+                    344,
+                    321,
+                    317,
+                    311,
+                    301,
+                    296,
+                    290,
+                    286,
+                    281,
+                    271,
+                    265,
+                    261,
+                    251,
+                    241,
+                    236,
+                    232,
+                    226
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_21.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    62,
+                    181,
+                    481,
+                    476,
+                    470,
+                    454,
+                    302,
+                    285,
+                    264,
+                    233,
+                    217,
+                    201,
+                    188,
+                    114,
+                    22,
+                    17,
+                    11,
+                    5,
+                    166,
+                    160,
+                    149,
+                    138,
+                    132,
+                    125,
+                    82,
+                    77,
+                    70,
+                    65
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_12.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    152,
+                    128,
+                    121,
+                    439,
+                    287,
+                    465,
+                    453,
+                    444,
+                    427,
+                    413,
+                    405,
+                    392,
+                    383,
+                    369,
+                    361,
+                    353,
+                    343,
+                    332,
+                    273,
+                    246,
+                    233,
+                    197,
+                    152,
+                    146,
+                    142,
+                    135,
+                    121,
+                    117,
+                    113,
+                    108,
+                    104,
+                    98,
+                    316,
+                    310,
+                    301,
+                    297,
+                    292,
+                    257,
+                    165
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_7.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    232,
+                    230,
+                    228,
+                    35,
+                    33,
+                    29,
+                    23,
+                    304,
+                    291,
+                    268,
+                    253,
+                    239,
+                    208,
+                    193,
+                    183,
+                    172,
+                    160,
+                    150,
+                    136,
+                    127,
+                    113,
+                    99,
+                    90,
+                    62,
+                    54,
+                    46,
+                    221,
+                    217,
+                    18,
+                    13,
+                    9
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_28.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    331,
+                    324,
+                    315,
+                    310,
+                    303,
+                    293,
+                    281,
+                    255,
+                    245,
+                    230,
+                    208,
+                    193,
+                    184,
+                    171,
+                    163,
+                    105,
+                    96,
+                    87,
+                    74,
+                    154,
+                    144,
+                    134,
+                    129,
+                    123,
+                    118,
+                    114,
+                    62,
+                    58,
+                    54
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_3.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    12,
+                    10,
+                    8,
+                    233,
+                    227,
+                    217,
+                    206,
+                    191,
+                    184,
+                    168,
+                    155,
+                    122,
+                    96,
+                    65,
+                    58,
+                    53,
+                    46,
+                    40,
+                    30,
+                    25,
+                    15
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_11.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    104,
+                    77,
+                    75,
+                    120,
+                    341,
+                    330,
+                    317,
+                    299,
+                    287,
+                    260,
+                    240,
+                    218,
+                    205,
+                    188,
+                    135,
+                    125,
+                    110,
+                    84,
+                    65,
+                    60,
+                    50,
+                    40,
+                    35,
+                    29,
+                    170,
+                    166,
+                    158,
+                    154,
+                    150,
+                    145,
+                    99,
+                    93
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_5.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    293,
+                    100,
+                    96,
+                    92,
+                    13,
+                    391,
+                    377,
+                    366,
+                    355,
+                    338,
+                    323,
+                    302,
+                    256,
+                    229,
+                    206,
+                    187,
+                    166,
+                    148,
+                    118,
+                    51,
+                    24,
+                    281,
+                    275,
+                    269,
+                    86,
+                    82,
+                    74,
+                    69,
+                    65,
+                    60,
+                    8
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_40.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    584,
+                    577,
+                    560,
+                    551,
+                    543,
+                    498,
+                    482,
+                    456,
+                    434,
+                    408,
+                    380,
+                    352,
+                    330,
+                    303,
+                    287,
+                    276,
+                    258,
+                    246,
+                    522,
+                    517,
+                    507,
+                    229,
+                    223,
+                    216
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_34.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    341,
+                    334,
+                    20,
+                    326,
+                    36,
+                    624,
+                    608,
+                    582,
+                    542,
+                    514,
+                    492,
+                    465,
+                    448,
+                    431,
+                    420,
+                    403,
+                    393,
+                    381,
+                    363,
+                    317,
+                    292,
+                    275,
+                    263,
+                    228,
+                    215,
+                    41,
+                    26,
+                    196,
+                    192,
+                    187,
+                    182,
+                    176,
+                    166,
+                    159,
+                    154,
+                    149,
+                    143,
+                    9
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_1.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    81,
+                    79,
+                    182,
+                    177,
+                    170,
+                    163,
+                    146,
+                    133,
+                    74,
+                    60,
+                    49,
+                    33,
+                    22,
+                    115,
+                    110,
+                    105,
+                    93,
+                    87
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_20.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    204,
+                    202,
+                    200,
+                    77,
+                    37,
+                    448,
+                    433,
+                    421,
+                    410,
+                    397,
+                    341,
+                    324,
+                    304,
+                    277,
+                    265,
+                    252,
+                    243,
+                    235,
+                    224,
+                    149,
+                    131,
+                    90,
+                    58,
+                    43,
+                    381,
+                    190,
+                    184,
+                    180,
+                    176,
+                    71,
+                    32
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_37.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    147,
+                    113,
+                    111,
+                    163,
+                    391,
+                    380,
+                    367,
+                    349,
+                    337,
+                    310,
+                    290,
+                    268,
+                    255,
+                    238,
+                    178,
+                    168,
+                    153,
+                    125,
+                    101,
+                    96,
+                    86,
+                    76,
+                    71,
+                    65,
+                    53,
+                    46,
+                    37,
+                    30,
+                    221,
+                    216,
+                    211,
+                    205,
+                    195,
+                    190,
+                    141,
+                    137
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_29.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    272,
+                    270,
+                    268,
+                    291,
+                    283,
+                    411,
+                    399,
+                    388,
+                    379,
+                    360,
+                    340,
+                    300,
+                    35,
+                    25,
+                    17,
+                    213,
+                    204,
+                    195,
+                    182,
+                    174,
+                    161
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_13.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    68,
+                    64,
+                    60,
+                    234,
+                    215,
+                    197,
+                    173,
+                    153,
+                    134,
+                    112,
+                    86,
+                    48,
+                    42,
+                    30,
+                    24,
+                    19,
+                    13
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_35.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    248,
+                    246,
+                    244,
+                    242,
+                    240,
+                    236,
+                    153,
+                    496,
+                    474,
+                    456,
+                    426,
+                    411,
+                    402,
+                    384,
+                    372,
+                    360,
+                    350,
+                    333,
+                    319,
+                    310,
+                    290,
+                    272,
+                    256,
+                    187,
+                    176,
+                    163,
+                    229,
+                    225,
+                    221,
+                    215,
+                    211,
+                    205,
+                    141,
+                    136
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_14.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    295,
+                    277,
+                    269,
+                    261,
+                    253,
+                    233,
+                    220,
+                    207,
+                    195,
+                    179,
+                    170,
+                    157,
+                    147,
+                    132,
+                    123,
+                    115,
+                    281,
+                    241,
+                    100,
+                    95,
+                    82,
+                    72
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_23.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    495,
+                    481,
+                    473,
+                    465,
+                    457,
+                    409,
+                    395,
+                    371,
+                    355,
+                    332,
+                    313,
+                    289,
+                    270,
+                    246,
+                    227,
+                    209,
+                    190,
+                    175,
+                    156,
+                    143,
+                    441,
+                    431,
+                    426,
+                    130,
+                    125,
+                    120
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_10.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    27,
+                    25,
+                    23,
+                    63,
+                    58,
+                    50,
+                    37,
+                    12,
+                    8
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_39.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    57,
+                    37,
+                    90,
+                    75,
+                    55,
+                    44,
+                    60,
+                    29,
+                    25,
+                    15,
+                    8
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_33.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    151,
+                    149,
+                    17,
+                    33,
+                    254,
+                    245,
+                    236,
+                    226,
+                    219,
+                    206,
+                    190,
+                    172,
+                    94,
+                    84,
+                    79,
+                    38,
+                    23,
+                    159,
+                    139,
+                    134,
+                    123,
+                    113,
+                    108,
+                    102,
+                    12,
+                    8
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_41.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    72,
+                    68,
+                    64,
+                    238,
+                    219,
+                    201,
+                    177,
+                    157,
+                    138,
+                    116,
+                    90,
+                    52,
+                    46,
+                    34,
+                    28,
+                    23,
+                    17
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_6.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    228,
+                    226,
+                    224,
+                    35,
+                    33,
+                    29,
+                    23,
+                    297,
+                    285,
+                    263,
+                    249,
+                    235,
+                    208,
+                    193,
+                    183,
+                    172,
+                    160,
+                    150,
+                    136,
+                    127,
+                    113,
+                    99,
+                    90,
+                    62,
+                    54,
+                    46,
+                    217,
+                    18,
+                    14,
+                    9
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_48.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    135,
+                    90,
+                    88,
+                    151,
+                    389,
+                    378,
+                    360,
+                    346,
+                    325,
+                    301,
+                    285,
+                    269,
+                    251,
+                    234,
+                    222,
+                    167,
+                    156,
+                    141,
+                    102,
+                    83,
+                    73,
+                    63,
+                    58,
+                    52,
+                    48,
+                    205,
+                    199,
+                    194,
+                    190,
+                    185,
+                    181,
+                    128,
+                    118
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_22.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    255,
+                    253,
+                    251,
+                    249,
+                    247,
+                    243,
+                    44,
+                    38,
+                    549,
+                    486,
+                    454,
+                    419,
+                    392,
+                    346,
+                    317,
+                    297,
+                    119,
+                    113,
+                    103,
+                    98,
+                    88,
+                    78,
+                    73,
+                    63,
+                    56,
+                    31,
+                    17,
+                    238,
+                    233,
+                    228,
+                    224,
+                    218,
+                    208,
+                    203,
+                    198,
+                    9
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_46.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    139,
+                    119,
+                    98,
+                    87,
+                    73,
+                    48,
+                    21
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_38.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    331,
+                    324,
+                    315,
+                    310,
+                    303,
+                    293,
+                    281,
+                    255,
+                    245,
+                    230,
+                    208,
+                    193,
+                    184,
+                    171,
+                    163,
+                    105,
+                    96,
+                    87,
+                    74,
+                    154,
+                    144,
+                    134,
+                    129,
+                    123,
+                    118,
+                    114,
+                    62,
+                    58,
+                    54
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_17.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    121,
+                    118,
+                    115,
+                    67,
+                    348,
+                    341,
+                    328,
+                    315,
+                    302,
+                    285,
+                    196,
+                    178,
+                    166,
+                    150,
+                    141,
+                    130,
+                    72,
+                    57,
+                    256,
+                    243,
+                    233,
+                    222,
+                    217,
+                    211,
+                    110,
+                    106,
+                    99,
+                    95,
+                    91,
+                    86,
+                    49
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_4.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    121,
+                    205,
+                    196,
+                    185,
+                    160,
+                    153,
+                    144,
+                    110,
+                    106,
+                    96,
+                    90,
+                    79,
+                    73,
+                    62,
+                    57,
+                    52,
+                    45,
+                    39,
+                    29
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_27.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    202,
+                    200,
+                    198,
+                    196,
+                    54,
+                    552,
+                    542,
+                    532,
+                    524,
+                    510,
+                    499,
+                    484,
+                    471,
+                    458,
+                    448,
+                    437,
+                    425,
+                    364,
+                    348,
+                    338,
+                    272,
+                    258,
+                    248,
+                    239,
+                    232,
+                    225,
+                    126,
+                    119,
+                    112,
+                    104,
+                    79,
+                    61,
+                    211,
+                    206,
+                    191,
+                    187,
+                    182,
+                    172,
+                    166,
+                    162,
+                    152,
+                    141,
+                    136,
+                    94,
+                    89
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_2.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    12,
+                    10,
+                    8,
+                    219,
+                    213,
+                    203,
+                    192,
+                    177,
+                    167,
+                    150,
+                    121,
+                    91,
+                    64,
+                    52,
+                    47,
+                    42,
+                    36,
+                    30,
+                    20,
+                    15
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_47.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    284,
+                    282,
+                    420,
+                    414,
+                    407,
+                    395,
+                    385,
+                    351,
+                    334,
+                    318,
+                    308,
+                    294,
+                    204,
+                    185,
+                    177,
+                    169,
+                    150,
+                    134,
+                    120,
+                    50,
+                    40,
+                    30,
+                    23,
+                    17,
+                    13,
+                    272,
+                    264,
+                    260,
+                    253,
+                    247,
+                    242,
+                    234,
+                    222,
+                    213,
+                    102,
+                    97,
+                    91,
+                    81,
+                    74,
+                    70,
+                    60
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_31.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    250,
+                    102,
+                    229,
+                    141,
+                    291,
+                    282,
+                    257,
+                    210,
+                    180,
+                    162,
+                    149,
+                    124,
+                    112,
+                    239,
+                    234,
+                    199,
+                    95
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_15.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    68,
+                    64,
+                    60,
+                    234,
+                    215,
+                    197,
+                    173,
+                    153,
+                    134,
+                    112,
+                    86,
+                    48,
+                    42,
+                    30,
+                    24,
+                    19,
+                    13
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_26.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    124,
+                    116,
+                    257,
+                    253,
+                    245,
+                    233,
+                    223,
+                    213,
+                    204,
+                    190,
+                    181,
+                    167,
+                    158,
+                    145,
+                    138,
+                    130,
+                    116,
+                    103,
+                    93,
+                    88,
+                    78,
+                    68,
+                    63
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_25.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    86,
+                    84,
+                    82,
+                    80,
+                    78,
+                    74,
+                    68,
+                    292,
+                    282,
+                    268,
+                    258,
+                    244,
+                    228,
+                    185,
+                    141,
+                    121,
+                    103,
+                    93,
+                    56,
+                    42,
+                    13
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_16.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    457,
+                    455,
+                    453,
+                    105,
+                    89,
+                    85,
+                    447,
+                    436,
+                    426,
+                    409,
+                    399,
+                    384,
+                    375,
+                    350,
+                    339,
+                    330,
+                    321,
+                    302,
+                    288,
+                    280,
+                    262,
+                    238,
+                    230,
+                    220,
+                    213,
+                    138,
+                    115,
+                    81,
+                    77,
+                    72,
+                    68,
+                    62,
+                    52,
+                    195,
+                    189,
+                    184,
+                    179,
+                    169,
+                    163,
+                    158,
+                    148,
+                    95
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_49.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    57,
+                    37,
+                    90,
+                    75,
+                    55,
+                    44,
+                    60,
+                    29,
+                    25,
+                    15,
+                    8
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    },
+    {
+        "name": "buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_45.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    34,
+                    32,
+                    29,
+                    27,
+                    25,
+                    21,
+                    15,
+                    9,
+                    286,
+                    273,
+                    261,
+                    248,
+                    218,
+                    200,
+                    187,
+                    177,
+                    165,
+                    154,
+                    110,
+                    105,
+                    94,
+                    84,
+                    79,
+                    72,
+                    67,
+                    62,
+                    56,
+                    52
+                ],
+                "category": "Timestamp-Dependency"
+            }
+        ]
+    }
+]

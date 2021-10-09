@@ -1,0 +1,1938 @@
+[
+    {
+        "name": "buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_19.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    633,
+                    615,
+                    597,
+                    579,
+                    556,
+                    538,
+                    515,
+                    497,
+                    474,
+                    451,
+                    428,
+                    410,
+                    392,
+                    369,
+                    346,
+                    323,
+                    300,
+                    277,
+                    259,
+                    241,
+                    218,
+                    197,
+                    172,
+                    154,
+                    131,
+                    113,
+                    84,
+                    58
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_18.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    465,
+                    235,
+                    184,
+                    152,
+                    1011,
+                    990,
+                    964,
+                    938,
+                    911,
+                    871,
+                    838,
+                    802,
+                    781,
+                    755,
+                    730,
+                    706,
+                    680,
+                    658,
+                    640,
+                    622,
+                    577,
+                    543,
+                    505,
+                    300,
+                    275,
+                    253,
+                    210,
+                    152,
+                    133,
+                    114,
+                    100,
+                    81,
+                    62,
+                    450,
+                    436,
+                    417,
+                    398,
+                    379,
+                    365,
+                    346
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_9.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    247,
+                    231,
+                    215,
+                    602,
+                    575,
+                    548,
+                    514,
+                    487,
+                    455,
+                    423,
+                    391,
+                    368,
+                    345,
+                    318,
+                    293,
+                    73,
+                    194,
+                    175,
+                    159,
+                    145,
+                    130,
+                    116,
+                    102,
+                    55
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_42.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    295,
+                    281,
+                    42,
+                    499,
+                    475,
+                    458,
+                    435,
+                    418,
+                    396,
+                    367,
+                    341,
+                    175,
+                    161,
+                    142,
+                    87,
+                    60,
+                    315,
+                    262,
+                    248,
+                    233,
+                    219,
+                    205,
+                    191,
+                    27,
+                    8
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_43.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    602,
+                    436,
+                    93,
+                    10,
+                    712,
+                    691,
+                    665,
+                    642,
+                    574,
+                    552,
+                    530,
+                    476,
+                    457,
+                    368,
+                    327,
+                    272,
+                    250,
+                    228,
+                    211,
+                    192,
+                    173,
+                    154,
+                    134,
+                    115,
+                    30,
+                    496,
+                    421,
+                    73,
+                    54
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_32.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    336,
+                    322,
+                    460,
+                    440,
+                    300,
+                    278,
+                    249,
+                    222,
+                    192,
+                    115,
+                    96,
+                    82,
+                    68,
+                    49,
+                    414,
+                    395,
+                    376,
+                    357,
+                    170,
+                    156,
+                    142
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_30.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    1170,
+                    1154,
+                    1000,
+                    986,
+                    851,
+                    837,
+                    1317,
+                    1299,
+                    1269,
+                    1245,
+                    1209,
+                    1191,
+                    1137,
+                    1114,
+                    1091,
+                    1069,
+                    1047,
+                    1020,
+                    968,
+                    950,
+                    932,
+                    915,
+                    898,
+                    876,
+                    790,
+                    757,
+                    727,
+                    699,
+                    664,
+                    624,
+                    589,
+                    549,
+                    514,
+                    494,
+                    476,
+                    452,
+                    420,
+                    397,
+                    371,
+                    340
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_36.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    545,
+                    531,
+                    517,
+                    503,
+                    484,
+                    470,
+                    85,
+                    71,
+                    922,
+                    850,
+                    805,
+                    766,
+                    731,
+                    676,
+                    633,
+                    599,
+                    239,
+                    220,
+                    206,
+                    192,
+                    178,
+                    164,
+                    150,
+                    132,
+                    110,
+                    54,
+                    32,
+                    450,
+                    430,
+                    411,
+                    397,
+                    378,
+                    359,
+                    345,
+                    331,
+                    9
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_44.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    601,
+                    306,
+                    292,
+                    93,
+                    10,
+                    748,
+                    722,
+                    701,
+                    675,
+                    647,
+                    572,
+                    555,
+                    538,
+                    446,
+                    405,
+                    350,
+                    327,
+                    267,
+                    250,
+                    233,
+                    216,
+                    197,
+                    178,
+                    159,
+                    134,
+                    115,
+                    35,
+                    499,
+                    73,
+                    54
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_50.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    126,
+                    111,
+                    542,
+                    524,
+                    488,
+                    456,
+                    428,
+                    410,
+                    387,
+                    360,
+                    336,
+                    317,
+                    299,
+                    276,
+                    253,
+                    228,
+                    205,
+                    180,
+                    155,
+                    96,
+                    81,
+                    60,
+                    45,
+                    30,
+                    10
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_8.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    542,
+                    241,
+                    225,
+                    209,
+                    23,
+                    714,
+                    687,
+                    668,
+                    642,
+                    616,
+                    588,
+                    563,
+                    476,
+                    440,
+                    403,
+                    370,
+                    336,
+                    305,
+                    271,
+                    82,
+                    51,
+                    526,
+                    511,
+                    497,
+                    188,
+                    174,
+                    158,
+                    138,
+                    119,
+                    100,
+                    8
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_24.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    1354,
+                    1330,
+                    1280,
+                    1260,
+                    1191,
+                    1157,
+                    1118,
+                    1084,
+                    1061,
+                    1025,
+                    997,
+                    975,
+                    953,
+                    912,
+                    873,
+                    796,
+                    769,
+                    742,
+                    720,
+                    693,
+                    648,
+                    607,
+                    581,
+                    564,
+                    536,
+                    499,
+                    476,
+                    439,
+                    420,
+                    401,
+                    387,
+                    368,
+                    348,
+                    334,
+                    320,
+                    301,
+                    282,
+                    263,
+                    249,
+                    230
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_21.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    116,
+                    745,
+                    728,
+                    710,
+                    679,
+                    519,
+                    489,
+                    458,
+                    418,
+                    389,
+                    364,
+                    343,
+                    223,
+                    62,
+                    43,
+                    24,
+                    5,
+                    313,
+                    298,
+                    283,
+                    268,
+                    253,
+                    238,
+                    181,
+                    161,
+                    146,
+                    131
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_12.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    279,
+                    215,
+                    183,
+                    843,
+                    818,
+                    801,
+                    770,
+                    752,
+                    731,
+                    709,
+                    687,
+                    669,
+                    652,
+                    630,
+                    607,
+                    583,
+                    465,
+                    415,
+                    398,
+                    358,
+                    279,
+                    265,
+                    251,
+                    234,
+                    183,
+                    169,
+                    155,
+                    136,
+                    117,
+                    98,
+                    563,
+                    543,
+                    520,
+                    506,
+                    492,
+                    440,
+                    313
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_7.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    504,
+                    490,
+                    476,
+                    114,
+                    95,
+                    81,
+                    62,
+                    629,
+                    601,
+                    569,
+                    541,
+                    523,
+                    425,
+                    401,
+                    377,
+                    352,
+                    327,
+                    304,
+                    286,
+                    268,
+                    250,
+                    232,
+                    214,
+                    178,
+                    155,
+                    137,
+                    461,
+                    442,
+                    42,
+                    23,
+                    9
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_28.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    628,
+                    609,
+                    588,
+                    571,
+                    547,
+                    527,
+                    502,
+                    468,
+                    443,
+                    419,
+                    384,
+                    365,
+                    348,
+                    326,
+                    304,
+                    173,
+                    151,
+                    129,
+                    112,
+                    286,
+                    272,
+                    258,
+                    244,
+                    230,
+                    210,
+                    196,
+                    92,
+                    73,
+                    54
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_3.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    36,
+                    22,
+                    8,
+                    446,
+                    423,
+                    403,
+                    379,
+                    356,
+                    334,
+                    309,
+                    283,
+                    246,
+                    212,
+                    172,
+                    151,
+                    132,
+                    112,
+                    93,
+                    79,
+                    65,
+                    51
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_11.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    207,
+                    132,
+                    118,
+                    657,
+                    631,
+                    610,
+                    579,
+                    557,
+                    521,
+                    488,
+                    457,
+                    436,
+                    415,
+                    276,
+                    252,
+                    225,
+                    151,
+                    99,
+                    85,
+                    71,
+                    57,
+                    43,
+                    29,
+                    387,
+                    368,
+                    352,
+                    338,
+                    319,
+                    300,
+                    187,
+                    173
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_5.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    542,
+                    241,
+                    225,
+                    209,
+                    23,
+                    714,
+                    687,
+                    668,
+                    642,
+                    616,
+                    588,
+                    563,
+                    476,
+                    440,
+                    403,
+                    370,
+                    336,
+                    305,
+                    271,
+                    82,
+                    51,
+                    526,
+                    511,
+                    497,
+                    188,
+                    174,
+                    158,
+                    138,
+                    119,
+                    100,
+                    8
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_40.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    818,
+                    799,
+                    770,
+                    749,
+                    724,
+                    652,
+                    623,
+                    589,
+                    552,
+                    517,
+                    476,
+                    444,
+                    414,
+                    378,
+                    348,
+                    323,
+                    292,
+                    267,
+                    699,
+                    685,
+                    671,
+                    246,
+                    231,
+                    216
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_34.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    557,
+                    538,
+                    29,
+                    989,
+                    960,
+                    926,
+                    871,
+                    839,
+                    804,
+                    768,
+                    738,
+                    717,
+                    697,
+                    666,
+                    643,
+                    618,
+                    591,
+                    508,
+                    479,
+                    458,
+                    437,
+                    394,
+                    371,
+                    74,
+                    47,
+                    342,
+                    328,
+                    309,
+                    289,
+                    270,
+                    256,
+                    235,
+                    216,
+                    201,
+                    186,
+                    9
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_1.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    142,
+                    128,
+                    378,
+                    361,
+                    337,
+                    320,
+                    290,
+                    269,
+                    108,
+                    85,
+                    61,
+                    41,
+                    22,
+                    242,
+                    223,
+                    204,
+                    179,
+                    160
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_20.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    363,
+                    349,
+                    335,
+                    135,
+                    47,
+                    771,
+                    743,
+                    723,
+                    697,
+                    675,
+                    591,
+                    570,
+                    542,
+                    506,
+                    480,
+                    453,
+                    431,
+                    410,
+                    395,
+                    227,
+                    205,
+                    160,
+                    93,
+                    70,
+                    644,
+                    315,
+                    301,
+                    282,
+                    263,
+                    115,
+                    32
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_37.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    289,
+                    211,
+                    197,
+                    749,
+                    723,
+                    702,
+                    671,
+                    649,
+                    613,
+                    580,
+                    549,
+                    528,
+                    507,
+                    358,
+                    334,
+                    307,
+                    235,
+                    178,
+                    164,
+                    150,
+                    136,
+                    122,
+                    108,
+                    86,
+                    64,
+                    47,
+                    30,
+                    475,
+                    456,
+                    436,
+                    422,
+                    403,
+                    384,
+                    274,
+                    260
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_29.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    389,
+                    375,
+                    361,
+                    600,
+                    575,
+                    556,
+                    532,
+                    509,
+                    476,
+                    427,
+                    48,
+                    34,
+                    17,
+                    292,
+                    270,
+                    248,
+                    226,
+                    204,
+                    187
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_13.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    154,
+                    138,
+                    122,
+                    417,
+                    381,
+                    353,
+                    316,
+                    288,
+                    254,
+                    223,
+                    184,
+                    106,
+                    92,
+                    71,
+                    51,
+                    32,
+                    13
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_35.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    450,
+                    436,
+                    422,
+                    408,
+                    389,
+                    375,
+                    171,
+                    852,
+                    815,
+                    788,
+                    745,
+                    726,
+                    709,
+                    682,
+                    656,
+                    630,
+                    607,
+                    577,
+                    559,
+                    541,
+                    517,
+                    495,
+                    470,
+                    243,
+                    217,
+                    194,
+                    360,
+                    341,
+                    322,
+                    302,
+                    288,
+                    269,
+                    150,
+                    136
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_14.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    512,
+                    469,
+                    449,
+                    429,
+                    404,
+                    361,
+                    335,
+                    314,
+                    287,
+                    262,
+                    240,
+                    223,
+                    205,
+                    181,
+                    158,
+                    136,
+                    485,
+                    379,
+                    117,
+                    103,
+                    86,
+                    72
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_23.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    754,
+                    728,
+                    708,
+                    688,
+                    663,
+                    588,
+                    561,
+                    529,
+                    498,
+                    466,
+                    434,
+                    406,
+                    379,
+                    346,
+                    313,
+                    281,
+                    249,
+                    221,
+                    198,
+                    176,
+                    643,
+                    629,
+                    615,
+                    155,
+                    135,
+                    120
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_10.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    61,
+                    47,
+                    144,
+                    127,
+                    104,
+                    83,
+                    22,
+                    8
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_39.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    141,
+                    82,
+                    211,
+                    184,
+                    122,
+                    101,
+                    156,
+                    66,
+                    47,
+                    28,
+                    8
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_33.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    295,
+                    281,
+                    42,
+                    500,
+                    476,
+                    459,
+                    436,
+                    419,
+                    397,
+                    368,
+                    341,
+                    175,
+                    161,
+                    142,
+                    87,
+                    60,
+                    315,
+                    262,
+                    248,
+                    233,
+                    219,
+                    205,
+                    191,
+                    27,
+                    8
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_41.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    158,
+                    142,
+                    126,
+                    421,
+                    385,
+                    357,
+                    320,
+                    292,
+                    258,
+                    227,
+                    188,
+                    110,
+                    96,
+                    75,
+                    55,
+                    36,
+                    17
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_6.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    490,
+                    476,
+                    462,
+                    119,
+                    100,
+                    86,
+                    67,
+                    612,
+                    585,
+                    554,
+                    527,
+                    509,
+                    430,
+                    406,
+                    382,
+                    357,
+                    332,
+                    309,
+                    291,
+                    273,
+                    255,
+                    237,
+                    219,
+                    183,
+                    160,
+                    142,
+                    447,
+                    47,
+                    28,
+                    9
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_48.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    229,
+                    146,
+                    132,
+                    714,
+                    688,
+                    662,
+                    635,
+                    604,
+                    571,
+                    542,
+                    517,
+                    491,
+                    470,
+                    444,
+                    298,
+                    274,
+                    247,
+                    170,
+                    118,
+                    104,
+                    90,
+                    76,
+                    62,
+                    48,
+                    412,
+                    398,
+                    383,
+                    364,
+                    345,
+                    326,
+                    214,
+                    195
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_22.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    545,
+                    531,
+                    517,
+                    503,
+                    484,
+                    470,
+                    85,
+                    71,
+                    922,
+                    850,
+                    805,
+                    766,
+                    731,
+                    676,
+                    633,
+                    599,
+                    239,
+                    220,
+                    206,
+                    192,
+                    178,
+                    164,
+                    150,
+                    132,
+                    110,
+                    54,
+                    32,
+                    450,
+                    430,
+                    411,
+                    397,
+                    378,
+                    359,
+                    345,
+                    331,
+                    9
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_46.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    215,
+                    183,
+                    150,
+                    127,
+                    96,
+                    61,
+                    21
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_38.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    628,
+                    609,
+                    588,
+                    571,
+                    547,
+                    527,
+                    502,
+                    468,
+                    443,
+                    419,
+                    384,
+                    365,
+                    348,
+                    326,
+                    304,
+                    173,
+                    151,
+                    129,
+                    112,
+                    286,
+                    272,
+                    258,
+                    244,
+                    230,
+                    210,
+                    196,
+                    92,
+                    73,
+                    54
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_17.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    257,
+                    242,
+                    227,
+                    656,
+                    634,
+                    613,
+                    587,
+                    564,
+                    538,
+                    393,
+                    366,
+                    346,
+                    326,
+                    303,
+                    278,
+                    99,
+                    72,
+                    500,
+                    478,
+                    464,
+                    449,
+                    435,
+                    421,
+                    212,
+                    193,
+                    178,
+                    164,
+                    145,
+                    126,
+                    49
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_4.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    392,
+                    371,
+                    348,
+                    311,
+                    289,
+                    272,
+                    226,
+                    212,
+                    193,
+                    174,
+                    154,
+                    140,
+                    125,
+                    106,
+                    87,
+                    67,
+                    48,
+                    29
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_27.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    371,
+                    357,
+                    343,
+                    329,
+                    54,
+                    947,
+                    924,
+                    906,
+                    883,
+                    860,
+                    836,
+                    817,
+                    796,
+                    774,
+                    750,
+                    725,
+                    700,
+                    626,
+                    606,
+                    587,
+                    517,
+                    499,
+                    480,
+                    463,
+                    441,
+                    424,
+                    203,
+                    181,
+                    159,
+                    137,
+                    109,
+                    78,
+                    401,
+                    387,
+                    315,
+                    296,
+                    277,
+                    258,
+                    244,
+                    225
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_2.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    36,
+                    22,
+                    8,
+                    428,
+                    405,
+                    385,
+                    361,
+                    338,
+                    313,
+                    287,
+                    245,
+                    211,
+                    176,
+                    155,
+                    136,
+                    117,
+                    98,
+                    79,
+                    65,
+                    51
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_47.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    584,
+                    833,
+                    815,
+                    796,
+                    769,
+                    751,
+                    704,
+                    677,
+                    652,
+                    629,
+                    606,
+                    389,
+                    366,
+                    344,
+                    322,
+                    290,
+                    261,
+                    238,
+                    85,
+                    71,
+                    57,
+                    41,
+                    27,
+                    13,
+                    558,
+                    542,
+                    528,
+                    506,
+                    486,
+                    466,
+                    450,
+                    429,
+                    406,
+                    211,
+                    196,
+                    176,
+                    157,
+                    137,
+                    123,
+                    104
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_31.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    362,
+                    115,
+                    438,
+                    419,
+                    381,
+                    302,
+                    243,
+                    221,
+                    195,
+                    162,
+                    137,
+                    347,
+                    333,
+                    277,
+                    95
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_15.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    154,
+                    138,
+                    122,
+                    417,
+                    381,
+                    353,
+                    316,
+                    288,
+                    254,
+                    223,
+                    184,
+                    106,
+                    92,
+                    71,
+                    51,
+                    32,
+                    13
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_26.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    192,
+                    159,
+                    483,
+                    467,
+                    442,
+                    420,
+                    397,
+                    379,
+                    355,
+                    332,
+                    310,
+                    292,
+                    275,
+                    253,
+                    232,
+                    210,
+                    159,
+                    133,
+                    119,
+                    105,
+                    91,
+                    77,
+                    63
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_25.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    179,
+                    165,
+                    151,
+                    137,
+                    118,
+                    104,
+                    85,
+                    509,
+                    484,
+                    461,
+                    438,
+                    420,
+                    396,
+                    344,
+                    286,
+                    252,
+                    221,
+                    198,
+                    69,
+                    46,
+                    13
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_16.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    861,
+                    847,
+                    833,
+                    199,
+                    175,
+                    161,
+                    814,
+                    795,
+                    770,
+                    744,
+                    721,
+                    702,
+                    685,
+                    651,
+                    626,
+                    603,
+                    581,
+                    549,
+                    531,
+                    514,
+                    492,
+                    464,
+                    447,
+                    429,
+                    407,
+                    252,
+                    221,
+                    142,
+                    123,
+                    104,
+                    90,
+                    71,
+                    52,
+                    380,
+                    365,
+                    345,
+                    326,
+                    307,
+                    293,
+                    273
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_49.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    141,
+                    82,
+                    211,
+                    184,
+                    122,
+                    101,
+                    156,
+                    66,
+                    47,
+                    28,
+                    8
+                ],
+                "category": "TOD"
+            }
+        ]
+    },
+    {
+        "name": "buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/TOD/buggy_45.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    118,
+                    104,
+                    89,
+                    75,
+                    56,
+                    42,
+                    23,
+                    9,
+                    565,
+                    543,
+                    518,
+                    501,
+                    463,
+                    436,
+                    409,
+                    385,
+                    360,
+                    336,
+                    288,
+                    274,
+                    259,
+                    245,
+                    231,
+                    216,
+                    196,
+                    181,
+                    167,
+                    148
+                ],
+                "category": "TOD"
+            }
+        ]
+    }
+]
