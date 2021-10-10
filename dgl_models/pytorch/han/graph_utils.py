@@ -31,6 +31,33 @@ def add_cfg_mapping(nx_call_graph, nx_cfg_graph):
     return nx_graph
 
 
+def get_node_label(nx_graph):
+    nx_g = nx_graph
+    node_labels = {}
+    for _, node_data in nx_g.nodes(data=True):
+        node_type = node_data['node_type']
+        node_label = node_data.get('node_info_vulnerabilities', None)
+        target = 0 if node_label is None else 1
+        if node_type not in node_labels.keys():
+            node_labels[node_type] = torch.tensor([target])
+        else:
+            node_labels[node_type] = torch.cat((node_labels[node_type], torch.tensor([target])))
+    return node_labels
+
+
+def get_node_tracker(nx_graph, filename_mapping):
+    nx_g = nx_graph
+    node_tracker = {}
+    for _, node_data in nx_g.nodes(data=True):
+        node_type = node_data['node_type']
+        filename = node_data['source_file']
+        if node_type not in node_tracker.keys():
+            node_tracker[node_type] = torch.tensor([filename_mapping[filename]], dtype=torch.int64)
+        else:
+            node_tracker[node_type] = torch.cat((node_tracker[node_type], torch.tensor([filename_mapping[filename]], dtype=torch.int64)))
+    return node_tracker
+
+
 def load_hetero_nx_graph(nx_graph_path):
     nx_graph = nx.read_gpickle(nx_graph_path)
     nx_graph = nx.convert_node_labels_to_integers(nx_graph)
@@ -50,7 +77,7 @@ def convert_edge_data_to_tensor(dict_egdes):
     return dict_three_cannonical_egdes
 
 
-def generate_hetero_graph_data(nx_graph, filename_mapping):
+def generate_hetero_graph_data(nx_graph):
     nx_g = nx_graph
     dict_three_cannonical_egdes = dict()
     node_tracker = {}
@@ -68,18 +95,9 @@ def generate_hetero_graph_data(nx_graph, filename_mapping):
             current_val.append(temp_edge)
             dict_three_cannonical_egdes[three_cannonical_egde] = current_val
 
-    for _, node_data in nx_g.nodes(data=True):
-        node_type = node_data['node_type']
-        filename = node_data['source_file']
-        if node_type not in node_tracker.keys():
-            node_tracker[node_type] = torch.tensor([filename_mapping[filename]], dtype=torch.int64)
-        else:
-            node_tracker[node_type] = torch.cat((node_tracker[node_type], torch.tensor([filename_mapping[filename]], dtype=torch.int64)))
-
-    first_cannonical = list(dict_three_cannonical_egdes.keys())[0]
     dict_three_cannonical_egdes = convert_edge_data_to_tensor(dict_three_cannonical_egdes)
 
-    return dict_three_cannonical_egdes, node_tracker
+    return dict_three_cannonical_egdes
 
 
 def get_number_of_nodes(nx_graph):
@@ -95,3 +113,31 @@ def get_number_of_nodes(nx_graph):
 
 def filename_mapping(extracted_graph):
     return {file: idx for idx, file in enumerate(extracted_graph)}
+
+
+def reflect_graph(nx_g_data):
+        symmetrical_data = {}
+        for metapath, value in nx_g_data.items():
+            if metapath[0] == metapath[-1]:
+                symmetrical_data[metapath] = (torch.cat((value[0], value[1])), torch.cat((value[1], value[0])))
+            else:
+                if metapath not in symmetrical_data.keys():
+                    symmetrical_data[metapath] = value
+                else:
+                    symmetrical_data[metapath] = (torch.cat((symmetrical_data[metapath][0], value[0])), torch.cat((symmetrical_data[metapath][1], value[1])))
+                if metapath[::-1] not in symmetrical_data.keys():
+                    symmetrical_data[metapath[::-1]] = (value[1], value[0])
+                else:
+                    symmetrical_data[metapath[::-1]] = (torch.cat((symmetrical_data[metapath[::-1]][0], value[1])), torch.cat((symmetrical_data[metapath[::-1]][1], value[0])))
+        return symmetrical_data
+
+def get_symmatrical_metapaths(symmetrical_global_graph):
+        meta_paths = []
+        for mt in symmetrical_global_graph.canonical_etypes:
+            if mt[0] == mt[1]:
+                ref_mt = [mt]
+            else:
+                ref_mt = [mt, mt[::-1]]
+            if ref_mt not in meta_paths:
+                meta_paths.append(ref_mt)
+        return meta_paths
