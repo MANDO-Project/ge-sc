@@ -16,7 +16,7 @@ from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
-from graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping
+from graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_tracker
 
 
 class SemanticAttention(nn.Module):
@@ -122,7 +122,8 @@ class HANVulClassifier(nn.Module):
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
-        nx_g_data, _node_tracker = generate_hetero_graph_data(nx_graph, filename_mapping)
+        nx_g_data = generate_hetero_graph_data(nx_graph)
+        _node_tracker = get_node_tracker(nx_graph, filename_mapping)
 
         # Reflect graph data
         self.symmetrical_global_graph_data = self.reflect_graph(nx_g_data)
@@ -221,7 +222,11 @@ class HANVulClassifier(nn.Module):
         features = {}
         for han in self.layers:
             ntype = han.meta_paths[0][0][0]
-            features[ntype] = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+            feature = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+            if ntype not in features.keys():
+                features[ntype] = feature
+            else:
+                features[ntype] = torch.cat((features[ntype].unsqueeze(0), feature.unsqueeze(0))).mean(0)
         return features
 
     def forward(self, batched_g_name):
