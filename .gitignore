@@ -9,3 +9,6 @@ outputs/*
 logs/*
 *.ipynb
 *.txt
+**/logs/
+**/dataset/
+data/
