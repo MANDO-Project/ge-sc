@@ -158,15 +158,15 @@ def add_cfg_mapping(nx_call_graph, nx_cfg_graph):
 
 
 if __name__ == '__main__':
-    extracted_graph = './dgl_models/pytorch/han/dataset/aggregate/source_code'
+    extracted_graph = './dgl_models/pytorch/han/dataset/smartbugs/source_code'
+    compressed_graph = './dgl_models/pytorch/han/dataset/smartbugs/compressed_graphs/compressed_graphs.gpickle'
+    # compressed_graph = './data/smartbug-dataset/compressed_graphs/compress_graphs.gpickle'
     filename_mapping = filename_mapping(extracted_graph)
-    call_graph_nx_graph = load_nx_graph('./dgl_models/pytorch/han/dataset/call_graph/compressed_graph/compress_call_graphs_no_solidity_calls.gpickle')
-    cfg_nx_graph = load_nx_graph('./dgl_models/pytorch/han/dataset/aggregate/compressed_graph/compressed_graphs.gpickle')
-    call_graph_nx_graph = add_cfg_mapping(call_graph_nx_graph, cfg_nx_graph)
+    cfg_nx_graph = load_nx_graph(compressed_graph)
 
-
-    # for n, data in call_graph_nx_graph.nodes(data=True):
-    #     print(f'{n} - {data.get("cfg_mapping", None)}')
+    for n, data in cfg_nx_graph.nodes(data=True):
+        if 'node_info_vulnerabilities' not in data:
+            print(data)
         
     # print(count)
     # nx_g_data, node_tracker = generate_hetero_graph_data(nx_graph, filename_mapping)
