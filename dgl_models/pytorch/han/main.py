@@ -10,6 +10,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 from dataloader import EthIdsDataset
 from model_hetero import HAN, HANVulClassifier
+from visualization import visualize_average_k_folds
 
 
 def score(logits, labels):
@@ -99,7 +100,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        han_model = HANVulClassifier(args['feature_compressed_graph'], ethdataset.filename_mapping, node_feature='metapath2vec', hidden_size=16, device=args['device'])
+        han_model = HANVulClassifier(args['feature_compressed_graph'], ethdataset.filename_mapping, node_feature='nodetype', hidden_size=16, device=args['device'])
         han_model.load_state_dict(torch.load(args['feature_extractor']))
         han_model.to(args['device'])
         han_model.eval()
@@ -151,48 +152,6 @@ def load_model(model_path):
     model = HANVulClassifier()
     model.load_state_dict(torch.load(model_path))
     return model.eval()
-
-
-def visualize_average_k_folds(args, train_results, val_results):
-    avg_train_result = {}
-    avg_train_result['acc'] = torch.mean(torch.tensor([train_results[fold]['acc'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    avg_train_result['micro_f1'] = torch.mean(torch.tensor([train_results[fold]['micro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    avg_train_result['macro_f1'] = torch.mean(torch.tensor([train_results[fold]['macro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    avg_train_result['loss'] = torch.mean(torch.tensor([train_results[fold]['loss'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    avg_train_result['lrs'] = torch.mean(torch.tensor([train_results[fold]['lrs'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    avg_val_result = {}
-    avg_val_result['acc'] = torch.mean(torch.tensor([val_results[fold]['acc'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    avg_val_result['micro_f1'] = torch.mean(torch.tensor([val_results[fold]['micro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    avg_val_result['macro_f1'] = torch.mean(torch.tensor([val_results[fold]['macro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    avg_val_result['loss'] = torch.mean(torch.tensor([val_results[fold]['loss'] for fold in range(args['k_folds'])]), dim=0).tolist()
-    writer = SummaryWriter(args['log_dir'])
-    for idx in range(args['num_epochs']):
-        writer.add_scalars('Accuracy', {f'train_avg': avg_train_result['acc'][idx],
-                                        f'valid_avg': avg_val_result['acc'][idx]}, idx)
-        writer.add_scalars('Micro_f1', {f'train_avg': avg_train_result['micro_f1'][idx],
-                                    f'valid_avg': avg_val_result['micro_f1'][idx]}, idx)
-        writer.add_scalars('Macro_f1', {f'train_avg': avg_train_result['macro_f1'][idx],
-                                    f'valid_avg': avg_val_result['macro_f1'][idx]}, idx)
-        writer.add_scalars('Loss', {f'train_avg': avg_train_result['loss'][idx],
-                                    f'valid_avg': avg_val_result['loss'][idx]}, idx)
-    for idx, lr in enumerate(avg_train_result['lrs']):
-        writer.add_scalar('Learning rate', lr, idx)
-
-
-def visualize_k_folds(args, train_results, val_results):
-    writer = SummaryWriter(args['log_dir'])
-    for fold in range(args['k_folds']):
-        for idx in range(args['num_epochs']):
-            writer.add_scalars('Accuracy', {f'train_{fold+1}': train_results[fold]['acc'][idx],
-                                            f'valid_{fold+1}': val_results[fold]['acc'][idx]}, idx)
-            writer.add_scalars('Micro_f1', {f'train_{fold+1}': train_results[fold]['micro_f1'][idx],
-                                        f'valid_{fold+1}': val_results[fold]['micro_f1'][idx]}, idx)
-            writer.add_scalars('Macro_f1', {f'train_{fold+1}': train_results[fold]['macro_f1'][idx],
-                                        f'valid_{fold+1}': val_results[fold]['macro_f1'][idx]}, idx)
-            writer.add_scalars('Loss', {f'train_{fold+1}': train_results[fold]['loss'][idx],
-                                        f'valid_{fold+1}': val_results[fold]['loss'][idx]}, idx)
-    for idx, lr in enumerate(train_results[0]['lrs']):
-        writer.add_scalar('Learning rate', lr, idx)
 
 
 if __name__ == '__main__':
