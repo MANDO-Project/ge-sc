@@ -234,6 +234,7 @@ class HANVulNodeClassifier(nn.Module):
                 features[ntype] = feature.unsqueeze(0)
             else:
                 features[ntype] = torch.cat((features[ntype], feature.unsqueeze(0)))
+        # Use mean for aggregate node hidden features
         return {k: torch.mean(v, dim=0) for k, v in features.items()}
 
     def forward(self):

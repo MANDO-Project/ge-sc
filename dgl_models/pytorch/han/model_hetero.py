@@ -224,10 +224,11 @@ class HANVulClassifier(nn.Module):
             ntype = han.meta_paths[0][0][0]
             feature = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
             if ntype not in features.keys():
-                features[ntype] = feature
+                features[ntype] = feature.unsqueeze(0)
             else:
-                features[ntype] = torch.cat((features[ntype].unsqueeze(0), feature.unsqueeze(0))).mean(0)
-        return features
+                features[ntype] = torch.cat((features[ntype], feature.unsqueeze(0)))
+        # Use mean for aggregate node hidden features
+        return {k: torch.mean(v, dim=0) for k, v in features.items()}
 
     def forward(self, batched_g_name):
         features = self.get_node_features()
