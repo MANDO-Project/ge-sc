@@ -1,25 +1,14 @@
 # Heterogeneous Graph Attention Network (HAN) with DGL
 
-This is an attempt to implement HAN with DGL's latest APIs for heterogeneous graphs.
-The authors' implementation can be found [here](https://github.com/Jhy1993/HAN).
+This is an attempt to apply HAN for Vulnerability detection in smart contracts.
+## Training
 
-## Usage
+`python main.py --dataset ./dataset/aggregate/source_code --compressed_graph ./dataset/aggregate/compressed_graph/compress_graphs.gpickle --label ./dataset/aggregate/labels.json`
 
-`python main.py` for reproducing HAN's work on their dataset.
+## Testing
 
-`python main.py --hetero` for reproducing HAN's work on DGL's own dataset from
-[here](https://github.com/Jhy1993/HAN/tree/master/data/acm).  The dataset is noisy
-because there are same author occurring multiple times as different nodes.
+`python main.py --test --testset ./dataset/smartbugs/source_code --dataset ./dataset/aggregate/source_code --compressed_graph ./dataset/aggregate/compressed_graph/compress_graphs.gpickle --label ./dataset/aggregate/labels.json --checkpoint ./models/model_han_fold_2.pth`
 
-## Performance
+## Visuallization
 
-Reference performance numbers for the ACM dataset:
-
-|                     | micro f1 score | macro f1 score |
-| ------------------- | -------------- | -------------- |
-| Paper               | 89.22          | 89.40          |
-| DGL                 | 88.99          | 89.02          |
-| Softmax regression (own dataset) | 89.66  | 89.62     |
-| DGL (own dataset)   | 91.51          | 91.66          |
-
-We ran a softmax regression to check the easiness of our own dataset.  HAN did show some improvements.
+`tensorboard --logdir ./logs`
