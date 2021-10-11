@@ -17,7 +17,7 @@ from dataloader import EthIdsDataset
 from model_hetero import HANVulClassifier
 from model_node_classification import HANVulNodeClassifier
 from utils import score
-from visualization import visualize_average_k_folds, visualize_k_folds
+from visualization import visualize_average_k_folds
 
 
 def get_binary_mask(total_size, indices):
@@ -95,8 +95,6 @@ def main(args):
 
         print('Saving model fold {}'.format(fold))
         save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
-        visualize_k_folds(args, train_results, val_results)
-        print('Visualized!!')
         torch.save(model.state_dict(), save_path)
     return train_results, val_results
 
@@ -132,7 +130,7 @@ if __name__ == '__main__':
     'num_epochs': 100,
     'batch_size': 256,
     'patience': 100,
-    'device': 'cpu'
+    'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
     }
     args.update(default_configure)
     torch.manual_seed(args['seed'])
