@@ -2,12 +2,32 @@ import os
 import json
 
 from os.path import join
+from shutil import copy
 from copy import deepcopy
+from re import L
+from typing import Pattern
 from tqdm import tqdm
+import re
 
 import networkx as nx
 from slither.slither import Slither
 from slither.core.cfg.node import NodeType
+from solc import install_solc
+
+
+pattern =  re.compile(r'\d.\d.\d')
+def get_solc_version(source):
+    with open(source, 'r') as f:
+        line = f.readline()
+        while line:
+            if 'pragma solidity' in line:
+                if len(pattern.findall(line)) > 0:
+                    return pattern.findall(line)[0]
+                else:
+                    return '0.4.25'
+            line = f.readline()
+    return '0.4.25'
+
 
 def get_node_info(node, list_vulnerabilities_info_in_sc):
     node_label = "Node Type: {}\n".format(str(node.type))
@@ -56,12 +76,22 @@ def get_vulnerabilities_of_node_by_source_code_line(source_code_lines, list_vul_
 
     return node_info_vulnerabilities
 
-def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None):
+def compress_full_smart_contracts(smart_contracts, input, output, vulnerabilities=None):
     full_graph = None
+    if input is not None:
+        full_graph = nx.read_gpickle(input)
+    count = 0
     for sc in tqdm(smart_contracts):
+        sc_version = get_solc_version(sc)
+        print(f'{sc} - {sc_version}')
+        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
+        if not os.path.exists(solc_compiler):
+            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
         try:
-            slither = Slither(sc)
+            slither = Slither(sc, solc=solc_compiler)
+            # copy(join(sc), join('./dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/source_code', file_name_sc))
+            count += 1
         except Exception as e:
             print(e)
             continue
@@ -150,7 +180,7 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
     # for node, node_data in full_graph.nodes(data=True):
     #     if node_data['node_info_vulnerabilities'] is not None:
     #         print('Node has vulnerabilities:', node, node_data)
-
+    print(f'{count}/{len(smart_contracts)}')
     nx.nx_agraph.write_dot(full_graph, join(output, 'compress_graphs.dot'))
     nx.write_gpickle(full_graph, join(output, 'compress_graphs.gpickle'))
 
@@ -158,12 +188,23 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
 if __name__ == '__main__':
     # smart_contract_path = 'data/extracted_source_code' 
     # output_path = 'data/extracted_source_code'
-    smart_contract_path = 'data/smartbug-dataset/reentrancy' 
-    output_path = 'data/smartbug-dataset/reentrancy'
+    import subprocess
+
+    smart_contract_path = './data/smartbug-dataset/reentrancy'
+    # smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs-wild-clean-contracts'
+    input_path = './dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/compressed_graphs/compress_graphs.gpickle'
+    output_path = './dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/compressed_graphs_with_test'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
-    
+    # for sc in smart_contracts:
+    #     print(sc)
+    #     sc_version = get_solc_version(sc)
+    #     try:
+    #         subprocess.run(['solc-select', 'install', sc_version])
+    #     except:
+    #         print(sc_version)
+
     data_vulnerabilities = None
-    with open('data/smartbug-dataset/vulnerabilities.json') as f:
+    with open('./data/solidifi_buggy_contracts/Re-entrancy/vulnerabilities.json') as f:
         data_vulnerabilities = json.load(f)
     
-    compress_full_smart_contracts(smart_contracts, output_path, vulnerabilities=data_vulnerabilities)
+    compress_full_smart_contracts(smart_contracts, input_path, output_path, vulnerabilities=data_vulnerabilities)

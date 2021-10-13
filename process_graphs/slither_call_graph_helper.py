@@ -1,5 +1,6 @@
 import os
 
+import re
 import logging
 import json
 import pygraphviz as pgv
@@ -21,6 +22,21 @@ from slither.core.declarations.function import Function
 from slither.core.variables.variable import Variable
 
 logger = logging.getLogger("Slither-simil")
+
+
+pattern =  re.compile(r'\d.\d.\d')
+def get_solc_version(source):
+    with open(source, 'r') as f:
+        line = f.readline()
+        while line:
+            if 'pragma solidity' in line:
+                if len(pattern.findall(line)) > 0:
+                    return pattern.findall(line)[0]
+                else:
+                    return '0.4.25'
+            line = f.readline()
+    return '0.4.25'
+
 
 # return graph edge with edge type
 def _edge(from_node, to_node, edge_type, label):
@@ -356,10 +372,16 @@ def get_vulnerabilities_of_node_by_source_code_line(source_code_lines, list_vul_
 
 def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None):
     full_graph = None
+    count = 0
     for sc in tqdm(smart_contracts):
+        sc_version = get_solc_version(sc)
+        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
+        if not os.path.exists(solc_compiler):
+            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
         try:
-            slither = Slither(sc)
+            slither = Slither(sc, solc=solc_compiler)
+            count += 1
         except Exception as e:
             print(e)
             continue
@@ -378,6 +400,7 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
         elif all_contracts_call_graph is not None:
             full_graph = nx.disjoint_union(full_graph, all_contracts_call_graph)
     
+    print(f'{count}/{len(smart_contracts)}')
     print(nx.info(full_graph))
     # print('Full graph nodes:', full_graph.nodes(data=True))
     # for node, node_data in full_graph.nodes(data=True):
@@ -460,12 +483,12 @@ class GESCPrinters(AbstractPrinter):
 if __name__ == '__main__':
     # smart_contract_path = 'data/extracted_source_code/' 
     # output_path = 'data/extracted_source_code/'
-    smart_contract_path = 'data/smartbug-dataset/reentrancy' 
-    output_path = 'data/smartbug-dataset/reentrancy'
+    smart_contract_path = './dgl_models/pytorch/han/dataset/smartbugs_wild/call_graph/source_code' 
+    output_path = './dgl_models/pytorch/han/dataset/smartbugs_wild/call_graph/compressed_graphs'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
 
     data_vulnerabilities = None
-    with open('data/smartbug-dataset/vulnerabilities.json') as f:
+    with open('./data/solidifi_buggy_contracts/Re-entrancy/vulnerabilities.json') as f:
         data_vulnerabilities = json.load(f)
 
     compress_full_smart_contracts(smart_contracts, output_path, vulnerabilities=data_vulnerabilities)
