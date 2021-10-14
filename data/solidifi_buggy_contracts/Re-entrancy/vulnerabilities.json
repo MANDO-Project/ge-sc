@@ -1,0 +1,1945 @@
+[
+    {
+        "name": "buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_19.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    437,
+                    425,
+                    412,
+                    397,
+                    382,
+                    369,
+                    359,
+                    346,
+                    335,
+                    322,
+                    309,
+                    296,
+                    283,
+                    270,
+                    258,
+                    245,
+                    232,
+                    217,
+                    203,
+                    190,
+                    171,
+                    155,
+                    135,
+                    122,
+                    109,
+                    96,
+                    72,
+                    58
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_18.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    62,
+                    71,
+                    79,
+                    86,
+                    96,
+                    105,
+                    111,
+                    122,
+                    143,
+                    163,
+                    175,
+                    192,
+                    207,
+                    245,
+                    254,
+                    260,
+                    269,
+                    278,
+                    286,
+                    296,
+                    303,
+                    312,
+                    322,
+                    358,
+                    391,
+                    420,
+                    461,
+                    474,
+                    488,
+                    502,
+                    518,
+                    532,
+                    546,
+                    562,
+                    578,
+                    609,
+                    632,
+                    662,
+                    677,
+                    698,
+                    711,
+                    727
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_9.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    180,
+                    170,
+                    159,
+                    437,
+                    418,
+                    396,
+                    375,
+                    353,
+                    333,
+                    311,
+                    289,
+                    271,
+                    253,
+                    236,
+                    222,
+                    68,
+                    148,
+                    137,
+                    125,
+                    116,
+                    105,
+                    96,
+                    87,
+                    55
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_42.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    197,
+                    189,
+                    27,
+                    324,
+                    308,
+                    296,
+                    286,
+                    274,
+                    264,
+                    245,
+                    229,
+                    119,
+                    110,
+                    101,
+                    57,
+                    40,
+                    213,
+                    178,
+                    168,
+                    158,
+                    148,
+                    139,
+                    130,
+                    17,
+                    8
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_43.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    427,
+                    314,
+                    58,
+                    10,
+                    510,
+                    494,
+                    481,
+                    463,
+                    411,
+                    399,
+                    387,
+                    343,
+                    329,
+                    261,
+                    231,
+                    186,
+                    174,
+                    160,
+                    147,
+                    133,
+                    118,
+                    104,
+                    89,
+                    75,
+                    27,
+                    358,
+                    304,
+                    50,
+                    41
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_32.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    234,
+                    226,
+                    312,
+                    295,
+                    212,
+                    195,
+                    179,
+                    157,
+                    139,
+                    85,
+                    76,
+                    67,
+                    58,
+                    49,
+                    280,
+                    271,
+                    262,
+                    251,
+                    121,
+                    112,
+                    102
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_30.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    937,
+                    927,
+                    832,
+                    821,
+                    722,
+                    713,
+                    1038,
+                    1025,
+                    1007,
+                    993,
+                    967,
+                    954,
+                    915,
+                    902,
+                    890,
+                    878,
+                    866,
+                    847,
+                    807,
+                    794,
+                    780,
+                    768,
+                    756,
+                    739,
+                    676,
+                    648,
+                    623,
+                    607,
+                    582,
+                    551,
+                    523,
+                    494,
+                    469,
+                    454,
+                    441,
+                    430,
+                    407,
+                    395,
+                    374,
+                    353,
+                    338,
+                    325
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_36.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    352,
+                    344,
+                    335,
+                    324,
+                    313,
+                    304,
+                    57,
+                    48,
+                    664,
+                    602,
+                    567,
+                    533,
+                    503,
+                    458,
+                    426,
+                    402,
+                    152,
+                    141,
+                    131,
+                    122,
+                    112,
+                    103,
+                    94,
+                    81,
+                    69,
+                    36,
+                    19,
+                    296,
+                    286,
+                    276,
+                    269,
+                    261,
+                    252,
+                    243,
+                    234,
+                    9
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_44.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    431,
+                    215,
+                    206,
+                    61,
+                    10,
+                    534,
+                    521,
+                    505,
+                    491,
+                    473,
+                    412,
+                    400,
+                    388,
+                    318,
+                    288,
+                    243,
+                    230,
+                    189,
+                    176,
+                    164,
+                    151,
+                    137,
+                    123,
+                    109,
+                    94,
+                    80,
+                    27,
+                    361,
+                    51,
+                    41
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_50.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    86,
+                    77,
+                    369,
+                    354,
+                    326,
+                    299,
+                    284,
+                    271,
+                    260,
+                    243,
+                    229,
+                    215,
+                    202,
+                    189,
+                    177,
+                    162,
+                    149,
+                    132,
+                    111,
+                    67,
+                    56,
+                    40,
+                    30,
+                    20,
+                    10
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_8.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    380,
+                    158,
+                    147,
+                    134,
+                    16,
+                    493,
+                    479,
+                    465,
+                    451,
+                    435,
+                    417,
+                    397,
+                    334,
+                    308,
+                    282,
+                    259,
+                    235,
+                    212,
+                    182,
+                    63,
+                    36,
+                    369,
+                    359,
+                    350,
+                    123,
+                    114,
+                    103,
+                    95,
+                    86,
+                    76,
+                    8
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_24.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    1066,
+                    1048,
+                    1003,
+                    986,
+                    925,
+                    896,
+                    870,
+                    841,
+                    830,
+                    804,
+                    786,
+                    769,
+                    752,
+                    721,
+                    693,
+                    626,
+                    609,
+                    590,
+                    572,
+                    550,
+                    509,
+                    473,
+                    452,
+                    440,
+                    422,
+                    390,
+                    372,
+                    347,
+                    338,
+                    328,
+                    321,
+                    313,
+                    303,
+                    294,
+                    285,
+                    279,
+                    269,
+                    261,
+                    252,
+                    243,
+                    237,
+                    228
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_21.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    5,
+                    14,
+                    23,
+                    31,
+                    75,
+                    86,
+                    96,
+                    106,
+                    116,
+                    153,
+                    163,
+                    173,
+                    183,
+                    194,
+                    204,
+                    215,
+                    237,
+                    253,
+                    268,
+                    287,
+                    315,
+                    341,
+                    358,
+                    513,
+                    536,
+                    551,
+                    563
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_12.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    98,
+                    108,
+                    117,
+                    124,
+                    133,
+                    142,
+                    150,
+                    159,
+                    172,
+                    184,
+                    193,
+                    202,
+                    211,
+                    228,
+                    264,
+                    299,
+                    312,
+                    329,
+                    341,
+                    358,
+                    367,
+                    376,
+                    389,
+                    398,
+                    411,
+                    425,
+                    437,
+                    449,
+                    461,
+                    474,
+                    486,
+                    498,
+                    507,
+                    520,
+                    538,
+                    550,
+                    567
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_7.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    324,
+                    316,
+                    307,
+                    62,
+                    51,
+                    42,
+                    36,
+                    408,
+                    392,
+                    370,
+                    352,
+                    339,
+                    278,
+                    264,
+                    251,
+                    236,
+                    221,
+                    206,
+                    192,
+                    179,
+                    165,
+                    152,
+                    139,
+                    108,
+                    95,
+                    82,
+                    297,
+                    290,
+                    26,
+                    16,
+                    9
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_28.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    422,
+                    409,
+                    393,
+                    379,
+                    363,
+                    348,
+                    336,
+                    307,
+                    294,
+                    280,
+                    255,
+                    241,
+                    229,
+                    217,
+                    206,
+                    124,
+                    112,
+                    98,
+                    85,
+                    193,
+                    183,
+                    174,
+                    165,
+                    156,
+                    146,
+                    137,
+                    70,
+                    63,
+                    54
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_3.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    25,
+                    17,
+                    8,
+                    296,
+                    281,
+                    266,
+                    255,
+                    237,
+                    227,
+                    212,
+                    196,
+                    164,
+                    135,
+                    105,
+                    95,
+                    86,
+                    76,
+                    65,
+                    55,
+                    46,
+                    36
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_11.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    141,
+                    96,
+                    87,
+                    428,
+                    410,
+                    394,
+                    376,
+                    359,
+                    335,
+                    312,
+                    291,
+                    275,
+                    259,
+                    185,
+                    172,
+                    155,
+                    109,
+                    76,
+                    66,
+                    57,
+                    47,
+                    38,
+                    29,
+                    236,
+                    224,
+                    215,
+                    206,
+                    199,
+                    131,
+                    121
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_5.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    380,
+                    158,
+                    147,
+                    134,
+                    16,
+                    493,
+                    479,
+                    465,
+                    451,
+                    435,
+                    417,
+                    397,
+                    334,
+                    308,
+                    282,
+                    259,
+                    235,
+                    212,
+                    182,
+                    63,
+                    36,
+                    369,
+                    359,
+                    350,
+                    123,
+                    114,
+                    103,
+                    95,
+                    86,
+                    76,
+                    8
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_40.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    654,
+                    641,
+                    617,
+                    599,
+                    582,
+                    528,
+                    512,
+                    483,
+                    458,
+                    433,
+                    402,
+                    375,
+                    350,
+                    324,
+                    305,
+                    290,
+                    269,
+                    252,
+                    561,
+                    552,
+                    542,
+                    236,
+                    226,
+                    216
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_34.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    408,
+                    395,
+                    16,
+                    722,
+                    701,
+                    672,
+                    630,
+                    603,
+                    580,
+                    554,
+                    534,
+                    518,
+                    503,
+                    482,
+                    470,
+                    455,
+                    438,
+                    373,
+                    348,
+                    332,
+                    315,
+                    277,
+                    259,
+                    46,
+                    29,
+                    235,
+                    226,
+                    219,
+                    209,
+                    199,
+                    192,
+                    182,
+                    173,
+                    163,
+                    153,
+                    9
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_1.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    22,
+                    36,
+                    51,
+                    65,
+                    78,
+                    86,
+                    94,
+                    108,
+                    119,
+                    134,
+                    143,
+                    151,
+                    168,
+                    184,
+                    201,
+                    213,
+                    229,
+                    243
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_20.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    269,
+                    261,
+                    252,
+                    101,
+                    40,
+                    550,
+                    535,
+                    520,
+                    506,
+                    494,
+                    430,
+                    414,
+                    391,
+                    365,
+                    350,
+                    333,
+                    321,
+                    308,
+                    297,
+                    181,
+                    163,
+                    123,
+                    73,
+                    55,
+                    473,
+                    237,
+                    228,
+                    221,
+                    212,
+                    90,
+                    32
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_37.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    202,
+                    150,
+                    141,
+                    487,
+                    469,
+                    453,
+                    435,
+                    418,
+                    394,
+                    371,
+                    350,
+                    334,
+                    318,
+                    246,
+                    233,
+                    216,
+                    168,
+                    130,
+                    120,
+                    111,
+                    101,
+                    92,
+                    83,
+                    66,
+                    54,
+                    42,
+                    30,
+                    298,
+                    287,
+                    277,
+                    270,
+                    262,
+                    192,
+                    183
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_29.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    305,
+                    297,
+                    288,
+                    459,
+                    442,
+                    428,
+                    417,
+                    399,
+                    378,
+                    339,
+                    38,
+                    29,
+                    17,
+                    229,
+                    218,
+                    206,
+                    194,
+                    180,
+                    167
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_13.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    92,
+                    82,
+                    71,
+                    288,
+                    260,
+                    237,
+                    213,
+                    190,
+                    168,
+                    147,
+                    118,
+                    60,
+                    51,
+                    40,
+                    31,
+                    22,
+                    13
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_35.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    321,
+                    313,
+                    304,
+                    293,
+                    282,
+                    273,
+                    156,
+                    605,
+                    580,
+                    563,
+                    530,
+                    516,
+                    504,
+                    487,
+                    472,
+                    456,
+                    443,
+                    421,
+                    407,
+                    394,
+                    374,
+                    357,
+                    337,
+                    200,
+                    184,
+                    166,
+                    263,
+                    256,
+                    247,
+                    236,
+                    229,
+                    221,
+                    145,
+                    136
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_14.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    358,
+                    331,
+                    316,
+                    299,
+                    282,
+                    252,
+                    239,
+                    223,
+                    208,
+                    193,
+                    181,
+                    169,
+                    156,
+                    142,
+                    130,
+                    118,
+                    341,
+                    265,
+                    103,
+                    94,
+                    81,
+                    72
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_23.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    575,
+                    555,
+                    540,
+                    523,
+                    506,
+                    450,
+                    436,
+                    409,
+                    390,
+                    368,
+                    346,
+                    323,
+                    301,
+                    278,
+                    256,
+                    234,
+                    212,
+                    192,
+                    173,
+                    156,
+                    490,
+                    481,
+                    472,
+                    140,
+                    130,
+                    120
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_10.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    37,
+                    29,
+                    100,
+                    86,
+                    71,
+                    55,
+                    17,
+                    8
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_39.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    85,
+                    45,
+                    135,
+                    111,
+                    74,
+                    58,
+                    96,
+                    34,
+                    27,
+                    18,
+                    8
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_33.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    197,
+                    189,
+                    27,
+                    325,
+                    309,
+                    297,
+                    287,
+                    275,
+                    265,
+                    246,
+                    229,
+                    119,
+                    110,
+                    101,
+                    57,
+                    40,
+                    213,
+                    178,
+                    168,
+                    158,
+                    148,
+                    139,
+                    130,
+                    17,
+                    8
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_41.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    96,
+                    86,
+                    75,
+                    292,
+                    264,
+                    241,
+                    217,
+                    194,
+                    172,
+                    151,
+                    122,
+                    64,
+                    55,
+                    44,
+                    35,
+                    26,
+                    17
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_6.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    317,
+                    309,
+                    300,
+                    62,
+                    51,
+                    42,
+                    36,
+                    398,
+                    383,
+                    362,
+                    345,
+                    332,
+                    278,
+                    264,
+                    251,
+                    236,
+                    221,
+                    206,
+                    192,
+                    179,
+                    165,
+                    152,
+                    139,
+                    108,
+                    95,
+                    82,
+                    290,
+                    28,
+                    19,
+                    9
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_48.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    166,
+                    113,
+                    104,
+                    473,
+                    455,
+                    434,
+                    420,
+                    394,
+                    373,
+                    354,
+                    339,
+                    318,
+                    302,
+                    286,
+                    211,
+                    197,
+                    180,
+                    131,
+                    94,
+                    85,
+                    75,
+                    66,
+                    57,
+                    48,
+                    264,
+                    253,
+                    244,
+                    237,
+                    228,
+                    155,
+                    148
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_22.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    352,
+                    344,
+                    335,
+                    324,
+                    313,
+                    304,
+                    57,
+                    48,
+                    664,
+                    602,
+                    567,
+                    533,
+                    503,
+                    458,
+                    426,
+                    402,
+                    152,
+                    141,
+                    131,
+                    122,
+                    112,
+                    103,
+                    94,
+                    81,
+                    69,
+                    36,
+                    19,
+                    296,
+                    286,
+                    276,
+                    269,
+                    261,
+                    252,
+                    243,
+                    234,
+                    9
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_46.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    175,
+                    149,
+                    121,
+                    101,
+                    78,
+                    48,
+                    21
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_38.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    422,
+                    409,
+                    393,
+                    379,
+                    363,
+                    348,
+                    336,
+                    307,
+                    294,
+                    280,
+                    255,
+                    241,
+                    229,
+                    217,
+                    206,
+                    124,
+                    112,
+                    98,
+                    85,
+                    193,
+                    183,
+                    174,
+                    165,
+                    156,
+                    146,
+                    137,
+                    70,
+                    63,
+                    54
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_17.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    170,
+                    161,
+                    151,
+                    440,
+                    426,
+                    410,
+                    397,
+                    379,
+                    365,
+                    261,
+                    244,
+                    229,
+                    214,
+                    201,
+                    187,
+                    80,
+                    63,
+                    335,
+                    317,
+                    308,
+                    297,
+                    288,
+                    279,
+                    141,
+                    132,
+                    122,
+                    113,
+                    106,
+                    97,
+                    49
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_4.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    256,
+                    241,
+                    223,
+                    189,
+                    175,
+                    163,
+                    130,
+                    121,
+                    114,
+                    105,
+                    95,
+                    86,
+                    76,
+                    67,
+                    59,
+                    49,
+                    40,
+                    29
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_27.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    255,
+                    247,
+                    238,
+                    227,
+                    54,
+                    660,
+                    650,
+                    637,
+                    626,
+                    613,
+                    599,
+                    585,
+                    569,
+                    557,
+                    544,
+                    529,
+                    514,
+                    448,
+                    432,
+                    418,
+                    352,
+                    339,
+                    325,
+                    313,
+                    301,
+                    289,
+                    146,
+                    136,
+                    124,
+                    111,
+                    90,
+                    70,
+                    276,
+                    267,
+                    218,
+                    212,
+                    202,
+                    194,
+                    185,
+                    176,
+                    170,
+                    160
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_2.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    25,
+                    17,
+                    8,
+                    282,
+                    267,
+                    252,
+                    241,
+                    223,
+                    210,
+                    194,
+                    162,
+                    133,
+                    103,
+                    92,
+                    84,
+                    75,
+                    66,
+                    55,
+                    45,
+                    36
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_47.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    360,
+                    534,
+                    521,
+                    505,
+                    486,
+                    473,
+                    439,
+                    417,
+                    404,
+                    391,
+                    378,
+                    249,
+                    231,
+                    219,
+                    208,
+                    186,
+                    167,
+                    152,
+                    61,
+                    52,
+                    42,
+                    31,
+                    22,
+                    13,
+                    344,
+                    333,
+                    324,
+                    314,
+                    304,
+                    293,
+                    284,
+                    274,
+                    261,
+                    130,
+                    120,
+                    113,
+                    103,
+                    94,
+                    85,
+                    76
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_31.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    270,
+                    104,
+                    331,
+                    315,
+                    285,
+                    225,
+                    189,
+                    172,
+                    158,
+                    135,
+                    120,
+                    260,
+                    251,
+                    210,
+                    95
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_15.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    92,
+                    82,
+                    71,
+                    288,
+                    260,
+                    237,
+                    213,
+                    190,
+                    168,
+                    147,
+                    118,
+                    60,
+                    51,
+                    40,
+                    31,
+                    22,
+                    13
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_26.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    63,
+                    72,
+                    81,
+                    91,
+                    100,
+                    110,
+                    128,
+                    136,
+                    145,
+                    159,
+                    171,
+                    181,
+                    193,
+                    205,
+                    218,
+                    230,
+                    243,
+                    255,
+                    268,
+                    278,
+                    295,
+                    312,
+                    325
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_25.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    126,
+                    118,
+                    109,
+                    98,
+                    87,
+                    78,
+                    72,
+                    361,
+                    348,
+                    335,
+                    322,
+                    309,
+                    290,
+                    248,
+                    201,
+                    177,
+                    156,
+                    141,
+                    60,
+                    42,
+                    13
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_16.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    573,
+                    565,
+                    556,
+                    135,
+                    111,
+                    102,
+                    550,
+                    536,
+                    523,
+                    507,
+                    494,
+                    480,
+                    468,
+                    444,
+                    430,
+                    417,
+                    405,
+                    381,
+                    367,
+                    355,
+                    337,
+                    314,
+                    302,
+                    289,
+                    277,
+                    180,
+                    154,
+                    95,
+                    86,
+                    76,
+                    69,
+                    61,
+                    52,
+                    255,
+                    245,
+                    238,
+                    228,
+                    220,
+                    211,
+                    201,
+                    195,
+                    126
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_49.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    85,
+                    45,
+                    135,
+                    111,
+                    74,
+                    58,
+                    96,
+                    34,
+                    27,
+                    18,
+                    8
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    },
+    {
+        "name": "buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_45.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    73,
+                    65,
+                    55,
+                    44,
+                    33,
+                    24,
+                    18,
+                    9,
+                    377,
+                    365,
+                    350,
+                    338,
+                    305,
+                    288,
+                    272,
+                    258,
+                    243,
+                    227,
+                    183,
+                    174,
+                    163,
+                    154,
+                    145,
+                    135,
+                    125,
+                    115,
+                    106,
+                    99
+                ],
+                "category": "Re-entrancy"
+            }
+        ]
+    }
+]

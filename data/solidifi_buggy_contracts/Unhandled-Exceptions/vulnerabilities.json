@@ -1,0 +1,1976 @@
+[
+    {
+        "name": "buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_19.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    358,
+                    347,
+                    337,
+                    330,
+                    319,
+                    305,
+                    291,
+                    283,
+                    275,
+                    268,
+                    254,
+                    241,
+                    233,
+                    225,
+                    215,
+                    201,
+                    191,
+                    183,
+                    169,
+                    155,
+                    142,
+                    129,
+                    114,
+                    103,
+                    96,
+                    88,
+                    69,
+                    58
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_18.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    62,
+                    66,
+                    70,
+                    79,
+                    83,
+                    89,
+                    92,
+                    95,
+                    113,
+                    128,
+                    139,
+                    151,
+                    160,
+                    184,
+                    193,
+                    204,
+                    213,
+                    223,
+                    227,
+                    231,
+                    234,
+                    244,
+                    250,
+                    257,
+                    263,
+                    267,
+                    273,
+                    277,
+                    282,
+                    297,
+                    312,
+                    320,
+                    322,
+                    326,
+                    340,
+                    366,
+                    401,
+                    415,
+                    429,
+                    436,
+                    449,
+                    464,
+                    473,
+                    476,
+                    487,
+                    498,
+                    529,
+                    553,
+                    577,
+                    589,
+                    605,
+                    622,
+                    639
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_9.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    152,
+                    143,
+                    135,
+                    379,
+                    364,
+                    341,
+                    316,
+                    299,
+                    282,
+                    266,
+                    243,
+                    225,
+                    212,
+                    200,
+                    188,
+                    66,
+                    127,
+                    123,
+                    111,
+                    101,
+                    96,
+                    90,
+                    86,
+                    55
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_42.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    154,
+                    147,
+                    19,
+                    260,
+                    248,
+                    235,
+                    221,
+                    214,
+                    207,
+                    194,
+                    177,
+                    97,
+                    93,
+                    89,
+                    47,
+                    29,
+                    164,
+                    143,
+                    133,
+                    122,
+                    118,
+                    112,
+                    108,
+                    11,
+                    8
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_43.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    349,
+                    255,
+                    38,
+                    10,
+                    426,
+                    409,
+                    392,
+                    379,
+                    336,
+                    330,
+                    317,
+                    278,
+                    269,
+                    212,
+                    184,
+                    138,
+                    129,
+                    122,
+                    109,
+                    94,
+                    85,
+                    74,
+                    64,
+                    52,
+                    19,
+                    293,
+                    250,
+                    33,
+                    27
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_32.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    206,
+                    199,
+                    259,
+                    250,
+                    189,
+                    171,
+                    151,
+                    134,
+                    119,
+                    76,
+                    66,
+                    57,
+                    53,
+                    49,
+                    237,
+                    227,
+                    221,
+                    217,
+                    101,
+                    91,
+                    87
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_30.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    860,
+                    851,
+                    780,
+                    777,
+                    697,
+                    687,
+                    942,
+                    934,
+                    919,
+                    911,
+                    884,
+                    871,
+                    844,
+                    836,
+                    826,
+                    813,
+                    804,
+                    792,
+                    763,
+                    749,
+                    741,
+                    732,
+                    725,
+                    710,
+                    656,
+                    633,
+                    613,
+                    600,
+                    578,
+                    553,
+                    523,
+                    498,
+                    478,
+                    468,
+                    460,
+                    449,
+                    432,
+                    422,
+                    403,
+                    385,
+                    366,
+                    359,
+                    341,
+                    333,
+                    319,
+                    306,
+                    298,
+                    285
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_36.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    266,
+                    259,
+                    253,
+                    250,
+                    243,
+                    233,
+                    42,
+                    38,
+                    556,
+                    500,
+                    464,
+                    430,
+                    405,
+                    365,
+                    335,
+                    310,
+                    113,
+                    109,
+                    99,
+                    89,
+                    85,
+                    79,
+                    75,
+                    64,
+                    58,
+                    31,
+                    19,
+                    228,
+                    221,
+                    217,
+                    208,
+                    204,
+                    200,
+                    196,
+                    192,
+                    9
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_44.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    352,
+                    153,
+                    147,
+                    43,
+                    10,
+                    439,
+                    422,
+                    411,
+                    400,
+                    388,
+                    332,
+                    320,
+                    313,
+                    251,
+                    223,
+                    177,
+                    167,
+                    137,
+                    124,
+                    111,
+                    104,
+                    93,
+                    84,
+                    72,
+                    63,
+                    54,
+                    23,
+                    289,
+                    36,
+                    32
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_50.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    64,
+                    56,
+                    300,
+                    293,
+                    269,
+                    241,
+                    222,
+                    214,
+                    206,
+                    195,
+                    180,
+                    166,
+                    158,
+                    150,
+                    140,
+                    124,
+                    114,
+                    104,
+                    83,
+                    45,
+                    40,
+                    27,
+                    22,
+                    14,
+                    10
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_8.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    302,
+                    112,
+                    104,
+                    99,
+                    18,
+                    400,
+                    382,
+                    373,
+                    362,
+                    352,
+                    333,
+                    313,
+                    271,
+                    250,
+                    226,
+                    202,
+                    181,
+                    165,
+                    135,
+                    55,
+                    34,
+                    294,
+                    289,
+                    282,
+                    94,
+                    90,
+                    84,
+                    79,
+                    73,
+                    69,
+                    8
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_24.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    980,
+                    963,
+                    921,
+                    912,
+                    855,
+                    825,
+                    795,
+                    771,
+                    763,
+                    743,
+                    724,
+                    707,
+                    695,
+                    669,
+                    643,
+                    575,
+                    561,
+                    549,
+                    531,
+                    508,
+                    473,
+                    440,
+                    424,
+                    414,
+                    402,
+                    375,
+                    362,
+                    340,
+                    334,
+                    330,
+                    321,
+                    317,
+                    312,
+                    308,
+                    304,
+                    298,
+                    294,
+                    288,
+                    281,
+                    275,
+                    265,
+                    262,
+                    257,
+                    251,
+                    239,
+                    230,
+                    226,
+                    217
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_21.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    66,
+                    482,
+                    473,
+                    466,
+                    447,
+                    291,
+                    270,
+                    249,
+                    224,
+                    211,
+                    195,
+                    179,
+                    120,
+                    27,
+                    21,
+                    11,
+                    5,
+                    164,
+                    153,
+                    142,
+                    137,
+                    130,
+                    125,
+                    85,
+                    81,
+                    76,
+                    71
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_12.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    160,
+                    128,
+                    120,
+                    458,
+                    445,
+                    432,
+                    410,
+                    402,
+                    396,
+                    390,
+                    377,
+                    364,
+                    357,
+                    350,
+                    340,
+                    325,
+                    275,
+                    253,
+                    240,
+                    204,
+                    160,
+                    154,
+                    150,
+                    140,
+                    120,
+                    116,
+                    112,
+                    108,
+                    102,
+                    98,
+                    310,
+                    305,
+                    297,
+                    293,
+                    289,
+                    263,
+                    174
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_7.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    251,
+                    244,
+                    238,
+                    56,
+                    49,
+                    39,
+                    29,
+                    321,
+                    308,
+                    292,
+                    273,
+                    260,
+                    222,
+                    213,
+                    202,
+                    186,
+                    174,
+                    166,
+                    152,
+                    138,
+                    130,
+                    120,
+                    112,
+                    83,
+                    76,
+                    68,
+                    233,
+                    229,
+                    22,
+                    18,
+                    9
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_28.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    340,
+                    328,
+                    315,
+                    309,
+                    297,
+                    281,
+                    265,
+                    241,
+                    231,
+                    223,
+                    197,
+                    183,
+                    176,
+                    169,
+                    160,
+                    103,
+                    94,
+                    87,
+                    74,
+                    146,
+                    142,
+                    136,
+                    132,
+                    125,
+                    121,
+                    117,
+                    64,
+                    60,
+                    54
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_3.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    21,
+                    14,
+                    8,
+                    248,
+                    237,
+                    221,
+                    206,
+                    193,
+                    186,
+                    177,
+                    160,
+                    128,
+                    104,
+                    79,
+                    71,
+                    61,
+                    54,
+                    50,
+                    40,
+                    30,
+                    26
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_11.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    108,
+                    73,
+                    67,
+                    350,
+                    336,
+                    319,
+                    297,
+                    285,
+                    264,
+                    247,
+                    225,
+                    209,
+                    198,
+                    145,
+                    134,
+                    116,
+                    85,
+                    63,
+                    53,
+                    43,
+                    39,
+                    33,
+                    29,
+                    177,
+                    174,
+                    168,
+                    164,
+                    160,
+                    154,
+                    103,
+                    94
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_5.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    302,
+                    112,
+                    104,
+                    99,
+                    18,
+                    400,
+                    382,
+                    373,
+                    362,
+                    352,
+                    333,
+                    313,
+                    271,
+                    250,
+                    226,
+                    202,
+                    181,
+                    165,
+                    135,
+                    55,
+                    34,
+                    294,
+                    289,
+                    282,
+                    94,
+                    90,
+                    84,
+                    79,
+                    73,
+                    69,
+                    8
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_40.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    594,
+                    582,
+                    561,
+                    551,
+                    538,
+                    488,
+                    468,
+                    444,
+                    422,
+                    403,
+                    371,
+                    344,
+                    324,
+                    303,
+                    286,
+                    270,
+                    252,
+                    242,
+                    517,
+                    507,
+                    503,
+                    229,
+                    224,
+                    216
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_34.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    337,
+                    325,
+                    16,
+                    619,
+                    602,
+                    572,
+                    526,
+                    504,
+                    484,
+                    464,
+                    443,
+                    427,
+                    417,
+                    401,
+                    391,
+                    375,
+                    361,
+                    310,
+                    285,
+                    268,
+                    257,
+                    222,
+                    209,
+                    37,
+                    26,
+                    190,
+                    186,
+                    182,
+                    175,
+                    171,
+                    162,
+                    156,
+                    152,
+                    147,
+                    142,
+                    9
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_1.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    22,
+                    31,
+                    46,
+                    61,
+                    68,
+                    73,
+                    80,
+                    88,
+                    92,
+                    104,
+                    114,
+                    120,
+                    132,
+                    143,
+                    164,
+                    177,
+                    189,
+                    195
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_20.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    218,
+                    211,
+                    205,
+                    86,
+                    42,
+                    457,
+                    438,
+                    428,
+                    417,
+                    411,
+                    352,
+                    336,
+                    318,
+                    297,
+                    284,
+                    266,
+                    257,
+                    251,
+                    240,
+                    149,
+                    137,
+                    100,
+                    69,
+                    53,
+                    396,
+                    195,
+                    191,
+                    187,
+                    181,
+                    81,
+                    32
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_37.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    147,
+                    109,
+                    103,
+                    392,
+                    378,
+                    361,
+                    339,
+                    327,
+                    306,
+                    289,
+                    267,
+                    251,
+                    240,
+                    184,
+                    173,
+                    155,
+                    126,
+                    99,
+                    89,
+                    79,
+                    75,
+                    69,
+                    65,
+                    50,
+                    44,
+                    37,
+                    30,
+                    223,
+                    217,
+                    212,
+                    203,
+                    199,
+                    195,
+                    142,
+                    138
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_29.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    281,
+                    274,
+                    268,
+                    416,
+                    403,
+                    388,
+                    373,
+                    360,
+                    342,
+                    309,
+                    33,
+                    24,
+                    17,
+                    214,
+                    205,
+                    192,
+                    183,
+                    176,
+                    163
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_13.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    74,
+                    65,
+                    57,
+                    252,
+                    228,
+                    204,
+                    176,
+                    158,
+                    139,
+                    124,
+                    94,
+                    46,
+                    42,
+                    36,
+                    29,
+                    19,
+                    13
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_35.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    268,
+                    261,
+                    255,
+                    252,
+                    245,
+                    235,
+                    146,
+                    504,
+                    482,
+                    471,
+                    437,
+                    423,
+                    416,
+                    404,
+                    391,
+                    374,
+                    364,
+                    349,
+                    335,
+                    321,
+                    307,
+                    293,
+                    278,
+                    183,
+                    173,
+                    160,
+                    230,
+                    226,
+                    220,
+                    215,
+                    206,
+                    202,
+                    140,
+                    136
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_14.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    305,
+                    282,
+                    270,
+                    261,
+                    248,
+                    224,
+                    207,
+                    196,
+                    184,
+                    175,
+                    162,
+                    150,
+                    142,
+                    133,
+                    123,
+                    110,
+                    291,
+                    238,
+                    95,
+                    85,
+                    78,
+                    72
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_23.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    504,
+                    485,
+                    473,
+                    464,
+                    451,
+                    408,
+                    390,
+                    368,
+                    352,
+                    336,
+                    313,
+                    290,
+                    273,
+                    255,
+                    235,
+                    212,
+                    193,
+                    180,
+                    161,
+                    143,
+                    441,
+                    435,
+                    431,
+                    129,
+                    125,
+                    120
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_10.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    35,
+                    28,
+                    81,
+                    75,
+                    64,
+                    47,
+                    12,
+                    8
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_39.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    68,
+                    32,
+                    108,
+                    92,
+                    61,
+                    44,
+                    73,
+                    26,
+                    22,
+                    19,
+                    8
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_33.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    154,
+                    147,
+                    19,
+                    261,
+                    249,
+                    236,
+                    222,
+                    215,
+                    208,
+                    195,
+                    177,
+                    97,
+                    93,
+                    89,
+                    47,
+                    29,
+                    164,
+                    143,
+                    133,
+                    122,
+                    118,
+                    112,
+                    108,
+                    11,
+                    8
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_41.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    78,
+                    69,
+                    61,
+                    256,
+                    232,
+                    208,
+                    180,
+                    162,
+                    143,
+                    128,
+                    98,
+                    50,
+                    46,
+                    40,
+                    33,
+                    23,
+                    17
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_6.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    242,
+                    235,
+                    229,
+                    51,
+                    44,
+                    34,
+                    24,
+                    309,
+                    297,
+                    282,
+                    264,
+                    251,
+                    217,
+                    208,
+                    197,
+                    181,
+                    169,
+                    161,
+                    147,
+                    133,
+                    125,
+                    115,
+                    107,
+                    78,
+                    71,
+                    63,
+                    224,
+                    19,
+                    13,
+                    9
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_48.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    136,
+                    95,
+                    89,
+                    392,
+                    378,
+                    356,
+                    338,
+                    317,
+                    299,
+                    286,
+                    270,
+                    249,
+                    238,
+                    227,
+                    173,
+                    158,
+                    144,
+                    112,
+                    79,
+                    69,
+                    65,
+                    59,
+                    55,
+                    48,
+                    211,
+                    207,
+                    202,
+                    198,
+                    192,
+                    188,
+                    126,
+                    122
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_22.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    266,
+                    259,
+                    253,
+                    250,
+                    243,
+                    233,
+                    42,
+                    38,
+                    556,
+                    500,
+                    464,
+                    430,
+                    405,
+                    365,
+                    335,
+                    310,
+                    113,
+                    109,
+                    99,
+                    89,
+                    85,
+                    79,
+                    75,
+                    64,
+                    58,
+                    31,
+                    19,
+                    228,
+                    221,
+                    217,
+                    208,
+                    204,
+                    200,
+                    196,
+                    192,
+                    9
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_46.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    164,
+                    139,
+                    114,
+                    102,
+                    83,
+                    52,
+                    21
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_38.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    340,
+                    328,
+                    315,
+                    309,
+                    297,
+                    281,
+                    265,
+                    241,
+                    231,
+                    223,
+                    197,
+                    183,
+                    176,
+                    169,
+                    160,
+                    103,
+                    94,
+                    87,
+                    74,
+                    146,
+                    142,
+                    136,
+                    132,
+                    125,
+                    121,
+                    117,
+                    64,
+                    60,
+                    54
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_17.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    134,
+                    126,
+                    119,
+                    354,
+                    344,
+                    327,
+                    310,
+                    297,
+                    286,
+                    208,
+                    190,
+                    175,
+                    165,
+                    157,
+                    145,
+                    71,
+                    57,
+                    263,
+                    245,
+                    235,
+                    230,
+                    224,
+                    220,
+                    111,
+                    108,
+                    103,
+                    99,
+                    95,
+                    89,
+                    49
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_4.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    211,
+                    197,
+                    182,
+                    156,
+                    146,
+                    133,
+                    96,
+                    92,
+                    88,
+                    85,
+                    74,
+                    65,
+                    60,
+                    56,
+                    50,
+                    39,
+                    33,
+                    29
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_27.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    226,
+                    219,
+                    213,
+                    210,
+                    57,
+                    559,
+                    545,
+                    537,
+                    529,
+                    522,
+                    507,
+                    493,
+                    482,
+                    475,
+                    464,
+                    448,
+                    436,
+                    377,
+                    361,
+                    346,
+                    286,
+                    276,
+                    267,
+                    257,
+                    251,
+                    244,
+                    151,
+                    144,
+                    135,
+                    128,
+                    85,
+                    69,
+                    236,
+                    232,
+                    206,
+                    200,
+                    196,
+                    190,
+                    183,
+                    177,
+                    167,
+                    163,
+                    159,
+                    118,
+                    108,
+                    99,
+                    53
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_2.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    21,
+                    14,
+                    8,
+                    240,
+                    229,
+                    213,
+                    198,
+                    185,
+                    175,
+                    165,
+                    132,
+                    103,
+                    78,
+                    72,
+                    66,
+                    56,
+                    50,
+                    46,
+                    36,
+                    26
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_47.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    266,
+                    411,
+                    401,
+                    393,
+                    378,
+                    364,
+                    326,
+                    309,
+                    299,
+                    292,
+                    278,
+                    190,
+                    177,
+                    170,
+                    161,
+                    138,
+                    122,
+                    114,
+                    46,
+                    36,
+                    32,
+                    24,
+                    20,
+                    13,
+                    256,
+                    250,
+                    246,
+                    239,
+                    232,
+                    227,
+                    216,
+                    210,
+                    202,
+                    97,
+                    92,
+                    85,
+                    81,
+                    74,
+                    67,
+                    61
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_31.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    249,
+                    102,
+                    292,
+                    284,
+                    258,
+                    208,
+                    173,
+                    161,
+                    150,
+                    133,
+                    117,
+                    239,
+                    235,
+                    198,
+                    95
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_15.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    74,
+                    65,
+                    57,
+                    252,
+                    228,
+                    204,
+                    176,
+                    158,
+                    139,
+                    124,
+                    94,
+                    46,
+                    42,
+                    36,
+                    29,
+                    19,
+                    13
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_26.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    63,
+                    67,
+                    73,
+                    77,
+                    87,
+                    97,
+                    108,
+                    113,
+                    121,
+                    129,
+                    142,
+                    150,
+                    157,
+                    164,
+                    177,
+                    190,
+                    197,
+                    206,
+                    214,
+                    228,
+                    246,
+                    259,
+                    264
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_25.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    110,
+                    103,
+                    97,
+                    94,
+                    87,
+                    77,
+                    67,
+                    310,
+                    300,
+                    293,
+                    279,
+                    266,
+                    252,
+                    215,
+                    170,
+                    145,
+                    127,
+                    119,
+                    55,
+                    36,
+                    13
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_16.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    453,
+                    446,
+                    440,
+                    107,
+                    93,
+                    83,
+                    430,
+                    421,
+                    411,
+                    401,
+                    387,
+                    373,
+                    366,
+                    347,
+                    335,
+                    321,
+                    312,
+                    295,
+                    281,
+                    268,
+                    256,
+                    236,
+                    229,
+                    218,
+                    212,
+                    139,
+                    118,
+                    79,
+                    73,
+                    69,
+                    60,
+                    56,
+                    52,
+                    195,
+                    190,
+                    183,
+                    179,
+                    173,
+                    166,
+                    159,
+                    149,
+                    104
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_49.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    68,
+                    32,
+                    108,
+                    92,
+                    61,
+                    44,
+                    73,
+                    26,
+                    22,
+                    19,
+                    8
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    },
+    {
+        "name": "buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_45.sol",
+        "source": "",
+        "vulnerabilities": [
+            {
+                "lines": [
+                    57,
+                    50,
+                    43,
+                    40,
+                    33,
+                    23,
+                    13,
+                    9,
+                    295,
+                    289,
+                    273,
+                    261,
+                    233,
+                    221,
+                    207,
+                    192,
+                    180,
+                    171,
+                    127,
+                    117,
+                    112,
+                    106,
+                    102,
+                    94,
+                    90,
+                    85,
+                    81,
+                    77
+                ],
+                "category": "Unhandled-Exceptions"
+            }
+        ]
+    }
+]
