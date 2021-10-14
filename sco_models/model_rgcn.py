@@ -7,7 +7,7 @@ from torch_geometric.nn import MetaPath2Vec
 import dgl
 import dgl.nn.pytorch as dglnn
 
-from graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, reflect_graph, \
+from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, reflect_graph, \
                          get_number_of_nodes, add_cfg_mapping, get_symmatrical_metapaths, get_node_tracker
 
 
