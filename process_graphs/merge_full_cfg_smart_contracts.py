@@ -15,7 +15,7 @@ from slither.core.cfg.node import NodeType
 from solc import install_solc
 
 
-pattern =  re.compile(r'\d.\d.\d')
+pattern =  re.compile(r'\d.\d.\d+')
 def get_solc_version(source):
     with open(source, 'r') as f:
         line = f.readline()
@@ -46,7 +46,7 @@ def get_node_info(node, list_vulnerabilities_info_in_sc):
     node_source_code_lines = node.source_mapping['lines']
     node_info_vulnerabilities = get_vulnerabilities_of_node_by_source_code_line(node_source_code_lines, list_vulnerabilities_info_in_sc)
     
-    return node_label, node_type, node_expression, node_irs, node_info_vulnerabilities
+    return node_label, node_type, node_expression, node_irs, node_info_vulnerabilities, node_source_code_lines
 
 def get_vulnerabilities(file_name_sc, vulnerabilities):
     list_vulnerability_in_sc = None
@@ -76,17 +76,17 @@ def get_vulnerabilities_of_node_by_source_code_line(source_code_lines, list_vul_
 
     return node_info_vulnerabilities
 
-def compress_full_smart_contracts(smart_contracts, input, output, vulnerabilities=None):
+def compress_full_smart_contracts(smart_contracts, input_graph, output, vulnerabilities=None):
     full_graph = None
-    if input is not None:
-        full_graph = nx.read_gpickle(input)
+    if input_graph is not None:
+        full_graph = nx.read_gpickle(input_graph)
     count = 0
     for sc in tqdm(smart_contracts):
         sc_version = get_solc_version(sc)
         print(f'{sc} - {sc_version}')
-        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
+        solc_compiler = f'/home/eric/.solc-select/artifacts/solc-{sc_version}'
         if not os.path.exists(solc_compiler):
-            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
+            solc_compiler = f'/home/eric/.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
         try:
             slither = Slither(sc, solc=solc_compiler)
@@ -107,21 +107,23 @@ def compress_full_smart_contracts(smart_contracts, input, output, vulnerabilitie
 
                 nx_g = nx.MultiDiGraph()
                 for nidx, node in enumerate(function.nodes):             
-                    node_label, node_type, node_expression, node_irs, node_info_vulnerabilities = get_node_info(node, list_vul_info_sc)
+                    node_label, node_type, node_expression, node_irs, node_info_vulnerabilities, node_source_code_lines = get_node_info(node, list_vul_info_sc)
                     
                     nx_g.add_node(node.node_id, label=node_label,
                                   node_type=node_type, node_expression=node_expression, node_irs=node_irs,
                                   node_info_vulnerabilities=node_info_vulnerabilities,
+                                  node_source_code_lines=node_source_code_lines,
                                   function_fullname=function.full_name, contract_name=contract.name, source_file=file_name_sc)
                     
                     if node.type in [NodeType.IF, NodeType.IFLOOP]:
                         true_node = node.son_true
                         if true_node:
                             if true_node.node_id not in nx_g.nodes():
-                                node_label, node_type, node_expression, node_irs, node_info_vulnerabilities = get_node_info(true_node, list_vul_info_sc)
+                                node_label, node_type, node_expression, node_irs, node_info_vulnerabilities, node_source_code_lines = get_node_info(true_node, list_vul_info_sc)
                                 nx_g.add_node(true_node.node_id, label=node_label,
                                               node_type=node_type, node_expression=node_expression, node_irs=node_irs,
                                               node_info_vulnerabilities=node_info_vulnerabilities,
+                                              node_source_code_lines=node_source_code_lines,
                                               function_fullname=function.full_name, contract_name=contract.name, source_file=file_name_sc)
                             nx_g.add_edge(node.node_id, true_node.node_id, edge_type='if_true', label='True')
                         
@@ -129,10 +131,11 @@ def compress_full_smart_contracts(smart_contracts, input, output, vulnerabilitie
                         false_node = node.son_false
                         if false_node:
                             if false_node.node_id not in nx_g.nodes():
-                                node_label, node_type, node_expression, node_irs, node_info_vulnerabilities = get_node_info(false_node, list_vul_info_sc)
+                                node_label, node_type, node_expression, node_irs, node_info_vulnerabilities, node_source_code_lines = get_node_info(false_node, list_vul_info_sc)
                                 nx_g.add_node(false_node.node_id, label=node_label,
                                               node_type=node_type, node_expression=node_expression, node_irs=node_irs,
                                               node_info_vulnerabilities=node_info_vulnerabilities,
+                                              node_source_code_lines=node_source_code_lines,
                                               function_fullname=function.full_name, contract_name=contract.name, source_file=file_name_sc)
                             nx_g.add_edge(node.node_id, false_node.node_id, edge_type='if_false', label='False')
                             
@@ -140,10 +143,11 @@ def compress_full_smart_contracts(smart_contracts, input, output, vulnerabilitie
                         for son_node in node.sons:
                             if son_node:
                                 if son_node.node_id not in nx_g.nodes():
-                                    node_label, node_type, node_expression, node_irs, node_info_vulnerabilities = get_node_info(son_node, list_vul_info_sc)
+                                    node_label, node_type, node_expression, node_irs, node_info_vulnerabilities, node_source_code_lines = get_node_info(son_node, list_vul_info_sc)
                                     nx_g.add_node(son_node.node_id, label=node_label,
                                                   node_type=node_type, node_expression=node_expression, node_irs=node_irs,
                                                   node_info_vulnerabilities=node_info_vulnerabilities,
+                                                  node_source_code_lines=node_source_code_lines,
                                                   function_fullname=function.full_name, contract_name=contract.name, source_file=file_name_sc)
                                 nx_g.add_edge(node.node_id, son_node.node_id, edge_type='next', label='Next')
 
@@ -155,6 +159,7 @@ def compress_full_smart_contracts(smart_contracts, input, output, vulnerabilitie
                 nx_graph.add_node(node_function_name, label=node_function_name,
                                   node_type='FUNCTION_NAME', node_expression=None, node_irs=None,
                                   node_info_vulnerabilities=node_function_info_vulnerabilities,
+                                  node_source_code_lines=node_function_source_code_lines,
                                   function_fullname=function.full_name, contract_name=contract.name, source_file=file_name_sc)
                 
                 if 0 in nx_graph.nodes():
@@ -181,8 +186,8 @@ def compress_full_smart_contracts(smart_contracts, input, output, vulnerabilitie
     #     if node_data['node_info_vulnerabilities'] is not None:
     #         print('Node has vulnerabilities:', node, node_data)
     print(f'{count}/{len(smart_contracts)}')
-    nx.nx_agraph.write_dot(full_graph, join(output, 'compress_graphs.dot'))
-    nx.write_gpickle(full_graph, join(output, 'compress_graphs.gpickle'))
+    nx.nx_agraph.write_dot(full_graph, join(output, 'compress_graphs_buggy.dot'))
+    nx.write_gpickle(full_graph, join(output, 'compress_graphs_buggy.gpickle'))
 
 
 if __name__ == '__main__':
@@ -190,10 +195,11 @@ if __name__ == '__main__':
     # output_path = 'data/extracted_source_code'
     import subprocess
 
-    smart_contract_path = './data/smartbug-dataset/reentrancy'
+    smart_contract_path = 'data/solidifi_buggy_contracts/Re-entrancy'
     # smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs-wild-clean-contracts'
-    input_path = './dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/compressed_graphs/compress_graphs.gpickle'
-    output_path = './dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/compressed_graphs_with_test'
+    # input_graph = './dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/compressed_graphs/compress_graphs.gpickle'
+    input_graph = None
+    output_path = 'data/solidifi_buggy_contracts/Re-entrancy/output_graph'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
     # for sc in smart_contracts:
     #     print(sc)
@@ -207,4 +213,4 @@ if __name__ == '__main__':
     with open('./data/solidifi_buggy_contracts/Re-entrancy/vulnerabilities.json') as f:
         data_vulnerabilities = json.load(f)
     
-    compress_full_smart_contracts(smart_contracts, input_path, output_path, vulnerabilities=data_vulnerabilities)
+    compress_full_smart_contracts(smart_contracts, input_graph, output_path, vulnerabilities=data_vulnerabilities)
