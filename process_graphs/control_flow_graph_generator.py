@@ -62,10 +62,14 @@ def get_vulnerabilities_of_node_by_source_code_line(source_code_lines, list_vul_
         list_vulnerability = []
         for vul_info_sc in list_vul_info_sc:
             vulnerabilities_lines = vul_info_sc['lines']
-            for source_code_line in source_code_lines:
-                for vulnerabilities_line in vulnerabilities_lines:
-                    if source_code_line == vulnerabilities_line:
-                        list_vulnerability.append(vul_info_sc)
+            # for source_code_line in source_code_lines:
+            #     for vulnerabilities_line in vulnerabilities_lines:
+            #         if source_code_line == vulnerabilities_line:
+            #             list_vulnerability.append(vul_info_sc)
+            interset_lines = set(vulnerabilities_lines).intersection(set(source_code_lines))
+            if len(interset_lines) > 0:
+                list_vulnerability.append(vul_info_sc)
+
     else:
         list_vulnerability = None
     
@@ -195,11 +199,11 @@ if __name__ == '__main__':
     # output_path = 'data/extracted_source_code'
     import subprocess
 
-    smart_contract_path = 'data/solidifi_buggy_contracts/Re-entrancy'
+    smart_contract_path = 'data/solidifi_buggy_contracts/Timestamp-Dependency'
     # smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs-wild-clean-contracts'
     # input_graph = './dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/compressed_graphs/compress_graphs.gpickle'
     input_graph = None
-    output_path = 'data/solidifi_buggy_contracts/Re-entrancy/output_graph'
+    output_path = 'data/solidifi_buggy_contracts/Timestamp-Dependency/output_graph'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
     # for sc in smart_contracts:
     #     print(sc)
@@ -210,7 +214,7 @@ if __name__ == '__main__':
     #         print(sc_version)
 
     data_vulnerabilities = None
-    with open('./data/solidifi_buggy_contracts/Re-entrancy/vulnerabilities.json') as f:
+    with open('data/solidifi_buggy_contracts/Timestamp-Dependency/vulnerabilities.json') as f:
         data_vulnerabilities = json.load(f)
     
     compress_full_smart_contracts(smart_contracts, input_graph, output_path, vulnerabilities=data_vulnerabilities)
