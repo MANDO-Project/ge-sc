@@ -27,7 +27,8 @@ for csv_sc in csv_smart_contracts:
     df_csv_sc = pd.read_csv(csv_sc)
     buggy_lines = []
     for index, row in df_csv_sc.iterrows():
-        buggy_lines.append(row['loc'])
+        for i in range(row['length']):
+            buggy_lines.append(row['loc'] + i)
 
     dict_sc_info = {
         'name': fn_sol_sc,
