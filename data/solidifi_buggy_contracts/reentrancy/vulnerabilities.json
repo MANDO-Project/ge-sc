@@ -1,7 +1,7 @@
 [
     {
         "name": "buggy_19.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_19.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -231,13 +231,13 @@
                     62,
                     63
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_18.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_18.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -571,13 +571,13 @@
                     735,
                     736
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_9.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_9.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -777,13 +777,13 @@
                     61,
                     62
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_42.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_42.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -991,13 +991,13 @@
                     14,
                     15
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_43.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_43.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1235,13 +1235,13 @@
                     47,
                     48
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_32.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_32.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1417,13 +1417,13 @@
                     109,
                     110
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_30.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_30.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1757,13 +1757,13 @@
                     331,
                     332
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_36.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_36.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2052,13 +2052,13 @@
                     12,
                     13
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_44.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_44.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2305,13 +2305,13 @@
                     48,
                     49
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_50.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_50.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2519,13 +2519,13 @@
                     16,
                     17
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_8.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_8.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2778,13 +2778,13 @@
                     12,
                     13
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_24.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_24.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3118,13 +3118,13 @@
                     234,
                     235
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_21.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_21.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3348,13 +3348,13 @@
                     568,
                     569
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_12.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_12.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3652,13 +3652,13 @@
                     575,
                     576
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_7.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_7.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3911,13 +3911,13 @@
                     13,
                     14
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_28.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_28.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4155,13 +4155,13 @@
                     60,
                     61
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_3.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_3.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4337,13 +4337,13 @@
                     43,
                     44
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_11.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_11.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4590,13 +4590,13 @@
                     128,
                     129
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_5.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_5.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4849,13 +4849,13 @@
                     12,
                     13
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_40.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_40.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5055,13 +5055,13 @@
                     222,
                     223
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_34.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_34.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5350,13 +5350,13 @@
                     12,
                     13
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_1.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_1.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5506,13 +5506,13 @@
                     249,
                     250
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_20.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_20.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5765,13 +5765,13 @@
                     36,
                     37
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_37.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_37.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6047,13 +6047,13 @@
                     189,
                     190
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_29.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_29.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6212,13 +6212,13 @@
                     174,
                     175
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_13.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_13.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6358,13 +6358,13 @@
                     19,
                     20
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_35.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_35.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6640,13 +6640,13 @@
                     142,
                     143
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_14.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_14.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6830,13 +6830,13 @@
                     78,
                     79
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_23.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_23.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7052,13 +7052,13 @@
                     126,
                     127
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_10.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_10.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7129,13 +7129,13 @@
                     14,
                     15
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_39.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_39.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7228,13 +7228,13 @@
                     14,
                     15
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_33.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_33.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7442,13 +7442,13 @@
                     14,
                     15
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_41.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_41.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7588,13 +7588,13 @@
                     23,
                     24
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_6.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_6.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7841,13 +7841,13 @@
                     16,
                     17
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_48.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_48.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8100,13 +8100,13 @@
                     152,
                     153
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_22.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_22.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8395,13 +8395,13 @@
                     12,
                     13
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_46.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_46.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8464,13 +8464,13 @@
                     24,
                     25
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_38.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_38.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8708,13 +8708,13 @@
                     60,
                     61
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_17.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_17.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8961,13 +8961,13 @@
                     56,
                     57
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_4.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_4.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -9117,13 +9117,13 @@
                     37,
                     38
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_27.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_27.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -9457,13 +9457,13 @@
                     166,
                     167
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_2.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_2.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -9630,13 +9630,13 @@
                     42,
                     43
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_47.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_47.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -9957,13 +9957,13 @@
                     82,
                     83
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_31.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_31.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -10087,13 +10087,13 @@
                     100,
                     101
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_15.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_15.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -10233,13 +10233,13 @@
                     19,
                     20
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_26.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_26.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -10431,13 +10431,13 @@
                     331,
                     332
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_25.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_25.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -10613,13 +10613,13 @@
                     20,
                     21
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_16.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_16.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -10953,13 +10953,13 @@
                     132,
                     133
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_49.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_49.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -11052,13 +11052,13 @@
                     14,
                     15
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     },
     {
         "name": "buggy_45.sol",
-        "path": "data/solidifi_buggy_contracts/Re-entrancy/buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/reentrancy/buggy_45.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -11288,7 +11288,7 @@
                     103,
                     104
                 ],
-                "category": "Re-entrancy"
+                "category": "reentrancy"
             }
         ]
     }

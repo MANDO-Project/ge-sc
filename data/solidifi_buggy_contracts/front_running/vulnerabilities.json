@@ -1,7 +1,7 @@
 [
     {
         "name": "buggy_19.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_19.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -431,13 +431,13 @@
                     74,
                     75
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_18.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_18.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1063,13 +1063,13 @@
                     362,
                     363
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_9.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_9.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1437,13 +1437,13 @@
                     66,
                     67
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_42.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_42.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1829,13 +1829,13 @@
                     24,
                     25
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_43.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_43.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2283,13 +2283,13 @@
                     70,
                     71
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_32.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_32.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2618,13 +2618,13 @@
                     153,
                     154
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_30.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_30.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3250,13 +3250,13 @@
                     356,
                     357
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_36.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_36.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3815,13 +3815,13 @@
                     25,
                     26
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_44.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_44.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4287,13 +4287,13 @@
                     70,
                     71
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_50.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_50.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4679,13 +4679,13 @@
                     26,
                     27
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_8.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_8.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5164,13 +5164,13 @@
                     19,
                     20
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_24.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_24.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5796,13 +5796,13 @@
                     246,
                     247
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_21.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_21.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6214,13 +6214,13 @@
                     142,
                     143
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_12.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_12.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6797,13 +6797,13 @@
                     329,
                     330
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_7.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_7.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7282,13 +7282,13 @@
                     20,
                     21
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_28.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_28.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7736,13 +7736,13 @@
                     70,
                     71
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_3.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_3.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8071,13 +8071,13 @@
                     62,
                     63
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_11.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_11.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8556,13 +8556,13 @@
                     184,
                     185
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_5.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_5.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -9041,13 +9041,13 @@
                     19,
                     20
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_40.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_40.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -9415,13 +9415,13 @@
                     227,
                     228
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_34.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_34.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -9980,13 +9980,13 @@
                     25,
                     26
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_1.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_1.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -10276,13 +10276,13 @@
                     176,
                     177
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_20.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_20.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -10761,13 +10761,13 @@
                     43,
                     44
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_37.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_37.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -11308,13 +11308,13 @@
                     271,
                     272
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_29.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_29.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -11617,13 +11617,13 @@
                     198,
                     199
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_13.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_13.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -11895,13 +11895,13 @@
                     29,
                     30
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_35.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_35.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -12429,13 +12429,13 @@
                     147,
                     148
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_14.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_14.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -12777,13 +12777,13 @@
                     83,
                     84
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_23.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_23.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -13182,13 +13182,13 @@
                     131,
                     132
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_10.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_10.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -13308,13 +13308,13 @@
                     19,
                     20
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_39.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_39.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -13488,13 +13488,13 @@
                     24,
                     25
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_33.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_33.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -13880,13 +13880,13 @@
                     24,
                     25
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_41.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_41.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -14158,13 +14158,13 @@
                     33,
                     34
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_6.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_6.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -14630,13 +14630,13 @@
                     25,
                     26
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_48.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_48.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -15133,13 +15133,13 @@
                     211,
                     212
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_22.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_22.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -15698,13 +15698,13 @@
                     25,
                     26
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_46.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_46.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -15811,13 +15811,13 @@
                     37,
                     38
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_38.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_38.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -16265,13 +16265,13 @@
                     70,
                     71
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_17.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_17.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -16737,13 +16737,13 @@
                     65,
                     66
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_4.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_4.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -17033,13 +17033,13 @@
                     45,
                     46
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_27.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_27.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -17665,13 +17665,13 @@
                     241,
                     242
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_2.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_2.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -17987,13 +17987,13 @@
                     62,
                     63
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_47.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_47.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -18619,13 +18619,13 @@
                     120,
                     121
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_31.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_31.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -18861,13 +18861,13 @@
                     111,
                     112
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_15.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_15.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -19139,13 +19139,13 @@
                     29,
                     30
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_26.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_26.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -19500,13 +19500,13 @@
                     74,
                     75
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_25.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_25.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -19835,13 +19835,13 @@
                     24,
                     25
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_16.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_16.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -20467,13 +20467,13 @@
                     289,
                     290
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_49.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_49.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -20647,13 +20647,13 @@
                     24,
                     25
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     },
     {
         "name": "buggy_45.sol",
-        "path": "data/solidifi_buggy_contracts/TOD/buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/front_running/buggy_45.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -21083,7 +21083,7 @@
                     164,
                     165
                 ],
-                "category": "TOD"
+                "category": "front_running"
             }
         ]
     }

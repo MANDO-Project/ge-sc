@@ -1,7 +1,7 @@
 [
     {
         "name": "buggy_19.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_19.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -146,13 +146,13 @@
                     59,
                     60
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_18.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_18.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -399,13 +399,13 @@
                     643,
                     644
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_9.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_9.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -539,13 +539,13 @@
                     59,
                     60
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_42.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_42.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -681,13 +681,13 @@
                     8,
                     9
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_43.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_43.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -837,13 +837,13 @@
                     30,
                     31
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_32.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_32.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -963,13 +963,13 @@
                     88,
                     89
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_30.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_30.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1211,13 +1211,13 @@
                     291,
                     292
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_36.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_36.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1395,13 +1395,13 @@
                     12,
                     13
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_44.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_44.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1554,13 +1554,13 @@
                     33,
                     34
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_50.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_50.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1696,13 +1696,13 @@
                     10,
                     11
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_8.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_8.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1863,13 +1863,13 @@
                     14,
                     15
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_24.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_24.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2111,13 +2111,13 @@
                     223,
                     224
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_21.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_21.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2259,13 +2259,13 @@
                     72,
                     73
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_12.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_12.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2446,13 +2446,13 @@
                     175,
                     176
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_7.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_7.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2613,13 +2613,13 @@
                     15,
                     16
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_28.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_28.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2769,13 +2769,13 @@
                     57,
                     58
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_3.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_3.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2895,13 +2895,13 @@
                     27,
                     28
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_11.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_11.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3062,13 +3062,13 @@
                     100,
                     101
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_5.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_5.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3229,13 +3229,13 @@
                     14,
                     15
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_40.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_40.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3369,13 +3369,13 @@
                     220,
                     221
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_34.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_34.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3553,13 +3553,13 @@
                     12,
                     13
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_1.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_1.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3658,13 +3658,13 @@
                     198,
                     199
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_20.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_20.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3825,13 +3825,13 @@
                     38,
                     39
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_37.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_37.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4004,13 +4004,13 @@
                     139,
                     140
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_29.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_29.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4118,13 +4118,13 @@
                     170,
                     171
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_13.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_13.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4220,13 +4220,13 @@
                     16,
                     17
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_35.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_35.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4396,13 +4396,13 @@
                     137,
                     138
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_14.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_14.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4527,13 +4527,13 @@
                     75,
                     76
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_23.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_23.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4672,13 +4672,13 @@
                     121,
                     122
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_10.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_10.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4727,13 +4727,13 @@
                     9,
                     10
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_39.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_39.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4796,13 +4796,13 @@
                     15,
                     16
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_33.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_33.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4938,13 +4938,13 @@
                     8,
                     9
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_41.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_41.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5040,13 +5040,13 @@
                     20,
                     21
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_6.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_6.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5199,13 +5199,13 @@
                     10,
                     11
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_48.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_48.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5369,13 +5369,13 @@
                     123,
                     124
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_22.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_22.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5553,13 +5553,13 @@
                     12,
                     13
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_46.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_46.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5605,13 +5605,13 @@
                     28,
                     29
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_38.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_38.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5761,13 +5761,13 @@
                     57,
                     58
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_17.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_17.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5920,13 +5920,13 @@
                     50,
                     51
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_4.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_4.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6025,13 +6025,13 @@
                     30,
                     31
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_27.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_27.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6265,13 +6265,13 @@
                     54,
                     55
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_2.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_2.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6388,13 +6388,13 @@
                     33,
                     34
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_47.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_47.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6591,13 +6591,13 @@
                     64,
                     65
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_31.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_31.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6679,13 +6679,13 @@
                     98,
                     99
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_15.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_15.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6781,13 +6781,13 @@
                     16,
                     17
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_26.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_26.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6915,13 +6915,13 @@
                     267,
                     268
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_25.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_25.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7041,13 +7041,13 @@
                     14,
                     15
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_16.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_16.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7255,13 +7255,13 @@
                     104,
                     105
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_49.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_49.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7324,13 +7324,13 @@
                     15,
                     16
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     },
     {
         "name": "buggy_45.sol",
-        "path": "data/solidifi_buggy_contracts/Unhandled-Exceptions/buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/denial_of_service/buggy_45.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7475,7 +7475,7 @@
                     78,
                     79
                 ],
-                "category": "Unhandled-Exceptions"
+                "category": "denial_of_service"
             }
         ]
     }

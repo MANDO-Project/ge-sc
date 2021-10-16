@@ -1,7 +1,7 @@
 [
     {
         "name": "buggy_19.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_19.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -140,13 +140,13 @@
                     59,
                     60
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_18.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_18.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -367,13 +367,13 @@
                     191,
                     192
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_9.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_9.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -501,13 +501,13 @@
                     56,
                     57
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_42.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_42.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -635,13 +635,13 @@
                     9,
                     10
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_43.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_43.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -784,13 +784,13 @@
                     29,
                     30
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_32.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_32.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -894,13 +894,13 @@
                     106,
                     107
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_30.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_30.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1121,13 +1121,13 @@
                     302,
                     303
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_36.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_36.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1298,13 +1298,13 @@
                     10,
                     11
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_44.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_44.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1447,13 +1447,13 @@
                     31,
                     32
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_50.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_50.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1581,13 +1581,13 @@
                     11,
                     12
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_8.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_8.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1733,13 +1733,13 @@
                     9,
                     10
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_24.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_24.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1960,13 +1960,13 @@
                     228,
                     229
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_21.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_21.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2102,13 +2102,13 @@
                     66,
                     67
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_12.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_12.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2297,13 +2297,13 @@
                     168,
                     169
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_7.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_7.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2449,13 +2449,13 @@
                     10,
                     11
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_28.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_28.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2594,13 +2594,13 @@
                     55,
                     56
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_3.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_3.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2704,13 +2704,13 @@
                     22,
                     23
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_11.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_11.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2861,13 +2861,13 @@
                     96,
                     97
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_5.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_5.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3013,13 +3013,13 @@
                     9,
                     10
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_40.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_40.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3141,13 +3141,13 @@
                     219,
                     220
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_34.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_34.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3331,13 +3331,13 @@
                     16,
                     17
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_1.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_1.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3419,13 +3419,13 @@
                     90,
                     91
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_20.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_20.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3571,13 +3571,13 @@
                     33,
                     34
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_37.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_37.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3748,13 +3748,13 @@
                     138,
                     139
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_29.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_29.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3858,13 +3858,13 @@
                     168,
                     169
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_13.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_13.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3941,13 +3941,13 @@
                     16,
                     17
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_35.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_35.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4111,13 +4111,13 @@
                     138,
                     139
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_14.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_14.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4230,13 +4230,13 @@
                     79,
                     80
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_23.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_23.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4364,13 +4364,13 @@
                     121,
                     122
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_10.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_10.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4397,13 +4397,13 @@
                     9,
                     10
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_39.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_39.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4444,13 +4444,13 @@
                     11,
                     12
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_33.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_33.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4578,13 +4578,13 @@
                     9,
                     10
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_41.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_41.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4661,13 +4661,13 @@
                     20,
                     21
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_6.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_6.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4810,13 +4810,13 @@
                     11,
                     12
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_48.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_48.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4976,13 +4976,13 @@
                     125,
                     126
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_22.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_22.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5153,13 +5153,13 @@
                     10,
                     11
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_46.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_46.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5178,13 +5178,13 @@
                     24,
                     25
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_38.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_38.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5323,13 +5323,13 @@
                     55,
                     56
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_17.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_17.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5475,13 +5475,13 @@
                     50,
                     51
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_4.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_4.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5572,13 +5572,13 @@
                     36,
                     37
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_27.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_27.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5799,13 +5799,13 @@
                     91,
                     92
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_2.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_2.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5900,13 +5900,13 @@
                     17,
                     18
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_47.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_47.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6107,13 +6107,13 @@
                     67,
                     68
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_31.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_31.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6190,13 +6190,13 @@
                     98,
                     99
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_15.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_15.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6273,13 +6273,13 @@
                     16,
                     17
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_26.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_26.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6396,13 +6396,13 @@
                     65,
                     66
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_25.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_25.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6506,13 +6506,13 @@
                     20,
                     21
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_16.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_16.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6722,13 +6722,13 @@
                     102,
                     103
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_49.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_49.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6769,13 +6769,13 @@
                     11,
                     12
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     },
     {
         "name": "buggy_45.sol",
-        "path": "data/solidifi_buggy_contracts/Timestamp-Dependency/buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/time_manipulation/buggy_45.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6911,7 +6911,7 @@
                     53,
                     54
                 ],
-                "category": "Timestamp-Dependency"
+                "category": "time_manipulation"
             }
         ]
     }

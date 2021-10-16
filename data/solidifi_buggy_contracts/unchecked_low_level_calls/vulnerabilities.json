@@ -1,7 +1,7 @@
 [
     {
         "name": "buggy_19.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_19.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -63,13 +63,13 @@
                     58,
                     59
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_18.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_18.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -139,13 +139,13 @@
                     63,
                     64
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_9.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_9.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -199,13 +199,13 @@
                     55,
                     56
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_42.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_42.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -261,13 +261,13 @@
                     8,
                     9
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_43.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_43.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -331,13 +331,13 @@
                     27,
                     28
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_32.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_32.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -385,13 +385,13 @@
                     72,
                     73
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_30.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_30.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -461,13 +461,13 @@
                     420,
                     421
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_36.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_36.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -537,13 +537,13 @@
                     153,
                     154
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_44.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_44.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -609,13 +609,13 @@
                     27,
                     28
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_50.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_50.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -671,13 +671,13 @@
                     10,
                     11
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_8.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_8.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -745,13 +745,13 @@
                     8,
                     9
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_24.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_24.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -821,13 +821,13 @@
                     239,
                     240
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_21.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_21.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -887,13 +887,13 @@
                     56,
                     57
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_12.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_12.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -963,13 +963,13 @@
                     246,
                     247
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_7.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_7.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1037,13 +1037,13 @@
                     9,
                     10
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_28.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_28.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1107,13 +1107,13 @@
                     54,
                     55
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_3.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_3.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1161,13 +1161,13 @@
                     18,
                     19
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_11.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_11.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1235,13 +1235,13 @@
                     64,
                     65
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_5.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_5.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1309,13 +1309,13 @@
                     8,
                     9
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_40.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_40.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1369,13 +1369,13 @@
                     216,
                     217
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_34.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_34.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1445,13 +1445,13 @@
                     135,
                     136
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_1.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_1.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1493,13 +1493,13 @@
                     68,
                     69
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_20.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_20.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1567,13 +1567,13 @@
                     32,
                     33
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_37.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_37.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1643,13 +1643,13 @@
                     142,
                     143
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_29.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_29.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1693,13 +1693,13 @@
                     149,
                     150
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_13.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_13.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1739,13 +1739,13 @@
                     13,
                     14
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_35.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_35.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1815,13 +1815,13 @@
                     184,
                     185
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_14.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_14.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1871,13 +1871,13 @@
                     72,
                     73
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_23.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_23.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1935,13 +1935,13 @@
                     120,
                     121
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_10.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_10.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1963,13 +1963,13 @@
                     8,
                     9
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_39.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_39.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1997,13 +1997,13 @@
                     8,
                     9
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_33.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_33.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2059,13 +2059,13 @@
                     8,
                     9
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_41.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_41.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2105,13 +2105,13 @@
                     17,
                     18
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_6.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_6.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2177,13 +2177,13 @@
                     9,
                     10
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_48.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_48.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2253,13 +2253,13 @@
                     91,
                     92
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_22.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_22.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2329,13 +2329,13 @@
                     153,
                     154
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_46.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_46.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2355,13 +2355,13 @@
                     21,
                     22
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_38.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_38.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2425,13 +2425,13 @@
                     54,
                     55
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_17.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_17.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2497,13 +2497,13 @@
                     49,
                     50
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_4.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_4.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2545,13 +2545,13 @@
                     29,
                     30
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_27.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_27.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2621,13 +2621,13 @@
                     62,
                     63
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_2.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_2.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2673,13 +2673,13 @@
                     18,
                     19
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_47.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_47.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2749,13 +2749,13 @@
                     132,
                     133
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_31.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_31.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2791,13 +2791,13 @@
                     95,
                     96
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_15.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_15.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2837,13 +2837,13 @@
                     13,
                     14
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_26.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_26.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2895,13 +2895,13 @@
                     63,
                     64
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_25.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_25.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2949,13 +2949,13 @@
                     13,
                     14
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_16.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_16.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3025,13 +3025,13 @@
                     53,
                     54
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_49.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_49.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3059,13 +3059,13 @@
                     8,
                     9
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     },
     {
         "name": "buggy_45.sol",
-        "path": "data/solidifi_buggy_contracts/Unchecked-Send/buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/unchecked_low_level_calls/buggy_45.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3127,7 +3127,7 @@
                     50,
                     51
                 ],
-                "category": "Unchecked-Send"
+                "category": "unchecked_low_level_calls"
             }
         ]
     }

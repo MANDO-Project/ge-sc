@@ -1,7 +1,7 @@
 [
     {
         "name": "buggy_19.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_19.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -181,13 +181,13 @@
                     60,
                     61
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_18.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_18.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -453,13 +453,13 @@
                     244,
                     245
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_9.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_9.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -613,13 +613,13 @@
                     63,
                     64
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_42.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_42.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -781,13 +781,13 @@
                     14,
                     15
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_43.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_43.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -975,13 +975,13 @@
                     47,
                     48
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_32.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_32.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1111,13 +1111,13 @@
                     98,
                     99
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_30.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_30.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1383,13 +1383,13 @@
                     346,
                     347
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_36.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_36.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1625,13 +1625,13 @@
                     11,
                     12
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_44.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_44.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1827,13 +1827,13 @@
                     37,
                     38
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_50.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_50.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1995,13 +1995,13 @@
                     16,
                     17
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_8.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_8.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2207,13 +2207,13 @@
                     16,
                     17
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_24.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_24.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2479,13 +2479,13 @@
                     236,
                     237
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_21.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_21.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2661,13 +2661,13 @@
                     78,
                     79
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_12.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_12.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2907,13 +2907,13 @@
                     220,
                     221
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_7.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_7.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3119,13 +3119,13 @@
                     17,
                     18
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_28.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_28.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3313,13 +3313,13 @@
                     60,
                     61
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_3.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_3.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3449,13 +3449,13 @@
                     38,
                     39
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_11.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_11.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3651,13 +3651,13 @@
                     110,
                     111
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_5.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_5.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3863,13 +3863,13 @@
                     16,
                     17
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_40.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_40.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4023,13 +4023,13 @@
                     224,
                     225
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_34.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_34.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4265,13 +4265,13 @@
                     11,
                     12
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_1.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_1.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4377,13 +4377,13 @@
                     102,
                     103
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_20.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_20.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4589,13 +4589,13 @@
                     40,
                     41
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_37.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_37.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4817,13 +4817,13 @@
                     168,
                     169
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_29.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_29.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4933,13 +4933,13 @@
                     161,
                     162
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_13.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_13.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5037,13 +5037,13 @@
                     15,
                     16
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_35.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_35.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5265,13 +5265,13 @@
                     138,
                     139
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_14.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_14.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5405,13 +5405,13 @@
                     74,
                     75
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_23.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_23.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5583,13 +5583,13 @@
                     128,
                     129
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_10.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_10.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5639,13 +5639,13 @@
                     10,
                     11
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_39.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_39.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5715,13 +5715,13 @@
                     14,
                     15
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_33.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_33.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5883,13 +5883,13 @@
                     14,
                     15
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_41.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_41.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5987,13 +5987,13 @@
                     19,
                     20
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_6.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_6.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6189,13 +6189,13 @@
                     15,
                     16
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_48.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_48.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6401,13 +6401,13 @@
                     145,
                     146
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_22.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_22.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6643,13 +6643,13 @@
                     11,
                     12
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_46.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_46.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6695,13 +6695,13 @@
                     23,
                     24
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_38.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_38.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -6889,13 +6889,13 @@
                     60,
                     61
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_17.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_17.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7091,13 +7091,13 @@
                     55,
                     56
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_4.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_4.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7203,13 +7203,13 @@
                     35,
                     36
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_27.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_27.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7475,13 +7475,13 @@
                     161,
                     162
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_2.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_2.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7601,13 +7601,13 @@
                     38,
                     39
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_47.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_47.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7873,13 +7873,13 @@
                     80,
                     81
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_31.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_31.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -7969,13 +7969,13 @@
                     101,
                     102
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_15.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_15.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8073,13 +8073,13 @@
                     15,
                     16
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_26.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_26.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8223,13 +8223,13 @@
                     71,
                     72
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_25.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_25.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8359,13 +8359,13 @@
                     21,
                     22
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_16.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_16.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8631,13 +8631,13 @@
                     180,
                     181
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_49.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_49.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8707,13 +8707,13 @@
                     14,
                     15
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     },
     {
         "name": "buggy_45.sol",
-        "path": "data/solidifi_buggy_contracts/Overflow-Underflow/buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/arithmetic/buggy_45.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -8893,7 +8893,7 @@
                     80,
                     81
                 ],
-                "category": "Overflow-Underflow"
+                "category": "arithmetic"
             }
         ]
     }

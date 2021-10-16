@@ -1,7 +1,7 @@
 [
     {
         "name": "buggy_19.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_19.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_19.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -113,13 +113,13 @@
                     325,
                     326
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_18.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_18.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_18.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -275,13 +275,13 @@
                     557,
                     558
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_9.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_9.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_9.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -377,13 +377,13 @@
                     57,
                     58
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_42.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_42.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_42.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -484,13 +484,13 @@
                     11,
                     12
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_43.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_43.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_43.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -605,13 +605,13 @@
                     395,
                     396
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_32.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_32.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_32.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -695,13 +695,13 @@
                     83,
                     84
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_30.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_30.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_30.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -857,13 +857,13 @@
                     863,
                     864
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_36.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_36.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_36.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1004,13 +1004,13 @@
                     520,
                     521
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_44.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_44.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_44.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1129,13 +1129,13 @@
                     412,
                     413
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_50.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_50.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_50.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1236,13 +1236,13 @@
                     13,
                     14
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_8.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_8.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_8.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1365,13 +1365,13 @@
                     369,
                     370
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_24.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_24.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_24.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1527,13 +1527,13 @@
                     895,
                     896
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_21.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_21.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_21.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1641,13 +1641,13 @@
                     452,
                     453
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_12.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_12.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_12.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1791,13 +1791,13 @@
                     421,
                     422
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_7.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_7.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_7.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -1921,13 +1921,13 @@
                     284,
                     285
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_28.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_28.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_28.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2042,13 +2042,13 @@
                     306,
                     307
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_3.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_3.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_3.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2132,13 +2132,13 @@
                     26,
                     27
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_11.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_11.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_11.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2261,13 +2261,13 @@
                     312,
                     313
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_5.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_5.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_5.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2390,13 +2390,13 @@
                     369,
                     370
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_40.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_40.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_40.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2492,13 +2492,13 @@
                     218,
                     219
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_34.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_34.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_34.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2640,13 +2640,13 @@
                     582,
                     583
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_1.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_1.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_1.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2718,13 +2718,13 @@
                     83,
                     84
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_20.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_20.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_20.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2848,13 +2848,13 @@
                     427,
                     428
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_37.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_37.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_37.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -2992,13 +2992,13 @@
                     357,
                     358
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_29.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_29.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_29.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3074,13 +3074,13 @@
                     157,
                     158
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_13.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_13.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_13.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3148,13 +3148,13 @@
                     14,
                     15
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_35.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_35.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_35.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3288,13 +3288,13 @@
                     469,
                     470
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_14.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_14.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_14.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3382,13 +3382,13 @@
                     74,
                     75
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_23.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_23.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_23.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3492,13 +3492,13 @@
                     470,
                     471
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_10.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_10.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_10.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3534,13 +3534,13 @@
                     10,
                     11
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_39.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_39.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_39.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3587,13 +3587,13 @@
                     10,
                     11
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_33.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_33.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_33.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3694,13 +3694,13 @@
                     11,
                     12
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_41.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_41.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_41.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3768,13 +3768,13 @@
                     18,
                     19
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_6.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_6.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_6.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -3893,13 +3893,13 @@
                     276,
                     277
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_48.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_48.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_48.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4026,13 +4026,13 @@
                     355,
                     356
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_22.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_22.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_22.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4173,13 +4173,13 @@
                     520,
                     521
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_46.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_46.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_46.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4211,13 +4211,13 @@
                     151,
                     152
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_38.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_38.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_38.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4332,13 +4332,13 @@
                     306,
                     307
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_17.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_17.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_17.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4457,13 +4457,13 @@
                     320,
                     321
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_4.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_4.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_4.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4535,13 +4535,13 @@
                     31,
                     32
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_27.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_27.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_27.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4697,13 +4697,13 @@
                     488,
                     489
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_2.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_2.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_2.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4783,13 +4783,13 @@
                     26,
                     27
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_47.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_47.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_47.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -4945,13 +4945,13 @@
                     374,
                     375
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_31.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_31.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_31.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5013,13 +5013,13 @@
                     97,
                     98
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_15.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_15.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_15.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5087,13 +5087,13 @@
                     14,
                     15
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_26.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_26.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_26.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5185,13 +5185,13 @@
                     231,
                     232
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_25.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_25.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_25.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5275,13 +5275,13 @@
                     15,
                     16
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_16.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_16.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_16.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5437,13 +5437,13 @@
                     402,
                     403
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_49.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_49.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_49.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5490,13 +5490,13 @@
                     10,
                     11
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     },
     {
         "name": "buggy_45.sol",
-        "path": "data/solidifi_buggy_contracts/tx.origin/buggy_45.sol",
+        "path": "data/solidifi_buggy_contracts/access_control/buggy_45.sol",
         "source": "",
         "vulnerabilities": [
             {
@@ -5607,7 +5607,7 @@
                     262,
                     263
                 ],
-                "category": "tx.origin"
+                "category": "access_control"
             }
         ]
     }
