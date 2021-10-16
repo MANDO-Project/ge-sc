@@ -96,28 +96,25 @@ class HANLayer(nn.Module):
 
 
 class HANVulNodeClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
+    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=16, num_heads=8, dropout=0.6, device='cpu'):
         super(HANVulNodeClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
         self.num_heads = num_heads
         self.source_path = source_path
         self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
-        self.filename_mapping = {file: idx for idx, file in enumerate(self.extracted_graph)}
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
         nx_g_data = generate_hetero_graph_data(nx_graph)
-        _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
 
         # Get None Labels
-        self.node_labels = get_node_label(nx_graph)
+        self.node_labels, self.labeled_node_ids, self.label_ids = get_node_label(nx_graph)
 
         # Reflect graph data
         self.symmetrical_global_graph_data = self.reflect_graph(nx_g_data)
         self.number_of_nodes = get_number_of_nodes(nx_graph)
         self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
-        self.symmetrical_global_graph.ndata['filename'] = _node_tracker
         self.meta_paths = self.get_symmatrical_metapaths()
         self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
         self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
@@ -167,7 +164,9 @@ class HANVulNodeClassifier(nn.Module):
         self.layers.append(HANLayer([self.meta_paths[0]], self.in_size, hidden_size, num_heads, dropout))
         for meta_path in self.meta_paths[1:]:
             self.layers.append(HANLayer([meta_path], self.in_size, hidden_size, num_heads, dropout))
-        self.classify = nn.Linear(hidden_size * num_heads , out_size)
+        # self.out_size = len(self.label_ids)
+        self.out_size = 2
+        self.classify = nn.Linear(hidden_size * num_heads , self.out_size)
 
     # HAN defined metapaths are the path between the same type nodes.
     # We need undirect the global graph.
@@ -219,6 +218,15 @@ class HANVulNodeClassifier(nn.Module):
         # Use mean for aggregate node hidden features
         return {k: torch.mean(v, dim=0) for k, v in features.items()}
 
+    def reset_parameters(self):
+        for model in self.layers:
+            for layer in model.children():
+                if hasattr(layer, 'reset_parameters'):
+                    layer.reset_parameters()
+        for layer in self.classify.children():
+            if hasattr(layer, 'reset_parameters'):
+                    layer.reset_parameters()
+
     def forward(self):
         features = self.get_node_features()
         targets = []
@@ -234,21 +242,22 @@ class HANVulNodeClassifier(nn.Module):
 
 
 if __name__ == '__main__':
-    from dataloader import EthNodeDataset, EthIdsDataset
-    from dgl.dataloading import GraphDataLoader
-    dataset = './dataset/node_classification/source_code'
-    compressed_graph = './dataset/node_classification/compressed_graphs/compressed_graphs.gpickle'
-    labels = './dataset/aggregate/labels.json'
-    # ethdataset = EthNodeDataset(dataset, compressed_graph)
-    ethdataset = EthIdsDataset(dataset, compressed_graph, labels)
-    dataloader = GraphDataLoader(ethdataset, batch_size=256)
+    # from dataloader import EthNodeDataset, EthIdsDataset
+    # from dgl.dataloading import GraphDataLoader
+    dataset = '/home/minhnn/minhnn/ICSE/ge-sc/data/solidifi_buggy_contracts/aggregate/source_code'
+    compressed_graph = '/home/minhnn/minhnn/ICSE/ge-sc/data/solidifi_buggy_contracts/aggregate/compressed_graphs/compress_graphs.gpickle'
+    # labels = './dataset/aggregate/labels.json'
     # Get feature extractor
     print('Getting features')
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-    model = HANVulNodeClassifier(compressed_graph, node_feature='nodetype', device=device)
-    model.to(device)
+    nx_graph = load_hetero_nx_graph(compressed_graph)
+    node_labels, label_ids = get_node_label(nx_graph)
+    print(node_labels)
+    print(label_ids) 
+    # model = HANVulNodeClassifier(compressed_graph, dataset, node_feature='nodetype', device=device)
+    # model.to(device)
     # print(model.meta_paths)
-    logits, targets = model()
-    print(logits.shape)
-    print(targets.shape)
-    print(model.symmetrical_global_graph.number_of_nodes())
+    # logits, targets = model()
+    # print(logits.shape)
+    # print(targets.shape)
+    # print(model.symmetrical_global_graph.number_of_nodes())
