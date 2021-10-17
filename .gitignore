@@ -1,4 +1,4 @@
-#data/*
+data/extracted_source_code
 build/*
 node_modules/*
 package-lock.json

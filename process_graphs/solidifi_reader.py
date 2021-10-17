@@ -6,13 +6,13 @@ from shutil import copyfile
 
 from os.path import join, dirname, basename
 
-buggy_contract_dir = 'data/solidifi_buggy_contracts/Re-entrancy'
-# buggy_contract_dir = 'data/solidifi_buggy_contracts/Overflow-Underflow'
-# buggy_contract_dir = 'data/solidifi_buggy_contracts/Timestamp-Dependency'
-# buggy_contract_dir = 'data/solidifi_buggy_contracts/TOD'
-# buggy_contract_dir = 'data/solidifi_buggy_contracts/tx.origin'
-# buggy_contract_dir = 'data/solidifi_buggy_contracts/Unchecked-Send'
-# buggy_contract_dir = 'data/solidifi_buggy_contracts/Unhandled-Exceptions'
+# buggy_contract_dir = 'data/solidifi_buggy_contracts/access_control'
+# buggy_contract_dir = 'data/solidifi_buggy_contracts/arithmetic'
+# buggy_contract_dir = 'data/solidifi_buggy_contracts/denial_of_service'
+# buggy_contract_dir = 'data/solidifi_buggy_contracts/front_running'
+# buggy_contract_dir = 'data/solidifi_buggy_contracts/reentrancy'
+# buggy_contract_dir = 'data/solidifi_buggy_contracts/time_manipulation'
+buggy_contract_dir = 'data/solidifi_buggy_contracts/unchecked_low_level_calls'
 
 bug_category = basename(buggy_contract_dir)
 # print(bug_category)
