@@ -6,9 +6,11 @@ package-lock.json
 *.pth
 
 outputs/*
-logs/*
+logs/
+logs*/
 *.ipynb
 *.txt
 **/logs/
+**/logs*/
 **/dataset/
 data/
