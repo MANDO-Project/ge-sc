@@ -208,5 +208,6 @@ if __name__ == '__main__':
         model = HANVulClassifier(args['compressed_graph'], ethdataset.filename_mapping, hidden_size=16, out_size=2,num_heads=8, dropout=0.6, device=args['device'])
         model.load_state_dict(torch.load(args['checkpoint']))
         model.to(args['device'])
+        model.eval()
         test_micro_f1, test_macro_f1, test_acc = test(args, model, test_dataloader)
         print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))

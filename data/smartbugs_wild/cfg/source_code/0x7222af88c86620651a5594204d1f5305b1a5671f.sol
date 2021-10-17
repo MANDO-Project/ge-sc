@@ -1,5 +1,0 @@
-contract Eater{
-	function(){
-		
-	}
-}

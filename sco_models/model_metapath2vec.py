@@ -16,7 +16,7 @@ import torch.nn.functional as F
 import networkx as nx
 import dgl
 
-from graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, reflect_graph, get_symmatrical_metapaths
+from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, reflect_graph, get_symmatrical_metapaths
 
 class VulMetaPath2Vec(nn.Module):
     def __init__(self, compressed_global_graph_path, embedding_dim=128, walk_length=50,
