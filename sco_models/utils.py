@@ -1,8 +1,12 @@
 import torch
 from sklearn.metrics import f1_score
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+import pandas as pd
 
 
-def score(logits, labels):
+def score(labels, logits):
     _, indices = torch.max(logits, dim=1)
     prediction = indices.long().cpu().numpy()
     labels = labels.cpu().numpy()
@@ -12,5 +16,29 @@ def score(logits, labels):
     return accuracy, micro_f1, macro_f1
 
 
-def accuracy(preds, labels):
+def accuracy(labels, preds):
     return (preds == labels).sum().item() / labels.shape[0]
+
+
+def get_classification_report(labels, logits):
+    _, indices = torch.max(logits, dim=1)
+    prediction = indices.long().cpu().numpy()
+    labels = labels.cpu().numpy()
+    return classification_report(labels, prediction)
+
+
+def get_confusion_matrix(labels, logits):
+    _, indices = torch.max(logits, dim=1)
+    prediction = indices.long().cpu().numpy()
+    labels = labels.cpu().numpy()  
+    return confusion_matrix(labels, prediction)
+
+
+def dump_result(labels, logits, output):
+    print('Confusion matrix', '\n', get_classification_report(labels, logits))
+    print('Classification report', '\n', get_confusion_matrix(labels, logits))
+    _, indices = torch.max(logits, dim=1)
+    prediction = indices.long().cpu().numpy()
+    labels = labels.cpu().numpy()  
+    df_confusion = pd.crosstab(labels, prediction)
+    df_confusion.to_csv(output)
