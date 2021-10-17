@@ -58,9 +58,8 @@ def main(args):
     # total_train_files = list(total_train_files.difference(total_test_files))
     print(f'Number of source code for Train/Test: {len(total_train_files)}/{len(total_test_files)}')
     total_train_ids = get_node_ids(nx_graph, total_train_files)
-    labels = model.node_labels
-    labeled_node_ids = model.labeled_node_ids
-    buggy_node_ids = labeled_node_ids['buggy']
+    targets = torch.tensor(model.node_labels, device=args['device'])
+    buggy_node_ids = torch.nonzero(targets).squeeze().tolist()
     test_ids = get_node_ids(nx_graph, total_test_files)
     print('Total buggy node {}'.format(len(buggy_node_ids)))
     for fold, (train_ids, val_ids) in enumerate(kfold.split(total_train_ids)):
@@ -77,8 +76,8 @@ def main(args):
         test_buggy_node_ids = set(buggy_node_ids) & set(test_ids)
         print('Buggy nodes in test: {}/{} ({}%)'.format(len(test_buggy_node_ids), len(test_ids), 100*len(test_buggy_node_ids)/len(test_ids)))
         total_steps = epochs
-        class_counter = [len(labeled_node_ids['valid']), len(labeled_node_ids['buggy'])]
-        class_weight = torch.tensor([1 - sample/len(class_counter) for sample in class_counter], requires_grad=False).to(args['device'])
+        # class_counter = [len(labeled_node_ids['valid']), len(labeled_node_ids['buggy'])]
+        # class_weight = torch.tensor([1 - sample/len(class_counter) for sample in class_counter], requires_grad=False).to(args['device'])
         # Don't record the following operation in autograd
         # with torch.no_grad():
         #     loss_weights.copy_(initial_weights)
@@ -94,9 +93,8 @@ def main(args):
         for epoch in range(epochs):
             print('Fold {} - Epochs {}'.format(fold, epoch))
             optimizer.zero_grad()
-            logits, targets = model()
+            logits = model()
             logits = logits.to(args['device'])
-            targets = targets.to(args['device'])
             train_loss = loss_fcn(logits[train_mask], targets[train_mask]) 
             train_loss.backward()
             optimizer.step()
@@ -120,7 +118,7 @@ def main(args):
             val_results[fold]['macro_f1'].append(val_macro_f1)
             val_results[fold]['acc'].append(val_acc)
         print('Saving model fold {}'.format(fold))
-        dump_result(targets[val_mask], logits[val_mask], os.path.join(args['log_dir'], f'confusion_{fold}.csv'))
+        dump_result(targets[val_mask], logits[val_mask], os.path.join(args['output_models'], f'confusion_{fold}.csv'))
         save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
         torch.save(model.state_dict(), save_path)
     return train_results, val_results
@@ -183,8 +181,8 @@ if __name__ == '__main__':
         model.eval()
         model.to(args['device'])
         test_ids = get_node_ids(nx_graph, test_files)
-        labels = model.node_labels
-        buggy_node_ids = model.labeled_node_ids['buggy']
+        targets = torch.tensor(model.node_labels, device=args['device'])
+        buggy_node_ids = torch.nonzero(targets).squeeze().tolist()
         test_buggy_node_ids = set(buggy_node_ids) & set(test_ids)
         print('Buggy nodes in test: {}/{} ({}%)'.format(len(test_buggy_node_ids), len(test_ids), 100*len(test_buggy_node_ids)/len(test_ids)))
         test_mask = get_binary_mask(number_of_nodes, test_ids)
@@ -192,8 +190,9 @@ if __name__ == '__main__':
             test_mask = test_mask.bool()
         print(f"Testing on {len(test_ids)} nodes")
         with torch.no_grad():
-            logits, targets = model()
-            print(torch.nonzero(targets[test_mask], as_tuple=True)[0].shape)
+            logits = model()
+            logits = logits.to(args['device'])
+            print(torch.nonzero(targets, as_tuple=True)[0].shape)
             test_acc, test_micro_f1, test_macro_f1 = score(targets[test_mask], logits[test_mask])
             print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
             print('Classification report', '\n', get_classification_report(targets[test_mask], logits[test_mask]))

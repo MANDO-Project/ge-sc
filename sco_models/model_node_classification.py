@@ -17,7 +17,7 @@ from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
-from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_label, get_node_tracker
+from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_label, get_node_ids_dict
 
 
 class SemanticAttention(nn.Module):
@@ -110,12 +110,20 @@ class HANVulNodeClassifier(nn.Module):
 
         # Get None Labels
         self.node_labels, self.labeled_node_ids, self.label_ids = get_node_label(nx_graph)
+        self.node_ids_dict = get_node_ids_dict(nx_graph)
 
         # Reflect graph data
         self.symmetrical_global_graph_data = self.reflect_graph(nx_g_data)
         self.number_of_nodes = get_number_of_nodes(nx_graph)
         self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
         self.meta_paths = self.get_symmatrical_metapaths()
+        self.full_metapath = {}
+        for metapath in self.meta_paths:
+            ntype = metapath[0][0]
+            if ntype not in self.full_metapath:
+                self.full_metapath[ntype] = [metapath]
+            else:
+                self.full_metapath[ntype].append(metapath)
         self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
         self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
         features = {}
@@ -164,9 +172,15 @@ class HANVulNodeClassifier(nn.Module):
         self.layers.append(HANLayer([self.meta_paths[0]], self.in_size, hidden_size, num_heads, dropout))
         for meta_path in self.meta_paths[1:]:
             self.layers.append(HANLayer([meta_path], self.in_size, hidden_size, num_heads, dropout))
+        
+        self.layers_dict = nn.ModuleDict()
+        for ntype, metapath in self.full_metapath.items():
+            self.layers_dict.update({ntype: (HANLayer(metapath, self.in_size, hidden_size, num_heads, dropout))})
+        
         # self.out_size = len(self.label_ids)
         self.out_size = 2
-        self.classify = nn.Linear(hidden_size * num_heads , self.out_size)
+        self.last_hidden_size = hidden_size * num_heads
+        self.classify = nn.Linear(self.last_hidden_size, self.out_size)
 
     # HAN defined metapaths are the path between the same type nodes.
     # We need undirect the global graph.
@@ -206,7 +220,7 @@ class HANVulNodeClassifier(nn.Module):
     def _han_feature_extractor(self, han_global_graph):
         pass
 
-    def get_node_features(self):
+    def get_assemble_node_features(self):
         features = {}
         for han in self.layers:
             ntype = han.meta_paths[0][0][0]
@@ -218,8 +232,18 @@ class HANVulNodeClassifier(nn.Module):
         # Use mean for aggregate node hidden features
         return {k: torch.mean(v, dim=0) for k, v in features.items()}
 
+    def get_node_features(self):
+        features = {}
+        for ntype in self.node_types:
+            features[ntype] = self.layers_dict[ntype](self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+        return features
+
     def reset_parameters(self):
         for model in self.layers:
+            for layer in model.children():
+                if hasattr(layer, 'reset_parameters'):
+                    layer.reset_parameters()
+        for _, model in self.layers_dict.items():
             for layer in model.children():
                 if hasattr(layer, 'reset_parameters'):
                     layer.reset_parameters()
@@ -229,16 +253,12 @@ class HANVulNodeClassifier(nn.Module):
 
     def forward(self):
         features = self.get_node_features()
-        targets = []
-        hiddens = []
+        hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.last_hidden_size), device=self.device)
         for ntype, feature in features.items():
-            hiddens.append(feature)
-            targets.append(self.node_labels[ntype])
-        hiddens = torch.cat(hiddens)
-        targets = torch.cat(targets)
+            assert len(self.node_ids_dict[ntype]) == feature.shape[0]
+            hiddens[self.node_ids_dict[ntype]] = feature
         output = self.classify(hiddens)
-        return output, targets
-
+        return output
 
 
 if __name__ == '__main__':
