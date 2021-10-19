@@ -37,22 +37,23 @@ def get_node_label(nx_graph):
     node_labels = []
     label_ids = {'valid': 0}
     labeled_node_ids = {'buggy': [], 'valid': []}
-    flatten_labels = []
     for node_id, node_data in nx_g.nodes(data=True):
         node_type = node_data['node_type']
         node_label = node_data['node_info_vulnerabilities']
+        target = 0
         if node_label is None:
             target = 0
             labeled_node_ids['valid'].append(node_id)
         else:
-            # bug_type = node_label[0]['category']
-            # if bug_type not in label_ids:
-            #     label_ids[bug_type] = len(label_ids)
+            bug_type = node_label[0]['category']
+            if bug_type not in label_ids:
+                label_ids[bug_type] = len(label_ids)
             # target = label_ids[bug_type]
+            # if bug_type == 'time_manipulation':
+            #     target = 1
             target = 1
             labeled_node_ids['buggy'].append(node_id)
         node_labels.append(target)
-        flatten_labels.append(target)
     return node_labels, labeled_node_ids, label_ids
 
 

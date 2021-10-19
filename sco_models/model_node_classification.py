@@ -96,7 +96,7 @@ class HANLayer(nn.Module):
 
 
 class HANVulNodeClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=16, num_heads=8, dropout=0.6, device='cpu'):
+    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=8, num_heads=8, dropout=0.6, device='cpu'):
         super(HANVulNodeClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
@@ -252,7 +252,7 @@ class HANVulNodeClassifier(nn.Module):
                     layer.reset_parameters()
 
     def forward(self):
-        features = self.get_node_features()
+        features = self.get_assemble_node_features()
         hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.last_hidden_size), device=self.device)
         for ntype, feature in features.items():
             assert len(self.node_ids_dict[ntype]) == feature.shape[0]
