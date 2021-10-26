@@ -32,6 +32,32 @@ def add_cfg_mapping(nx_call_graph, nx_cfg_graph):
     return nx_graph
 
 
+def map_node_embedding(nx_graph, embedding):
+    nx_g = nx_graph
+    features = {}
+    assert len(nx_g.nodes) == embedding.shape[0]
+    for node_ids, node_data in nx_g.nodes(data=True):
+        node_type = node_data['node_type']
+        if node_type not in features:
+            features[node_type] = embedding[node_ids].unsqueeze(0)
+        else:
+            features[node_type] = torch.cat((features[node_type], embedding[node_ids].unsqueeze(0)))
+    return features
+
+
+def reveert_map_node_embedding(nx_graph, features):
+    nx_g = nx_graph
+    embedded = torch.zeros(len(nx_g.nodes), 128)
+    feature_count = {}
+    for node_ids, node_data in nx_g.nodes(data=True):
+        node_type = node_data['node_type']
+        if node_type not in feature_count:
+            feature_count[node_type] = 0
+        embedded[node_ids] = features[node_type][feature_count[node_type]]
+        feature_count[node_type] += 1
+    return embedded
+
+
 def get_node_label(nx_graph):
     nx_g = nx_graph
     node_labels = []
