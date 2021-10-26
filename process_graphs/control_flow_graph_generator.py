@@ -88,14 +88,15 @@ def compress_full_smart_contracts(smart_contracts, input_graph, output, vulnerab
     for sc in tqdm(smart_contracts):
         sc_version = get_solc_version(sc)
         print(f'{sc} - {sc_version}')
-        solc_compiler = f'/home/eric/.solc-select/artifacts/solc-{sc_version}'
+        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
         if not os.path.exists(solc_compiler):
-            solc_compiler = f'/home/eric/.solc-select/artifacts/solc-0.4.25'
+            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
+        bug_type = sc.split('/')[-2]
         try:
             slither = Slither(sc, solc=solc_compiler)
-            # copy(join(sc), join('./dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/source_code', file_name_sc))
             count += 1
+            # copy(sc, join('/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs_wild/multi_class_cfg/buggy', bug_type, file_name_sc))
         except Exception as e:
             print(e)
             continue
@@ -190,31 +191,49 @@ def compress_full_smart_contracts(smart_contracts, input_graph, output, vulnerab
     #     if node_data['node_info_vulnerabilities'] is not None:
     #         print('Node has vulnerabilities:', node, node_data)
     print(f'{count}/{len(smart_contracts)}')
-    nx.nx_agraph.write_dot(full_graph, join(output, 'compress_graphs_buggy.dot'))
-    nx.write_gpickle(full_graph, join(output, 'compress_graphs_buggy.gpickle'))
+    # nx.nx_agraph.write_dot(full_graph, join(output, 'compress_graphs_buggy.dot'))
+    nx.write_gpickle(full_graph, output)
 
 
 if __name__ == '__main__':
     # smart_contract_path = 'data/extracted_source_code' 
     # output_path = 'data/extracted_source_code'
-    import subprocess
 
-    smart_contract_path = 'data/solidifi_buggy_contracts/Timestamp-Dependency'
-    # smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs-wild-clean-contracts'
-    # input_graph = './dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/compressed_graphs/compress_graphs.gpickle'
-    input_graph = None
-    output_path = 'data/solidifi_buggy_contracts/Timestamp-Dependency/output_graph'
-    smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
-    # for sc in smart_contracts:
-    #     print(sc)
-    #     sc_version = get_solc_version(sc)
-    #     try:
-    #         subprocess.run(['solc-select', 'install', sc_version])
-    #     except:
-    #         print(sc_version)
+    # smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs_wild/clean_100'
+    # smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs'
+    # # input_graph = './dgl_models/pytorch/han/dataset/smartbugs_wild/cfg/compressed_graphs/compress_graphs.gpickle'
+    # input_graph = None
+    # output_path = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs_wild/clean_100/clean_100.gpickle'
+    # smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
 
-    data_vulnerabilities = None
-    with open('data/solidifi_buggy_contracts/Timestamp-Dependency/vulnerabilities.json') as f:
-        data_vulnerabilities = json.load(f)
+    # data_vulnerabilities = None
+    # with open('/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs_wild/multi_class_cfg/curated/vulnerabilities.json') as f:
+    #     data_vulnerabilities = json.load(f)
     
-    compress_full_smart_contracts(smart_contracts, input_graph, output_path, vulnerabilities=data_vulnerabilities)
+    # compress_full_smart_contracts(smart_contracts, input_graph, output_path, vulnerabilities=None)
+
+    buggy_type = ['access_control', 'arithmetic', 'denial_of_service',
+              'front_running', 'reentrancy', 'time_manipulation', 
+              'unchecked_low_level_calls']
+    tools = ['solhint', 'securify', 'mythril', 'honeybadger', 'osiris', 'slither', 'manticore', 'smartcheck', 'oyente', 'maian']
+    input_graph = None
+    for bug in buggy_type:
+        smart_contract_path = f'/home/minhnn/minhnn/ICSE/ge-sc/data/smartbug_tools/curated/{bug}'
+        smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
+        curated_vul_file = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbug-dataset/vulnerabilities.json'
+        data_vulnerabilities = None
+        with open(curated_vul_file, 'r') as f:
+            data_vulnerabilities = json.load(f)
+        curated_output = f'/home/minhnn/minhnn/ICSE/ge-sc/data/smartbug_tools/curated/{bug}/{bug}_compressed_graphs.gpickle'
+        compress_full_smart_contracts(smart_contracts, input_graph, curated_output, vulnerabilities=data_vulnerabilities)
+
+        for tool in tools:
+            print(tool)
+            vul_file = f'/home/minhnn/minhnn/ICSE/ge-sc/data/smartbug_tools/curated/{bug}/{tool}_{bug}_vulnerabilities.json'
+            output_path = f'/home/minhnn/minhnn/ICSE/ge-sc/data/smartbug_tools/curated/{bug}/{tool}_{bug}_compressed_graphs.gpickle'
+            data_vulnerabilities = None
+            with open(vul_file, 'r') as f:
+                data_vulnerabilities = json.load(f)
+            if len(data_vulnerabilities) == 0:
+                data_vulnerabilities = None
+            compress_full_smart_contracts(smart_contracts, input_graph, output_path, vulnerabilities=data_vulnerabilities)
