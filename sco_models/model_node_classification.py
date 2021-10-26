@@ -8,6 +8,7 @@ labels.
 """
 import os
 
+import pickle
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -17,7 +18,9 @@ from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
-from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_label, get_node_ids_dict
+from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, \
+                         get_number_of_nodes, add_cfg_mapping, get_node_label, \
+                         get_node_ids_dict, map_node_embedding, reveert_map_node_embedding
 
 
 class SemanticAttention(nn.Module):
@@ -96,7 +99,7 @@ class HANLayer(nn.Module):
 
 
 class HANVulNodeClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=8, num_heads=8, dropout=0.6, device='cpu'):
+    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=16, num_heads=8, dropout=0.6, device='cpu'):
         super(HANVulNodeClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
@@ -146,12 +149,17 @@ class HANVulNodeClassifier(nn.Module):
                     features[ntype] = torch.cat((features[ntype], _metapath_embedding(ntype).unsqueeze(0)))
             # Use mean for aggregate node features
             features = {k: torch.mean(v, dim=0).to(self.device) for k, v in features.items()}
+            # embeded = reveert_map_node_embedding(nx_graph, features)
+            # embeded = embeded.detach().numpy()
+            # with open(feature_extractor, 'wb') as f:
+            #     pickle.dump(embeded, f)
+
         elif node_feature == 'han':
             assert feature_extractor is not None, "Please pass features extraction model"
             nx_cfg_graph = load_hetero_nx_graph(feature_extractor.compressed_global_graph_path)
             self.in_size = feature_extractor.hidden_size * feature_extractor.num_heads
             nx_graph = add_cfg_mapping(nx_graph, nx_cfg_graph)
-            han_features = feature_extractor.get_node_features()
+            han_features = feature_extractor.get_assemble_node_features()
             features = {}
             for node, node_data in nx_graph.nodes(data=True):
                 han_mapping = node_data['cfg_mapping']
@@ -162,6 +170,13 @@ class HANVulNodeClassifier(nn.Module):
                     features[node_data['node_type']] = node_features
                 else:
                     features[node_data['node_type']] = torch.cat((features[node_data['node_type']], node_features))
+        elif node_feature in ['gae', 'node2vec', 'line']:
+            embedding_dim = 128
+            self.in_size = embedding_dim
+            with open(feature_extractor, 'rb') as f:
+                embedding = pickle.load(f, encoding="utf8")
+            embedding = torch.tensor(embedding, device=device)
+            features = map_node_embedding(nx_graph, embedding)
 
         # self.symmetrical_global_graph = self.symmetrical_global_graph.to('cpu')
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
