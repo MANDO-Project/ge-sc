@@ -43,33 +43,66 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        han_model = HANVulClassifier(args['feature_compressed_graph'], node_feature='metapath2vec', hidden_size=16, device=args['device'])
-        han_model.load_state_dict(torch.load(args['feature_extractor']))
-        han_model.to(args['device'])
-        han_model.eval()
+        feature_extractor = HANVulNodeClassifier(args['feature_compressed_graph'], args['dataset'], feature_extractor=args['cfg_feature_extractor'], node_feature='gae', device=args['device'])
+        feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
+        feature_extractor.to(args['device'])
+        feature_extractor.eval()
     else:
-        han_model = None
+        feature_extractor = args['feature_extractor']
 
     nx_graph = nx.read_gpickle(args['compressed_graph'])
     number_of_nodes = len(nx_graph)
-    model = HANVulNodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=han_model, node_feature=args['node_feature'], device=device)
-    total_train_files = set([f for f in os.listdir(args['dataset']) if f.endswith('.sol')])
-    total_test_files = set([f for f in os.listdir(args['testset']) if f.endswith('.sol')])
+    model = HANVulNodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+    total_train_files = [f for f in os.listdir(args['dataset']) if f.endswith('.sol')]
+    total_test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
+    total_train_files = list(set(total_train_files).difference(set(total_test_files)))
+    clean_smart_contract = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs_wild/clean_50'
+    # total_clean_files = [f for f in os.listdir(clean_smart_contract) if f.endswith('.sol')]
+    total_clean_files = []
+    total_train_files = list(set(total_train_files).difference(set(total_clean_files)))
+
+    # Train valid split data
+    train_rate = 0.6
+    val_rate = 0.2
+    rand_train_ids = torch.randperm(len(total_train_files)).tolist()
+    rand_test_ids = torch.randperm(len(total_test_files)).tolist()
+    rand_clean_ids = torch.randperm(len(total_clean_files)).tolist()
+
+    train_size_0 = int(train_rate * len(total_train_files))
+    train_size_1 = int(train_rate * len(total_test_files))
+    train_size_2 = int(train_rate * len(total_clean_files))
+    train_files = [total_train_files[i] for i in rand_train_ids[:train_size_0]] + \
+                  [total_test_files[i] for i in rand_test_ids[:train_size_1]] + \
+                  [total_clean_files[i] for i in rand_clean_ids[:train_size_2]]
+    print('Buggy train files: ', [total_train_files[i] for i in rand_train_ids[:train_size_0]])
+    print('Curated train files: ', [total_test_files[i] for i in rand_test_ids[:train_size_1]])
+
+    val_size_0 = int(val_rate * len(total_train_files))
+    val_size_1 = int(val_rate * len(total_test_files))
+    val_size_2 = int(val_rate * len(total_clean_files))
+    val_files = [total_train_files[i] for i in rand_train_ids[train_size_0:train_size_0 + val_size_0]] + \
+                [total_test_files[i] for i in rand_test_ids[train_size_1:train_size_1 + val_size_1]] + \
+                [total_clean_files[i] for i in rand_clean_ids[train_size_2:train_size_2 + val_size_2]]
+    print('Buggy valid files: ', [total_train_files[i] for i in rand_train_ids[train_size_0:train_size_0 + val_size_0]])
+    print('Curated valid files: ', [total_test_files[i] for i in rand_test_ids[train_size_1:train_size_1 + val_size_1]])
+    test_files = [total_train_files[i] for i in rand_train_ids[train_size_0 + val_size_0:]] + \
+                 [total_test_files[i] for i in rand_test_ids[train_size_1 + val_size_1:]] + \
+                 [total_clean_files[i] for i in rand_clean_ids[train_size_2 + val_size_2:]]
+    print('Buggy test files: ', [total_train_files[i] for i in rand_train_ids[train_size_0 + val_size_0:]])
+    print('Curated test files: ', [total_test_files[i] for i in rand_test_ids[train_size_1 + val_size_1:]])
+
+    assert len(train_files) + len(val_files) + len(test_files) == len(total_train_files) + len(total_test_files) + len(total_clean_files)
+
     print('Label dict: ', model.label_ids)
-    total_train_files = list(total_train_files.difference(total_test_files))
-    print(f'Number of source code for Train/Test: {len(total_train_files)}/{len(total_test_files)}')
+    print(f'Number of source code for Buggy/Curated: {len(total_train_files)}/{len(total_test_files)}')
     total_train_ids = get_node_ids(nx_graph, total_train_files)
-    test_ids = get_node_ids(nx_graph, total_test_files)
+    train_ids = get_node_ids(nx_graph, train_files)
+    val_ids = get_node_ids(nx_graph, val_files)
+    test_ids = get_node_ids(nx_graph, test_files)
     targets = torch.tensor(model.node_labels, device=args['device'])
-    assert len(set(total_train_ids) | set(test_ids)) == len(targets)
+    assert len(set(train_ids) | set(val_ids) | set(test_ids)) == len(targets)
     buggy_node_ids = torch.nonzero(targets).squeeze().tolist()
     print('Buggy node {}/{} ({}%)'.format(len(set(buggy_node_ids)), len(targets), 100*len(set(buggy_node_ids))/len(targets)))
-    # Train valid split data
-    train_rate = 0.8
-    rand_ids = torch.randperm(len(total_train_ids)).tolist()
-    train_size = int(len(total_train_ids) * train_rate)
-    train_ids = [total_train_ids[i] for i in rand_ids[:train_size]]
-    val_ids = [total_train_ids[i] for i in rand_ids[train_size:]]
     # for fold, (train_ids, val_ids) in enumerate(kfold.split(total_train_ids)):
         # Init model 
     fold = 0
@@ -95,17 +128,19 @@ def main(args):
     scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.005, total_steps=total_steps)
     train_mask = get_binary_mask(number_of_nodes, train_ids)
     val_mask = get_binary_mask(number_of_nodes, val_ids)
+    test_mask = get_binary_mask(number_of_nodes, test_ids)
     if hasattr(torch, 'BoolTensor'):
         train_mask = train_mask.bool()
         val_mask = val_mask.bool()
-
+        test_mask = test_mask.bool()
+    retain_graph = True if args['node_feature'] == 'han' else False
     for epoch in range(epochs):
         print('Fold {} - Epochs {}'.format(fold, epoch))
         optimizer.zero_grad()
         logits = model()
         logits = logits.to(args['device'])
         train_loss = loss_fcn(logits[train_mask], targets[train_mask]) 
-        train_loss.backward()
+        train_loss.backward(retain_graph=retain_graph)
         optimizer.step()
         scheduler.step()
         train_acc, train_micro_f1, train_macro_f1 = score(targets[train_mask], logits[train_mask])
@@ -130,6 +165,16 @@ def main(args):
     dump_result(targets[val_mask], logits[val_mask], os.path.join(args['output_models'], f'confusion_{fold}.csv'))
     save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
     torch.save(model.state_dict(), save_path)
+    print('Testing phase')
+    print(f'Testing on {len(test_ids)} nodes')
+    model.eval()
+    with torch.no_grad():
+        logits = model()
+        logits = logits.to(args['device'])
+        test_acc, test_micro_f1, test_macro_f1 = score(targets[test_mask], logits[test_mask])
+        print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
+        print('Classification report', '\n', get_classification_report(targets[test_mask], logits[test_mask]))
+        print('Confusion matrix', '\n', get_confusion_matrix(targets[test_mask], logits[test_mask]))
     return train_results, val_results
 
 
@@ -149,6 +194,7 @@ if __name__ == '__main__':
     parser.add_argument('--checkpoint', type=str, default='./models/call_graph_rgcn/han_fold_1.pth')
     parser.add_argument('--feature_compressed_graph', type=str, default='./dataset/aggregate/compressed_graph/compressed_graphs.gpickle')
     parser.add_argument('--feature_extractor', type=str, default='./models/metapath2vec_cfg/han_fold_1.pth')
+    parser.add_argument('--cfg_feature_extractor', type=str, default='./models/metapath2vec_cfg/han_fold_1.pth')
     parser.add_argument('--node_feature', type=str, default='metapath2vec')
     parser.add_argument('--k_folds', type=int, default=1)
     parser.add_argument('--test', action='store_true')
