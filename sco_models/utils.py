@@ -35,8 +35,8 @@ def get_confusion_matrix(labels, logits):
 
 
 def dump_result(labels, logits, output):
-    print('Confusion matrix', '\n', get_classification_report(labels, logits))
-    print('Classification report', '\n', get_confusion_matrix(labels, logits))
+    print('Confusion matrix', '\n', get_confusion_matrix(labels, logits))
+    print('Classification report', '\n', get_classification_report(labels, logits))
     _, indices = torch.max(logits, dim=1)
     prediction = indices.long().cpu().numpy()
     labels = labels.cpu().numpy()  
