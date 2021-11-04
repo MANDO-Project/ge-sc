@@ -11,11 +11,17 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
 
 - [Smart Contract Vulnerabilities](#smart-contract-vulnerabilities)
 - [Multi-Level Graph Embeddings](#multi-level-graph-embeddings)
+- [Table of contents](#table-of-contents)
   - [How to train your own model?](#how-to-train-your-own-model)
   - [Dataset](#dataset)
+    - [Node Classification](#node-classification)
+      - [Usage](#usage)
+      - [Examples](#examples)
+    - [Graph Classification](#graph-classification)
   - [Testing](#testing)
   - [Visuallization](#visuallization)
   - [Results](#results)
+    - [Node classification](#node-classification)
   - [TODO](#todo)
 
 ## How to train your own model?
@@ -28,7 +34,7 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
 ### Node Classification
 - We used node classification tasks to detect vulnerabilites in line level and function level for Control flow graph (CFG) and Call graph (CG) in corressponding.
 
-##### Usage
+#### Usage
 ```bash
 usage: HAN [-h] [-s SEED] [-ld LOG_DIR] [--output_models OUTPUT_MODELS]
            [--compressed_graph COMPRESSED_GRAPH] [--dataset DATASET]
