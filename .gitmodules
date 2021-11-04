@@ -1,0 +1,3 @@
+[submodule "ge-sc-dataset"]
+	path = ge-sc-dataset
+	url = git@github.com:minhnn-tiny/ge-sc-dataset.git

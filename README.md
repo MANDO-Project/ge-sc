@@ -29,7 +29,7 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
 
 
 ## Dataset
-- We prepared the precessed dataset as submodule of this repositories. Please check it down for more details.
+- We prepared [the precessed dataset](https://github.com/minhnn-tiny/ge-sc-dataset) as submodule of this repositories. Please check it out for more details.
 
 ### Node Classification
 - We used node classification tasks to detect vulnerabilites in line level and function level for Control flow graph (CFG) and Call graph (CG) in corressponding.
