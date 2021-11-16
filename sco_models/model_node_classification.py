@@ -20,7 +20,7 @@ from torch_geometric.nn import MetaPath2Vec
 
 from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, \
                          get_number_of_nodes, add_cfg_mapping, get_node_label, \
-                         get_node_ids_dict, map_node_embedding, reveert_map_node_embedding
+                         get_node_ids_dict, map_node_embedding, get_symmatrical_metapaths, reflect_graph
 
 
 class SemanticAttention(nn.Module):
@@ -111,15 +111,16 @@ class HANVulNodeClassifier(nn.Module):
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
         nx_g_data = generate_hetero_graph_data(nx_graph)
 
-        # Get None Labels
+        # Get Node Labels
         self.node_labels, self.labeled_node_ids, self.label_ids = get_node_label(nx_graph)
         self.node_ids_dict = get_node_ids_dict(nx_graph)
 
         # Reflect graph data
-        self.symmetrical_global_graph_data = self.reflect_graph(nx_g_data)
+        self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
         self.number_of_nodes = get_number_of_nodes(nx_graph)
         self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
-        self.meta_paths = self.get_symmatrical_metapaths()
+        self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
+        # Concat the metapaths have the same begin nodetype
         self.full_metapath = {}
         for metapath in self.meta_paths:
             ntype = metapath[0][0]
@@ -178,7 +179,6 @@ class HANVulNodeClassifier(nn.Module):
             embedding = torch.tensor(embedding, device=device)
             features = map_node_embedding(nx_graph, embedding)
 
-        # self.symmetrical_global_graph = self.symmetrical_global_graph.to('cpu')
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.symmetrical_global_graph.ndata['feat'] = features
 
@@ -197,43 +197,10 @@ class HANVulNodeClassifier(nn.Module):
         self.last_hidden_size = hidden_size * num_heads
         self.classify = nn.Linear(self.last_hidden_size, self.out_size)
 
-    # HAN defined metapaths are the path between the same type nodes.
-    # We need undirect the global graph.
-    def reflect_graph(self, nx_g_data):
-        symmetrical_data = {}
-        for metapath, value in nx_g_data.items():
-            if metapath[0] == metapath[-1]:
-                symmetrical_data[metapath] = (torch.cat((value[0], value[1])), torch.cat((value[1], value[0])))
-            else:
-                if metapath not in symmetrical_data.keys():
-                    symmetrical_data[metapath] = value
-                else:
-                    symmetrical_data[metapath] = (torch.cat((symmetrical_data[metapath][0], value[0])), torch.cat((symmetrical_data[metapath][1], value[1])))
-                if metapath[::-1] not in symmetrical_data.keys():
-                    symmetrical_data[metapath[::-1]] = (value[1], value[0])
-                else:
-                    symmetrical_data[metapath[::-1]] = (torch.cat((symmetrical_data[metapath[::-1]][0], value[1])), torch.cat((symmetrical_data[metapath[::-1]][1], value[0])))
-        return symmetrical_data
-    
-    # Get all the pair of symmetrical metapath from the symmetrical graph. 
-    def get_symmatrical_metapaths(self):
-        meta_paths = []
-        for mt in self.symmetrical_global_graph.canonical_etypes:
-            if mt[0] == mt[1]:
-                ref_mt = [mt]
-            else:
-                ref_mt = [mt, mt[::-1]]
-            if ref_mt not in meta_paths:
-                meta_paths.append(ref_mt)
-        return meta_paths
-
     def _nodetype2onehot(self, ntype):
         feature = torch.zeros(len(self.ntypes_dict), dtype=torch.float)
         feature[self.ntypes_dict[ntype]] = 1
         return feature
-
-    def _han_feature_extractor(self, han_global_graph):
-        pass
 
     def get_assemble_node_features(self):
         features = {}
