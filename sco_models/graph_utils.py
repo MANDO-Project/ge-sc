@@ -17,6 +17,26 @@ def add_hetero_ids(nx_graph):
     return nx_g
 
 
+def add_hetero_subgraph_ids(nx_graph):
+    nx_g = nx_graph
+    dict_hetero_subgraph_id = {}
+    for node, node_data in nx_g.nodes(data=True):
+        filename = node_data['source_file']
+        nodetype = node_data['node_type']
+        if filename not in dict_hetero_subgraph_id:
+            dict_hetero_id = {}
+            dict_hetero_id[nodetype] = 0
+        else:
+            dict_hetero_id = dict_hetero_subgraph_id[filename]
+            if nodetype not in dict_hetero_id:
+                dict_hetero_id[nodetype] = 0
+            else:
+                dict_hetero_id[nodetype] += 1
+        dict_hetero_subgraph_id[filename] = dict_hetero_id
+        nx_g.nodes[node]['node_hetero_subgraph_id'] = dict_hetero_subgraph_id[filename][nodetype]
+    return nx_g
+
+
 def add_cfg_mapping(nx_call_graph, nx_cfg_graph):
     nx_graph = nx_call_graph
     for call_node, call_node_data in nx_graph.nodes(data=True):
@@ -129,6 +149,20 @@ def get_nodetype_mask(nx_graph, nodetype_dict):
     return nodetype_mask
 
 
+def get_nx_subgraphs(nx_graph):
+    nx_g = nx_graph
+    nx_subgraphs_dict = {}
+    for node, node_data in nx_g.nodes(data=True):
+        filename = node_data['source_file']
+        nodetype = node_data['node_type']
+        if filename not in nx_subgraphs_dict:
+            nx_subgraphs_dict[filename] = nx.MultiDiGraph()
+        nx_subgraphs_dict[filename].add_node(node, **node_data)
+    for k, v in nx_subgraphs_dict.items():
+        nx_subgraphs_dict[k] = add_hetero_ids(nx_subgraphs_dict[k])
+    return nx_subgraphs_dict
+
+
 def load_hetero_nx_graph(nx_graph_path):
     nx_graph = nx.read_gpickle(nx_graph_path)
     nx_graph = nx.convert_node_labels_to_integers(nx_graph)
@@ -168,6 +202,36 @@ def generate_hetero_graph_data(nx_graph):
 
     dict_three_cannonical_egdes = convert_edge_data_to_tensor(dict_three_cannonical_egdes)
     return dict_three_cannonical_egdes
+
+
+def generate_hetero_subgraph_data(nx_graph):
+    nx_g = nx_graph
+    subgraph_dict = dict()
+    for source, target, data in nx_g.edges(data=True):
+        edge_type = data['edge_type']
+        source_node_type = nx_g.nodes[source]['node_type']
+        target_node_type = nx_g.nodes[target]['node_type']
+        source_filename = nx_g.nodes[source]['source_file']
+        target_filename = nx_g.nodes[target]['source_file']
+        if source_filename == target_filename:
+            filename = source_filename
+            three_cannonical_egde = (source_node_type, edge_type, target_node_type)
+            if filename not in subgraph_dict.keys():
+                dict_three_cannonical_egdes = dict()
+                dict_three_cannonical_egdes[three_cannonical_egde] = [(nx_g.nodes[source]['node_hetero_subgraph_id'], nx_g.nodes[target]['node_hetero_subgraph_id'])]
+            else:
+                dict_three_cannonical_egdes = subgraph_dict[filename]
+                if three_cannonical_egde not in dict_three_cannonical_egdes.keys():
+                    dict_three_cannonical_egdes[three_cannonical_egde] = [(nx_g.nodes[source]['node_hetero_subgraph_id'], nx_g.nodes[target]['node_hetero_subgraph_id'])]
+                else:
+                    current_val = dict_three_cannonical_egdes[three_cannonical_egde]
+                    temp_edge = (nx_g.nodes[source]['node_hetero_subgraph_id'], nx_g.nodes[target]['node_hetero_subgraph_id'])
+                    current_val.append(temp_edge)
+                    dict_three_cannonical_egdes[three_cannonical_egde] = current_val
+            subgraph_dict[filename] = dict_three_cannonical_egdes
+    for k, v in subgraph_dict.items():
+        subgraph_dict[k] = convert_edge_data_to_tensor(v)
+    return subgraph_dict
 
 
 def filename_mapping(extracted_graph):

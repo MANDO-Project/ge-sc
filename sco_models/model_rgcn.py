@@ -1,5 +1,8 @@
 import os
 
+import networkx as nx
+import pickle
+from dgl import subgraph
 import torch
 import torch.nn as nn
 from torch.nn.functional import relu
@@ -8,7 +11,10 @@ import dgl
 import dgl.nn.pytorch as dglnn
 
 from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, reflect_graph, \
-                         get_number_of_nodes, add_cfg_mapping, get_symmatrical_metapaths, get_node_tracker
+                         get_number_of_nodes, map_node_embedding, get_symmatrical_metapaths, \
+                         get_node_tracker, generate_hetero_subgraph_data, \
+                         add_hetero_subgraph_ids, get_nx_subgraphs, \
+                         add_hetero_ids
 
 
 class RGCN(nn.Module):
@@ -40,8 +46,24 @@ class RGCNVulClassifier(nn.Module):
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
+        # nx_graph = add_hetero_subgraph_ids(nx_graph)
         nx_g_data = generate_hetero_graph_data(nx_graph)
         _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
+
+        # # Get subgraphs
+        # self.nx_subgraph_dict = get_nx_subgraphs(nx_graph)
+        # assert len(list(self.nx_subgraph_dict.keys())) == len(self.extracted_graph)
+        # self.dgl_subgraph_dict = {}
+        # for filename, subgraph_data in  self.nx_subgraph_dict.items():
+        #     _nx_subgraph = nx.convert_node_labels_to_integers(subgraph_data)
+        #     _nx_subgraph = add_hetero_ids(_nx_subgraph)
+        #     _nx_subgraph_data = generate_hetero_graph_data(_nx_subgraph)
+        #     _node_subtracker = get_node_tracker(_nx_subgraph, self.filename_mapping)
+        #     _symmetrical_subgraph_data = reflect_graph(_nx_subgraph_data)
+        #     _sub_number_of_nodes = get_number_of_nodes(_nx_subgraph)
+        #     _dgl_subgraph = dgl.heterograph(_symmetrical_subgraph_data, num_nodes_dict=_sub_number_of_nodes)
+        #     _dgl_subgraph.ndata['filename'] = _node_subtracker
+        #     self.dgl_subgraph_dict[filename] = _dgl_subgraph
 
         # Reflect graph data
         self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
@@ -79,6 +101,13 @@ class RGCNVulClassifier(nn.Module):
                 else:
                     features[ntype] = torch.cat((features[ntype], _metapath_embedding(ntype).unsqueeze(0)))
             features = {k: torch.mean(v, dim=0).to(self.device) for k, v in features.items()}
+        elif node_feature in ['gae', 'node2vec', 'line']:
+            embedding_dim = 128
+            self.in_size = embedding_dim
+            with open(feature_extractor, 'rb') as f:
+                embedding = pickle.load(f, encoding="utf8")
+            embedding = torch.tensor(embedding, device=device)
+            features = map_node_embedding(nx_graph, embedding)
         
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.symmetrical_global_graph.ndata['feat'] = features
@@ -117,7 +146,7 @@ class RGCNVulClassifier(nn.Module):
         for layer in self.classify.children():
             if hasattr(layer, 'reset_parameters'):
                     layer.reset_parameters()
-    
+
     def forward(self, batched_graph):
         batched_graph_embedded = []
         for g_name in batched_graph:
@@ -127,6 +156,7 @@ class RGCNVulClassifier(nn.Module):
                 node_mask[node_type] = self.symmetrical_global_graph.ndata['filename'][node_type] == file_ids
             sub_graph = dgl.node_subgraph(self.symmetrical_global_graph, node_mask)
             h = sub_graph.ndata['feat']
+            # sub_graph = self.dgl_subgraph_dict[g_name]
             h = self.rgcn(sub_graph, h)
             graph_embedded = 0
             for node_type, feature in h.items():
