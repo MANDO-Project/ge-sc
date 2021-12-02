@@ -109,7 +109,9 @@ class HANVulNodeClassifier(nn.Module):
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
+        self.nx_graph = nx_graph
         nx_g_data = generate_hetero_graph_data(nx_graph)
+        self.total_nodes = len(nx_graph)
 
         # Get Node Labels
         self.node_labels, self.labeled_node_ids, self.label_ids = get_node_label(nx_graph)
