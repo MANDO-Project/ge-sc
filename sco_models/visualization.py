@@ -28,6 +28,8 @@ def visualize_average_k_folds(args, train_results, val_results):
                                     f'valid_avg': avg_val_result['loss'][idx]}, idx)
     for idx, lr in enumerate(avg_train_result['lrs']):
         writer.add_scalar('Learning rate', lr, idx)
+    writer.close()
+    return avg_train_result, avg_val_result
 
 
 def visualize_k_folds(args, train_results, val_results):
@@ -44,3 +46,4 @@ def visualize_k_folds(args, train_results, val_results):
                                         f'valid_{fold+1}': val_results[fold]['loss'][idx]}, idx)
     for idx, lr in enumerate(train_results[0]['lrs']):
         writer.add_scalar('Learning rate', lr, idx)
+    writer.close()
