@@ -1,6 +1,7 @@
+from numpy.core.fromnumeric import mean
 import torch
 import networkx as nx
-
+import dgl
 
 def add_hetero_ids(nx_graph):
     nx_g = nx_graph
@@ -13,6 +14,26 @@ def add_hetero_ids(nx_graph):
             dict_hetero_id[node_data['node_type']] += 1
         
         nx_g.nodes[node]['node_hetero_id'] = dict_hetero_id[node_data['node_type']]
+    return nx_g
+
+
+def add_hetero_subgraph_ids(nx_graph):
+    nx_g = nx_graph
+    dict_hetero_subgraph_id = {}
+    for node, node_data in nx_g.nodes(data=True):
+        filename = node_data['source_file']
+        nodetype = node_data['node_type']
+        if filename not in dict_hetero_subgraph_id:
+            dict_hetero_id = {}
+            dict_hetero_id[nodetype] = 0
+        else:
+            dict_hetero_id = dict_hetero_subgraph_id[filename]
+            if nodetype not in dict_hetero_id:
+                dict_hetero_id[nodetype] = 0
+            else:
+                dict_hetero_id[nodetype] += 1
+        dict_hetero_subgraph_id[filename] = dict_hetero_id
+        nx_g.nodes[node]['node_hetero_subgraph_id'] = dict_hetero_subgraph_id[filename][nodetype]
     return nx_g
 
 
@@ -119,6 +140,29 @@ def get_node_ids_dict(nx_graph):
     return node_ids_dict
 
 
+def get_nodetype_mask(nx_graph, nodetype_dict):
+    nx_g = nx_graph
+    nodetype_mask = []
+    for node_ids, node_data in nx_g.nodes(data=True):
+        ntype = node_data['node_type']
+        nodetype_mask.append(nodetype_dict[ntype])
+    return nodetype_mask
+
+
+def get_nx_subgraphs(nx_graph):
+    nx_g = nx_graph
+    nx_subgraphs_dict = {}
+    for node, node_data in nx_g.nodes(data=True):
+        filename = node_data['source_file']
+        nodetype = node_data['node_type']
+        if filename not in nx_subgraphs_dict:
+            nx_subgraphs_dict[filename] = nx.MultiDiGraph()
+        nx_subgraphs_dict[filename].add_node(node, **node_data)
+    for k, v in nx_subgraphs_dict.items():
+        nx_subgraphs_dict[k] = add_hetero_ids(nx_subgraphs_dict[k])
+    return nx_subgraphs_dict
+
+
 def load_hetero_nx_graph(nx_graph_path):
     nx_graph = nx.read_gpickle(nx_graph_path)
     nx_graph = nx.convert_node_labels_to_integers(nx_graph)
@@ -160,10 +204,41 @@ def generate_hetero_graph_data(nx_graph):
     return dict_three_cannonical_egdes
 
 
+def generate_hetero_subgraph_data(nx_graph):
+    nx_g = nx_graph
+    subgraph_dict = dict()
+    for source, target, data in nx_g.edges(data=True):
+        edge_type = data['edge_type']
+        source_node_type = nx_g.nodes[source]['node_type']
+        target_node_type = nx_g.nodes[target]['node_type']
+        source_filename = nx_g.nodes[source]['source_file']
+        target_filename = nx_g.nodes[target]['source_file']
+        if source_filename == target_filename:
+            filename = source_filename
+            three_cannonical_egde = (source_node_type, edge_type, target_node_type)
+            if filename not in subgraph_dict.keys():
+                dict_three_cannonical_egdes = dict()
+                dict_three_cannonical_egdes[three_cannonical_egde] = [(nx_g.nodes[source]['node_hetero_subgraph_id'], nx_g.nodes[target]['node_hetero_subgraph_id'])]
+            else:
+                dict_three_cannonical_egdes = subgraph_dict[filename]
+                if three_cannonical_egde not in dict_three_cannonical_egdes.keys():
+                    dict_three_cannonical_egdes[three_cannonical_egde] = [(nx_g.nodes[source]['node_hetero_subgraph_id'], nx_g.nodes[target]['node_hetero_subgraph_id'])]
+                else:
+                    current_val = dict_three_cannonical_egdes[three_cannonical_egde]
+                    temp_edge = (nx_g.nodes[source]['node_hetero_subgraph_id'], nx_g.nodes[target]['node_hetero_subgraph_id'])
+                    current_val.append(temp_edge)
+                    dict_three_cannonical_egdes[three_cannonical_egde] = current_val
+            subgraph_dict[filename] = dict_three_cannonical_egdes
+    for k, v in subgraph_dict.items():
+        subgraph_dict[k] = convert_edge_data_to_tensor(v)
+    return subgraph_dict
+
+
 def filename_mapping(extracted_graph):
     return {file: idx for idx, file in enumerate(extracted_graph)}
 
-
+# HAN defined metapaths are the path between the same type nodes.
+# We need undirect the global graph.
 def reflect_graph(nx_g_data):
     symmetrical_data = {}
     for metapath, value in nx_g_data.items():
@@ -181,6 +256,7 @@ def reflect_graph(nx_g_data):
     return symmetrical_data
 
 
+# Get all the pair of symmetrical metapath from the symmetrical graph. 
 def get_symmatrical_metapaths(symmetrical_global_graph):
         meta_paths = []
         for mt in symmetrical_global_graph.canonical_etypes:
@@ -191,3 +267,25 @@ def get_symmatrical_metapaths(symmetrical_global_graph):
             if ref_mt not in meta_paths:
                 meta_paths.append(ref_mt)
         return meta_paths
+
+
+def get_subgraph_by_metapath(nx_graph, dgl_graph, metapath):
+    nx_g = nx_graph
+    number_of_nodes = 0
+    source_nodes = []
+    target_nodes = []
+    edges = []
+    for source, edge, target, data in nx_g.edges(data=True, keys=True):
+        edge_type = data['edge_type']
+        source_node_type = nx_g.nodes[source]['node_type']
+        target_node_type = nx_g.nodes[target]['node_type']
+        # print((source_node_type, edge_type, target_node_type))
+        if (source_node_type, edge_type, target_node_type) == metapath:
+            print('this metapath')
+            number_of_nodes += 1
+            # source_nodes.append(int(nx_g.nodes[source]['node_hetero_id']))
+            # target_nodes.append(int(nx_g.nodes[target]['node_hetero_id']))
+            edges.append(edge)
+    # print(source_nodes)
+    # print(target_nodes)
+    return dgl.edge_subgraph(dgl_graph, {metapath: edges}, preserve_nodes=True)

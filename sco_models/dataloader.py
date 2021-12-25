@@ -7,9 +7,8 @@ from dgl.data import DGLDataset
 
 
 class EthIdsDataset(DGLDataset):
-    def __init__(self, data_path, compressed_graph, label, raw_dir=None, force_reload=True, verbose=False):
+    def __init__(self, data_path, label, raw_dir=None, force_reload=True, verbose=False):
         self._data_path = data_path
-        self._compressed_graph = compressed_graph
         self._label = label
         super(EthIdsDataset, self).__init__(name='ethscids',
                                             raw_dir=raw_dir,
@@ -19,10 +18,9 @@ class EthIdsDataset(DGLDataset):
     def process(self):
         # Get labels
         with open(self._label, 'r') as f:
-            content = f.readlines()
+            content = json.load(f)
         self.label_dict = {}
-        for l in content:
-            sc = json.loads(l.strip('\n').strip(','))
+        for sc in content:
             self.label_dict[sc['contract_name']] = sc['targets']
          # Get source names
         self.extracted_graph = [f for f in os.listdir(self._data_path) if f.endswith('.sol')]
