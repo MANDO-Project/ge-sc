@@ -1,27 +1,21 @@
-"""This model shows an example of using dgl.metapath_reachable_graph on the original heterogeneous
-graph.
-
-Because the original HAN implementation only gives the preprocessed homogeneous graph, this model
-could not reproduce the result in HAN as they did not provide the preprocessing code, and we
-constructed another dataset from ACM with a different set of papers, connections, features and
-labels.
-"""
 import os
 
 import pickle
 import torch
+from torch._C import ModuleDict
 import torch.nn as nn
 import torch.nn.functional as F
+import numpy as np
 import networkx as nx
 import dgl
 from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
-
 from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, \
                          get_number_of_nodes, add_cfg_mapping, get_node_label, \
-                         get_node_ids_dict, map_node_embedding, get_symmatrical_metapaths, reflect_graph
-
+                         get_node_ids_dict, map_node_embedding, get_symmatrical_metapaths, reflect_graph, get_subgraph_by_metapath, get_nodetype_mask
+from .MAGNN_nc import MAGNN_nc, MAGNN_nc_layer
+from .magnn_preprocess import get_metapath_neighbor_pairs, get_edge_metapath_idx_array, get_networkx_graph
 
 class SemanticAttention(nn.Module):
     def __init__(self, in_size, hidden_size=128):
@@ -98,9 +92,9 @@ class HANLayer(nn.Module):
         return self.semantic_attention(semantic_embeddings)                            # (N, D * K)
 
 
-class HANVulNodeClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=32, num_heads=8, dropout=0.6, device='cpu'):
-        super(HANVulNodeClassifier, self).__init__()
+class MAGNNVulNodeClassifier(nn.Module):
+    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='nodetype', hidden_size=16, num_heads=8, dropout=0.6, device='cpu'):
+        super(MAGNNVulNodeClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
         self.num_heads = num_heads
@@ -111,7 +105,6 @@ class HANVulNodeClassifier(nn.Module):
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
         self.nx_graph = nx_graph
         nx_g_data = generate_hetero_graph_data(nx_graph)
-        self.total_nodes = len(nx_graph)
 
         # Get Node Labels
         self.node_labels, self.labeled_node_ids, self.label_ids = get_node_label(nx_graph)
@@ -132,6 +125,10 @@ class HANVulNodeClassifier(nn.Module):
                 self.full_metapath[ntype].append(metapath)
         self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
         self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
+        self.etypes_dict =  {k: v for v, k in enumerate(self.symmetrical_global_graph.canonical_etypes)}
+        self.full_metapath_ids = [[(self.ntypes_dict[metapath[0][0]], self.ntypes_dict[metapath[0][2]], self.ntypes_dict[metapath[0][0]]) for metapath in metapaths] for metapaths in self.full_metapath.values()]
+        self.full_edge_metapath_ids = [[[self.etypes_dict[etype[0]], self.etypes_dict[etype[1]]] for etype in metapath] for metapath in self.full_metapath.values()]
+        self.nodetype_mask = get_nodetype_mask(nx_graph, self.ntypes_dict)
         features = {}
         if node_feature == 'nodetype':
             for ntype in self.symmetrical_global_graph.ntypes:
@@ -184,21 +181,69 @@ class HANVulNodeClassifier(nn.Module):
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.symmetrical_global_graph.ndata['feat'] = features
 
+        # get adjacency
+        self.edge_matrix_list = []
+        self.G_ = []
+        self.adj = nx.adjacency_matrix(self.nx_graph).todense()
+        for idx, (ntype, metapaths) in enumerate(self.full_metapath.items()):
+            # get metapath based neighbor pairs
+            print(self.full_metapath_ids[idx])
+            neighbor_pairs = get_metapath_neighbor_pairs(self.adj, self.nodetype_mask, self.full_metapath_ids[idx])
+            # construct and save metapath-based networks
+            G_list = get_networkx_graph(neighbor_pairs, self.nodetype_mask, idx)
+            
+            # save data
+            # networkx graph (metapath specific)
+            self.G_.append([])
+            for G, metapath in zip(G_list, self.full_metapath_ids[idx]):
+                self.G_.append[-1].append(G)
+            # node indices of edge metapaths
+            self.edge_matrix_list.append([])
+            all_edge_metapath_idx_array = get_edge_metapath_idx_array(neighbor_pairs)
+            for metapath, edge_metapath_idx_array in zip(self.full_metapath_ids[idx], all_edge_metapath_idx_array):
+                self.edge_matrix_list[-1].append(edge_metapath_idx_array)
+
+        # get graph
+        self.g_dict = {}
+        for ntype, metapaths in self.full_metapath.items():
+            self.g_dict[ntype] = []
+            self.edge_matrix_dict[ntype] = []
+            for metapath in metapaths:
+                dgl_g = dgl.edge_type_subgraph(self.symmetrical_global_graph, metapath)
+                self.g_dict[ntype].append(dgl_g)
+
+        # Create graph list and features list for MAGNN
+        self.g_list = []
+        self.feature_list = []
+        for ntype in self.node_types:
+            self.g_list.append(self.g_dict[ntype])
+            self.feature_list.append(features[ntype])
+
         # Init Model
-        self.layers = nn.ModuleList()
-        self.layers.append(HANLayer([self.meta_paths[0]], self.in_size, hidden_size, num_heads, dropout))
-        for meta_path in self.meta_paths[1:]:
-            self.layers.append(HANLayer([meta_path], self.in_size, hidden_size, num_heads, dropout))
-        
         self.layers_dict = nn.ModuleDict()
-        for ntype, metapath in self.full_metapath.items():
-            self.layers_dict.update({ntype: (HANLayer(metapath, self.in_size, hidden_size, num_heads, dropout))})
+        for ntype, metapaths in self.full_metapath.items():
+            # MAGNN_nc layers
+            num_layers = 2
+            num_edge_type = len(self.symmetrical_global_graph.etypes)
+            etypes_lists = self.full_metapath_ids
+            num_metapaths_list = [len(metapath) for metapath in self.full_metapath_ids]
+            features = self.symmetrical_global_graph.ndata['feat']
+            in_dims = list(self.number_of_nodes.values())
+            hidden_dim = 64
+            out_dim = 2
+            num_heads = 8
+            attn_vec_dim = 128
+            rnn_type = 'RotatE0'
+            dropout_rate = 0.5
+            layer = MAGNN_nc(num_layers, num_metapaths_list, num_edge_type, etypes_lists, in_dims, hidden_dim,
+                             out_dim, num_heads, attn_vec_dim, rnn_type, dropout_rate)
+            self.layers_dict.update({ntype: layer})
         
         # self.out_size = len(self.label_ids)
         self.out_size = 2
         self.last_hidden_size = hidden_size * num_heads
         self.classify = nn.Linear(self.last_hidden_size, self.out_size)
-
+ 
     def _nodetype2onehot(self, ntype):
         feature = torch.zeros(len(self.ntypes_dict), dtype=torch.float)
         feature[self.ntypes_dict[ntype]] = 1
@@ -219,7 +264,7 @@ class HANVulNodeClassifier(nn.Module):
     def get_node_features(self):
         features = {}
         for ntype in self.node_types:
-            features[ntype] = self.layers_dict[ntype](self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+            features[ntype] = self.layers_dict[ntype](self.g_list, self.feature_list, None)
         return features
 
     def reset_parameters(self):
@@ -246,19 +291,24 @@ class HANVulNodeClassifier(nn.Module):
 
 
 if __name__ == '__main__':
-    # from dataloader import EthNodeDataset, EthIdsDataset
-    # from dgl.dataloading import GraphDataLoader
-    dataset = '/home/minhnn/minhnn/ICSE/ge-sc/data/solidifi_buggy_contracts/aggregate/source_code'
-    compressed_graph = '/home/minhnn/minhnn/ICSE/ge-sc/data/solidifi_buggy_contracts/aggregate/compressed_graphs/compress_graphs.gpickle'
+    dataset = '../ge-sc-data/node_classification/cfg/reentrancy/buggy_curated'
+    compressed_graph = '../ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle'
     # labels = './dataset/aggregate/labels.json'
     # Get feature extractor
-    print('Getting features')
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-    nx_graph = load_hetero_nx_graph(compressed_graph)
-    node_labels, label_ids = get_node_label(nx_graph)
-    print(node_labels)
-    print(label_ids) 
-    # model = HANVulNodeClassifier(compressed_graph, dataset, node_feature='nodetype', device=device)
+    # nx_graph = load_hetero_nx_graph(compressed_graph)
+    # node_labels, label_ids = get_node_label(nx_graph)
+    # print(node_labels)
+    # print(label_ids)
+    model = MAGNNVulNodeClassifier(compressed_graph, dataset, node_feature='nodetype', device=device)
+    adj = nx.adjacency_matrix(model.nx_graph)
+    print(len(model.g_list))
+    print(len(model.nx_graph.nodes))
+    print(adj.todense().shape)
+    print(model.symmetrical_global_graph.etypes)
+    print(len(model.symmetrical_global_graph.canonical_etypes))
+    print(model.full_metapath_ids)
+    print(model.edge_matrix_dict)
     # model.to(device)
     # print(model.meta_paths)
     # logits, targets = model()

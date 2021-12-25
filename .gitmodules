@@ -1,0 +1,4 @@
+[submodule "ge-sc-data"]
+	path = ge-sc-data
+	url = git@github.com:minhnn-tiny/ge-sc-dataset.git
+	branch = master

@@ -20,11 +20,11 @@ def accuracy(labels, preds):
     return (preds == labels).sum().item() / labels.shape[0]
 
 
-def get_classification_report(labels, logits):
+def get_classification_report(labels, logits, output_dict=False):
     _, indices = torch.max(logits, dim=1)
     prediction = indices.long().cpu().numpy()
     labels = labels.cpu().numpy()
-    return classification_report(labels, prediction)
+    return classification_report(labels, prediction, digits=4, output_dict=output_dict)
 
 
 def get_confusion_matrix(labels, logits):
