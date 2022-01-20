@@ -3,6 +3,7 @@ import torch
 import networkx as nx
 import dgl
 
+
 def add_hetero_ids(nx_graph):
     nx_g = nx_graph
     dict_hetero_id = {}
@@ -12,7 +13,6 @@ def add_hetero_ids(nx_graph):
             dict_hetero_id[node_data['node_type']] = 0
         else:
             dict_hetero_id[node_data['node_type']] += 1
-        
         nx_g.nodes[node]['node_hetero_id'] = dict_hetero_id[node_data['node_type']]
     return nx_g
 
