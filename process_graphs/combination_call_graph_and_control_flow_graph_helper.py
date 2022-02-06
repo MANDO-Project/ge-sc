@@ -6,9 +6,9 @@ def print_nx_network_full_info(nx_graph):
     for node, node_data in nx_graph.nodes(data=True):
         print(node, node_data)
     
-    print('====Edges info====')
-    for source_node, target_node, edge_data in nx_graph.edges(data=True):
-        print(source_node, target_node, edge_data)
+    # print('====Edges info====')
+    # for source_node, target_node, edge_data in nx_graph.edges(data=True):
+    #     print(source_node, target_node, edge_data)
 
 def mapping_cfg_and_cg_node_labels(cfg, call_graph):
     dict_node_label_cfg_and_cg = {}
@@ -67,9 +67,9 @@ def update_cfg_node_types_by_call_graph_node_types(cfg, dict_node_label):
 
 
 if __name__ == '__main__':
-    input_cfg_path = 'data/smartbug-dataset/reentrancy/compress_graphs.gpickle'
-    input_call_graph_path = 'data/smartbug-dataset/reentrancy/compress_call_graphs_no_solidity_calls_buggy.gpickle'
-    output_path = 'data/smartbug-dataset/reentrancy'
+    input_cfg_path = 'data/clean_71_buggy_curated_0/cfg_compress_graphs.gpickle'
+    input_call_graph_path = 'data/clean_71_buggy_curated_0/compress_call_graphs_no_solidity_calls_buggy.gpickle'
+    output_path = 'data/clean_71_buggy_curated_0'
 
     input_cfg = nx.read_gpickle(input_cfg_path)
     print(nx.info(input_cfg))
