@@ -6,9 +6,9 @@ def print_nx_network_full_info(nx_graph):
     for node, node_data in nx_graph.nodes(data=True):
         print(node, node_data)
     
-    print('====Edges info====')
-    for source_node, target_node, edge_data in nx_graph.edges(data=True):
-        print(source_node, target_node, edge_data)
+    # print('====Edges info====')
+    # for source_node, target_node, edge_data in nx_graph.edges(data=True):
+    #     print(source_node, target_node, edge_data)
 
 def mapping_cfg_and_cg_node_labels(cfg, call_graph):
     dict_node_label_cfg_and_cg = {}
@@ -24,6 +24,7 @@ def mapping_cfg_and_cg_node_labels(cfg, call_graph):
                 'cfg_node_id': node,
                 'cfg_node_type': node_data['node_type']
             }
+    
     
     for node, node_data in call_graph.nodes(data=True):
         if node_data['label'] in dict_node_label_cfg_and_cg:
@@ -54,7 +55,8 @@ def add_new_cfg_edges_from_call_graph(cfg, dict_node_label, call_graph):
             if value['call_graph_node_id'] == target:
                 target_cfg = value['cfg_node_id']
         
-        list_new_edges_cfg.append((source_cfg, target_cfg, edge_data_cfg))
+        if source_cfg is not None and target_cfg is not None:
+            list_new_edges_cfg.append((source_cfg, target_cfg, edge_data_cfg))
     
     cfg.add_edges_from(list_new_edges_cfg)
 
@@ -65,11 +67,10 @@ def update_cfg_node_types_by_call_graph_node_types(cfg, dict_node_label):
         cfg_node_id = value['cfg_node_id']
         cfg.nodes[cfg_node_id]['node_type'] = value['call_graph_node_type']
 
-
 if __name__ == '__main__':
-    input_cfg_path = 'data/smartbug-dataset/reentrancy/compress_graphs.gpickle'
-    input_call_graph_path = 'data/smartbug-dataset/reentrancy/compress_call_graphs_no_solidity_calls_buggy.gpickle'
-    output_path = 'data/smartbug-dataset/reentrancy'
+    input_cfg_path = 'data/clean_57_buggy_curated_0_access_control/cfg_compress_graphs.gpickle'
+    input_call_graph_path = 'data/clean_57_buggy_curated_0_access_control/compress_call_graphs_no_solidity_calls_buggy.gpickle'
+    output_path = 'data/clean_57_buggy_curated_0_access_control'
 
     input_cfg = nx.read_gpickle(input_cfg_path)
     print(nx.info(input_cfg))

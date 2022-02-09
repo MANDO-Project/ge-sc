@@ -479,13 +479,13 @@ class GESCPrinters(AbstractPrinter):
 if __name__ == '__main__':
     # smart_contract_path = 'data/extracted_source_code/' 
     # output_path = 'data/extracted_source_code/'
-    smart_contract_path = 'data/call_graph/access_control/clean_50_buggy_curated' 
-    output_path = 'data/call_graph/access_control/clean_50_buggy_curated'
+    smart_contract_path = 'data/clean_71_buggy_curated_0' 
+    output_path = 'data/clean_71_buggy_curated_0'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
 
     list_vulnerabilities_json_files = [
-        # 'data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
-        'data/solidifi_buggy_contracts/access_control/vulnerabilities.json',
+        'data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
+        # 'data/solidifi_buggy_contracts/access_control/vulnerabilities.json',
         'data/smartbug-dataset/vulnerabilities.json']
 
     data_vulnerabilities = merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files)
