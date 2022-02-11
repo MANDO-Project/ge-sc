@@ -4,7 +4,7 @@
 [![slither](https://img.shields.io/badge/dgl-0.6.1-green)](https://www.dgl.ai/)
 
 # Multi-Level Graph Embeddings
-[![GE-SC overview](./asserts/GE-SC-components.svg)](https://github.com/erichoang/ge-sc)
+[![GE-SC overview](./assets/GE-SC-components.svg)](https://github.com/erichoang/ge-sc)
 This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https://arxiv.org/abs/1903.07293) for Vulnerability detection in buggy smart contracts.
 
 # Table of contents
@@ -21,7 +21,7 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
   - [Testing](#testing)
   - [Visuallization](#visuallization)
   - [Results](#results)
-    - [Node classification](#node-classification)
+    - [Node classification](#node-classification-1)
   - [TODO](#todo)
 
 ## How to train your own model?
@@ -151,10 +151,10 @@ tensorboard --logdir LOG_DIR
 - Please check image links for more details.
 - CFGs
 
-[![CFGs](./asserts/cfg_results.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![CFGs](./assets/cfg_results.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
 - CGs
 
-[![CGs](./asserts/cg_results.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![CGs](./assets/cg_results.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
 
 ## TODO
 - [ ] Support other Heterogeneous Graph Neural Network than HAN.
