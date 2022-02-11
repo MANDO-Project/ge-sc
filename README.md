@@ -141,7 +141,7 @@ Optional configures:
 #### Examples
 We prepared some scripts for the custom HAN structures bellow:
 
-- Node classication for Control Flow Graph (CFG) which detect vulnerabilites on line level.
+- Node Classication for Heterogeous Control Flow Graphs (HCFGs) which detect vulnerabilites at the line level.
     - Nodetype one hot vector as node features for detection reentrancy bugs.
     ```bash
     python node_classifier.py -ld ./logs/node_classification/cfg/node2vec/reentrancy --output_models ./models/node_classification/cfg/node2vec/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature nodetype --testset ./ge-sc-data/node_classification/cfg/curated/reentrancy --seed 1
@@ -163,13 +163,13 @@ We prepared some scripts for the custom HAN structures bellow:
     python node_classifier.py -ld ./logs/node_classification/cfg/gae/reentrancy --output_models ./models/node_classification/cfg/gae/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature node2vec --feature_extractor ./ge-sc-data/node_classification/cfg/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --testset ./data/smartbugs_wild/multi_class_cfg/curated/reentrancy --seed 1
     ```
 
-- Node classification for Heterogeous Call Graphs (HCGs) which detect vulnerabilites on function level.
+- Node Classification for Heterogeous Call Graphs (HCGs) which detect vulnerabilites at the function level.
 - The command lines are the same as CFG except the dataset. 
     - Nodetype one hot vector as node features for detection reentrancy bugs.
     ```bash
     python node_classifier.py -ld ./logs/node_classification/cg/node2vec/reentrancy --output_models ./models/node_classification/cg/node2vec/reentrancy --dataset ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature nodetype --testset ./ge-sc-data/node_classification/cg/curated/reentrancy --seed 1
     ```
-    - We also stack 2 HAN layer for CF. The first one will aggregate CFG nodes on line level in a CG node on function levl as features of CG nodes.
+    - We also stack 2 HAN layers for CF. The first one will aggregate CFG nodes on line level in a CG node on function level as features of CG nodes.
     ```bash
     python node_classifier.py -ld ./logs/node_classification/call_graph/node2vec_han/reentrancy --output_models ./models/node_classification/call_graph/node2vec_han/reentrancy --dataset ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated/compressed_graphs.gpickle --testset ./ge-sc-data/node_classification/cg/curated/reentrancy --seed 1  --node_feature han --feature_compressed_graph ./data/smartbugs_wild/binary_class_cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --cfg_feature_extractor ./data/smartbugs_wild/embeddings_buggy_currated_mixed/cfg_mixed/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --feature_extractor ./models/node_classification/cfg/node2vec/reentrancy/han_fold_0.pth
     ```
