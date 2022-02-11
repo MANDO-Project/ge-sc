@@ -12,12 +12,16 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
 - [Smart Contract Vulnerabilities](#smart-contract-vulnerabilities)
 - [Multi-Level Graph Embeddings](#multi-level-graph-embeddings)
 - [Table of contents](#table-of-contents)
-  - [How to train your own model?](#how-to-train-your-own-model)
+  - [How to train the models?](#how-to-train-the-models)
+  - [System Description](#system-description)
+  - [Install Environment](#install-environment)
+  - [Inspection scripts](#inspection-scripts)
+    - [Graph Classification](#graph-classification)
   - [Dataset](#dataset)
     - [Node Classification](#node-classification)
       - [Usage](#usage)
       - [Examples](#examples)
-    - [Graph Classification](#graph-classification)
+    - [Graph Classification](#graph-classification-1)
   - [Testing](#testing)
   - [Visuallization](#visuallization)
   - [Results](#results)
@@ -30,12 +34,44 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
       - [Function Level Classification](#function-level-classification)
   - [TODO](#todo)
 
-## How to train your own model?
+## How to train the models?
+
+## System Description
+
+We run all experiments on 
+- Ubuntu 20.04
+- CUDA 11.1
+- NVIDA 3080
+
+## Install Environment
+
+Install python required packages.
+```bash
+pip install -r requirements.txt -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html -f https://data.pyg.org/whl/torch-1.8.0+cu111.html -f https://data.dgl.ai/wheels/repo.html
+```
+
+## Inspection scripts
+
+We provied inspection scripts for Graph Classification and Node Classification tasks as well as their required data.
+
+### Graph Classification
+
+Training Phase
+```bash
+python -m experiments.graph_classification
+```
+To show the result table
+
+```bash
+python -m experiments.graph_classification --result
+```
+
 - We currently supported 7 types of bug: `access_control`, `arithmetic`, `denial_of_service`, `front_running`, `reentrancy`, `time_manipulation`, `unchecked_low_level_calls`.
 
+- Run the inspection 
 
 ## Dataset
-- We prepared [the precessed dataset](https://github.com/minhnn-tiny/ge-sc-dataset) as submodule of this repositories. Please check it out for more details.
+- We prepared dataset for  submodule of this repositories. Please check it out for more details.
 
 ### Node Classification
 - We used node classification tasks to detect vulnerabilites in line level and function level for Control flow graph (CFG) and Call graph (CG) in corressponding.
