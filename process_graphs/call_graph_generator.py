@@ -455,6 +455,14 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
     nx.write_gpickle(full_graph, output)
     print('Dumped succesfully:', output)
 
+def merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files):
+    result = list()
+    for f1 in list_vulnerabilities_json_files:
+        with open(f1, 'r') as infile:
+            result.extend(json.load(infile))
+
+    return result
+
 
 class GESCPrinters(AbstractPrinter):
     ARGUMENT = 'call-graph'
@@ -488,45 +496,16 @@ class GESCPrinters(AbstractPrinter):
             filename(string)
         """
 
-        all_contracts_filename = ''
-        if not filename.endswith('.dot'):
-            all_contracts_filename = f"{filename}.all_contracts.call-graph"
-        if filename == '.dot':
-            all_contracts_filename = "all_contracts"
-
-        # all_contracts_call_graph = _process_functions(all_functions_as_dict.values())
-        all_contracts_call_graph = self.generate_all_contracts_call_graph()
-
-        print(nx.info(all_contracts_call_graph))
-        # print(all_contracts_call_graph.nodes(data=True))
-        # print(all_contracts_call_graph.edges(data=True))
-    
-        # Dump call graph to gpickle and DOT file
-        nx.nx_agraph.write_dot(all_contracts_call_graph, all_contracts_filename + '.dot')
-        print('Dumped succesfully:', all_contracts_filename + '.dot')
-        nx.write_gpickle(all_contracts_call_graph, all_contracts_filename + '.gpickle')
-        print('Dumped succesfully:', all_contracts_filename + '.gpickle')
-
-        # for derived_contract in self.slither.contracts_derived:
-        #     derived_output_filename = f"{filename}.{derived_contract.name}.call-graph"
-        #     derived_contract_call_graph = _process_functions(derived_contract.functions)
-
-        #     # Dump call graph to gpickle and DOT file
-        #     nx.nx_agraph.write_dot(derived_contract_call_graph, derived_output_filename + '.dot')
-        #     print('Dumped:', derived_output_filename + '.dot')
-        #     nx.write_gpickle(derived_contract_call_graph, derived_output_filename + '.gpickle')
-        #     print('Dumped:', derived_output_filename + '.gpickle')
-
 if __name__ == '__main__':
     # smart_contract_path = 'data/extracted_source_code/' 
     # output_path = 'data/extracted_source_code/'
-    smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0' 
-    output_path = '/home/minhnn/minhnn/ICSE/ge-sc/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0'
+    smart_contract_path = 'data/clean_71_buggy_curated_0' 
+    output_path = 'data/clean_71_buggy_curated_0'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
 
     list_vulnerabilities_json_files = [
-        # 'data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
-        'data/solidifi_buggy_contracts/access_control/vulnerabilities.json',
+        'data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
+        # 'data/solidifi_buggy_contracts/access_control/vulnerabilities.json',
         'data/smartbug-dataset/vulnerabilities.json']
 
     data_vulnerabilities = merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files)
