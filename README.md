@@ -21,7 +21,13 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
   - [Testing](#testing)
   - [Visuallization](#visuallization)
   - [Results](#results)
-    - [Node classification](#node-classification-1)
+    - [Combine CFGs and CGs in form-A Fusion.](#combine-cfgs-and-cgs-in-form-a-fusion)
+      - [Contract Level Classification](#contract-level-classification)
+      - [Line Level Classification](#line-level-classification)
+    - [CFGs only](#cfgs-only)
+      - [Contract Level Classification](#contract-level-classification-1)
+    - [Combine CFGs and CGs in form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
+      - [Function Level Classification](#function-level-classification)
   - [TODO](#todo)
 
 ## How to train your own model?
@@ -146,15 +152,29 @@ tensorboard --logdir LOG_DIR
 ```
 
 ## Results
-### Node classification
 
 - Please check image links for more details.
-- CFGs
+- 
+### Combine CFGs and CGs in form-A Fusion.
 
-[![CFGs](./assets/cfg_results.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
-- CGs
+#### Contract Level Classification
 
-[![CGs](./assets/cg_results.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![Coarse-Grained CFGs+CGs](./assets/coarse_grained_cfg_cg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+
+#### Line Level Classification
+
+[![Coarse-Grained CFGs+CGs](./assets/fine_grained_cfg_cg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+
+
+### CFGs only
+#### Contract Level Classification
+
+[![CFGs](./assets/coarse_grained_cfg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+
+### Combine CFGs and CGs in form-B Fusion.
+#### Function Level Classification
+
+[![CGs](./assets/function_level_fusion_form_B.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
 
 ## TODO
 - [ ] Support other Heterogeneous Graph Neural Network than HAN.
