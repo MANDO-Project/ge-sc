@@ -107,7 +107,7 @@ def make_annotaiton(ratio):
 
 if __name__ == '__main__':
     ratio = 1
-    # copy_file(CLEAN_WILD, '/home/minhnn/minhnn/ICSE/ge-sc/ge-sc-data/smartbugs-wild-clean-contracts-copied')
+    # copy_file(CLEAN_WILD, './ge-sc-data/smartbugs-wild-clean-contracts-copied')
     # collect_dataset(1)
     # collect_dataset(2)
     # compressed_graph(1)

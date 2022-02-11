@@ -240,8 +240,8 @@ class HANVulNodeClassifier(nn.Module):
 if __name__ == '__main__':
     # from dataloader import EthNodeDataset, EthIdsDataset
     # from dgl.dataloading import GraphDataLoader
-    dataset = '/home/minhnn/minhnn/ICSE/ge-sc/data/solidifi_buggy_contracts/aggregate/source_code'
-    compressed_graph = '/home/minhnn/minhnn/ICSE/ge-sc/data/solidifi_buggy_contracts/aggregate/compressed_graphs/compress_graphs.gpickle'
+    dataset = './ge-sc-data/solidifi_buggy_contracts/aggregate/source_code'
+    compressed_graph = './ge-sc-data/solidifi_buggy_contracts/aggregate/compressed_graphs/compress_graphs.gpickle'
     # labels = './dataset/aggregate/labels.json'
     # Get feature extractor
     print('Getting features')

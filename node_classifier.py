@@ -56,7 +56,7 @@ def main(args):
     total_train_files = [f for f in os.listdir(args['dataset']) if f.endswith('.sol')]
     total_test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
     total_train_files = list(set(total_train_files).difference(set(total_test_files)))
-    clean_smart_contract = '/home/minhnn/minhnn/ICSE/ge-sc/data/smartbugs_wild/clean_50'
+    # clean_smart_contract = './ge-sc-data/smartbugs_wild/clean_50'
     # total_clean_files = [f for f in os.listdir(clean_smart_contract) if f.endswith('.sol')]
     total_clean_files = []
     total_train_files = list(set(total_train_files).difference(set(total_clean_files)))

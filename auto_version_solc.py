@@ -16,7 +16,7 @@ def get_solc_version(source):
             line = f.readline()
     return '0.4.25'
 
-smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/data/solidifi_buggy_contracts/Re-entrancy'
+smart_contract_path = './ge-sc-data/solidifi_buggy_contracts/Re-entrancy'
 smart_contracts = [os.path.join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
 count = 0
 for sc in smart_contracts:
