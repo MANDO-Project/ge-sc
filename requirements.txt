@@ -5,7 +5,7 @@ certifi==2020.12.5
 chardet==4.0.0
 crytic-compile==0.2.0
 decorator==4.4.2
-dgl==0.6.1
+dgl-cu111==0.6.1
 docopt==0.6.2
 gast==0.4.0
 google-pasta==0.2.0
@@ -14,7 +14,7 @@ h5py==3.2.1
 idna==2.10
 importlib-metadata==4.0.1
 joblib==1.0.1
-Keras==2.2.4
+# Keras==2.2.4
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 Markdown==3.3.4
@@ -36,14 +36,19 @@ semantic-version==2.8.5
 six==1.15.0
 slither-analyzer==0.8.0
 solc-select==0.2.0
-tensorboard==1.14.0
-tensorflow==1.14.0
-tensorflow-estimator==1.14.0
+tabulate==0.8.9
+torch==1.8.1+cu111
+torch-scatter==2.0.8
+torch-sparse==0.6.11
+torch-geometric==2.0.1
+# tensorboard==1.14.0
+# tensorflow==1.14.0
+# tensorflow-estimator==1.14.0
 termcolor==1.1.0
 threadpoolctl==2.1.0
-torch==1.9.0+cpu
-torchaudio==0.9.0
-torchvision==0.10.0+cpu
+# torch==1.9.0+cpu
+# torchaudio==0.9.0
+# torchvision==0.10.0+cpu
 tree-sitter==0.19.0
 typing-extensions==3.7.4.3
 urllib3==1.26.6
