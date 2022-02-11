@@ -85,7 +85,6 @@ def test(args, model, test_loader):
     return total_micro_f1/steps, test_macro_f1/steps, total_accucracy/steps, classification_report, confusion_report
 
 
-
 def main(args):
     epochs = args['num_epochs']
     k_folds = args['k_folds']
@@ -109,8 +108,8 @@ def main(args):
     # for epoch in range(epochs):
     classification_total_report = {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}}
     confusion_matrix_total_report = []
-    test_ids = [ethdataset.filename_mapping[sc] for sc in os.listdir(args['testset']) if sc.endswith('.sol')]
-    # test_ids = []
+    # test_ids = [ethdataset.filename_mapping[sc] for sc in os.listdir(args['testset']) if sc.endswith('.sol')]
+    test_ids = []
     test_subsampler = torch.utils.data.SubsetRandomSampler(test_ids)
     test_dataloader = GraphDataLoader(ethdataset, batch_size=args['batch_size'], drop_last=False, sampler=test_subsampler)
     total_train_ids = list(set(list(range(ethdataset.num_graphs))).difference(set(test_ids)))
