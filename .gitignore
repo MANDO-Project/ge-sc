@@ -5,6 +5,7 @@ package-lock.json
 *.pyc
 *.pth
 
+.ipynb_checkpoints
 outputs/*
 logs/
 logs*/
