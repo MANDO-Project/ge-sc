@@ -5,7 +5,8 @@
 
 # Multi-Level Graph Embeddings
 [![GE-SC overview](./assets/GE-SC-components.svg)](https://github.com/erichoang/ge-sc)
-This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https://arxiv.org/abs/1903.07293) for Vulnerability detection in buggy smart contracts.
+This repository is an implementation of MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities.
+The source code is based on the implementation of [HAN](https://github.com/dmlc/dgl/tree/master/examples/pytorch/han) and [GAT](https://github.com/dmlc/dgl/tree/master/examples/pytorch/gat) model using [Deep Graph Library](https://www.dgl.ai/)
 
 # Table of contents
 
@@ -25,12 +26,12 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
   - [Testing](#testing)
   - [Visuallization](#visuallization)
   - [Results](#results)
-    - [Combine CFGs and CGs in form-A Fusion.](#combine-cfgs-and-cgs-in-form-a-fusion)
+    - [Combine HCFGs and HCGs in Form-A Fusion.](#combine-cfgs-and-cgs-in-form-a-fusion) (Core Form in the MANDO paper.)
       - [Contract Level Classification](#contract-level-classification)
       - [Line Level Classification](#line-level-classification)
-    - [CFGs only](#cfgs-only)
+    - [HCFGs only](#cfgs-only)
       - [Contract Level Classification](#contract-level-classification-1)
-    - [Combine CFGs and CGs in form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
+    - [Combine HCFGs and HCGs in Form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
       - [Function Level Classification](#function-level-classification)
   - [TODO](#todo)
 
@@ -163,7 +164,7 @@ We prepared some scripts for the custom HAN structures bellow:
     python node_classifier.py -ld ./logs/node_classification/cfg/gae/reentrancy --output_models ./models/node_classification/cfg/gae/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature node2vec --feature_extractor ./ge-sc-data/node_classification/cfg/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --testset ./data/smartbugs_wild/multi_class_cfg/curated/reentrancy --seed 1
     ```
 
-- Node classification for Cal Graph (CG) which detect vulnerabilites on function level.
+- Node classification for Heterogeous Call Graphs (HCGs) which detect vulnerabilites on function level.
 - The command lines are the same as CFG except the dataset. 
     - Nodetype one hot vector as node features for detection reentrancy bugs.
     ```bash
