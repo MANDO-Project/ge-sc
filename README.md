@@ -189,26 +189,24 @@ tensorboard --logdir LOG_DIR
 
 ## Results
 
-- Please check image links for more details.
-- 
 ### Combine HCFGs and HCGs in Form-A Fusion.
 
 #### Coarse-Grained Contract-Level Detection
 
-[![Coarse-Grained CFGs+CGs](./assets/coarse_grained_cfg_cg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![Coarse-Grained CFGs+CGs](./assets/coarse_grained_cfg_cg.png)](https://anonymous.4open.science/r/ge-sc-FE31)
 
 #### Fine-Grained Line-Level Detection
 
-[![Coarse-Grained CFGs+CGs](./assets/fine_grained_cfg_cg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![Coarse-Grained CFGs+CGs](./assets/fine_grained_cfg_cg.png)](https://anonymous.4open.science/r/ge-sc-FE31)
 
 
 ### HCFGs only
 #### Coarse-Grained Contract-Level Detection
 
-[![CFGs](./assets/coarse_grained_cfg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![CFGs](./assets/coarse_grained_cfg.png)](https://anonymous.4open.science/r/ge-sc-FE31)
 
 ### Combine CFGs and CGs in Form-B Fusion.
 #### Fine-Grained Function-Level Detection
 
-[![CGs](./assets/function_level_fusion_form_B.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![CGs](./assets/function_level_fusion_form_B.png)](https://anonymous.4open.science/r/ge-sc-FE31)
 
