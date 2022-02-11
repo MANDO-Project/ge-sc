@@ -387,14 +387,34 @@ def get_vulnerabilities_of_node_by_source_code_line(source_code_lines, list_vul_
 
     return node_info_vulnerabilities
 
+
+def extract_graph(source_path, output, vulnerabilities=None):
+    sc_version = get_solc_version(source_path)
+    solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
+    if not os.path.exists(solc_compiler):
+        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
+    file_name_sc = source_path.split('/')[-1]
+    try:
+        slither = Slither(source_path, solc=solc_compiler)
+    except Exception as e:
+        return 0
+
+    vulnerabilities_info_in_sc = get_vulnerabilities(file_name_sc, vulnerabilities)
+    call_graph_printer = GESCPrinters(slither, file_name_sc, logger, vulnerabilities_info_in_sc)
+    all_contracts_call_graph = call_graph_printer.generate_all_contracts_call_graph()  
+    nx.write_gpickle(all_contracts_call_graph, join(output, file_name_sc))
+    return 1
+
+
 def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None):
     full_graph = None
     count = 0
     for sc in tqdm(smart_contracts):
+        print(sc)
         sc_version = get_solc_version(sc)
-        solc_compiler = f'/home/eric/.solc-select/artifacts/solc-{sc_version}'
+        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
         if not os.path.exists(solc_compiler):
-            solc_compiler = f'/home/eric/.solc-select/artifacts/solc-0.4.25'
+            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
         try:
             slither = Slither(sc, solc=solc_compiler)
@@ -417,8 +437,8 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
         elif all_contracts_call_graph is not None:
             full_graph = nx.disjoint_union(full_graph, all_contracts_call_graph)
     
-    print(f'{count}/{len(smart_contracts)}')
-    print(nx.info(full_graph))
+    # print(f'{count}/{len(smart_contracts)}')
+    # print(nx.info(full_graph))
     # print('Full graph nodes:', full_graph.nodes(data=True))
     # for node, node_data in full_graph.nodes(data=True):
     #     if node_data['node_info_vulnerabilities'] is not None:
@@ -430,10 +450,10 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
     # print('Dumped succesfully:', join(output, 'compress_call_graphs.dot'))
     # nx.write_gpickle(full_graph, join(output, 'compress_call_graphs.gpickle'))
     # print('Dumped succesfully:', join(output, 'compress_call_graphs.gpickle'))
-    nx.nx_agraph.write_dot(full_graph, join(output, 'compress_call_graphs_no_solidity_calls_buggy.dot'))
-    print('Dumped succesfully:', join(output, 'compress_call_graphs_no_solidity_calls_buggy.dot'))
-    nx.write_gpickle(full_graph, join(output, 'compress_call_graphs_no_solidity_calls_buggy.gpickle'))
-    print('Dumped succesfully:', join(output, 'compress_call_graphs_no_solidity_calls_buggy.gpickle'))
+    # nx.nx_agraph.write_dot(full_graph, join(output, 'compress_call_graphs_no_solidity_calls_buggy.dot'))
+    # print('Dumped succesfully:', join(output, 'compress_call_graphs_no_solidity_calls_buggy.dot'))
+    nx.write_gpickle(full_graph, output)
+    print('Dumped succesfully:', output)
 
 
 class GESCPrinters(AbstractPrinter):
@@ -500,12 +520,21 @@ class GESCPrinters(AbstractPrinter):
 if __name__ == '__main__':
     # smart_contract_path = 'data/extracted_source_code/' 
     # output_path = 'data/extracted_source_code/'
-    smart_contract_path = 'data/solidifi_buggy_contracts/Timestamp-Dependency' 
-    output_path = 'data/solidifi_buggy_contracts/Timestamp-Dependency/output_graph'
+    smart_contract_path = '/home/minhnn/minhnn/ICSE/ge-sc/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0' 
+    output_path = '/home/minhnn/minhnn/ICSE/ge-sc/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0'
     smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
 
-    data_vulnerabilities = None
-    with open('data/solidifi_buggy_contracts/Timestamp-Dependency/vulnerabilities.json') as f:
-        data_vulnerabilities = json.load(f)
+    list_vulnerabilities_json_files = [
+        # 'data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
+        'data/solidifi_buggy_contracts/access_control/vulnerabilities.json',
+        'data/smartbug-dataset/vulnerabilities.json']
+
+    data_vulnerabilities = merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files)
+    # print(data_vulnerabilities)
+    # with open('merged_data_vulnerabilities.json', 'w') as output_file:
+    #     json.dump(data_vulnerabilities, output_file, indent=4)
+
+    # with open('data/smartbug-dataset/vulnerabilities.json') as f:
+    #     data_vulnerabilities = json.load(f)
 
     compress_full_smart_contracts(smart_contracts, output_path, vulnerabilities=data_vulnerabilities)
