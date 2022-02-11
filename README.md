@@ -74,7 +74,7 @@ python -m experiments.graph_classification --result
 - We prepared dataset for  submodule of this repositories. Please check it out for more details.
 
 ### Node Classification
-- We used node classification tasks to detect vulnerabilites in line level and function level for Control flow graph (CFG) and Call graph (CG) in corressponding.
+- We used node classification tasks to detect vulnerabilites at the line level and function level for Heterogeneous Control flow graph (HCFGs) and Call Graphs (HCGs) in corressponding.
 
 #### Usage
 ```bash
