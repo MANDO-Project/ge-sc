@@ -1,13 +1,3 @@
-"""This model shows an example of using dgl.metapath_reachable_graph on the original heterogeneous
-graph.
-
-Because the original HAN implementation only gives the preprocessed homogeneous graph, this model
-could not reproduce the result in HAN as they did not provide the preprocessing code, and we
-constructed another dataset from ACM with a different set of papers, connections, features and
-labels.
-"""
-import sys
-sys.path.append('/home/minhnn/minhnn/ICSE/pytorch_geometric')
 from torch_geometric.nn import MetaPath2Vec
 
 import torch
@@ -57,10 +47,6 @@ class VulMetaPath2Vec(nn.Module):
             else:
                 count_node[k[2]] = torch.unique(torch.cat((count_node[k[2]], torch.unique(v[1]))))
                 max_node_id[k[2]] = max(max_node_id[k[2]], torch.max(v[1]).item())
-
-        for k, v in count_node.items():
-            print(k, v.shape[0])
-        print('max node: ', max_node_id)
         
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.extended_metapaths = {}
@@ -71,7 +57,7 @@ class VulMetaPath2Vec(nn.Module):
                     _metapath_list += metapath
             self.extended_metapaths[ntype] = _metapath_list
         self.metapath2vec_dict = {}
-        for ntype in list(self.node_types)[:1]:
+        for ntype in list(self.node_types):
             self.metapath2vec_dict[ntype] = MetaPath2Vec(self.symmetrical_global_graph_data ,embedding_dim=128,
                                                                  metapath=self.extended_metapaths[ntype], walk_length=5, context_size=2,
                                                                  walks_per_node=2, num_negative_samples=5,

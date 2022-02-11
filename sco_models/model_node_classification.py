@@ -1,11 +1,3 @@
-"""This model shows an example of using dgl.metapath_reachable_graph on the original heterogeneous
-graph.
-
-Because the original HAN implementation only gives the preprocessed homogeneous graph, this model
-could not reproduce the result in HAN as they did not provide the preprocessing code, and we
-constructed another dataset from ACM with a different set of papers, connections, features and
-labels.
-"""
 import os
 
 import pickle

@@ -148,16 +148,15 @@ class HANVulClassifier(nn.Module):
             for metapath in self.meta_paths:
                 _metapath_embedding = MetaPath2Vec(self.symmetrical_global_graph_data, embedding_dim=embedding_dim,
                         metapath=metapath, walk_length=50, context_size=7,
-                        walks_per_node=5, num_negative_samples=5, num_nodes_dict=None,
-                        sparse=True)
+                        walks_per_node=5, num_negative_samples=5, num_nodes_dict=self.number_of_nodes,
+                        sparse=False)
                 ntype = metapath[0][0]
                 if ntype not in features.keys():
                     features[ntype] = _metapath_embedding(ntype).unsqueeze(0)
                 else:
                     features[ntype] = torch.cat((features[ntype], _metapath_embedding(ntype).unsqueeze(0)))
+            # Use mean for aggregate node features
             features = {k: torch.mean(v, dim=0).to(self.device) for k, v in features.items()}
-            for k, v in features.items():
-                print(k, v.shape)
         elif node_feature == 'han':
             assert feature_extractor is not None, "Please pass features extraction model"
             nx_cfg_graph = load_hetero_nx_graph(feature_extractor.compressed_global_graph_path)
@@ -229,6 +228,7 @@ class HANVulClassifier(nn.Module):
                 file_mask = self.symmetrical_global_graph.ndata['filename'][node_type] == file_ids
                 if file_mask.sum().item() != 0:
                     graph_embedded += features[node_type][file_mask].mean(0)
+            # if not isinstance(graph_embedded, int):
             batched_graph_embedded.append(graph_embedded.tolist())
         batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
         output = self.classify(batched_graph_embedded)
