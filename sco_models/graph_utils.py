@@ -258,15 +258,15 @@ def reflect_graph(nx_g_data):
 
 # Get all the pair of symmetrical metapath from the symmetrical graph. 
 def get_symmatrical_metapaths(symmetrical_global_graph):
-        meta_paths = []
-        for mt in symmetrical_global_graph.canonical_etypes:
-            if mt[0] == mt[1]:
-                ref_mt = [mt]
-            else:
-                ref_mt = [mt, mt[::-1]]
-            if ref_mt not in meta_paths:
-                meta_paths.append(ref_mt)
-        return meta_paths
+    meta_paths = []
+    for mt in symmetrical_global_graph.canonical_etypes:
+        if mt[0] == mt[1]:
+            ref_mt = [mt]
+        else:
+            ref_mt = [mt, mt[::-1]]
+        if ref_mt not in meta_paths:
+            meta_paths.append(ref_mt)
+    return meta_paths
 
 
 def get_subgraph_by_metapath(nx_graph, dgl_graph, metapath):
