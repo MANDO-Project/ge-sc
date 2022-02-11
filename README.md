@@ -4,9 +4,9 @@
 [![slither](https://img.shields.io/badge/dgl-0.6.1-green)](https://www.dgl.ai/)
 
 # Multi-Level Graph Embeddings
-[![GE-SC overview](./assets/GE-SC-components.svg)](https://github.com/erichoang/ge-sc)
+[![GE-SC overview](./assets/GE-SC-components-2Predictions.svg)]
 This repository is an implementation of MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities.
-The source code is based on the implementation of [HAN](https://github.com/dmlc/dgl/tree/master/examples/pytorch/han) and [GAT](https://github.com/dmlc/dgl/tree/master/examples/pytorch/gat) model using [Deep Graph Library](https://www.dgl.ai/)
+The source code is based on the implementation of [HAN](https://github.com/dmlc/dgl/tree/master/examples/pytorch/han) and [GAT](https://github.com/dmlc/dgl/tree/master/examples/pytorch/gat) model using [Deep Graph Library](https://www.dgl.ai/).
 
 # Table of contents
 
@@ -192,33 +192,24 @@ tensorboard --logdir LOG_DIR
 
 - Please check image links for more details.
 - 
-### Combine CFGs and CGs in form-A Fusion.
+### Combine HCFGs and HCGs in Form-A Fusion.
 
-#### Contract Level Classification
+#### Coarse-Grained Contract-Level Detection
 
 [![Coarse-Grained CFGs+CGs](./assets/coarse_grained_cfg_cg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
 
-#### Line Level Classification
+#### Fine-Grained Line-Level Detection
 
 [![Coarse-Grained CFGs+CGs](./assets/fine_grained_cfg_cg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
 
 
-### CFGs only
-#### Contract Level Classification
+### HCFGs only
+#### Coarse-Grained Contract-Level Detection
 
 [![CFGs](./assets/coarse_grained_cfg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
 
-### Combine CFGs and CGs in form-B Fusion.
-#### Function Level Classification
+### Combine CFGs and CGs in Form-B Fusion.
+#### Fine-Grained Function-Level Detection
 
 [![CGs](./assets/function_level_fusion_form_B.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
 
-## TODO
-- [ ] Support other Heterogeneous Graph Neural Network than HAN.
-    - [ ] Metapath Aggregated Graph Neural Network for Heterogeneous Graph Embedding (MAGNN).
-    - [ ] Retrain metapath2vec.
-- [ ] Handle the EVM Bytecode.
-- [ ] Support End-to-End Model.
-- [ ] Support graph classification tasks.
-- [ ] Create a tool for our approach.
-- [ ] ...
