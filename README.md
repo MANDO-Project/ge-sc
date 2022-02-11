@@ -4,7 +4,7 @@
 [![slither](https://img.shields.io/badge/dgl-0.6.1-green)](https://www.dgl.ai/)
 
 # Multi-Level Graph Embeddings
-[![GE-SC overview](./assets/GE-SC-components-2Predictions.svg)]
+[![GE-SC overview](./assets/GE-SC-components-2Predictions.svg)](https://anonymous.4open.science/r/ge-sc-FE31)
 This repository is an implementation of MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities.
 The source code is based on the implementation of [HAN](https://github.com/dmlc/dgl/tree/master/examples/pytorch/han) and [GAT](https://github.com/dmlc/dgl/tree/master/examples/pytorch/gat) model using [Deep Graph Library](https://www.dgl.ai/).
 
