@@ -28,7 +28,7 @@ The source code is based on the implementation of [HAN](https://github.com/dmlc/
   - [Results](#results)
     - [Combine HCFGs and HCGs in Form-A Fusion.](#combine-cfgs-and-cgs-in-form-a-fusion) (Core Form in the MANDO paper.)
       - [Coarse-Grained Contract-Level Detection](#contract-level-classification)
-      - [Fine-Grained Line Level Classification](#line-level-classification)
+      - [Fine-Grained Line-Level Detection](#line-level-classification)
     - [HCFGs only](#cfgs-only)
       - [Coarse-Grained Contract-Level Detection](#contract-level-classification-1)
     - [Combine HCFGs and HCGs in Form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
