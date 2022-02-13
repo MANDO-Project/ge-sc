@@ -4,8 +4,9 @@
 [![slither](https://img.shields.io/badge/dgl-0.6.1-green)](https://www.dgl.ai/)
 
 # Multi-Level Graph Embeddings
-[![GE-SC overview](./assets/GE-SC-components.svg)](https://github.com/erichoang/ge-sc)
-This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https://arxiv.org/abs/1903.07293) for Vulnerability detection in buggy smart contracts.
+[![GE-SC overview](./assets/GE-SC-components-2Predictions.svg)](https://anonymous.4open.science/r/ge-sc-FE31)
+This repository is an implementation of MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities.
+The source code is based on the implementation of [HAN](https://github.com/dmlc/dgl/tree/master/examples/pytorch/han) and [GAT](https://github.com/dmlc/dgl/tree/master/examples/pytorch/gat) model using [Deep Graph Library](https://www.dgl.ai/).
 
 # Table of contents
 
@@ -25,14 +26,13 @@ This is an attempt to apply Multi-Level Graph Embeddings baseed on [HAN](https:/
   - [Testing](#testing)
   - [Visuallization](#visuallization)
   - [Results](#results)
-    - [Combine CFGs and CGs in form-A Fusion.](#combine-cfgs-and-cgs-in-form-a-fusion)
-      - [Contract Level Classification](#contract-level-classification)
-      - [Line Level Classification](#line-level-classification)
-    - [CFGs only](#cfgs-only)
-      - [Contract Level Classification](#contract-level-classification-1)
-    - [Combine CFGs and CGs in form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
-      - [Function Level Classification](#function-level-classification)
-  - [TODO](#todo)
+    - [Combine HCFGs and HCGs in Form-A Fusion.](#combine-cfgs-and-cgs-in-form-a-fusion) (Core Form in the MANDO paper.)
+      - [Coarse-Grained Contract-Level Detection](#contract-level-classification)
+      - [Fine-Grained Line Level Classification](#line-level-classification)
+    - [HCFGs only](#cfgs-only)
+      - [Coarse-Grained Contract-Level Detection](#contract-level-classification-1)
+    - [Combine HCFGs and HCGs in Form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
+      - [Fine-Grained Function-Level Detection](#function-level-classification)
 
 ## How to train the models?
 
@@ -74,7 +74,7 @@ python -m experiments.graph_classification --result
 - We prepared dataset for  submodule of this repositories. Please check it out for more details.
 
 ### Node Classification
-- We used node classification tasks to detect vulnerabilites in line level and function level for Control flow graph (CFG) and Call graph (CG) in corressponding.
+- We used node classification tasks to detect vulnerabilites at the line level and function level for Heterogeneous Control flow graph (HCFGs) and Call Graphs (HCGs) in corressponding.
 
 #### Usage
 ```bash
@@ -141,7 +141,7 @@ Optional configures:
 #### Examples
 We prepared some scripts for the custom HAN structures bellow:
 
-- Node classication for Control Flow Graph (CFG) which detect vulnerabilites on line level.
+- Node Classication for Heterogeous Control Flow Graphs (HCFGs) which detect vulnerabilites at the line level.
     - Nodetype one hot vector as node features for detection reentrancy bugs.
     ```bash
     python node_classifier.py -ld ./logs/node_classification/cfg/node2vec/reentrancy --output_models ./models/node_classification/cfg/node2vec/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature nodetype --testset ./ge-sc-data/node_classification/cfg/curated/reentrancy --seed 1
@@ -163,13 +163,13 @@ We prepared some scripts for the custom HAN structures bellow:
     python node_classifier.py -ld ./logs/node_classification/cfg/gae/reentrancy --output_models ./models/node_classification/cfg/gae/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature node2vec --feature_extractor ./ge-sc-data/node_classification/cfg/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --testset ./data/smartbugs_wild/multi_class_cfg/curated/reentrancy --seed 1
     ```
 
-- Node classification for Cal Graph (CG) which detect vulnerabilites on function level.
+- Node Classification for Heterogeous Call Graphs (HCGs) which detect vulnerabilites at the function level.
 - The command lines are the same as CFG except the dataset. 
     - Nodetype one hot vector as node features for detection reentrancy bugs.
     ```bash
     python node_classifier.py -ld ./logs/node_classification/cg/node2vec/reentrancy --output_models ./models/node_classification/cg/node2vec/reentrancy --dataset ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature nodetype --testset ./ge-sc-data/node_classification/cg/curated/reentrancy --seed 1
     ```
-    - We also stack 2 HAN layer for CF. The first one will aggregate CFG nodes on line level in a CG node on function levl as features of CG nodes.
+    - We also stack 2 HAN layers for CF. The first one will aggregate CFG nodes on line level in a CG node on function level as features of CG nodes.
     ```bash
     python node_classifier.py -ld ./logs/node_classification/call_graph/node2vec_han/reentrancy --output_models ./models/node_classification/call_graph/node2vec_han/reentrancy --dataset ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated/compressed_graphs.gpickle --testset ./ge-sc-data/node_classification/cg/curated/reentrancy --seed 1  --node_feature han --feature_compressed_graph ./data/smartbugs_wild/binary_class_cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --cfg_feature_extractor ./data/smartbugs_wild/embeddings_buggy_currated_mixed/cfg_mixed/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --feature_extractor ./models/node_classification/cfg/node2vec/reentrancy/han_fold_0.pth
     ```
@@ -189,35 +189,24 @@ tensorboard --logdir LOG_DIR
 
 ## Results
 
-- Please check image links for more details.
-- 
-### Combine CFGs and CGs in form-A Fusion.
+### Combine HCFGs and HCGs in Form-A Fusion.
 
-#### Contract Level Classification
+#### Coarse-Grained Contract-Level Detection
 
-[![Coarse-Grained CFGs+CGs](./assets/coarse_grained_cfg_cg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![Coarse-Grained CFGs+CGs](./assets/coarse_grained_cfg_cg.png)](https://anonymous.4open.science/r/ge-sc-FE31)
 
-#### Line Level Classification
+#### Fine-Grained Line-Level Detection
 
-[![Coarse-Grained CFGs+CGs](./assets/fine_grained_cfg_cg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![Coarse-Grained CFGs+CGs](./assets/fine_grained_cfg_cg.png)](https://anonymous.4open.science/r/ge-sc-FE31)
 
 
-### CFGs only
-#### Contract Level Classification
+### HCFGs only
+#### Coarse-Grained Contract-Level Detection
 
-[![CFGs](./assets/coarse_grained_cfg.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![CFGs](./assets/coarse_grained_cfg.png)](https://anonymous.4open.science/r/ge-sc-FE31)
 
-### Combine CFGs and CGs in form-B Fusion.
-#### Function Level Classification
+### Combine CFGs and CGs in Form-B Fusion.
+#### Fine-Grained Function-Level Detection
 
-[![CGs](./assets/function_level_fusion_form_B.png)](https://docs.google.com/spreadsheets/d/171jzn8XRFbeqSKIsiHbWHg9270tzXaqTSPcGipwMA_s/edit?usp=sharing)
+[![CGs](./assets/function_level_fusion_form_B.png)](https://anonymous.4open.science/r/ge-sc-FE31)
 
-## TODO
-- [ ] Support other Heterogeneous Graph Neural Network than HAN.
-    - [ ] Metapath Aggregated Graph Neural Network for Heterogeneous Graph Embedding (MAGNN).
-    - [ ] Retrain metapath2vec.
-- [ ] Handle the EVM Bytecode.
-- [ ] Support End-to-End Model.
-- [ ] Support graph classification tasks.
-- [ ] Create a tool for our approach.
-- [ ] ...
