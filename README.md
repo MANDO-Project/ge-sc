@@ -78,7 +78,7 @@ python -m experiments.graph_classification --result
 
 #### Usage
 ```bash
-usage: HAN [-h] [-s SEED] [-ld LOG_DIR] [--output_models OUTPUT_MODELS]
+usage: MANDO [-h] [-s SEED] [-ld LOG_DIR] [--output_models OUTPUT_MODELS]
            [--compressed_graph COMPRESSED_GRAPH] [--dataset DATASET]
            [--testset TESTSET] [--label LABEL]
            [--feature_compressed_graph FEATURE_COMPRESSED_GRAPH]
