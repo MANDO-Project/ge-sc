@@ -8,7 +8,7 @@ from sklearn.model_selection import KFold
 from dgl.dataloading import GraphDataLoader
 
 from sco_models.dataloader import EthIdsDataset
-from sco_models.model_hetero import HANVulClassifier
+from sco_models.model_hetero import MANDOGraphClassifier
 from sco_models.model_rgcn import  RGCNVulClassifier
 from sco_models.visualization import visualize_average_k_folds
 from sco_models.utils import score
@@ -94,7 +94,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = HANVulClassifier(args['feature_compressed_graph'], ethdataset.filename_mapping, node_feature='metapath2vec', hidden_size=16, device=args['device'])
+        feature_extractor = MANDOGraphClassifier(args['feature_compressed_graph'], ethdataset.filename_mapping, node_feature='metapath2vec', hidden_size=16, device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()

@@ -106,9 +106,9 @@ class HAN(nn.Module):
         return self.predict(h)
 
 
-class HANVulClassifier(nn.Module):
+class MANDOGraphClassifier(nn.Module):
     def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='nodetype', hidden_size=32, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
-        super(HANVulClassifier, self).__init__()
+        super(MANDOGraphClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
         self.source_path = source_path
@@ -245,11 +245,11 @@ if __name__ == '__main__':
     print('Getting features')
     feature_compressed_graph = './dataset/aggregate/compressed_graph/compressed_graphs.gpickle'
     device = 'cuda:0'
-    han_model = HANVulClassifier(feature_compressed_graph, ethdataset.filename_mapping, node_feature='metatpath2vec', device=device)
+    han_model = MANDOGraphClassifier(feature_compressed_graph, ethdataset.filename_mapping, node_feature='metatpath2vec', device=device)
     feature_extractor = './models/metapath2vec/han_fold_1.pth'
     han_model.load_state_dict(torch.load(feature_extractor))
     han_model.to(device)
     han_model.eval()
 
     compressed_graph = './dataset/call_graph/compressed_graph/compress_call_graphs_no_solidity_calls.gpickle'
-    model = HANVulClassifier(compressed_graph, ethdataset.filename_mapping, feature_extractor=han_model, node_feature='han', device=device)
+    model = MANDOGraphClassifier(compressed_graph, ethdataset.filename_mapping, feature_extractor=han_model, node_feature='han', device=device)

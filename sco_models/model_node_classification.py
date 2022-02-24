@@ -35,7 +35,7 @@ class SemanticAttention(nn.Module):
 
 class HANLayer(nn.Module):
     """
-    HAN layer.
+    We used custom HAN layer for self-attention layer per node type in our paper.
 
     Arguments
     ---------
@@ -90,9 +90,9 @@ class HANLayer(nn.Module):
         return self.semantic_attention(semantic_embeddings)                            # (N, D * K)
 
 
-class HANVulNodeClassifier(nn.Module):
+class MANDONodeClassifier(nn.Module):
     def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=32, num_heads=8, dropout=0.6, device='cpu'):
-        super(HANVulNodeClassifier, self).__init__()
+        super(MANDONodeClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
         self.num_heads = num_heads
@@ -250,7 +250,7 @@ if __name__ == '__main__':
     node_labels, label_ids = get_node_label(nx_graph)
     print(node_labels)
     print(label_ids) 
-    # model = HANVulNodeClassifier(compressed_graph, dataset, node_feature='nodetype', device=device)
+    # model = MANDONodeClassifier(compressed_graph, dataset, node_feature='nodetype', device=device)
     # model.to(device)
     # print(model.meta_paths)
     # logits, targets = model()

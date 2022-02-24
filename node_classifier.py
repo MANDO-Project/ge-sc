@@ -12,8 +12,8 @@ import torch
 import networkx as nx
 from sklearn.model_selection import KFold
 
-from sco_models.model_hetero import HANVulClassifier
-from sco_models.model_node_classification import HANVulNodeClassifier
+from sco_models.model_hetero import MANDOGraphClassifier
+from sco_models.model_node_classification import MANDONodeClassifier
 from sco_models.utils import score, get_classification_report, get_confusion_matrix, dump_result
 from sco_models.visualization import visualize_average_k_folds
 
@@ -43,7 +43,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = HANVulNodeClassifier(args['feature_compressed_graph'], args['dataset'], feature_extractor=args['cfg_feature_extractor'], node_feature='gae', device=args['device'])
+        feature_extractor = MANDONodeClassifier(args['feature_compressed_graph'], args['dataset'], feature_extractor=args['cfg_feature_extractor'], node_feature='gae', device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()
@@ -52,7 +52,7 @@ def main(args):
 
     nx_graph = nx.read_gpickle(args['compressed_graph'])
     number_of_nodes = len(nx_graph)
-    model = HANVulNodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+    model = MANDONodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
     total_train_files = [f for f in os.listdir(args['dataset']) if f.endswith('.sol')]
     total_test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
     total_train_files = list(set(total_train_files).difference(set(total_test_files)))
@@ -181,7 +181,7 @@ def main(args):
 if __name__ == '__main__':
     import argparse
 
-    parser = argparse.ArgumentParser('HAN')
+    parser = argparse.ArgumentParser('MANDO')
     parser.add_argument('-s', '--seed', type=int, default=1,
                         help='Random seed')
     archive_params = parser.add_argument_group(title='Storage', description='Directories for util results')
@@ -245,7 +245,7 @@ if __name__ == '__main__':
         nx_graph = nx.read_gpickle(args['compressed_graph'])
         number_of_nodes = len(nx_graph)
         test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
-        model = HANVulNodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=None, node_feature=args['node_feature'], device=args['device'])
+        model = MANDONodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=None, node_feature=args['node_feature'], device=args['device'])
         model.load_state_dict(torch.load(args['feature_extractor']))
         model.eval()
         model.to(args['device'])

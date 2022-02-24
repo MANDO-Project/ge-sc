@@ -11,7 +11,7 @@ from dgl.dataloading import GraphDataLoader
 from torch.utils.tensorboard import SummaryWriter
 
 from sco_models.dataloader import EthIdsDataset
-from sco_models.model_hetero import HAN, HANVulClassifier
+from sco_models.model_hetero import HAN, MANDOGraphClassifier
 from sco_models.visualization import visualize_average_k_folds, visualize_k_folds
 from sco_models.utils import score, get_classification_report, get_confusion_matrix
 
@@ -96,7 +96,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = HANVulClassifier(args['feature_compressed_graph'], ethdataset.filename_mapping, node_feature='nodetype', hidden_size=16, device=args['device'])
+        feature_extractor = MANDOGraphClassifier(args['feature_compressed_graph'], ethdataset.filename_mapping, node_feature='nodetype', hidden_size=16, device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()
@@ -128,7 +128,7 @@ def main(args):
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
         print('Start training fold {} with {}/{}/{} train/val/test smart contracts'.format(fold, len(train_subsampler), len(val_subsampler), len(test_ids)))
         total_steps = epochs
-        model = HANVulClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+        model = MANDOGraphClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
         model.reset_parameters()
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
@@ -181,7 +181,7 @@ def main(args):
 
 
 def load_model(model_path):
-    model = HANVulClassifier()
+    model = MANDOGraphClassifier()
     model.load_state_dict(torch.load(model_path))
     return model.eval()
 
@@ -239,7 +239,7 @@ if __name__ == '__main__':
         smartbugs_ids = [ethdataset.filename_mapping[sc] for sc in os.listdir(args['testset'])]
         test_dataloader = GraphDataLoader(ethdataset, batch_size=256, drop_last=False, sampler=smartbugs_ids)
         for i in args['k_folds']:
-            model = HANVulClassifier(args['compressed_graph'], args['dataset'], feature_extractor=args['feature_extractor'], node_feature=args['node_feature'], device=args['device'])
+            model = MANDOGraphClassifier(args['compressed_graph'], args['dataset'], feature_extractor=args['feature_extractor'], node_feature=args['node_feature'], device=args['device'])
             model.load_state_dict(torch.load(args['checkpoint']))
             model.to(args['device'])
             model.eval()
