@@ -14,16 +14,19 @@ The source code is based on the implementation of [HAN](https://github.com/dmlc/
 - [Multi-Level Graph Embeddings](#multi-level-graph-embeddings)
 - [Table of contents](#table-of-contents)
 - [How to train the models?](#how-to-train-the-models)
+  - [Dataset](#dataset)
   - [System Description](#system-description)
   - [Install Environment](#install-environment)
   - [Inspection scripts](#inspection-scripts)
     - [Graph Classification](#graph-classification)
     - [Node Classification](#node-classification)
-  - [Dataset](#dataset)
-    - [Node Classification](#node-classification-1)
+  - [Trainer](#trainer)
+    - [Graph Classification](#graph-classification-1)
       - [Usage](#usage)
       - [Examples](#examples)
-    - [Graph Classification](#graph-classification-1)
+    - [Node Classification](#node-classification-1)
+      - [Usage](#usage-1)
+      - [Examples](#examples-1)
   - [Testing](#testing)
   - [Visuallization](#visuallization)
   - [Results](#results)
@@ -36,6 +39,9 @@ The source code is based on the implementation of [HAN](https://github.com/dmlc/
       - [Fine-Grained Function-Level Detection](#fine-grained-function-level-detection)
 
 # How to train the models?
+
+## Dataset
+- We prepared dataset for [experiments](experiments/ge-sc-data/source_code).
 
 ## System Description
 
@@ -83,8 +89,89 @@ python -m experiments.node_classification --result
 
 - Run the inspection 
 
-## Dataset
-- We prepared dataset for  submodule of this repositories. Please check it out for more details.
+
+## Trainer
+
+### Graph Classification
+
+#### Usage
+
+```bash
+usage: MANDO Graph Classifier [-h] [-s SEED] [-ld LOG_DIR]
+                              [--output_models OUTPUT_MODELS]
+                              [--compressed_graph COMPRESSED_GRAPH]
+                              [--dataset DATASET] [--testset TESTSET]
+                              [--label LABEL] [--checkpoint CHECKPOINT]
+                              [--feature_extractor FEATURE_EXTRACTOR]
+                              [--node_feature NODE_FEATURE]
+                              [--k_folds K_FOLDS] [--test] [--non_visualize]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s SEED, --seed SEED  Random seed
+
+Storage:
+  Directories for util results
+
+  -ld LOG_DIR, --log-dir LOG_DIR
+                        Directory for saving training logs and visualization
+  --output_models OUTPUT_MODELS
+                        Where you want to save your models
+
+Dataset:
+  Dataset paths
+
+  --compressed_graph COMPRESSED_GRAPH
+                        Compressed graphs of dataset which was extracted by
+                        graph helper tools
+  --dataset DATASET     Dicrectory of all souce code files which were used to
+                        extract the compressed graph
+  --testset TESTSET     Dicrectory of all souce code files which is a
+                        partition of the dataset for testing
+  --label LABEL         Label of sources in source code storage
+  --checkpoint CHECKPOINT
+                        Checkpoint of trained models
+
+Node feature:
+  Define the way to get node features
+
+  --feature_extractor FEATURE_EXTRACTOR
+                        If "node_feature" is "GAE" or "LINE" or "Node2vec", we
+                        need a extracted features from those models
+  --node_feature NODE_FEATURE
+                        Kind of node features we want to use, here is one of
+                        "nodetype", "metapath2vec", "han", "gae", "line",
+                        "node2vec"
+
+Optional configures:
+  Advanced options
+
+  --k_folds K_FOLDS     Config for cross validate strategy
+  --test                Set true if you only want to run test phase
+  --non_visualize       Wheather you want to visualize the metrics
+```
+
+#### Examples
+
+- We prepared some scripts for the custom MANDO structures bellow:
+
+- Graph Classication for Heterogeous Control Flow Graphs (HCFGs) which detect vulnerabilites at the contract level.
+  - GAE as node features.
+```bash
+python graph_classifier.py -ld ./logs/graph_classification/cfg/gae/access_control --output_models ./models/graph_classification/cfg/gae/access_control --dataset ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/ --compressed_graph ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/cfg_compressed_graphs.gpickle --label ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/graph_labels.json --node_feature gae --feature_extractor ./experiments/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_access_control_cfg_clean_57_0.pkl --seed 1
+```
+
+- Graph Classication for Heterogeous Call Graphs (HCGs) which detect vulnerabilites at the contract level.
+  - LINE as node features.
+```bash
+python graph_classifier.py -ld ./logs/graph_classification/cg/line/access_control --output_models ./models/graph_classification/cg/line/access_control --dataset ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/ --compressed_graph ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/cg_compressed_graphs.gpickle --label ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/graph_labels.json --node_feature line --feature_extractor ./experiments/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_access_control_cg_clean_57_0.pkl --seed 1
+```
+
+- Graph Classication for HCfGs and HCGs combination and which detect vulnerabilites at the contract level.
+  - node2vec as node features.
+```bash
+python graph_classifier.py -ld ./logs/graph_classification/cfg/node2vec/access_control --output_models ./models/graph_classification/cfg/node2vec/access_control --dataset ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/ --compressed_graph ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/cg_compressed_graphs.gpickle --label ./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/graph_labels.json --node_feature node2vec --feature_extractor ./experiments/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_access_control_cg_clean_57_0.pkl --seed 1
+```
 
 ### Node Classification
 - We used node classification tasks to detect vulnerabilites at the line level and function level for Heterogeneous Control flow graph (HCFGs) and Call Graphs (HCGs) in corressponding.
@@ -154,43 +241,25 @@ Optional configures:
 ```
 
 #### Examples
-We prepared some scripts for the custom HAN structures bellow:
+We prepared some scripts for the custom MANDO structures bellow:
 
 - Node Classication for Heterogeous Control Flow Graphs (HCFGs) which detect vulnerabilites at the line level.
-    - Nodetype one hot vector as node features for detection reentrancy bugs.
+    - GAE as node features for detection access_control bugs.
     ```bash
-    python node_classifier.py -ld ./logs/node_classification/cfg/node2vec/reentrancy --output_models ./models/node_classification/cfg/node2vec/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature nodetype --testset ./ge-sc-data/node_classification/cfg/curated/reentrancy --seed 1
-    ```
-    - metapath2vec as node features.
-    ```bash
-    python node_classifier.py -ld ./logs/node_classification/cfg/node2vec/reentrancy --output_models ./models/node_classification/cfg/node2vec/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature metapath2vec --testset ./ge-sc-data/node_classification/cfg/curated/reentrancy --seed 1
-    ```
-    - Graph Auto Encoder (GAE) as node features.
-    ```bash
-    python node_classifier.py -ld ./logs/node_classification/cfg/gae/reentrancy --output_models ./models/node_classification/cfg/gae/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature gae --feature_extractor ./ge-sc-data/node_classification/cfg/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --testset ./data/smartbugs_wild/multi_class_cfg/curated/reentrancy --seed 1
-    ```
-    - LINE as node features.
-    ```bash
-    python node_classifier.py -ld ./logs/node_classification/cfg/gae/reentrancy --output_models ./models/node_classification/cfg/gae/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature line --feature_extractor ./ge-sc-data/node_classification/cfg/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --testset ./data/smartbugs_wild/multi_class_cfg/curated/reentrancy --seed 1
-    ```
-    - node2vec as node features.
-    ```bash
-    python node_classifier.py -ld ./logs/node_classification/cfg/gae/reentrancy --output_models ./models/node_classification/cfg/gae/reentrancy --dataset ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature node2vec --feature_extractor ./ge-sc-data/node_classification/cfg/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --testset ./data/smartbugs_wild/multi_class_cfg/curated/reentrancy --seed 1
+    python node_classifier.py -ld ./logs/node_classification/cfg/gae/access_control --output_models ./models/node_classification/cfg/gae/access_control --dataset ./experiments/ge-sc-data/source_code/access_control/buggy_curated/ --compressed_graph ./experiments/ge-sc-data/source_code/access_control/buggy_curated/cfg_compressed_graphs.gpickle --node_feature gae --feature_extractor ./experiments/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_access_control_cfg_cg_buggy_curated.pkl --testset ./experiments/ge-sc-data/source_code/access_control/curated --seed 1
     ```
 
 - Node Classification for Heterogeous Call Graphs (HCGs) which detect vulnerabilites at the function level.
 - The command lines are the same as CFG except the dataset. 
-    - Nodetype one hot vector as node features for detection reentrancy bugs.
+    - LINE as node features for detection access_control bugs.
     ```bash
-    python node_classifier.py -ld ./logs/node_classification/cg/node2vec/reentrancy --output_models ./models/node_classification/cg/node2vec/reentrancy --dataset ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated/compressed_graphs.gpickle --node_feature nodetype --testset ./ge-sc-data/node_classification/cg/curated/reentrancy --seed 1
+    python node_classifier.py -ld ./logs/node_classification/cg/node2vec/access_control --output_models ./models/node_classification/cg/node2vec/access_control --dataset ./ge-sc-data/node_classification/cg/access_control/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cg/access_control/buggy_curated/compressed_graphs.gpickle --node_feature nodetype --testset ./ge-sc-data/node_classification/cg/curated/access_control --seed 1
     ```
-    - We also stack 2 HAN layers for CF. The first one will aggregate CFG nodes on line level in a CG node on function level as features of CG nodes.
+- We also stack 2 HAN layers for function-level detection. The first HAN layer is based on HCFGs used as feature for the second HAN layer based on HCGs.
     ```bash
-    python node_classifier.py -ld ./logs/node_classification/call_graph/node2vec_han/reentrancy --output_models ./models/node_classification/call_graph/node2vec_han/reentrancy --dataset ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cg/reentrancy/buggy_curated/compressed_graphs.gpickle --testset ./ge-sc-data/node_classification/cg/curated/reentrancy --seed 1  --node_feature han --feature_compressed_graph ./data/smartbugs_wild/binary_class_cfg/reentrancy/buggy_curated/compressed_graphs.gpickle --cfg_feature_extractor ./data/smartbugs_wild/embeddings_buggy_currated_mixed/cfg_mixed/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_reentrancy_compressed_graphs.pkl --feature_extractor ./models/node_classification/cfg/node2vec/reentrancy/han_fold_0.pth
+    python node_classifier.py -ld ./logs/node_classification/call_graph/node2vec_han/access_control --output_models ./models/node_classification/call_graph/node2vec_han/access_control --dataset ./ge-sc-data/node_classification/cg/access_control/buggy_curated --compressed_graph ./ge-sc-data/node_classification/cg/access_control/buggy_curated/compressed_graphs.gpickle --testset ./ge-sc-data/node_classification/cg/curated/access_control --seed 1  --node_feature han --feature_compressed_graph ./data/smartbugs_wild/binary_class_cfg/access_control/buggy_curated/compressed_graphs.gpickle --cfg_feature_extractor ./data/smartbugs_wild/embeddings_buggy_currated_mixed/cfg_mixed/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_access_control_compressed_graphs.pkl --feature_extractor ./models/node_classification/cfg/node2vec/access_control/han_fold_0.pth
     ```
 
-### Graph Classification
-- TODO
 
 ## Testing
 - We automatically run testing after training phase for now.
