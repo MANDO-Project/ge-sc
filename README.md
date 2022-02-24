@@ -13,7 +13,7 @@ The source code is based on the implementation of [HAN](https://github.com/dmlc/
 - [Smart Contract Vulnerabilities](#smart-contract-vulnerabilities)
 - [Multi-Level Graph Embeddings](#multi-level-graph-embeddings)
 - [Table of contents](#table-of-contents)
-- [How to train the model?](#how-to-train-the-model)
+- [How to train the models?](#how-to-train-the-models)
   - [System Description](#system-description)
   - [Install Environment](#install-environment)
   - [Inspection scripts](#inspection-scripts)
@@ -35,7 +35,7 @@ The source code is based on the implementation of [HAN](https://github.com/dmlc/
     - [Combine CFGs and CGs in Form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
       - [Fine-Grained Function-Level Detection](#fine-grained-function-level-detection)
 
-# How to train the model?
+# How to train the models?
 
 ## System Description
 
@@ -91,14 +91,16 @@ python -m experiments.node_classification --result
 
 #### Usage
 ```bash
-usage: MAND [-h] [-s SEED] [-ld LOG_DIR] [--output_models OUTPUT_MODELS]
-            [--compressed_graph COMPRESSED_GRAPH] [--dataset DATASET]
-            [--testset TESTSET] [--label LABEL]
-            [--feature_compressed_graph FEATURE_COMPRESSED_GRAPH]
-            [--cfg_feature_extractor CFG_FEATURE_EXTRACTOR]
-            [--feature_extractor FEATURE_EXTRACTOR]
-            [--node_feature NODE_FEATURE] [--k_folds K_FOLDS] [--test]
-            [--non_visualize]
+usage: MANDO Node Classifier [-h] [-s SEED] [-ld LOG_DIR]
+                             [--output_models OUTPUT_MODELS]
+                             [--compressed_graph COMPRESSED_GRAPH]
+                             [--dataset DATASET] [--testset TESTSET]
+                             [--label LABEL]
+                             [--feature_compressed_graph FEATURE_COMPRESSED_GRAPH]
+                             [--cfg_feature_extractor CFG_FEATURE_EXTRACTOR]
+                             [--feature_extractor FEATURE_EXTRACTOR]
+                             [--node_feature NODE_FEATURE] [--k_folds K_FOLDS]
+                             [--test] [--non_visualize]
 
 optional arguments:
   -h, --help            show this help message and exit
