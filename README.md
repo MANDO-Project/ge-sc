@@ -13,28 +13,29 @@ The source code is based on the implementation of [HAN](https://github.com/dmlc/
 - [Smart Contract Vulnerabilities](#smart-contract-vulnerabilities)
 - [Multi-Level Graph Embeddings](#multi-level-graph-embeddings)
 - [Table of contents](#table-of-contents)
-  - [How to train the models?](#how-to-train-the-models)
+- [How to train the model?](#how-to-train-the-model)
   - [System Description](#system-description)
   - [Install Environment](#install-environment)
   - [Inspection scripts](#inspection-scripts)
     - [Graph Classification](#graph-classification)
-  - [Dataset](#dataset)
     - [Node Classification](#node-classification)
+  - [Dataset](#dataset)
+    - [Node Classification](#node-classification-1)
       - [Usage](#usage)
       - [Examples](#examples)
     - [Graph Classification](#graph-classification-1)
   - [Testing](#testing)
   - [Visuallization](#visuallization)
   - [Results](#results)
-    - [Combine HCFGs and HCGs in Form-A Fusion.](#combine-cfgs-and-cgs-in-form-a-fusion) (Core Form in the MANDO paper.)
-      - [Coarse-Grained Contract-Level Detection](#contract-level-classification)
-      - [Fine-Grained Line-Level Detection](#line-level-classification)
-    - [HCFGs only](#cfgs-only)
-      - [Coarse-Grained Contract-Level Detection](#contract-level-classification-1)
-    - [Combine HCFGs and HCGs in Form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
-      - [Fine-Grained Function-Level Detection](#function-level-classification)
+    - [Combine HCFGs and HCGs in Form-A Fusion.](#combine-hcfgs-and-hcgs-in-form-a-fusion)
+      - [Coarse-Grained Contract-Level Detection](#coarse-grained-contract-level-detection)
+      - [Fine-Grained Line-Level Detection](#fine-grained-line-level-detection)
+    - [HCFGs only](#hcfgs-only)
+      - [Coarse-Grained Contract-Level Detection](#coarse-grained-contract-level-detection-1)
+    - [Combine CFGs and CGs in Form-B Fusion.](#combine-cfgs-and-cgs-in-form-b-fusion)
+      - [Fine-Grained Function-Level Detection](#fine-grained-function-level-detection)
 
-## How to train the models?
+# How to train the model?
 
 ## System Description
 
@@ -58,12 +59,24 @@ We provied inspection scripts for Graph Classification and Node Classification t
 
 Training Phase
 ```bash
-python -m experiments.graph_classification
+python -m experiments.graph_classification --epochs 50 --repeat 20
 ```
 To show the result table
 
 ```bash
 python -m experiments.graph_classification --result
+```
+
+### Node Classification
+
+Training Phase
+```bash
+python -m experiments.node_classification --epochs 50 --repeat 20
+```
+To show the result table
+
+```bash
+python -m experiments.node_classification --result
 ```
 
 - We currently supported 7 types of bug: `access_control`, `arithmetic`, `denial_of_service`, `front_running`, `reentrancy`, `time_manipulation`, `unchecked_low_level_calls`.
@@ -78,14 +91,14 @@ python -m experiments.graph_classification --result
 
 #### Usage
 ```bash
-usage: HAN [-h] [-s SEED] [-ld LOG_DIR] [--output_models OUTPUT_MODELS]
-           [--compressed_graph COMPRESSED_GRAPH] [--dataset DATASET]
-           [--testset TESTSET] [--label LABEL]
-           [--feature_compressed_graph FEATURE_COMPRESSED_GRAPH]
-           [--cfg_feature_extractor CFG_FEATURE_EXTRACTOR]
-           [--feature_extractor FEATURE_EXTRACTOR]
-           [--node_feature NODE_FEATURE] [--k_folds K_FOLDS] [--test]
-           [--non_visualize]
+usage: MAND [-h] [-s SEED] [-ld LOG_DIR] [--output_models OUTPUT_MODELS]
+            [--compressed_graph COMPRESSED_GRAPH] [--dataset DATASET]
+            [--testset TESTSET] [--label LABEL]
+            [--feature_compressed_graph FEATURE_COMPRESSED_GRAPH]
+            [--cfg_feature_extractor CFG_FEATURE_EXTRACTOR]
+            [--feature_extractor FEATURE_EXTRACTOR]
+            [--node_feature NODE_FEATURE] [--k_folds K_FOLDS] [--test]
+            [--non_visualize]
 
 optional arguments:
   -h, --help            show this help message and exit
