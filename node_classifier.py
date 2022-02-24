@@ -185,7 +185,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--seed', type=int, default=1,
                         help='Random seed')
     archive_params = parser.add_argument_group(title='Storage', description='Directories for util results')
-    archive_params.add_argument('-ld', '--log-dir', type=str, default='./logs', help='Directory for saving training logs and visualization')
+    archive_params.add_argument('-ld', '--log-dir', type=str, default='./logs/node_classification', help='Directory for saving training logs and visualization')
     archive_params.add_argument('--output_models', type=str, default='./models/call_graph_rgcn',
                         help='Where you want to save your models')
 
@@ -196,8 +196,6 @@ if __name__ == '__main__':
                         help='Dicrectory of all souce code files which were used to extract the compressed graph')
     dataset_params.add_argument('--testset', type=str, default='./dataset/smartbugs/source_code',
                         help='Dicrectory of all souce code files which is a partition of the dataset for testing')
-    dataset_params.add_argument('--label', type=str, default='./dataset/aggregate/labels.json')
-    
     node_feature_params = parser.add_argument_group(title='Node feature', description='Define the way to get node features')
     node_feature_params.add_argument('--feature_compressed_graph', type=str, default='./dataset/aggregate/compressed_graph/compressed_graphs.gpickle',
                         help='If "node_feature" is han, you mean use 2 HAN layers. The first one is HAN of CFGs as feature node for the second HAN of call graph, This is the compressed graphs were trained for the first HAN')
