@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from statistics import mean
 
 from sco_models.model_hetero import MANDOGraphClassifier
+from sco_models.model_hgt import HGTVulGraphClassifier
 from sco_models.utils import get_classification_report
 from sco_models.graph_utils import reveert_map_node_embedding, load_hetero_nx_graph
 
@@ -32,7 +33,7 @@ DATA_ID = 0
 REPEAT = args['repeat']
 EPOCHS = args['epochs']
 TASK = "graph_classification"
-STRUCTURE = 'han'
+STRUCTURE = 'hgt'
 COMPRESSED_GRAPH = 'cfg_cg'
 DATASET = 'clean_50_buggy_curated'
 TRAIN_RATE = 0.7
@@ -83,7 +84,9 @@ def base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bu
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
-    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=None, 
+    if not os.path.exists(output_models):
+        os.makedirs(output_models)
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=None, 
                                  node_feature='metapath2vec', device=device)
     features = model.symmetrical_global_graph.ndata['feat']
     nx_graph = load_hetero_nx_graph(compressed_graph)
@@ -112,8 +115,8 @@ def base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bu
         train_loss = loss_fcn(logits, targets)
         train_loss.backward()
         optimizer.step()
-    # save_path = os.path.join(output_models, f'han.pth')
-    # torch.save(classifier.state_dict(), save_path)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(classifier.state_dict(), save_path)
     classifier.eval()
     with torch.no_grad():
         logits = classifier(X_embedded_val)
@@ -134,6 +137,8 @@ def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_gae/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
+    if not os.path.exists(output_models):
+        os.makedirs(output_models)
     X_train, X_val, y_train, y_val = dataset
     with open(gae_embedded, 'rb') as f:
         embedding = pickle.load(f, encoding="utf8")
@@ -160,8 +165,8 @@ def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
         train_loss = loss_fcn(logits, targets)
         train_loss.backward()
         optimizer.step()
-    # save_path = os.path.join(output_models, f'han.pth')
-    # torch.save(classifier.state_dict(), save_path)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(classifier.state_dict(), save_path)
     classifier.eval()
     with torch.no_grad():
         logits = classifier(X_embedded_val)
@@ -182,6 +187,8 @@ def base_line(dataset, bugtype, gae_embedded, file_name_dict, device):
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_line/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
+    if not os.path.exists(output_models):
+        os.makedirs(output_models)
     X_train, X_val, y_train, y_val = dataset
     with open(gae_embedded, 'rb') as f:
         embedding = pickle.load(f, encoding="utf8")
@@ -208,8 +215,8 @@ def base_line(dataset, bugtype, gae_embedded, file_name_dict, device):
         train_loss = loss_fcn(logits, targets)
         train_loss.backward()
         optimizer.step()
-    # save_path = os.path.join(output_models, f'han.pth')
-    # torch.save(classifier.state_dict(), save_path)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(classifier.state_dict(), save_path)
     classifier.eval()
     with torch.no_grad():
         logits = classifier(X_embedded_val)
@@ -230,6 +237,8 @@ def base_node2vec(dataset, bugtype, gae_embedded, file_name_dict, device):
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_node2vec/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
+    if not os.path.exists(output_models):
+        os.makedirs(output_models)
     X_train, X_val, y_train, y_val = dataset
     with open(gae_embedded, 'rb') as f:
         embedding = pickle.load(f, encoding="utf8")
@@ -256,8 +265,8 @@ def base_node2vec(dataset, bugtype, gae_embedded, file_name_dict, device):
         train_loss = loss_fcn(logits, targets)
         train_loss.backward()
         optimizer.step()
-    # save_path = os.path.join(output_models, f'han.pth')
-    # torch.save(classifier.state_dict(), save_path)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(classifier.state_dict(), save_path)
     classifier.eval()
     with torch.no_grad():
         logits = classifier(X_embedded_val)
@@ -282,13 +291,13 @@ def nodetype(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = None
     node_feature = 'nodetype'
-    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -315,13 +324,13 @@ def metapath2vec(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = None
     node_feature = 'metapath2vec'
-    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -348,13 +357,13 @@ def gae(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'gae'
-    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -381,13 +390,13 @@ def line(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'line'
-    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -414,13 +423,13 @@ def node2vec(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'node2vec'
-    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -469,7 +478,7 @@ def main(device):
             node2vec_embedded = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
 
             # Run experiments
-            ## Base lines
+            # Base lines
             base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bugtype, device)
             if bugtype not in ['arithmetic', 'front_running', 'reentrancy', 'unchecked_low_level_calls']:
                 base_gae(dataset, bugtype, gae_embedded, file_name_dict, device)
@@ -526,12 +535,6 @@ def get_results():
                 macro_f1_report[model].append(macro_f1)
     data = []
     for model in models:
-        # print(' ', end=' ')
-        # print(' \t'.join(['%.2f'%n for n in buggy_f1_report[model]]), end=r'')
-        # print()
-        # print(' ', end=' ')
-        # print(' \t'.join(['%.2f'%n for n in macro_f1_report[model]]), end=r'')
-        # print()
         buggy_f1_row = []
         macro_f1_row = []
         for i in range(len(buggy_f1_report[model])):
@@ -539,9 +542,15 @@ def get_results():
             macro_f1 = macro_f1_report[model][i]
             buggy_f1_row.append('%.2f'%buggy_f1 + '%' if isinstance(buggy_f1, float) else buggy_f1)
             macro_f1_row.append('%.2f'%macro_f1 + '%' if isinstance(macro_f1, float) else macro_f1)
-        data.append([model, 'Buggy-F1'] + buggy_f1_row)
-        data.append([model, 'Macro-F1'] + macro_f1_row)
-    print(tabulate(data, headers=bug_list, tablefmt='orgtbl'))
+    #     data.append([model, 'Buggy-F1'] + buggy_f1_row)
+    #     data.append([model, 'Macro-F1'] + macro_f1_row)
+    # print(tabulate(data, headers=bug_list, tablefmt='orgtbl'))
+        print(' ', end=' ')
+        print(' \t'.join(buggy_f1_row), end=r'')
+        print()
+        print(' ', end=' ')
+        print(' \t'.join(macro_f1_row), end=r'')
+        print()
 
 
 if __name__ == '__main__':
