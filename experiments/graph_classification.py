@@ -1,12 +1,19 @@
 import os
 import argparse
+import multiprocessing as mp
+import threading
+import time
 from os.path import join
+from threading import Thread
 
 import pickle
 import json
 import networkx as nx
+from numpy import zeros_like
 import torch
+from torch import nn
 from tabulate import tabulate
+from timebudget import timebudget
 from sklearn.model_selection import train_test_split
 from statistics import mean
 
@@ -42,6 +49,8 @@ ratio = 1
 
 
 models = ['base_metapath2vec', 'base_gae', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'gae', 'line', 'node2vec']
+# models = ['random_', 'random_', 'random_', 'random_', 'random_', 'random_', 'random_', 'random_', 'random_']
+feature_dim_list = [2, 8, 16, 32, 64, 128]
 bug_list = ['access_control', 'arithmetic', 'denial_of_service',
             'front_running', 'reentrancy', 'time_manipulation', 
             'unchecked_low_level_calls']
@@ -447,6 +456,75 @@ def node2vec(compressed_graph, source_path, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
+def random(compressed_graph, source_path, dataset, feature_dims, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/non_feature/random_{feature_dims}/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
+    if not os.path.exists(logs):
+        os.makedirs(logs, exist_ok=True)
+    output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/non_feature/random_{feature_dims}/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
+    if not os.path.exists(output_models):
+        os.makedirs(output_models, exist_ok=True)
+    feature_extractor = feature_dims
+    node_feature = 'random'
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+                                 node_feature=node_feature, device=device)
+    model.reset_parameters()
+    # model = nn.DataParallel(model)
+    model.to(device)
+    X_train, X_val, y_train, y_val = dataset
+    model = train(model, X_train, y_train, device)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(model.state_dict(), save_path)
+    model.eval()
+    with torch.no_grad():
+        logits, _ = model(X_val)
+        logits = logits.to(device)
+        # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
+        test_results = get_classification_report(y_val, logits, output_dict=True)
+    if os.path.isfile(join(logs, 'test_report.json')):
+        with open(join(logs, 'test_report.json'), 'r') as f:
+            report = json.load(f)
+        report.append(test_results)
+    else:
+        report = [test_results]
+    with open(join(logs, 'test_report.json'), 'w') as f:
+        json.dump(report, f, indent=2)
+
+
+def zeros(compressed_graph, source_path, dataset, feature_dims, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/non_feature/zeros_{feature_dims}/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
+    if not os.path.exists(logs):
+        os.makedirs(logs, exist_ok=True)
+    output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/non_feature/zeros_{feature_dims}/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
+    if not os.path.exists(output_models):
+        os.makedirs(output_models, exist_ok=True)
+    feature_extractor = feature_dims
+    node_feature = 'zeros'
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+                                 node_feature=node_feature, device=device)
+    model.reset_parameters()
+    # model = nn.DataParallel(model)
+    model.to(device)
+    X_train, X_val, y_train, y_val = dataset
+    model = train(model, X_train, y_train, device)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(model.state_dict(), save_path)
+    model.eval()
+    with torch.no_grad():
+        logits, _ = model(X_val)
+        logits = logits.to(device)
+        # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
+        test_results = get_classification_report(y_val, logits, output_dict=True)
+    if os.path.isfile(join(logs, 'test_report.json')):
+        with open(join(logs, 'test_report.json'), 'r') as f:
+            report = json.load(f)
+        report.append(test_results)
+    else:
+        report = [test_results]
+    report = [test_results]
+    with open(join(logs, 'test_report.json'), 'w') as f:
+        json.dump(report, f, indent=2)
+
+@timebudget
 def main(device):
     for bugtype in bug_list:
         print('Bugtype {}'.format(bugtype))
@@ -478,20 +556,61 @@ def main(device):
             node2vec_embedded = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
 
             # Run experiments
-            # Base lines
-            base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bugtype, device)
-            if bugtype not in ['arithmetic', 'front_running', 'reentrancy', 'unchecked_low_level_calls']:
-                base_gae(dataset, bugtype, gae_embedded, file_name_dict, device)
-            base_line(dataset, bugtype, line_embedded, file_name_dict, device)
-            base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device)
+            # ## Base lines
+            # base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bugtype, device)
+            # if bugtype not in ['arithmetic', 'front_running', 'reentrancy', 'unchecked_low_level_calls']:
+            #     base_gae(dataset, bugtype, gae_embedded, file_name_dict, device)
+            # base_line(dataset, bugtype, line_embedded, file_name_dict, device)
+            # base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device)
 
-            ## Out models
-            nodetype(compressed_graph, source_path, dataset, bugtype, device)
-            metapath2vec(compressed_graph, source_path, dataset, bugtype, device)
-            if bugtype not in ['arithmetic', 'front_running', 'reentrancy', 'unchecked_low_level_calls']:
-                gae(compressed_graph, source_path, dataset, bugtype, device)
-            line(compressed_graph, source_path, dataset, bugtype, device)
-            node2vec(compressed_graph, source_path, dataset, bugtype, device)
+            # ## Out models
+            # nodetype(compressed_graph, source_path, dataset, bugtype, device)
+            # metapath2vec(compressed_graph, source_path, dataset, bugtype, device)
+            # if bugtype not in ['arithmetic', 'front_running', 'reentrancy', 'unchecked_low_level_calls']:
+            #     gae(compressed_graph, source_path, dataset, bugtype, device)
+            # line(compressed_graph, source_path, dataset, bugtype, device)
+            # node2vec(compressed_graph, source_path, dataset, bugtype, device)
+
+            ## Random input
+            # pool = mp.Pool(mp.cpu_count())
+            # _ = [pool.apply_async(random, args=(compressed_graph, source_path, dataset, f_dims, bugtype, f'cuda:{device}')) for device, f_dims in enumerate(feature_dim_list)]
+            # _ = [pool.apply_async(random, args=(compressed_graph, source_path, dataset, f_dims, bugtype, f'cuda:{device}')) for device, f_dims in enumerate(feature_dim_list)]
+            # pool.close()
+            # pool.join()
+    #         pools = []
+    #         for idx, feat_dims in enumerate(feature_dim_list):
+    #             device = f'cuda:{idx}'
+    #             targets = targets.to(device)
+    #             X_train, X_val, y_train, y_val = train_test_split(total_files, targets, train_size=TRAIN_RATE)
+    #             dataset = (tuple(X_train), tuple(X_val), y_train, y_val)
+    #             r = threading.Thread(target=random, args=(compressed_graph, source_path, dataset, 2, bugtype, device))
+    #             r.start()
+    #             pools.append(r)
+    #             device = f'cuda:{idx}'
+    #             targets = targets.to(device)
+    #             X_train, X_val, y_train, y_val = train_test_split(total_files, targets, train_size=TRAIN_RATE)
+    #             dataset = (tuple(X_train), tuple(X_val), y_train, y_val)
+    #             z = threading.Thread(target=zeros, args=(compressed_graph, source_path, dataset, 2, bugtype, device))
+    #             z.start()
+    #             pools.append(z)
+    # # for p in pools:
+    # #     p.start()
+    # for p in pools:
+    #     p.join()
+            random(compressed_graph, source_path, dataset, 2, bugtype, device)
+            random(compressed_graph, source_path, dataset, 8, bugtype, device)
+            random(compressed_graph, source_path, dataset, 16, bugtype, device)
+            random(compressed_graph, source_path, dataset, 32, bugtype, device)
+            random(compressed_graph, source_path, dataset, 64, bugtype, device)
+            random(compressed_graph, source_path, dataset, 128, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 2, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 8, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 16, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 32, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 64, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 128, bugtype, device)
+
+
 
 
 def get_avg_results(report_path, top_rate=0.5):
@@ -554,7 +673,7 @@ def get_results():
 
 
 if __name__ == '__main__':
-    device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+    device = 'cuda:14' if torch.cuda.is_available() else 'cpu'
     if args['result']:
             get_results()
     else:
