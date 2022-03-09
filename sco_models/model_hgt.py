@@ -16,7 +16,8 @@ from .graph_utils import load_hetero_nx_graph, \
                          get_number_of_nodes, add_cfg_mapping, \
                          get_node_label, get_node_ids_dict, \
                          map_node_embedding, get_symmatrical_metapaths, \
-                         reflect_graph
+                         reflect_graph, get_node_tracker, get_node_ids_by_filename, \
+                         generate_random_node_features
 
 
 class HGTLayer(nn.Module):
@@ -330,15 +331,165 @@ class HGTVulNodeClassifier(nn.Module):
         return output
 
 
+class HGTVulGraphClassifier(nn.Module):
+    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu'):
+        super(HGTVulGraphClassifier, self).__init__()
+        self.compressed_global_graph_path = compressed_global_graph_path
+        self.hidden_size = hidden_size
+        self.num_heads = num_heads
+        self.source_path = source_path
+        self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
+        self.filename_mapping = {file: idx for idx, file in enumerate(self.extracted_graph)}
+        self.device = device
+        # Get Global graph
+        nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
+        self.nx_graph = nx_graph
+        nx_g_data = generate_hetero_graph_data(nx_graph)
+        self.total_nodes = len(nx_graph)
+        
+        # Get Node Labels
+        self.node_labels, self.labeled_node_ids, self.label_ids = get_node_label(nx_graph)
+        self.node_ids_dict = get_node_ids_dict(nx_graph)
+        _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
+        self.node_ids_by_filename = get_node_ids_by_filename(nx_graph)
+        # Reflect graph data
+        self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
+        self.number_of_nodes = get_number_of_nodes(nx_graph)
+        self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
+        self.symmetrical_global_graph.ndata['filename'] = _node_tracker
+        self.symmetrical_global_graph = self.symmetrical_global_graph.to(device)
+        self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
+        # Concat the metapaths have the same begin nodetype
+        self.full_metapath = {}
+        for metapath in self.meta_paths:
+            ntype = metapath[0][0]
+            if ntype not in self.full_metapath:
+                self.full_metapath[ntype] = [metapath]
+            else:
+                self.full_metapath[ntype].append(metapath)
+        self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
+        # node/edge dictionaries
+        self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
+        self.etypes_dict = {}
+        for etype in self.symmetrical_global_graph.canonical_etypes:
+            self.etypes_dict[etype] = len(self.etypes_dict)
+            self.symmetrical_global_graph.edges[etype].data['id'] = \
+                torch.ones(self.symmetrical_global_graph.number_of_edges(etype), 
+                        dtype=torch.long, device=device) * self.etypes_dict[etype]
+
+        # Create input node features
+        features = {}
+        if node_feature == 'nodetype':
+            for ntype in self.symmetrical_global_graph.ntypes:
+                features[ntype] = self._nodetype2onehot(ntype).repeat(self.symmetrical_global_graph.num_nodes(ntype), 1).to(self.device)
+            self.in_size = len(self.node_types)
+        elif node_feature == 'metapath2vec':
+            embedding_dim = 128
+            self.in_size = embedding_dim
+            for metapath in self.meta_paths:
+                _metapath_embedding = MetaPath2Vec(self.symmetrical_global_graph_data, embedding_dim=embedding_dim,
+                        metapath=metapath, walk_length=50, context_size=7,
+                        walks_per_node=5, num_negative_samples=5, num_nodes_dict=self.number_of_nodes,
+                        sparse=False)
+                ntype = metapath[0][0]
+                if ntype not in features.keys():
+                    features[ntype] = _metapath_embedding(ntype).unsqueeze(0)
+                else:
+                    features[ntype] = torch.cat((features[ntype], _metapath_embedding(ntype).unsqueeze(0)))
+            # Use mean for aggregate node features
+            features = {k: torch.mean(v, dim=0).to(self.device) for k, v in features.items()}
+        elif node_feature in ['gae', 'node2vec', 'line']:
+            embedding_dim = 128
+            self.in_size = embedding_dim
+            with open(feature_extractor, 'rb') as f:
+                embedding = pickle.load(f, encoding="utf8")
+            embedding = torch.tensor(embedding, device=device)
+            features = map_node_embedding(nx_graph, embedding)
+        elif node_feature == 'random':
+            embedding_dim = feature_extractor
+            self.in_size = embedding_dim
+            features = generate_random_node_features(nx_graph, self.in_size)
+        elif node_feature == 'zeros':
+            embedding_dim = feature_extractor
+            self.in_size = embedding_dim
+            features = generate_random_node_features(nx_graph, self.in_size)
+
+        self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
+        self.symmetrical_global_graph.ndata['feat'] = features
+        for ntype in self.symmetrical_global_graph.ntypes:
+            emb = nn.Parameter(features[ntype], requires_grad = False)
+            self.symmetrical_global_graph.nodes[ntype].data['inp'] = emb.to(device)
+
+        # Init Model
+        self.gcs = nn.ModuleList()
+        self.out_size = 2
+        self.num_layers = num_layers
+        self.adapt_ws  = nn.ModuleList()
+        for t in range(len(self.ntypes_dict)):
+            self.adapt_ws.append(nn.Linear(self.in_size, self.hidden_size))
+        for _ in range(self.num_layers):
+            self.gcs.append(HGTLayer(self.hidden_size, self.hidden_size, self.ntypes_dict, self.etypes_dict, self.num_heads, use_norm=use_norm))
+        self.classify = nn.Linear(self.hidden_size, self.out_size)
+
+    def _nodetype2onehot(self, ntype):
+        feature = torch.zeros(len(self.ntypes_dict), dtype=torch.float)
+        feature[self.ntypes_dict[ntype]] = 1
+        return feature
+
+    def get_assemble_node_features(self):
+        features = {}
+        for han in self.layers:
+            ntype = han.meta_paths[0][0][0]
+            feature = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+            if ntype not in features.keys():
+                features[ntype] = feature.unsqueeze(0)
+            else:
+                features[ntype] = torch.cat((features[ntype], feature.unsqueeze(0)))
+        # Use mean for aggregate node hidden features
+        return {k: torch.mean(v, dim=0) for k, v in features.items()}
+
+    def reset_parameters(self):
+        for model in self.adapt_ws:
+            for layer in model.children():
+                if hasattr(layer, 'reset_parameters'):
+                    layer.reset_parameters()
+        for model in self.gcs:
+            for layer in model.children():
+                if hasattr(layer, 'reset_parameters'):
+                    layer.reset_parameters()
+        for layer in self.classify.children():
+            if hasattr(layer, 'reset_parameters'):
+                    layer.reset_parameters()
+
+    def forward(self, batched_g_name):
+        h = {}
+        hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
+        for ntype in self.symmetrical_global_graph.ntypes:
+            n_id = self.ntypes_dict[ntype]
+            h[ntype] = F.gelu(self.adapt_ws[n_id](self.symmetrical_global_graph.nodes[ntype].data['inp']))
+        for i in range(self.num_layers):
+            h = self.gcs[i](self.symmetrical_global_graph, h)
+        for ntype, feature in h.items():
+            assert len(self.node_ids_dict[ntype]) == feature.shape[0]
+            hiddens[self.node_ids_dict[ntype]] = feature
+        batched_graph_embedded = []
+        for g_name in batched_g_name:
+            node_list = self.node_ids_by_filename[g_name]
+            batched_graph_embedded.append(hiddens[node_list].mean(0).tolist())
+        batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
+        output = self.classify(batched_graph_embedded)
+        return output, hiddens
+
+
 if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-    compressed_graph = './ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/compressed_graphs.gpickle'
-    dataset = './ge-sc-data/node_classification/cfg/reentrancy/buggy_curated/'
+    compressed_graph = './experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/cfg_cg_compressed_graphs.gpickle'
+    dataset = './experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0'
     node_feature = 'nodetype'
     feature_extractor = None
-    model = HGTVulNodeClassifier(compressed_graph,
+    model = HGTVulGraphClassifier(compressed_graph,
                                  dataset, feature_extractor=None, node_feature='nodetype', device=device).to(device)
     model.train()
-    logits = model()
-    print(logits.shape)
+    # logits = model()
+    # print(logits.shape)
