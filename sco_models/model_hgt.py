@@ -17,7 +17,7 @@ from .graph_utils import load_hetero_nx_graph, \
                          get_node_label, get_node_ids_dict, \
                          map_node_embedding, get_symmatrical_metapaths, \
                          reflect_graph, get_node_tracker, get_node_ids_by_filename, \
-                         generate_random_node_features
+                         generate_random_node_features, generate_zeros_node_features
 
 
 class HGTLayer(nn.Module):
@@ -409,10 +409,12 @@ class HGTVulGraphClassifier(nn.Module):
             embedding_dim = int(feature_extractor)
             self.in_size = embedding_dim
             features = generate_random_node_features(nx_graph, self.in_size)
+            features = {k: v.to(self.device) for k, v in features.items()}
         elif node_feature == 'zeros':
             embedding_dim = int(feature_extractor)
             self.in_size = embedding_dim
-            features = generate_random_node_features(nx_graph, self.in_size)
+            features = generate_zeros_node_features(nx_graph, self.in_size)
+            features = {k: v.to(self.device) for k, v in features.items()}
 
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.symmetrical_global_graph.ndata['feat'] = features
