@@ -72,9 +72,9 @@ def generate_random_node_features(nx_graph, feature_dims):
     for node_ids, node_data in nx_g.nodes(data=True):
         node_type = node_data['node_type']
         if node_type not in features:
-            features[node_type] = torch.rand((1, feature_dims))
+            features[node_type] = torch.rand(1, feature_dims)
         else:
-            features[node_type] = torch.cat((features[node_type], torch.rand((1, feature_dims))))
+            features[node_type] = torch.cat((features[node_type], torch.rand(1, feature_dims)))
     return features
 
 
