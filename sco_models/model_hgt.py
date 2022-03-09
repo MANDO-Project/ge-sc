@@ -406,11 +406,11 @@ class HGTVulGraphClassifier(nn.Module):
             embedding = torch.tensor(embedding, device=device)
             features = map_node_embedding(nx_graph, embedding)
         elif node_feature == 'random':
-            embedding_dim = feature_extractor
+            embedding_dim = int(feature_extractor)
             self.in_size = embedding_dim
             features = generate_random_node_features(nx_graph, self.in_size)
         elif node_feature == 'zeros':
-            embedding_dim = feature_extractor
+            embedding_dim = int(feature_extractor)
             self.in_size = embedding_dim
             features = generate_random_node_features(nx_graph, self.in_size)
 
