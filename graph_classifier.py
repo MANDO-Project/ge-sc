@@ -12,6 +12,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 from sco_models.dataloader import EthIdsDataset
 from sco_models.model_hetero import HAN, MANDOGraphClassifier
+from sco_models.model_hgt import HGTVulGraphClassifier
 from sco_models.visualization import visualize_average_k_folds, visualize_k_folds
 from sco_models.utils import score, get_classification_report, get_confusion_matrix
 
@@ -37,7 +38,7 @@ def train(args, model, train_loader, optimizer, loss_fcn, epoch):
         total_loss += loss.item()
         circle_lrs.append(optimizer.param_groups[0]["lr"])
     steps = idx + 1
-    return total_loss/steps, total_micro_f1/steps, train_macro_f1/steps, total_accucracy/steps, circle_lrs
+    return model, total_loss/steps, total_micro_f1/steps, train_macro_f1/steps, total_accucracy/steps, circle_lrs
 
 
 def validate(args, model, val_loader, loss_fcn):
@@ -128,7 +129,7 @@ def main(args):
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
         print('Start training fold {} with {}/{}/{} train/val/test smart contracts'.format(fold, len(train_subsampler), len(val_subsampler), len(test_ids)))
         total_steps = epochs
-        model = MANDOGraphClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+        model = HGTVulGraphClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
         model.reset_parameters()
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
@@ -138,7 +139,7 @@ def main(args):
 
         for epoch in range(epochs):
             print('Fold {} - Epochs {}'.format(fold, epoch))
-            train_loss, train_micro_f1, train_macro_f1, train_acc, lrs = train(args, model, train_dataloader, optimizer, loss_fcn, epoch)
+            model, train_loss, train_micro_f1, train_macro_f1, train_acc, lrs = train(args, model, train_dataloader, optimizer, loss_fcn, epoch)
             print('Train Loss: {:.4f} | Train Micro f1: {:.4f} | Train Macro f1: {:.4f} | Train Accuracy: {:.4f}'.format(
                     train_loss, train_micro_f1, train_macro_f1, train_acc))
             val_loss, val_micro_f1, val_macro_f1, val_acc = validate(args, model, val_dataloader, loss_fcn)
