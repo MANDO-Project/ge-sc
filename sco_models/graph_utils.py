@@ -66,6 +66,30 @@ def map_node_embedding(nx_graph, embedding):
     return features
 
 
+def generate_random_node_features(nx_graph, feature_dims):
+    nx_g = nx_graph
+    features = {}
+    for node_ids, node_data in nx_g.nodes(data=True):
+        node_type = node_data['node_type']
+        if node_type not in features:
+            features[node_type] = torch.rand((1, feature_dims))
+        else:
+            features[node_type] = torch.cat((features[node_type], torch.rand((1, feature_dims))))
+    return features
+
+
+def generate_zeros_node_features(nx_graph, feature_dims):
+    nx_g = nx_graph
+    features = {}
+    for node_ids, node_data in nx_g.nodes(data=True):
+        node_type = node_data['node_type']
+        if node_type not in features:
+            features[node_type] = torch.zeros((1, feature_dims))
+        else:
+            features[node_type] = torch.cat((features[node_type], torch.zeros((1, feature_dims))))
+    return features
+
+
 def reveert_map_node_embedding(nx_graph, features):
     nx_g = nx_graph
     embedded = torch.zeros(len(nx_g.nodes), 128)
@@ -147,6 +171,19 @@ def get_nodetype_mask(nx_graph, nodetype_dict):
         ntype = node_data['node_type']
         nodetype_mask.append(nodetype_dict[ntype])
     return nodetype_mask
+
+
+def get_node_ids_by_filename(nx_graph):
+    nx_g = nx_graph
+    node_ids_dict = {}
+    for node_ids, node_data in nx_g.nodes(data=True):
+        ntype = node_data['node_type']
+        filename = node_data['source_file']
+        if filename not in node_ids_dict:
+            node_ids_dict[filename] = [node_ids]
+        else:
+            node_ids_dict[filename].append(node_ids)
+    return node_ids_dict
 
 
 def get_nx_subgraphs(nx_graph):
