@@ -49,7 +49,7 @@ ratio = 1
 
 
 models = ['base_metapath2vec', 'base_gae', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'gae', 'line', 'node2vec']
-# models = ['random_', 'random_', 'random_', 'random_', 'random_', 'random_', 'random_', 'random_', 'random_']
+models = ['random_2', 'random_8', 'random_16', 'random_32', 'random_64', 'random_128', 'zeros_2', 'zeros_8', 'zeros_16', 'zeros_32', 'zeros_64', 'zeros_128']
 feature_dim_list = [2, 8, 16, 32, 64, 128]
 bug_list = ['access_control', 'arithmetic', 'denial_of_service',
             'front_running', 'reentrancy', 'time_manipulation', 
@@ -520,7 +520,6 @@ def zeros(compressed_graph, source_path, dataset, feature_dims, bugtype, device)
         report.append(test_results)
     else:
         report = [test_results]
-    report = [test_results]
     with open(join(logs, 'test_report.json'), 'w') as f:
         json.dump(report, f, indent=2)
 
