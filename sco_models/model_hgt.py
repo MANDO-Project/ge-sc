@@ -348,7 +348,6 @@ class HGTVulGraphClassifier(nn.Module):
         self.total_nodes = len(nx_graph)
         
         # Get Node Labels
-        self.node_labels, self.labeled_node_ids, self.label_ids = get_node_label(nx_graph)
         self.node_ids_dict = get_node_ids_dict(nx_graph)
         _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
         self.node_ids_by_filename = get_node_ids_by_filename(nx_graph)

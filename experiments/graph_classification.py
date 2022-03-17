@@ -1,12 +1,19 @@
 import os
 import argparse
+import multiprocessing as mp
+import threading
+import time
 from os.path import join
+from threading import Thread
 
 import pickle
 import json
 import networkx as nx
+from numpy import zeros_like
 import torch
+from torch import nn
 from tabulate import tabulate
+from timebudget import timebudget
 from sklearn.model_selection import train_test_split
 from statistics import mean
 
@@ -33,7 +40,7 @@ DATA_ID = 0
 REPEAT = args['repeat']
 EPOCHS = args['epochs']
 TASK = "graph_classification"
-STRUCTURE = 'hgt'
+STRUCTURE = 'han'
 COMPRESSED_GRAPH = 'cfg'
 DATASET = 'clean_50_buggy_curated'
 TRAIN_RATE = 0.7
@@ -41,11 +48,12 @@ VAL_RATE = 0.3
 ratio = 1
 
 
-models = ['base_metapath2vec', 'base_gae', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'gae', 'line', 'node2vec']
+# models = ['base_metapath2vec', 'base_gae', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'gae', 'line', 'node2vec']
 # bug_list = ['access_control', 'arithmetic', 'denial_of_service',
 #             'front_running', 'reentrancy', 'time_manipulation', 
 #             'unchecked_low_level_calls']
-models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec']
+models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_2', 'random_8', 'random_16', 'random_32', 'random_64', 'random_128', 'zeros_2', 'zeros_8', 'zeros_16', 'zeros_32', 'zeros_64', 'zeros_128']
+feature_dim_list = [2, 8, 16, 32, 64, 128]
 bug_list = ['ethor']
 file_counter = {'access_control': 57, 'arithmetic': 60, 'denial_of_service': 46,
               'front_running': 44, 'reentrancy': 71, 'time_manipulation': 50, 
@@ -449,6 +457,74 @@ def node2vec(compressed_graph, source_path, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
+def random(compressed_graph, source_path, dataset, feature_dims, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/random_{feature_dims}/{bugtype}/'
+    if not os.path.exists(logs):
+        os.makedirs(logs, exist_ok=True)
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/random_{feature_dims}/{bugtype}/'
+    if not os.path.exists(output_models):
+        os.makedirs(output_models, exist_ok=True)
+    feature_extractor = feature_dims
+    node_feature = 'random'
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+                                 node_feature=node_feature, device=device)
+    model.reset_parameters()
+    # model = nn.DataParallel(model)
+    model.to(device)
+    X_train, X_val, y_train, y_val = dataset
+    model = train(model, X_train, y_train, device)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(model.state_dict(), save_path)
+    model.eval()
+    with torch.no_grad():
+        logits, _ = model(X_val)
+        logits = logits.to(device)
+        # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
+        test_results = get_classification_report(y_val, logits, output_dict=True)
+    if os.path.isfile(join(logs, 'test_report.json')):
+        with open(join(logs, 'test_report.json'), 'r') as f:
+            report = json.load(f)
+        report.append(test_results)
+    else:
+        report = [test_results]
+    with open(join(logs, 'test_report.json'), 'w') as f:
+        json.dump(report, f, indent=2)
+
+
+def zeros(compressed_graph, source_path, dataset, feature_dims, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/zeros_{feature_dims}/{bugtype}/'
+    if not os.path.exists(logs):
+        os.makedirs(logs, exist_ok=True)
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/zeros_{feature_dims}/{bugtype}/'
+    if not os.path.exists(output_models):
+        os.makedirs(output_models, exist_ok=True)
+    feature_extractor = feature_dims
+    node_feature = 'zeros'
+    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+                                 node_feature=node_feature, device=device)
+    model.reset_parameters()
+    # model = nn.DataParallel(model)
+    model.to(device)
+    X_train, X_val, y_train, y_val = dataset
+    model = train(model, X_train, y_train, device)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(model.state_dict(), save_path)
+    model.eval()
+    with torch.no_grad():
+        logits, _ = model(X_val)
+        logits = logits.to(device)
+        # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
+        test_results = get_classification_report(y_val, logits, output_dict=True)
+    if os.path.isfile(join(logs, 'test_report.json')):
+        with open(join(logs, 'test_report.json'), 'r') as f:
+            report = json.load(f)
+        report.append(test_results)
+    else:
+        report = [test_results]
+    with open(join(logs, 'test_report.json'), 'w') as f:
+        json.dump(report, f, indent=2)
+
+@timebudget
 def main(device):
     for bugtype in bug_list:
         print('Bugtype {}'.format(bugtype))
@@ -482,18 +558,28 @@ def main(device):
             # Run experiments
             # Base lines
             base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bugtype, device)
-            # if bugtype not in ['arithmetic', 'front_running', 'reentrancy', 'unchecked_low_level_calls']:
-                # base_gae(dataset, bugtype, gae_embedded, file_name_dict, device)
             base_line(dataset, bugtype, line_embedded, file_name_dict, device)
             base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device)
 
             ## Out models
             nodetype(compressed_graph, source_path, dataset, bugtype, device)
             metapath2vec(compressed_graph, source_path, dataset, bugtype, device)
-            # if bugtype not in ['arithmetic', 'front_running', 'reentrancy', 'unchecked_low_level_calls']:
-            #     gae(compressed_graph, source_path, dataset, bugtype, device)
             line(compressed_graph, source_path, dataset, bugtype, device)
             node2vec(compressed_graph, source_path, dataset, bugtype, device)
+            random(compressed_graph, source_path, dataset, 2, bugtype, device)
+            random(compressed_graph, source_path, dataset, 8, bugtype, device)
+            random(compressed_graph, source_path, dataset, 16, bugtype, device)
+            random(compressed_graph, source_path, dataset, 32, bugtype, device)
+            random(compressed_graph, source_path, dataset, 64, bugtype, device)
+            random(compressed_graph, source_path, dataset, 128, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 2, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 8, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 16, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 32, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 64, bugtype, device)
+            zeros(compressed_graph, source_path, dataset, 128, bugtype, device)
+
+
 
 
 def get_avg_results(report_path, top_rate=0.5):
@@ -544,15 +630,15 @@ def get_results():
             macro_f1 = macro_f1_report[model][i]
             buggy_f1_row.append('%.2f'%buggy_f1 + '%' if isinstance(buggy_f1, float) else buggy_f1)
             macro_f1_row.append('%.2f'%macro_f1 + '%' if isinstance(macro_f1, float) else macro_f1)
-    #     data.append([model, 'Buggy-F1'] + buggy_f1_row)
-    #     data.append([model, 'Macro-F1'] + macro_f1_row)
-    # print(tabulate(data, headers=bug_list, tablefmt='orgtbl'))
-        print(' ', end=' ')
-        print(' \t'.join(buggy_f1_row), end=r'')
-        print()
-        print(' ', end=' ')
-        print(' \t'.join(macro_f1_row), end=r'')
-        print()
+        data.append([model, 'Buggy-F1'] + buggy_f1_row)
+        data.append([model, 'Macro-F1'] + macro_f1_row)
+    print(tabulate(data, headers=bug_list, tablefmt='orgtbl'))
+        # print(' ', end=' ')
+        # print(' \t'.join(buggy_f1_row), end=r'')
+        # print()
+        # print(' ', end=' ')
+        # print(' \t'.join(macro_f1_row), end=r'')
+        # print()
 
 
 if __name__ == '__main__':
