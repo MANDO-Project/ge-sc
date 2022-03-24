@@ -45,11 +45,54 @@ def creat_edge_label(g):
     return edgeLabel
 
 
+def createLabel(g, d):
+        nodes = g.nodes()
+        int2label = {}
+        startwith, endwith = 0,1
+        node_info = {}
+        edgeLabel = {}
+        for idx,node_idx in enumerate(nodes):
+            obj = g._node[node_idx]
+            if 'shape' not in obj:
+                shape = 'None'
+            else:
+                shape = obj['shape']
+            if 'color' not in obj:
+                color = 'None'
+            else:
+                color = obj['color']
+            if 'fillcolor' not in obj:
+                fillcolor = 'None'
+            else:
+                fillcolor = obj['fillcolor']
+            t = (shape,color,fillcolor)
+            node_type = d[t]
+            # nodetype without number
+            # psb_node_type = g._node[node_idx]['label'].splitlines()[0]
+            # colonPos = psb_node_type.find(':') + 1
+            # node_type = psb_node_type[colonPos:]
+            int2label[node_idx] = node_type
+            info = obj['label'].split(':')
+            node_info[node_idx] = [info[1][1:9],info[-1][1:-3]]
+
+        for u,v in g.edges():
+            if node_info[u][endwith] == 'JUMPI':
+                if node_info[v][startwith] == 'JUMPDEST':
+                    edgeLabel[(u,v,0)] = {'edge_type': 'True'}
+                else:
+                    edgeLabel[(u,v,0)] = {'edge_type': 'Else'}
+            else:
+                edgeLabel[(u,v,0)] = {'edge_type': 'CF'}
+        return int2label, edgeLabel
+
+
 def dot2gpickle(dot_file, gpickle_file):
     source_file = gpickle_file.split('/')[-1]
     nx_g = nx.drawing.nx_pydot.read_dot(dot_file)
-    node_lables = creat_node_label(nx_g, EDGE_DICT)
-    edge_labels = creat_edge_label(nx_g)
+    # node_lables = creat_node_label(nx_g, EDGE_DICT)
+    # edge_labels = creat_edge_label(nx_g)
+    node_lables, edge_labels = createLabel(nx_g, EDGE_DICT)
+    print(edge_labels)
     nx.set_node_attributes(nx_g, node_lables, name='node_type')
     nx.set_node_attributes(nx_g, source_file, name='source_file')
     nx.set_edge_attributes(nx_g, edge_labels)
@@ -127,11 +170,11 @@ if __name__ == '__main__':
     # for dot in dot_files[:SCALE]:
     #     dot2gpickle(join(graph_path, dot), join(gpickle_path, dot.replace('.dot', '.sol')))
 
-    # # Merge gpickle files
-    # gpickle_files = [f for f in os.listdir(gpickle_path) if f.endswith('.sol')]
-    # merge_byte_code_cfg(gpickle_path, gpickle_files, compressed_graph)
+    # Merge gpickle files
+    gpickle_files = [f for f in os.listdir(gpickle_path) if f.endswith('.sol')]
+    merge_byte_code_cfg(gpickle_path, gpickle_files, compressed_graph)
 
-    # Forencis gpickle graph
-    source_compressed_graph = './experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/cfg_compressed_graphs.gpickle'
-    # forencis_gpickle(source_compressed_graph)
-    forencis_gpickle(compressed_graph)
+    # # Forencis gpickle graph
+    # source_compressed_graph = './experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/cfg_compressed_graphs.gpickle'
+    # # forencis_gpickle(source_compressed_graph)
+    # forencis_gpickle(compressed_graph)
