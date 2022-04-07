@@ -42,7 +42,8 @@ EPOCHS = args['epochs']
 TASK = "graph_classification"
 STRUCTURE = 'hgt'
 COMPRESSED_GRAPH = 'cfg'
-DATASET = 'clean_50_buggy_curated'
+DATASET = 'smartbugs'
+BYTECODE = 'creation'
 TRAIN_RATE = 0.7
 VAL_RATE = 0.3
 ratio = 1
@@ -52,12 +53,17 @@ ratio = 1
 # bug_list = ['access_control', 'arithmetic', 'denial_of_service',
 #             'front_running', 'reentrancy', 'time_manipulation', 
 #             'unchecked_low_level_calls']
-models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_2', 'random_8', 'random_16', 'random_32', 'random_64', 'random_128', 'zeros_2', 'zeros_8', 'zeros_16', 'zeros_32', 'zeros_64', 'zeros_128']
-feature_dim_list = [2, 8, 16, 32, 64, 128]
-bug_list = ['ethor']
+# models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_2', 'random_8', 'random_16', 'random_32', 'random_64', 'random_128', 'zeros_2', 'zeros_8', 'zeros_16', 'zeros_32', 'zeros_64', 'zeros_128']
+models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_32', 'random_64', 'zeros_32', 'zeros_64']
+# feature_dim_list = [2, 8, 16, 32, 64, 128]
+feature_dim_list = [32, 64]
+# bug_list = ['ethor']
+bug_list = ['access_control', 'arithmetic', 'denial_of_service',
+            'front_running', 'reentrancy', 'time_manipulation', 
+            'unchecked_low_level_calls']
 file_counter = {'access_control': 57, 'arithmetic': 60, 'denial_of_service': 46,
-              'front_running': 44, 'reentrancy': 71, 'time_manipulation': 50, 
-              'unchecked_low_level_calls': 95}
+                'front_running': 44, 'reentrancy': 71, 'time_manipulation': 50, 
+                'unchecked_low_level_calls': 95}
 print(f'Run experiments on {len(bug_list)} kinds of bug for {len(models)} kinds of model.')
 print(f'Repeat {REPEAT} times and {EPOCHS} epochs for each experiment.')
 
@@ -89,14 +95,14 @@ def get_node_id_by_file_name(nx_graph):
     return file_name_dict
 
 
-def base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/'
+def base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=None, 
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=None, 
                                  node_feature='metapath2vec', device=device)
     features = model.symmetrical_global_graph.ndata['feat']
     nx_graph = load_hetero_nx_graph(compressed_graph)
@@ -143,10 +149,10 @@ def base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bu
 
 
 def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/base_gae/{bugtype}/'
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_gae/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/base_gae/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_gae/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     X_train, X_val, y_train, y_val = dataset
@@ -192,15 +198,15 @@ def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
         json.dump(report, f, indent=2)
 
 
-def base_line(dataset, bugtype, gae_embedded, file_name_dict, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/base_line/{bugtype}/'
+def base_line(dataset, bugtype, line_embedded, file_name_dict, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_line/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/base_line/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_line/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     X_train, X_val, y_train, y_val = dataset
-    with open(gae_embedded, 'rb') as f:
+    with open(line_embedded, 'rb') as f:
         embedding = pickle.load(f, encoding="utf8")
         embedding = torch.tensor(embedding, device=device)
     X_embedded_train = []
@@ -242,15 +248,15 @@ def base_line(dataset, bugtype, gae_embedded, file_name_dict, device):
         json.dump(report, f, indent=2)
 
 
-def base_node2vec(dataset, bugtype, gae_embedded, file_name_dict, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/base_node2vec/{bugtype}/'
+def base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_node2vec/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/base_node2vec/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_node2vec/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     X_train, X_val, y_train, y_val = dataset
-    with open(gae_embedded, 'rb') as f:
+    with open(node2vec_embedded, 'rb') as f:
         embedding = pickle.load(f, encoding="utf8")
         embedding = torch.tensor(embedding, device=device)
     X_embedded_train = []
@@ -292,16 +298,16 @@ def base_node2vec(dataset, bugtype, gae_embedded, file_name_dict, device):
         json.dump(report, f, indent=2)
 
 
-def nodetype(compressed_graph, source_path, dataset, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/'
+def nodetype(compressed_graph, dataset, feature_extractor, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    feature_extractor = None
+    feature_extractor = feature_extractor
     node_feature = 'nodetype'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -325,16 +331,16 @@ def nodetype(compressed_graph, source_path, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def metapath2vec(compressed_graph, source_path, dataset, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/'
+def metapath2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    feature_extractor = None
+    feature_extractor = feature_extractor
     node_feature = 'metapath2vec'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -358,16 +364,16 @@ def metapath2vec(compressed_graph, source_path, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def gae(compressed_graph, source_path, dataset, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/'
+def gae(compressed_graph, dataset, feature_extractor, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    feature_extractor = f'{ROOT}/ge-sc-data/byte_code/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
+    feature_extractor = feature_extractor
     node_feature = 'gae'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -391,16 +397,16 @@ def gae(compressed_graph, source_path, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def line(compressed_graph, source_path, dataset, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/'
+def line(compressed_graph, dataset, feature_extractor, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    feature_extractor = f'{ROOT}/ge-sc-data/byte_code/ethor/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
+    feature_extractor = feature_extractor
     node_feature = 'line'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -424,16 +430,16 @@ def line(compressed_graph, source_path, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def node2vec(compressed_graph, source_path, dataset, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/'
+def node2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    feature_extractor = f'{ROOT}/ge-sc-data/byte_code/ethor/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
+    feature_extractor = feature_extractor
     node_feature = 'node2vec'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -457,16 +463,16 @@ def node2vec(compressed_graph, source_path, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def random(compressed_graph, source_path, dataset, feature_dims, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/random_{feature_dims}/{bugtype}/'
+def random(compressed_graph, dataset, feature_dims, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/random_{feature_dims}/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs, exist_ok=True)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/random_{feature_dims}/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/random_{feature_dims}/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models, exist_ok=True)
     feature_extractor = feature_dims
     node_feature = 'random'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     # model = nn.DataParallel(model)
@@ -491,16 +497,16 @@ def random(compressed_graph, source_path, dataset, feature_dims, bugtype, device
         json.dump(report, f, indent=2)
 
 
-def zeros(compressed_graph, source_path, dataset, feature_dims, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/zeros_{feature_dims}/{bugtype}/'
+def zeros(compressed_graph, dataset, feature_dims, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/zeros_{feature_dims}/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs, exist_ok=True)
-    output_models = f'{ROOT}/models/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/zeros_{feature_dims}/{bugtype}/'
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/zeros_{feature_dims}/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models, exist_ok=True)
     feature_extractor = feature_dims
     node_feature = 'zeros'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     # model = nn.DataParallel(model)
@@ -530,54 +536,57 @@ def main(device):
         print('Bugtype {}'.format(bugtype))
         for i in range(REPEAT):
             print(f'Train bugtype {bugtype} {i}-th')
-            compressed_graph = f'{ROOT}/ge-sc-data/byte_code/{bugtype}/compressed_graphs/{COMPRESSED_GRAPH}_compressed_graphs.gpickle'
+            compressed_graph = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/compressed_graphs/{COMPRESSED_GRAPH}_compressed_graphs.gpickle'
             nx_graph = nx.read_gpickle(compressed_graph)
             file_name_dict = get_node_id_by_file_name(nx_graph)
-            label = f'{ROOT}/ge-sc-data/byte_code/{bugtype}/graph_labels.json'
-            source_path = f'{ROOT}/ge-sc-data/byte_code/{bugtype}/'
+            # label = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/graph_labels.json'
+            label = f'{ROOT}/ge-sc-data/byte_code/smartbugs/contract_labels/{bugtype}/contract_labels.json'
+            source_path = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/'
             with open(label, 'r') as f:
                 annotations = json.load(f)
-            total_files = [f for f in os.listdir(source_path) if f.endswith('.sol')]
-            assert len(total_files) == len(annotations)
+            total_files = [f for f in os.listdir(source_path) if f.endswith('.gpickle')]
+            assert len(total_files) <= len(annotations)
             targets = []
             for file in total_files:
                 try:
-                    target = next(anno['targets'] for anno in annotations if anno['contract_name'] == file)
+                    target = next(anno['targets'] for anno in annotations if anno['contract_name'] == file.replace('.gpickle', '.sol'))
                 except StopIteration:
                     raise f'{file} not found!'
                 targets.append(target)
             targets = torch.tensor(targets, device=device)
             assert len(total_files) == len(targets)
+            print(len(total_files), len(targets))
             X_train, X_val, y_train, y_val = train_test_split(total_files, targets, train_size=TRAIN_RATE)
             dataset = (tuple(X_train), tuple(X_val), y_train, y_val)
             print('Start training with {}/{} train/val smart contracts'.format(len(X_train), len(X_val)))
-            gae_embedded = f'{ROOT}/ge-sc-data/byte_code/ethor/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
-            line_embedded = f'{ROOT}/ge-sc-data/byte_code/ethor/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
-            node2vec_embedded = f'{ROOT}/ge-sc-data/byte_code/ethor/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
+            gae_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
+            line_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
+            node2vec_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
 
             # Run experiments
             # Base lines
-            base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bugtype, device)
+            base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device)
             base_line(dataset, bugtype, line_embedded, file_name_dict, device)
             base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device)
 
             ## Out models
-            nodetype(compressed_graph, source_path, dataset, bugtype, device)
-            metapath2vec(compressed_graph, source_path, dataset, bugtype, device)
-            line(compressed_graph, source_path, dataset, bugtype, device)
-            node2vec(compressed_graph, source_path, dataset, bugtype, device)
-            random(compressed_graph, source_path, dataset, 2, bugtype, device)
-            random(compressed_graph, source_path, dataset, 8, bugtype, device)
-            random(compressed_graph, source_path, dataset, 16, bugtype, device)
-            random(compressed_graph, source_path, dataset, 32, bugtype, device)
-            random(compressed_graph, source_path, dataset, 64, bugtype, device)
-            random(compressed_graph, source_path, dataset, 128, bugtype, device)
-            zeros(compressed_graph, source_path, dataset, 2, bugtype, device)
-            zeros(compressed_graph, source_path, dataset, 8, bugtype, device)
-            zeros(compressed_graph, source_path, dataset, 16, bugtype, device)
-            zeros(compressed_graph, source_path, dataset, 32, bugtype, device)
-            zeros(compressed_graph, source_path, dataset, 64, bugtype, device)
-            zeros(compressed_graph, source_path, dataset, 128, bugtype, device)
+            nodetype(compressed_graph, dataset, None, bugtype, device)
+            metapath2vec(compressed_graph, dataset, None, bugtype, device)
+            # gae(compressed_graph, dataset, line_embedded, bugtype, device)
+            line(compressed_graph, dataset, line_embedded, bugtype, device)
+            node2vec(compressed_graph, dataset, node2vec_embedded, bugtype, device)
+            # random(compressed_graph, dataset, 2, bugtype, device)
+            # random(compressed_graph, dataset, 8, bugtype, device)
+            # random(compressed_graph, dataset, 16, bugtype, device)
+            random(compressed_graph, dataset, 32, bugtype, device)
+            random(compressed_graph, dataset, 64, bugtype, device)
+            random(compressed_graph, dataset, 128, bugtype, device)
+            # zeros(compressed_graph, dataset, 2, bugtype, device)
+            # zeros(compressed_graph, dataset, 8, bugtype, device)
+            # zeros(compressed_graph, dataset, 16, bugtype, device)
+            zeros(compressed_graph, dataset, 32, bugtype, device)
+            zeros(compressed_graph, dataset, 64, bugtype, device)
+            zeros(compressed_graph, dataset, 128, bugtype, device)
 
 
 
@@ -612,7 +621,7 @@ def get_results():
             if  model in ['gae', 'base_gae'] and bugtype in ['arithmetic', 'front_running', 'reentrancy', 'unchecked_low_level_calls']:
                 buggy_f1, macro_f1 = '-', '-'
             else:
-                report_path = f'{ROOT}/logs/{TASK}/byte_code/{STRUCTURE}/{COMPRESSED_GRAPH}/{model}/{bugtype}/test_report.json'
+                report_path = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/{model}/{bugtype}/test_report.json'
                 buggy_f1, macro_f1 = get_avg_results(report_path, top_rate=0.5)
             # buggy_f1, macro_f1 = get_max_results(report_path)
             if model not in buggy_f1_report:
