@@ -1,0 +1,3200 @@
+{
+    "curated": {
+        "0x663e4229142a27f00bafb5d087e1e730648314c3.sol": {
+            "ERC20": {
+                "start": 10,
+                "end": 21
+            },
+            "Ownable": {
+                "start": 27,
+                "end": 59
+            },
+            "ERC721": {
+                "start": 63,
+                "end": 84
+            },
+            "GeneScienceInterface": {
+                "start": 86,
+                "end": 105
+            },
+            "PandaAccessControl": {
+                "start": 110,
+                "end": 219
+            },
+            "PandaBase": {
+                "start": 231,
+                "end": 511
+            },
+            "ERC721Metadata": {
+                "start": 514,
+                "end": 532
+            },
+            "PandaOwnership": {
+                "start": 544,
+                "end": 784
+            },
+            "PandaBreeding": {
+                "start": 792,
+                "end": 1159
+            },
+            "ClockAuctionBase": {
+                "start": 1168,
+                "end": 1407
+            },
+            "Pausable": {
+                "start": 1416,
+                "end": 1456
+            },
+            "ClockAuction": {
+                "start": 1461,
+                "end": 1613
+            },
+            "SiringClockAuction": {
+                "start": 1620,
+                "end": 1682
+            },
+            "SaleClockAuction": {
+                "start": 1689,
+                "end": 1836
+            },
+            "SaleClockAuctionERC20": {
+                "start": 1842,
+                "end": 2017
+            },
+            "PandaAuction": {
+                "start": 2023,
+                "end": 2201
+            },
+            "PandaMinting": {
+                "start": 2208,
+                "end": 2309
+            },
+            "PandaCore": {
+                "start": 2316,
+                "end": 2471
+            }
+        },
+        "0x84d9ec85c9c568eb332b7226a8f826d897e0a4a8.sol": {
+            "Owned": {
+                "start": 17,
+                "end": 58
+            },
+            "WedIndex": {
+                "start": 62,
+                "end": 95
+            }
+        },
+        "0x524960d55174d912768678d8c606b4d50b79d7b1.sol": {
+            "Centra4": {
+                "start": 9,
+                "end": 28
+            }
+        },
+        "0xe4eabdca81e31d9acbc4af76b30f532b6ed7f3bf.sol": {
+            "Honey": {
+                "start": 9,
+                "end": 47
+            }
+        },
+        "0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol": {
+            "Token": {
+                "start": 8,
+                "end": 11
+            },
+            "EtherGet": {
+                "start": 12,
+                "end": 31
+            }
+        },
+        "0x3f2ef511aa6e75231e4deafc7a3d2ecab3741de2.sol": {
+            "WhaleGiveaway2": {
+                "start": 9,
+                "end": 48
+            }
+        },
+        "0xe894d54dca59cb53fe9cbc5155093605c7068220.sol": {
+            "airDrop": {
+                "start": 9,
+                "end": 22
+            }
+        },
+        "0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4.sol": {
+            "HomeyJar": {
+                "start": 9,
+                "end": 32
+            }
+        },
+        "0x610495793564aed0f9c7fc48dc4c7c9151d34fd6.sol": {
+            "SimpleWallet": {
+                "start": 10,
+                "end": 36
+            }
+        },
+        "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol": {
+            "Ownable": {
+                "start": 9,
+                "end": 34
+            },
+            "Token": {
+                "start": 36,
+                "end": 46
+            },
+            "TokenBank": {
+                "start": 48,
+                "end": 101
+            }
+        },
+        "0xd5967fed03e85d1cce44cab284695b41bc675b5c.sol": {
+            "demo": {
+                "start": 9,
+                "end": 21
+            }
+        },
+        "0x89c1b3807d4c67df034fffb62f3509561218d30b.sol": {
+            "TownCrier": {
+                "start": 9,
+                "end": 223
+            }
+        },
+        "0xb0510d68f210b7db66e8c7c814f22680f2b8d1d6.sol": {
+            "Splitter": {
+                "start": 9,
+                "end": 82
+            },
+            "Puppet": {
+                "start": 85,
+                "end": 111
+            },
+            "SafeMath": {
+                "start": 116,
+                "end": 142
+            }
+        },
+        "0xec329ffc97d75fe03428ae155fc7793431487f63.sol": {
+            "Owned": {
+                "start": 9,
+                "end": 32
+            },
+            "Token": {
+                "start": 34,
+                "end": 37
+            },
+            "TokenSender": {
+                "start": 39,
+                "end": 133
+            }
+        },
+        "0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77.sol": {
+            "Proxy": {
+                "start": 9,
+                "end": 16
+            },
+            "DepositProxy": {
+                "start": 18,
+                "end": 43
+            }
+        },
+        "0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c.sol": {
+            "Proxy": {
+                "start": 9,
+                "end": 16
+            },
+            "VaultProxy": {
+                "start": 18,
+                "end": 43
+            }
+        },
+        "0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol": {
+            "keepMyEther": {
+                "start": 16,
+                "end": 29
+            }
+        },
+        "0xe09b1ab8111c2729a76f16de96bc86a7af837928.sol": {
+            "FiftyFlip": {
+                "start": 25,
+                "end": 371
+            },
+            "ERC20Interface": {
+                "start": 374,
+                "end": 378
+            }
+        },
+        "0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol": {
+            "MultiplicatorX4": {
+                "start": 9,
+                "end": 42
+            }
+        },
+        "0xe82f0742a71a02b9e9ffc142fdcb6eb1ed06fb87.sol": {
+            "Freebie": {
+                "start": 9,
+                "end": 42
+            }
+        },
+        "0x7a4349a749e59a5736efb7826ee3496a2dfd5489.sol": {
+            "WhaleGiveaway1": {
+                "start": 9,
+                "end": 47
+            }
+        },
+        "0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol": {
+            "Ownable": {
+                "start": 9,
+                "end": 34
+            },
+            "Token": {
+                "start": 36,
+                "end": 46
+            },
+            "TokenBank": {
+                "start": 48,
+                "end": 105
+            }
+        },
+        "0xf2570186500a46986f3139f65afedc2afe4f445d.sol": {
+            "RealOldFuckMaker": {
+                "start": 9,
+                "end": 22
+            }
+        },
+        "0xb37f18af15bafb869a065b61fc83cfc44ed9cc27.sol": {
+            "SimpleWallet": {
+                "start": 10,
+                "end": 36
+            }
+        },
+        "0xdb1c55f6926e7d847ddf8678905ad871a68199d2.sol": {
+            "FreeEth": {
+                "start": 9,
+                "end": 42
+            }
+        },
+        "0xb620cee6b52f96f3c6b253e6eea556aa2d214a99.sol": {
+            "DrainMe": {
+                "start": 14,
+                "end": 145
+            }
+        },
+        "0x78c2a1e91b52bca4130b6ed9edd9fbcfd4671c37.sol": {
+            "WhaleGiveaway1": {
+                "start": 9,
+                "end": 48
+            }
+        },
+        "0x806a6bd219f162442d992bdc4ee6eba1f2c5a707.sol": {
+            "Pie": {
+                "start": 9,
+                "end": 47
+            }
+        },
+        "0x39cfd754c85023648bf003bea2dd498c5612abfa.sol": {
+            "Ownable": {
+                "start": 9,
+                "end": 34
+            },
+            "Token": {
+                "start": 36,
+                "end": 46
+            },
+            "TokenBank": {
+                "start": 48,
+                "end": 105
+            }
+        },
+        "0x0cbe050f75bc8f8c2d6c0d249fea125fd6e1acc9.sol": {
+            "Caller": {
+                "start": 9,
+                "end": 15
+            }
+        },
+        "0x2972d548497286d18e92b5fa1f8f9139e5653fd2.sol": {
+            "demo": {
+                "start": 8,
+                "end": 19
+            }
+        },
+        "0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol": {
+            "airPort": {
+                "start": 10,
+                "end": 22
+            }
+        },
+        "etherpot_lotto.sol": {
+            "Lotto": {
+                "start": 10,
+                "end": 162
+            }
+        },
+        "0x9d06cbafa865037a01d322d3f4222fa3e04e5488.sol": {
+            "Delta": {
+                "start": 22,
+                "end": 91
+            }
+        },
+        "lotto.sol": {
+            "Lotto": {
+                "start": 9,
+                "end": 29
+            }
+        },
+        "king_of_the_ether_throne.sol": {
+            "KingOfTheEtherThrone": {
+                "start": 26,
+                "end": 182
+            }
+        },
+        "0xa1fceeff3acc57d257b917e30c4df661401d6431.sol": {
+            "AirDropContract": {
+                "start": 9,
+                "end": 36
+            }
+        },
+        "0xd2018bfaa266a9ec0a1a84b061640faa009def76.sol": {
+            "Pie": {
+                "start": 9,
+                "end": 47
+            }
+        },
+        "mishandled.sol": {
+            "SendBack": {
+                "start": 8,
+                "end": 17
+            }
+        },
+        "0x4051334adc52057aca763453820cb0e045076ef3.sol": {
+            "airdrop": {
+                "start": 9,
+                "end": 21
+            }
+        },
+        "0x19cf8481ea15427a98ba3cdd6d9e14690011ab10.sol": {
+            "tokenRecipient": {
+                "start": 9,
+                "end": 9
+            },
+            "MigrationAgent": {
+                "start": 13,
+                "end": 15
+            },
+            "ERC20": {
+                "start": 17,
+                "end": 27
+            },
+            "SafeMath": {
+                "start": 34,
+                "end": 80
+            },
+            "StandardToken": {
+                "start": 90,
+                "end": 147
+            },
+            "daoPOLSKAtokens": {
+                "start": 151,
+                "end": 503
+            }
+        },
+        "0xf29ebe930a539a60279ace72c707cba851a57707.sol": {
+            "B": {
+                "start": 10,
+                "end": 23
+            }
+        },
+        "0x5aa88d2901c68fda244f1d0584400368d2c8e739.sol": {
+            "MultiplicatorX3": {
+                "start": 9,
+                "end": 42
+            }
+        },
+        "0xbaa3de6504690efb064420d89e871c27065cdd52.sol": {
+            "Proxy": {
+                "start": 9,
+                "end": 16
+            },
+            "VaultProxy": {
+                "start": 18,
+                "end": 43
+            }
+        },
+        "0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol": {
+            "Ownable": {
+                "start": 9,
+                "end": 34
+            },
+            "Token": {
+                "start": 36,
+                "end": 46
+            },
+            "TokenBank": {
+                "start": 48,
+                "end": 105
+            }
+        },
+        "0xa46edd6a9a93feec36576ee5048146870ea2c3ae.sol": {
+            "EBU": {
+                "start": 9,
+                "end": 21
+            }
+        },
+        "0xf70d589d76eebdd7c12cc5eec99f8f6fa4233b9e.sol": {
+            "WhaleGiveaway2": {
+                "start": 9,
+                "end": 47
+            }
+        },
+        "0x4a66ad0bca2d700f11e1f2fc2c106f7d3264504c.sol": {
+            "EBU": {
+                "start": 9,
+                "end": 24
+            }
+        },
+        "unchecked_return_value.sol": {
+            "ReturnValue": {
+                "start": 9,
+                "end": 19
+            }
+        },
+        "0x958a8f594101d2c0485a52319f29b2647f2ebc06.sol": {
+            "Owned": {
+                "start": 16,
+                "end": 57
+            },
+            "Marriage": {
+                "start": 60,
+                "end": 149
+            }
+        }
+    },
+    "solidifi": {
+        "buggy_8.sol": {
+            "Ownable": {
+                "start": 7,
+                "end": 47
+            },
+            "TokenERC20": {
+                "start": 49,
+                "end": 219
+            },
+            "YFT": {
+                "start": 225,
+                "end": 317
+            }
+        },
+        "buggy_50.sol": {
+            "digitalNotary": {
+                "start": 7,
+                "end": 225
+            }
+        },
+        "buggy_18.sol": {
+            "SafeMath": {
+                "start": 21,
+                "end": 43
+            },
+            "ExtendedMath": {
+                "start": 45,
+                "end": 52
+            },
+            "ERC20Interface": {
+                "start": 59,
+                "end": 84
+            },
+            "ApproveAndCallFallBack": {
+                "start": 92,
+                "end": 98
+            },
+            "Owned": {
+                "start": 104,
+                "end": 139
+            },
+            "_Yesbuzz": {
+                "start": 146,
+                "end": 474
+            }
+        },
+        "buggy_29.sol": {
+            "ERC20Interface": {
+                "start": 15,
+                "end": 19
+            },
+            "IERC20Interface": {
+                "start": 21,
+                "end": 28
+            },
+            "RaffleToken": {
+                "start": 30,
+                "end": 30
+            },
+            "SafeMath": {
+                "start": 45,
+                "end": 136
+            },
+            "RaffleTokenExchange": {
+                "start": 138,
+                "end": 354
+            }
+        },
+        "buggy_30.sol": {
+            "IERC777": {
+                "start": 8,
+                "end": 75
+            },
+            "IERC777Recipient": {
+                "start": 77,
+                "end": 87
+            },
+            "IERC777Sender": {
+                "start": 89,
+                "end": 99
+            },
+            "IERC20": {
+                "start": 101,
+                "end": 125
+            },
+            "SafeMath": {
+                "start": 127,
+                "end": 174
+            },
+            "Address": {
+                "start": 176,
+                "end": 188
+            },
+            "IERC1820Registry": {
+                "start": 190,
+                "end": 218
+            },
+            "ERC777": {
+                "start": 220,
+                "end": 566
+            },
+            "Roles": {
+                "start": 568,
+                "end": 590
+            },
+            "MinterRole": {
+                "start": 592,
+                "end": 646
+            },
+            "PauserRole": {
+                "start": 648,
+                "end": 702
+            },
+            "Pausable": {
+                "start": 704,
+                "end": 758
+            },
+            "SKYBITToken": {
+                "start": 760,
+                "end": 779
+            }
+        },
+        "buggy_21.sol": {
+            "Token": {
+                "start": 3,
+                "end": 16
+            },
+            "SafeMath": {
+                "start": 18,
+                "end": 47
+            },
+            "StableDEX": {
+                "start": 49,
+                "end": 407
+            }
+        },
+        "buggy_48.sol": {
+            "SafeMath": {
+                "start": 22,
+                "end": 39
+            },
+            "ERC20Interface": {
+                "start": 46,
+                "end": 72
+            },
+            "ApproveAndCallFallBack": {
+                "start": 80,
+                "end": 84
+            },
+            "Owned": {
+                "start": 90,
+                "end": 126
+            },
+            "QurasToken": {
+                "start": 133,
+                "end": 300
+            }
+        },
+        "buggy_4.sol": {
+            "IERC20": {
+                "start": 17,
+                "end": 22
+            },
+            "PHO": {
+                "start": 28,
+                "end": 158
+            }
+        },
+        "buggy_15.sol": {
+            "tokenRecipient": {
+                "start": 7,
+                "end": 9
+            },
+            "MD": {
+                "start": 11,
+                "end": 199
+            }
+        },
+        "buggy_19.sol": {
+            "SafeMath": {
+                "start": 11,
+                "end": 50
+            },
+            "owned": {
+                "start": 57,
+                "end": 88
+            },
+            "ethBank": {
+                "start": 90,
+                "end": 278
+            }
+        },
+        "buggy_22.sol": {
+            "owned": {
+                "start": 8,
+                "end": 27
+            },
+            "tokenRecipient": {
+                "start": 30,
+                "end": 51
+            },
+            "Token": {
+                "start": 54,
+                "end": 76
+            },
+            "SafeMath": {
+                "start": 83,
+                "end": 141
+            },
+            "MindsyncPlatform": {
+                "start": 147,
+                "end": 451
+            }
+        },
+        "buggy_20.sol": {
+            "Ownable": {
+                "start": 30,
+                "end": 58
+            },
+            "Stoppable": {
+                "start": 64,
+                "end": 87
+            },
+            "RampInstantPoolInterface": {
+                "start": 93,
+                "end": 100
+            },
+            "RampInstantEscrowsPoolInterface": {
+                "start": 106,
+                "end": 132
+            },
+            "RampInstantPool": {
+                "start": 149,
+                "end": 310
+            },
+            "RampInstantEthPool": {
+                "start": 317,
+                "end": 374
+            }
+        },
+        "buggy_45.sol": {
+            "StockBet": {
+                "start": 7,
+                "end": 216
+            }
+        },
+        "buggy_31.sol": {
+            "IERC20": {
+                "start": 9,
+                "end": 11
+            },
+            "Marmo": {
+                "start": 13,
+                "end": 15
+            },
+            "ECDSA": {
+                "start": 23,
+                "end": 83
+            },
+            "Ownable": {
+                "start": 94,
+                "end": 159
+            },
+            "ReentrancyGuard": {
+                "start": 173,
+                "end": 200
+            },
+            "FeeTransactionManager": {
+                "start": 202,
+                "end": 252
+            }
+        },
+        "buggy_26.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 48
+            },
+            "IERC20": {
+                "start": 50,
+                "end": 59
+            },
+            "UBBCToken": {
+                "start": 61,
+                "end": 193
+            }
+        },
+        "buggy_44.sol": {
+            "EventMetadata": {
+                "start": 8,
+                "end": 21
+            },
+            "Operated": {
+                "start": 25,
+                "end": 107
+            },
+            "ProofHashes": {
+                "start": 111,
+                "end": 136
+            },
+            "MultiHashWrapper": {
+                "start": 145,
+                "end": 199
+            },
+            "iFactory": {
+                "start": 210,
+                "end": 228
+            },
+            "Template": {
+                "start": 232,
+                "end": 272
+            },
+            "Feed": {
+                "start": 280,
+                "end": 362
+            }
+        },
+        "buggy_27.sol": {
+            "IERC20": {
+                "start": 7,
+                "end": 17
+            },
+            "SafeMath": {
+                "start": 19,
+                "end": 50
+            },
+            "Ownable": {
+                "start": 52,
+                "end": 81
+            },
+            "ERC20Detailed": {
+                "start": 83,
+                "end": 114
+            },
+            "DanPanCoin": {
+                "start": 116,
+                "end": 404
+            }
+        },
+        "buggy_24.sol": {
+            "SafeMath": {
+                "start": 22,
+                "end": 165
+            },
+            "FomoFeast": {
+                "start": 173,
+                "end": 811
+            }
+        },
+        "buggy_43.sol": {
+            "EventMetadata": {
+                "start": 8,
+                "end": 21
+            },
+            "Operated": {
+                "start": 25,
+                "end": 107
+            },
+            "MultiHashWrapper": {
+                "start": 116,
+                "end": 170
+            },
+            "iFactory": {
+                "start": 181,
+                "end": 199
+            },
+            "ProofHash": {
+                "start": 203,
+                "end": 230
+            },
+            "Template": {
+                "start": 234,
+                "end": 274
+            },
+            "Post": {
+                "start": 281,
+                "end": 347
+            }
+        },
+        "buggy_40.sol": {
+            "SafeMath": {
+                "start": 20,
+                "end": 111
+            },
+            "IERC20": {
+                "start": 118,
+                "end": 187
+            },
+            "ERC20": {
+                "start": 213,
+                "end": 444
+            },
+            "ERC20Detailed": {
+                "start": 449,
+                "end": 509
+            },
+            "SimpleSwapCoin": {
+                "start": 511,
+                "end": 517
+            }
+        },
+        "buggy_47.sol": {
+            "ERC20Interface": {
+                "start": 11,
+                "end": 35
+            },
+            "AcunarToken": {
+                "start": 37,
+                "end": 123
+            },
+            "AcunarIEO": {
+                "start": 126,
+                "end": 291
+            }
+        },
+        "buggy_49.sol": {
+            "TAMC": {
+                "start": 7,
+                "end": 78
+            }
+        },
+        "buggy_3.sol": {
+            "CareerOnToken": {
+                "start": 7,
+                "end": 179
+            }
+        },
+        "buggy_23.sol": {
+            "IERC20": {
+                "start": 13,
+                "end": 29
+            },
+            "SafeMath": {
+                "start": 39,
+                "end": 97
+            },
+            "ERC20": {
+                "start": 117,
+                "end": 321
+            },
+            "ERC20Burnable": {
+                "start": 332,
+                "end": 353
+            },
+            "ERC20Detailed": {
+                "start": 366,
+                "end": 411
+            },
+            "AGR": {
+                "start": 420,
+                "end": 426
+            }
+        },
+        "buggy_5.sol": {
+            "Ownable": {
+                "start": 7,
+                "end": 47
+            },
+            "TokenERC20": {
+                "start": 49,
+                "end": 219
+            },
+            "TTC": {
+                "start": 225,
+                "end": 317
+            }
+        },
+        "buggy_38.sol": {
+            "IERC20": {
+                "start": 7,
+                "end": 17
+            },
+            "SafeMath": {
+                "start": 19,
+                "end": 50
+            },
+            "ERC20Detailed": {
+                "start": 52,
+                "end": 89
+            },
+            "BIGBOMBv2": {
+                "start": 91,
+                "end": 257
+            }
+        },
+        "buggy_34.sol": {
+            "Ownable": {
+                "start": 8,
+                "end": 31
+            },
+            "SafeMath": {
+                "start": 34,
+                "end": 125
+            },
+            "LollypopToken": {
+                "start": 127,
+                "end": 513
+            }
+        },
+        "buggy_35.sol": {
+            "SafeMath": {
+                "start": 37,
+                "end": 128
+            },
+            "owned": {
+                "start": 135,
+                "end": 171
+            },
+            "ERC20Essential": {
+                "start": 173,
+                "end": 179
+            },
+            "BitpayerDEX": {
+                "start": 182,
+                "end": 415
+            }
+        },
+        "buggy_36.sol": {
+            "owned": {
+                "start": 8,
+                "end": 27
+            },
+            "tokenRecipient": {
+                "start": 30,
+                "end": 51
+            },
+            "Token": {
+                "start": 54,
+                "end": 76
+            },
+            "SafeMath": {
+                "start": 83,
+                "end": 141
+            },
+            "MindsyncPlatform": {
+                "start": 147,
+                "end": 451
+            }
+        },
+        "buggy_7.sol": {
+            "Ownable": {
+                "start": 7,
+                "end": 157
+            },
+            "AccountWallet": {
+                "start": 159,
+                "end": 232
+            }
+        },
+        "buggy_6.sol": {
+            "Ownable": {
+                "start": 7,
+                "end": 157
+            },
+            "ChannelWallet": {
+                "start": 159,
+                "end": 226
+            }
+        },
+        "buggy_11.sol": {
+            "SafeMath": {
+                "start": 8,
+                "end": 25
+            },
+            "ERC20Interface": {
+                "start": 27,
+                "end": 53
+            },
+            "ApproveAndCallFallBack": {
+                "start": 56,
+                "end": 60
+            },
+            "Owned": {
+                "start": 63,
+                "end": 99
+            },
+            "ForTheBlockchain": {
+                "start": 102,
+                "end": 260
+            }
+        },
+        "buggy_16.sol": {
+            "SafeMath": {
+                "start": 14,
+                "end": 47
+            },
+            "ERC20Interface": {
+                "start": 50,
+                "end": 74
+            },
+            "Owned": {
+                "start": 77,
+                "end": 113
+            },
+            "ExclusivePlatform": {
+                "start": 115,
+                "end": 320
+            }
+        },
+        "buggy_9.sol": {
+            "SafeMath": {
+                "start": 11,
+                "end": 51
+            },
+            "Ownable": {
+                "start": 54,
+                "end": 69
+            },
+            "TokenERC20": {
+                "start": 71,
+                "end": 290
+            },
+            "XLToken": {
+                "start": 296,
+                "end": 302
+            }
+        },
+        "buggy_33.sol": {
+            "Owned": {
+                "start": 7,
+                "end": 35
+            },
+            "SafeMath": {
+                "start": 37,
+                "end": 68
+            },
+            "Token": {
+                "start": 70,
+                "end": 80
+            },
+            "Staking": {
+                "start": 82,
+                "end": 183
+            }
+        },
+        "buggy_28.sol": {
+            "IERC20": {
+                "start": 7,
+                "end": 17
+            },
+            "SafeMath": {
+                "start": 19,
+                "end": 50
+            },
+            "ERC20Detailed": {
+                "start": 52,
+                "end": 89
+            },
+            "HYDROGEN": {
+                "start": 91,
+                "end": 257
+            }
+        },
+        "buggy_2.sol": {
+            "CareerOnToken": {
+                "start": 7,
+                "end": 171
+            }
+        },
+        "buggy_32.sol": {
+            "SafeMath": {
+                "start": 19,
+                "end": 41
+            },
+            "ERC20TokenInterface": {
+                "start": 46,
+                "end": 64
+            },
+            "ERC20Token": {
+                "start": 70,
+                "end": 155
+            },
+            "AsseteGram": {
+                "start": 161,
+                "end": 193
+            }
+        },
+        "buggy_17.sol": {
+            "SafeMath": {
+                "start": 8,
+                "end": 43
+            },
+            "owned": {
+                "start": 48,
+                "end": 69
+            },
+            "tokenRecipient": {
+                "start": 71,
+                "end": 73
+            },
+            "TokenERC20": {
+                "start": 76,
+                "end": 164
+            },
+            "AZT": {
+                "start": 171,
+                "end": 269
+            }
+        },
+        "buggy_39.sol": {
+            "TAMCContract": {
+                "start": 7,
+                "end": 78
+            }
+        },
+        "buggy_14.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 47
+            },
+            "IERC20": {
+                "start": 49,
+                "end": 66
+            },
+            "ERC20": {
+                "start": 69,
+                "end": 174
+            },
+            "ERC20Detailed": {
+                "start": 176,
+                "end": 217
+            },
+            "SaveWon": {
+                "start": 219,
+                "end": 234
+            }
+        },
+        "buggy_12.sol": {
+            "SafeMath": {
+                "start": 11,
+                "end": 93
+            },
+            "ERC20": {
+                "start": 96,
+                "end": 121
+            },
+            "ERC223ReceivingContract": {
+                "start": 124,
+                "end": 128
+            },
+            "ERC223": {
+                "start": 130,
+                "end": 144
+            },
+            "ERC223Token": {
+                "start": 147,
+                "end": 214
+            },
+            "Owned": {
+                "start": 220,
+                "end": 235
+            },
+            "Grand": {
+                "start": 238,
+                "end": 350
+            }
+        },
+        "buggy_1.sol": {
+            "EIP20Interface": {
+                "start": 6,
+                "end": 64
+            },
+            "HotDollarsToken": {
+                "start": 66,
+                "end": 144
+            }
+        },
+        "buggy_42.sol": {
+            "Owned": {
+                "start": 7,
+                "end": 35
+            },
+            "SafeMath": {
+                "start": 37,
+                "end": 68
+            },
+            "Token": {
+                "start": 70,
+                "end": 80
+            },
+            "Staking": {
+                "start": 82,
+                "end": 182
+            }
+        },
+        "buggy_25.sol": {
+            "WhiteBetting": {
+                "start": 12,
+                "end": 242
+            }
+        }
+    },
+    "clean": {
+        "0x787f552bdc17332c98aa360748884513e3cb401a.sol": {
+            "SafeMath": {
+                "start": 28,
+                "end": 86
+            },
+            "Ownable": {
+                "start": 95,
+                "end": 159
+            },
+            "IErc20": {
+                "start": 171,
+                "end": 238
+            },
+            "Monetary": {
+                "start": 248,
+                "end": 263
+            },
+            "IPriceOracle": {
+                "start": 273,
+                "end": 296
+            },
+            "Require": {
+                "start": 306,
+                "end": 601
+            },
+            "Math": {
+                "start": 611,
+                "end": 723
+            },
+            "Time": {
+                "start": 733,
+                "end": 744
+            },
+            "IMakerOracle": {
+                "start": 754,
+                "end": 777
+            },
+            "IOasisDex": {
+                "start": 787,
+                "end": 1084
+            },
+            "DaiPriceOracle": {
+                "start": 1094,
+                "end": 1419
+            }
+        },
+        "0x0597edbd535f2c76780818cd55cae87d7e035f5b.sol": {
+            "ERC20Basic": {
+                "start": 9,
+                "end": 14
+            },
+            "SafeMath": {
+                "start": 20,
+                "end": 60
+            },
+            "ERC20": {
+                "start": 67,
+                "end": 72
+            },
+            "BasicToken": {
+                "start": 79,
+                "end": 118
+            },
+            "StandardToken": {
+                "start": 128,
+                "end": 214
+            },
+            "MOONToken": {
+                "start": 223,
+                "end": 240
+            }
+        },
+        "0x319e49a0a4213529f9a3a97ca67c32a04093e32c.sol": {
+            "Ownable": {
+                "start": 3,
+                "end": 3
+            },
+            "CREDITS": {
+                "start": 4,
+                "end": 4
+            },
+            "CREDITCoins": {
+                "start": 5,
+                "end": 17
+            },
+            "ContractSendCreditCoins": {
+                "start": 19,
+                "end": 38
+            }
+        },
+        "0x708ba31efde01cc53901248e7c174e0a74a822a0.sol": {
+            "IERC20": {
+                "start": 3,
+                "end": 19
+            },
+            "Ownable": {
+                "start": 21,
+                "end": 55
+            },
+            "SafeMath": {
+                "start": 58,
+                "end": 83
+            },
+            "BasementOperationRealm": {
+                "start": 85,
+                "end": 137
+            }
+        },
+        "0x494a0cece54896b2b5308773a0ebff47eb55e1c3.sol": {
+            "SafeMath": {
+                "start": 3,
+                "end": 61
+            },
+            "owned": {
+                "start": 63,
+                "end": 84
+            },
+            "ERC20": {
+                "start": 87,
+                "end": 99
+            },
+            "StandardToken": {
+                "start": 102,
+                "end": 139
+            },
+            "ioeXTokenERC20": {
+                "start": 142,
+                "end": 405
+            }
+        },
+        "0x609d6f40eed97ec8a96cb9bca78d73caa6225b8a.sol": {
+            "SafeMath": {
+                "start": 8,
+                "end": 66
+            },
+            "IERC20": {
+                "start": 72,
+                "end": 88
+            },
+            "Claimable": {
+                "start": 97,
+                "end": 146
+            },
+            "Keeper": {
+                "start": 158,
+                "end": 241
+            }
+        },
+        "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 34
+            },
+            "Ownable": {
+                "start": 41,
+                "end": 73
+            },
+            "ERC20Basic": {
+                "start": 78,
+                "end": 83
+            },
+            "ERC20": {
+                "start": 89,
+                "end": 94
+            },
+            "BasicToken": {
+                "start": 100,
+                "end": 158
+            },
+            "StandardToken": {
+                "start": 168,
+                "end": 238
+            },
+            "Pausable": {
+                "start": 245,
+                "end": 285
+            },
+            "PausableToken": {
+                "start": 288,
+                "end": 313
+            },
+            "MintableToken": {
+                "start": 316,
+                "end": 341
+            },
+            "MyAdvancedToken": {
+                "start": 343,
+                "end": 397
+            }
+        },
+        "0x536c2622748118a82bc9fb15a450d828966d9761.sol": {
+            "Prism": {
+                "start": 1,
+                "end": 23
+            }
+        },
+        "0x468b8809ec8e0ab8cd56050f820b028417218ef3.sol": {
+            "Ownable": {
+                "start": 10,
+                "end": 81
+            },
+            "Operable": {
+                "start": 88,
+                "end": 120
+            },
+            "BlacklistStore": {
+                "start": 127,
+                "end": 141
+            }
+        },
+        "0x748d84c273334af1349ebee96bb48c2a17b3b416.sol": {
+            "SafeMath": {
+                "start": 2,
+                "end": 24
+            },
+            "owned": {
+                "start": 25,
+                "end": 40
+            },
+            "Verification": {
+                "start": 42,
+                "end": 70
+            }
+        },
+        "0x0695a5d83639c4ec38244768e0e93bde775488dc.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 65
+            },
+            "IERC20": {
+                "start": 73,
+                "end": 100
+            },
+            "ERC20": {
+                "start": 111,
+                "end": 309
+            },
+            "Roles": {
+                "start": 316,
+                "end": 349
+            },
+            "MinterRole": {
+                "start": 352,
+                "end": 390
+            },
+            "ERC20Mintable": {
+                "start": 397,
+                "end": 415
+            },
+            "ERC20Burnable": {
+                "start": 422,
+                "end": 440
+            },
+            "INOMIX": {
+                "start": 450,
+                "end": 466
+            }
+        },
+        "0x646b41183bb0d18c01f75f630688d613a5774dc7.sol": {
+            "SafeMath": {
+                "start": 10,
+                "end": 28
+            },
+            "ERC20Interface": {
+                "start": 37,
+                "end": 50
+            },
+            "ApproveAndCallFallBack": {
+                "start": 58,
+                "end": 60
+            },
+            "Owned": {
+                "start": 67,
+                "end": 92
+            },
+            "BLUEKEY": {
+                "start": 100,
+                "end": 236
+            }
+        },
+        "0x312b34333d7d21a412af8ae029125cf1aab81c8e.sol": {
+            "SafeMath": {
+                "start": 8,
+                "end": 48
+            },
+            "ERC20Basic": {
+                "start": 55,
+                "end": 60
+            },
+            "BasicToken": {
+                "start": 66,
+                "end": 104
+            },
+            "ERC20": {
+                "start": 110,
+                "end": 115
+            },
+            "StandardToken": {
+                "start": 124,
+                "end": 194
+            },
+            "SafeERC20": {
+                "start": 202,
+                "end": 214
+            },
+            "Owned": {
+                "start": 216,
+                "end": 227
+            },
+            "TokenVesting": {
+                "start": 235,
+                "end": 348
+            },
+            "TokenVault": {
+                "start": 355,
+                "end": 375
+            },
+            "BurnableToken": {
+                "start": 381,
+                "end": 400
+            },
+            "LCGC_Token": {
+                "start": 402,
+                "end": 566
+            }
+        },
+        "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f.sol": {
+            "Ownable": {
+                "start": 10,
+                "end": 63
+            },
+            "ERC20Basic": {
+                "start": 72,
+                "end": 77
+            },
+            "SafeMath": {
+                "start": 85,
+                "end": 129
+            },
+            "BasicToken": {
+                "start": 137,
+                "end": 174
+            },
+            "ERC20": {
+                "start": 182,
+                "end": 195
+            },
+            "StandardToken": {
+                "start": 206,
+                "end": 314
+            },
+            "BurnableToken": {
+                "start": 322,
+                "end": 344
+            },
+            "StandardBurnableToken": {
+                "start": 352,
+                "end": 366
+            },
+            "Amplify": {
+                "start": 370,
+                "end": 411
+            }
+        },
+        "0x517c62136a2d0ba66d0590644c9763992253e90b.sol": {
+            "SafeMath": {
+                "start": 21,
+                "end": 38
+            },
+            "ERC20Interface": {
+                "start": 45,
+                "end": 55
+            },
+            "ApproveAndCallFallBack": {
+                "start": 63,
+                "end": 66
+            },
+            "Owned": {
+                "start": 72,
+                "end": 96
+            },
+            "ITSToken": {
+                "start": 103,
+                "end": 233
+            }
+        },
+        "0x334a934fa07fce4fb7b1c89457fe9754c08f4d41.sol": {
+            "Ownable": {
+                "start": 14,
+                "end": 77
+            },
+            "IERC20": {
+                "start": 87,
+                "end": 156
+            },
+            "ERC20Detailed": {
+                "start": 166,
+                "end": 212
+            },
+            "SafeMath": {
+                "start": 231,
+                "end": 322
+            },
+            "ERC20": {
+                "start": 353,
+                "end": 552
+            },
+            "Roles": {
+                "start": 562,
+                "end": 591
+            },
+            "MinterRole": {
+                "start": 598,
+                "end": 636
+            },
+            "ERC20Mintable": {
+                "start": 650,
+                "end": 662
+            },
+            "PauserRole": {
+                "start": 669,
+                "end": 707
+            },
+            "Pausable": {
+                "start": 723,
+                "end": 782
+            },
+            "ERC20Pausable": {
+                "start": 794,
+                "end": 814
+            },
+            "CrowdliToken": {
+                "start": 827,
+                "end": 852
+            }
+        },
+        "0x676abde481967851b0c28e81bde8561e756d75e8.sol": {
+            "Ownable": {
+                "start": 8,
+                "end": 43
+            },
+            "ModulumInvestorsWhitelist": {
+                "start": 51,
+                "end": 86
+            }
+        },
+        "0x376c128eb3d734912de09f6ad9a8609e3f87e13f.sol": {
+            "RevertReason": {
+                "start": 3,
+                "end": 18
+            }
+        },
+        "0x755cdba6ae4f479f7164792b318b2a06c759833b.sol": {
+            "DAO": {
+                "start": 5,
+                "end": 9
+            },
+            "WithdrawDAO": {
+                "start": 11,
+                "end": 30
+            }
+        },
+        "0x395a200ab37e622ad721f6c0d2fa913b522c84cf.sol": {
+            "SafeMath": {
+                "start": 6,
+                "end": 30
+            },
+            "Ownable": {
+                "start": 31,
+                "end": 61
+            },
+            "ERC20Interface": {
+                "start": 68,
+                "end": 78
+            },
+            "RADION": {
+                "start": 84,
+                "end": 262
+            }
+        },
+        "0x535bfc6883442f2ebe26171c2716cb25b623792c.sol": {
+            "SafeMath": {
+                "start": 4,
+                "end": 38
+            },
+            "ERC20Interface": {
+                "start": 40,
+                "end": 59
+            },
+            "ApproveAndCallFallBack": {
+                "start": 61,
+                "end": 65
+            },
+            "Owned": {
+                "start": 67,
+                "end": 111
+            },
+            "DissolutionToken": {
+                "start": 113,
+                "end": 238
+            }
+        },
+        "0x684ae11a577080ec13877c6d28ac4f45b7c00966.sol": {
+            "Ownable": {
+                "start": 5,
+                "end": 21
+            },
+            "Manageable": {
+                "start": 23,
+                "end": 46
+            },
+            "MytilcoinStorage": {
+                "start": 48,
+                "end": 134
+            }
+        },
+        "0x309f39a2dc38f99a756c10badd85acc09de316c4.sol": {
+            "calc": {
+                "start": 1,
+                "end": 9
+            }
+        },
+        "0x433d84a1c0b650eac4fc1fb570798cf655ce24c0.sol": {
+            "HackerSpaceBarneysToken": {
+                "start": 1,
+                "end": 18
+            }
+        },
+        "0x364aa6b380cb4f9cee6711326d6b33a81ce1998c.sol": {
+            "SafeMath": {
+                "start": 10,
+                "end": 27
+            },
+            "ERC20Interface": {
+                "start": 33,
+                "end": 43
+            },
+            "ApproveAndCallFallBack": {
+                "start": 51,
+                "end": 53
+            },
+            "Owned": {
+                "start": 59,
+                "end": 84
+            },
+            "Metha": {
+                "start": 88,
+                "end": 242
+            }
+        },
+        "0x598c9a4f069dc076984868873c01e78a905d50e6.sol": {
+            "SafeMath": {
+                "start": 11,
+                "end": 69
+            },
+            "IERC20": {
+                "start": 75,
+                "end": 91
+            },
+            "ERC20": {
+                "start": 103,
+                "end": 319
+            },
+            "LedgeriumToken": {
+                "start": 329,
+                "end": 342
+            }
+        },
+        "0x664e6db4044f23c95de63ec299aaa9b39c59328d.sol": {
+            "SafeMath": {
+                "start": 19,
+                "end": 58
+            },
+            "Ownable": {
+                "start": 65,
+                "end": 95
+            },
+            "CutdownToken": {
+                "start": 101,
+                "end": 105
+            },
+            "ApproveAndCallFallback": {
+                "start": 111,
+                "end": 113
+            },
+            "DigitizeCoin": {
+                "start": 119,
+                "end": 357
+            }
+        },
+        "0x0364a98148b7031451e79b93449b20090d79702a.sol": {
+            "ERC20Interface": {
+                "start": 18,
+                "end": 28
+            },
+            "Owned": {
+                "start": 34,
+                "end": 58
+            },
+            "Admined": {
+                "start": 64,
+                "end": 89
+            },
+            "DeveryRegistry": {
+                "start": 95,
+                "end": 343
+            }
+        },
+        "0x744c9c36d1cc3268a4b9b2e28c60b1752c85e97d.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 28
+            },
+            "ERC20Interface": {
+                "start": 33,
+                "end": 44
+            },
+            "Owned": {
+                "start": 48,
+                "end": 80
+            },
+            "AlluvaToken": {
+                "start": 84,
+                "end": 212
+            }
+        },
+        "0x352e504813b9e0b30f9ca70efc27a52d298f6697.sol": {
+            "AmIOnTheFork": {
+                "start": 4,
+                "end": 6
+            },
+            "ForkSweeper": {
+                "start": 8,
+                "end": 27
+            }
+        },
+        "0x395dc9a82e3eef962b0355a3d4e6819e9af776d2.sol": {
+            "ERC20": {
+                "start": 12,
+                "end": 20
+            },
+            "CoinCasso": {
+                "start": 23,
+                "end": 106
+            },
+            "SafeMath": {
+                "start": 111,
+                "end": 136
+            }
+        },
+        "0x522b0f328ca716b5b676cab767372d48853ff040.sol": {
+            "ERC20Basic": {
+                "start": 13,
+                "end": 23
+            },
+            "SafeMath": {
+                "start": 35,
+                "end": 115
+            },
+            "ERC223": {
+                "start": 122,
+                "end": 126
+            },
+            "ERC223ReceivingContract": {
+                "start": 132,
+                "end": 141
+            },
+            "PGGamePlatform": {
+                "start": 148,
+                "end": 314
+            }
+        },
+        "0x388b2f93e822d39d45ce748f2b827aa1df657c39.sol": {
+            "SafeMathLib": {
+                "start": 4,
+                "end": 25
+            },
+            "ERC20Lib": {
+                "start": 28,
+                "end": 75
+            },
+            "FQCoin": {
+                "start": 85,
+                "end": 128
+            }
+        },
+        "0x411a4bf072d099069249846532acd874c131355e.sol": {
+            "ERC20": {
+                "start": 3,
+                "end": 14
+            },
+            "ERC223": {
+                "start": 21,
+                "end": 28
+            },
+            "Ownable": {
+                "start": 35,
+                "end": 91
+            },
+            "SafeMath": {
+                "start": 97,
+                "end": 141
+            },
+            "Generic223Receiver": {
+                "start": 143,
+                "end": 197
+            },
+            "FISH": {
+                "start": 199,
+                "end": 329
+            }
+        },
+        "0x560b63bb82ce25c2c9b7a63c96378f6b1f9ea5b0.sol": {
+            "ERC20TokenInterface": {
+                "start": 3,
+                "end": 10
+            },
+            "SafeMath": {
+                "start": 12,
+                "end": 38
+            },
+            "CliffTokenVesting": {
+                "start": 46,
+                "end": 155
+            }
+        },
+        "0x697fc9371a33a98078543b777ca7d5c8009d6d0b.sol": {
+            "SafeMath": {
+                "start": 8,
+                "end": 48
+            },
+            "Math": {
+                "start": 54,
+                "end": 70
+            },
+            "ERC20Basic": {
+                "start": 77,
+                "end": 82
+            },
+            "ERC20": {
+                "start": 88,
+                "end": 101
+            },
+            "BasicToken": {
+                "start": 107,
+                "end": 143
+            },
+            "BurnableToken": {
+                "start": 149,
+                "end": 171
+            },
+            "StandardToken": {
+                "start": 180,
+                "end": 293
+            },
+            "Ownable": {
+                "start": 300,
+                "end": 344
+            },
+            "MintableToken": {
+                "start": 352,
+                "end": 409
+            },
+            "Pausable": {
+                "start": 411,
+                "end": 449
+            },
+            "PausableToken": {
+                "start": 451,
+                "end": 508
+            },
+            "MoaCOIN": {
+                "start": 514,
+                "end": 525
+            }
+        },
+        "0x603a595145dcb1d49782f569ff4780de98f678e6.sol": {
+            "DependentOnIPFS": {
+                "start": 24,
+                "end": 42
+            },
+            "Poll": {
+                "start": 51,
+                "end": 133
+            },
+            "AccountRegistryInterface": {
+                "start": 135,
+                "end": 144
+            },
+            "SigningLogicInterface": {
+                "start": 146,
+                "end": 204
+            },
+            "VotingCenter": {
+                "start": 213,
+                "end": 260
+            }
+        },
+        "0x0622d8ec245f14d6ac137989fb842fb68ab6d837.sol": {
+            "IERC20": {
+                "start": 23,
+                "end": 34
+            },
+            "IERC223": {
+                "start": 36,
+                "end": 48
+            },
+            "ContractReceiver": {
+                "start": 50,
+                "end": 54
+            },
+            "SafeMath": {
+                "start": 60,
+                "end": 120
+            },
+            "StandardToken": {
+                "start": 123,
+                "end": 226
+            },
+            "ACLYD": {
+                "start": 228,
+                "end": 239
+            }
+        },
+        "0x395d3d67f3ef6c626da4a06a7bffecfc4f089b78.sol": {
+            "ERC20Basic": {
+                "start": 8,
+                "end": 13
+            },
+            "SerenityTeamAllocator": {
+                "start": 17,
+                "end": 95
+            }
+        },
+        "0x773dcefa15b47e77c7955e5d0383bafecd672734.sol": {
+            "SafeMath": {
+                "start": 12,
+                "end": 56
+            },
+            "Ownable": {
+                "start": 58,
+                "end": 91
+            },
+            "ERC20Basic": {
+                "start": 94,
+                "end": 99
+            },
+            "ERC20": {
+                "start": 101,
+                "end": 106
+            },
+            "BasicToken": {
+                "start": 108,
+                "end": 134
+            },
+            "StandardToken": {
+                "start": 143,
+                "end": 213
+            },
+            "BurnableToken": {
+                "start": 219,
+                "end": 241
+            },
+            "MintableToken": {
+                "start": 248,
+                "end": 273
+            },
+            "Pausable": {
+                "start": 282,
+                "end": 319
+            },
+            "PausableToken": {
+                "start": 323,
+                "end": 344
+            },
+            "SignalCoin": {
+                "start": 347,
+                "end": 352
+            }
+        },
+        "0x746dda2ea243400d5a63e0700f190ab79f06489e.sol": {
+            "IERC20": {
+                "start": 9,
+                "end": 25
+            },
+            "SafeMath": {
+                "start": 27,
+                "end": 85
+            },
+            "ERC20": {
+                "start": 87,
+                "end": 259
+            },
+            "ERC20Detailed": {
+                "start": 261,
+                "end": 292
+            },
+            "BOSAGORA": {
+                "start": 294,
+                "end": 302
+            }
+        },
+        "0x794d1d86685d45f9297c2fe80f295aa7f8285bb4.sol": {
+            "ERC20Interface": {
+                "start": 11,
+                "end": 37
+            },
+            "SafeMath": {
+                "start": 39,
+                "end": 97
+            },
+            "PALSToken": {
+                "start": 99,
+                "end": 233
+            }
+        },
+        "0x673a5fb0639d35ab6e157c1e6377d0096ab74128.sol": {
+            "SafeMath": {
+                "start": 8,
+                "end": 66
+            },
+            "IERC20": {
+                "start": 72,
+                "end": 88
+            },
+            "ERC20Detailed": {
+                "start": 97,
+                "end": 128
+            },
+            "ERC20": {
+                "start": 142,
+                "end": 314
+            },
+            "ERC20Burnable": {
+                "start": 320,
+                "end": 337
+            },
+            "ERC20Mintable": {
+                "start": 343,
+                "end": 370
+            },
+            "ERC20Capped": {
+                "start": 376,
+                "end": 395
+            },
+            "IERC20Freezable": {
+                "start": 397,
+                "end": 400
+            },
+            "ERC20Freezable": {
+                "start": 402,
+                "end": 449
+            },
+            "L2T": {
+                "start": 454,
+                "end": 469
+            }
+        },
+        "0x538cc4af284ba376ad5bad0d364fbc9fb302546a.sol": {
+            "SafeMath": {
+                "start": 12,
+                "end": 70
+            },
+            "Ownable": {
+                "start": 78,
+                "end": 142
+            },
+            "EtherPornStars": {
+                "start": 144,
+                "end": 312
+            }
+        },
+        "0x489cbb70668f5c6e0160ef57fb10c97ddff3548e.sol": {
+            "ERC20Basic": {
+                "start": 8,
+                "end": 14
+            },
+            "ERC20": {
+                "start": 20,
+                "end": 25
+            },
+            "Ownable": {
+                "start": 27,
+                "end": 60
+            },
+            "TokenLocker": {
+                "start": 62,
+                "end": 106
+            }
+        },
+        "0x0371a82e4a9d0a4312f3ee2ac9c6958512891372.sol": {
+            "ERC20Basic": {
+                "start": 32,
+                "end": 37
+            },
+            "ERC20": {
+                "start": 45,
+                "end": 50
+            },
+            "SafeMath": {
+                "start": 59,
+                "end": 100
+            },
+            "StandardToken": {
+                "start": 110,
+                "end": 164
+            },
+            "BurnableToken": {
+                "start": 168,
+                "end": 185
+            },
+            "UpgradeAgent": {
+                "start": 217,
+                "end": 228
+            },
+            "UpgradeableToken": {
+                "start": 236,
+                "end": 354
+            },
+            "Ownable": {
+                "start": 370,
+                "end": 401
+            },
+            "ReleasableToken": {
+                "start": 409,
+                "end": 488
+            },
+            "SafeMathLib": {
+                "start": 516,
+                "end": 535
+            },
+            "MintableToken": {
+                "start": 546,
+                "end": 592
+            },
+            "CrowdsaleToken": {
+                "start": 607,
+                "end": 691
+            },
+            "BurnableCrowdsaleToken": {
+                "start": 698,
+                "end": 705
+            }
+        },
+        "0x580f18c090914eb9edbb3d6a810c9789a91c7ba4.sol": {
+            "Emitter": {
+                "start": 3,
+                "end": 8
+            },
+            "Caller": {
+                "start": 10,
+                "end": 21
+            }
+        },
+        "0x353cb8bd3f9d4216546d6bfb47cdeab6ae1b3e3d.sol": {
+            "StoreIPHash": {
+                "start": 3,
+                "end": 10
+            }
+        },
+        "0x603c096b5d19d631c58202931de0d11eb9accafa.sol": {
+            "Uint256HashTable": {
+                "start": 3,
+                "end": 18
+            }
+        },
+        "0x459c780413b46552e2314f5840cab416e4b689af.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 24
+            },
+            "ERC20Interface": {
+                "start": 26,
+                "end": 36
+            },
+            "ApproveAndCallFallBack": {
+                "start": 38,
+                "end": 40
+            },
+            "Owned": {
+                "start": 42,
+                "end": 66
+            },
+            "CalegariToken": {
+                "start": 68,
+                "end": 136
+            }
+        },
+        "0x0785d6edc7c7a19cbcc5fb56a406b1351fc907dc.sol": {
+            "SafeMath": {
+                "start": 3,
+                "end": 30
+            },
+            "Ownable": {
+                "start": 32,
+                "end": 52
+            },
+            "ERC20Basic": {
+                "start": 54,
+                "end": 59
+            },
+            "BasicToken": {
+                "start": 61,
+                "end": 86
+            },
+            "BurnableToken": {
+                "start": 88,
+                "end": 100
+            },
+            "ERC20": {
+                "start": 102,
+                "end": 107
+            },
+            "StandardToken": {
+                "start": 109,
+                "end": 153
+            },
+            "Pausable": {
+                "start": 155,
+                "end": 193
+            },
+            "PausableToken": {
+                "start": 195,
+                "end": 216
+            },
+            "FreezableToken": {
+                "start": 218,
+                "end": 248
+            },
+            "TimeLockToken": {
+                "start": 250,
+                "end": 282
+            },
+            "GoldToken": {
+                "start": 284,
+                "end": 297
+            }
+        },
+        "0x337e7416685a59af9ff844f4504d64a3a1eb4e43.sol": {
+            "SafeMath": {
+                "start": 3,
+                "end": 42
+            },
+            "IERC20": {
+                "start": 45,
+                "end": 61
+            },
+            "ERC20": {
+                "start": 63,
+                "end": 125
+            },
+            "ERC20Detailed": {
+                "start": 127,
+                "end": 158
+            },
+            "Chairman": {
+                "start": 160,
+                "end": 167
+            }
+        },
+        "0x484fa8db2f005a7c19f4e3049fcc0fa363384cb5.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 31
+            },
+            "token": {
+                "start": 42,
+                "end": 42
+            },
+            "Crowdsale": {
+                "start": 43,
+                "end": 144
+            }
+        },
+        "0x322bfda9f9ab156d12bd107b1c84ba0e06e46278.sol": {
+            "SimpleStorage": {
+                "start": 3,
+                "end": 17
+            }
+        },
+        "0x349c14bca4e70d5ea4a4c08e7cffce51708b4887.sol": {
+            "IERC20": {
+                "start": 3,
+                "end": 19
+            },
+            "SafeMath": {
+                "start": 21,
+                "end": 79
+            },
+            "ERC20": {
+                "start": 81,
+                "end": 250
+            },
+            "ERC20Detailed": {
+                "start": 252,
+                "end": 283
+            },
+            "Ownable": {
+                "start": 285,
+                "end": 349
+            },
+            "HealthyLife": {
+                "start": 351,
+                "end": 372
+            }
+        },
+        "0x341e790174e3a4d35b65fdc067b6b5634a61caea.sol": {
+            "AmIOnTheFork": {
+                "start": 1,
+                "end": 3
+            },
+            "ReplaySafeSplit": {
+                "start": 8,
+                "end": 27
+            }
+        },
+        "0x325c96fa60eeb3a9f88bab75278b5ff18398c919.sol": {
+            "Ownable": {
+                "start": 8,
+                "end": 49
+            },
+            "InvestorWhiteList": {
+                "start": 51,
+                "end": 84
+            }
+        },
+        "0x388e1a3249a93932ee9c84b8fecde2a0492228f9.sol": {
+            "IERC20": {
+                "start": 7,
+                "end": 23
+            },
+            "SafeMath": {
+                "start": 29,
+                "end": 87
+            },
+            "ERC20": {
+                "start": 100,
+                "end": 269
+            },
+            "MyToken": {
+                "start": 277,
+                "end": 297
+            }
+        },
+        "0x401ce0d7b7ddbb6507165b0adab7dd33fef5d16d.sol": {
+            "SafeMath": {
+                "start": 4,
+                "end": 29
+            },
+            "ERC20": {
+                "start": 31,
+                "end": 33
+            },
+            "MultiSign": {
+                "start": 35,
+                "end": 116
+            }
+        },
+        "0x656caef69787f1a55c1c4d4faba287163d6c109e.sol": {
+            "ImplementationProvider": {
+                "start": 9,
+                "end": 16
+            },
+            "ZOSLibOwnable": {
+                "start": 32,
+                "end": 96
+            },
+            "ZOSLibAddress": {
+                "start": 110,
+                "end": 130
+            },
+            "ImplementationDirectory": {
+                "start": 143,
+                "end": 208
+            }
+        },
+        "0x494e9eef5d5d553a02ca2537698598b73622730d.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 24
+            },
+            "ERC20Interface": {
+                "start": 31,
+                "end": 41
+            },
+            "ApproveAndCallFallBack": {
+                "start": 49,
+                "end": 51
+            },
+            "Owned": {
+                "start": 57,
+                "end": 81
+            },
+            "FmlSupplyToken": {
+                "start": 88,
+                "end": 212
+            }
+        },
+        "0x616a74e4895bfe762da00b95877f25bef0d0d3c8.sol": {
+            "SafeMath": {
+                "start": 3,
+                "end": 30
+            },
+            "Ownable": {
+                "start": 32,
+                "end": 52
+            },
+            "ERC20Basic": {
+                "start": 54,
+                "end": 59
+            },
+            "BasicToken": {
+                "start": 61,
+                "end": 86
+            },
+            "BurnableToken": {
+                "start": 88,
+                "end": 100
+            },
+            "ERC20": {
+                "start": 102,
+                "end": 107
+            },
+            "StandardToken": {
+                "start": 109,
+                "end": 153
+            },
+            "Pausable": {
+                "start": 155,
+                "end": 193
+            },
+            "PausableToken": {
+                "start": 195,
+                "end": 216
+            },
+            "FreezableToken": {
+                "start": 218,
+                "end": 248
+            },
+            "TimeLockToken": {
+                "start": 250,
+                "end": 282
+            },
+            "GINICON": {
+                "start": 284,
+                "end": 297
+            }
+        },
+        "0x736f7961adfc0f303eb65f889f3670aef81d85ef.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 34
+            },
+            "ERC20": {
+                "start": 36,
+                "end": 45
+            },
+            "CentralBankofMalaysia": {
+                "start": 48,
+                "end": 147
+            }
+        },
+        "0x755e52bea0f7ea8c7dad02b11cdf48f1a9cdaa72.sol": {
+            "SafeMath": {
+                "start": 18,
+                "end": 35
+            },
+            "ERC20Interface": {
+                "start": 42,
+                "end": 52
+            },
+            "ApproveAndCallFallBack": {
+                "start": 60,
+                "end": 62
+            },
+            "Owned": {
+                "start": 68,
+                "end": 92
+            },
+            "EPSBets": {
+                "start": 99,
+                "end": 330
+            }
+        },
+        "0x383faacfa060d83cf5a4da60dd85a68785f401f8.sol": {
+            "ERC20": {
+                "start": 9,
+                "end": 18
+            },
+            "OwnableMintable": {
+                "start": 28,
+                "end": 84
+            },
+            "SafeMath": {
+                "start": 92,
+                "end": 151
+            },
+            "HSYToken": {
+                "start": 162,
+                "end": 403
+            }
+        },
+        "0x549fbdff350c728e71280482721e805cc0916ff9.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 43
+            },
+            "EIP20Interface": {
+                "start": 45,
+                "end": 54
+            },
+            "BasicToken": {
+                "start": 56,
+                "end": 101
+            },
+            "AICoinToken": {
+                "start": 103,
+                "end": 114
+            }
+        },
+        "0x418c64f80ce3ee75245123dc3b7ef5749ac7946b.sol": {
+            "SafeMath": {
+                "start": 22,
+                "end": 49
+            },
+            "Ownable": {
+                "start": 53,
+                "end": 73
+            },
+            "TokenCHK": {
+                "start": 75,
+                "end": 77
+            },
+            "SpaceImpulse_ERC20": {
+                "start": 88,
+                "end": 178
+            },
+            "tokenRecipient": {
+                "start": 182,
+                "end": 184
+            },
+            "SpaceImpulseERC20": {
+                "start": 188,
+                "end": 213
+            }
+        },
+        "0x657f73cb1877eb98ddd3381d825613336d8b8dbe.sol": {
+            "EthJackpot": {
+                "start": 10,
+                "end": 248
+            },
+            "SafeMath": {
+                "start": 251,
+                "end": 285
+            }
+        },
+        "0x489bd62059e03966af9bb17b1d06cf799dabf820.sol": {
+            "IERC20": {
+                "start": 3,
+                "end": 19
+            },
+            "Ownable": {
+                "start": 21,
+                "end": 55
+            },
+            "SafeMath": {
+                "start": 58,
+                "end": 83
+            },
+            "GlobalBlockchainBank": {
+                "start": 85,
+                "end": 137
+            }
+        },
+        "0x361adf7ac4dff1ef44a240050136ba3d2805ef1c.sol": {
+            "TestCert": {
+                "start": 1,
+                "end": 15
+            }
+        },
+        "0x346a8e2a7fe29e32b9174c408a84ef1c7ed7408f.sol": {
+            "BurnableERC20": {
+                "start": 3,
+                "end": 6
+            },
+            "Burner": {
+                "start": 8,
+                "end": 20
+            }
+        },
+        "0x424bc5bfc7898644c91ca59eb9c47fad1a3a6384.sol": {
+            "Greeter": {
+                "start": 3,
+                "end": 15
+            }
+        },
+        "0x762d141b8d9600bde64138762e6fb38efc56dcba.sol": {
+            "IERC20": {
+                "start": 9,
+                "end": 25
+            },
+            "SafeMath": {
+                "start": 32,
+                "end": 90
+            },
+            "IHumanity": {
+                "start": 93,
+                "end": 96
+            },
+            "HumanityRegistry": {
+                "start": 103,
+                "end": 148
+            },
+            "UniversalBasicIncome": {
+                "start": 155,
+                "end": 193
+            }
+        },
+        "0x763a67be94e2494dbffdcc62cee4ed8f761f6770.sol": {
+            "IERC20": {
+                "start": 7,
+                "end": 23
+            },
+            "SafeMath": {
+                "start": 29,
+                "end": 140
+            },
+            "ERC20": {
+                "start": 153,
+                "end": 322
+            },
+            "Ownable": {
+                "start": 329,
+                "end": 393
+            },
+            "BTNY": {
+                "start": 395,
+                "end": 490
+            }
+        },
+        "0x404acb05b709eb5a81d08183b24080c7446875ee.sol": {
+            "SafeMath": {
+                "start": 17,
+                "end": 44
+            },
+            "Token": {
+                "start": 53,
+                "end": 63
+            },
+            "AbstractToken": {
+                "start": 71,
+                "end": 176
+            },
+            "PRIN": {
+                "start": 182,
+                "end": 397
+            }
+        },
+        "0x469b35e513c2e6e8cd14acbeb6d15609c5964138.sol": {
+            "owned": {
+                "start": 3,
+                "end": 18
+            },
+            "TokenERC20": {
+                "start": 20,
+                "end": 71
+            },
+            "A0101Token": {
+                "start": 73,
+                "end": 108
+            }
+        },
+        "0x0531c928d539cbee3aa3bb3dae37ad507c750efc.sol": {
+            "HelloEx": {
+                "start": 2,
+                "end": 9
+            },
+            "Call": {
+                "start": 11,
+                "end": 45
+            }
+        },
+        "0x366cf49c6bc3986b20ecf4fd7c05f0c617332e8c.sol": {
+            "IERC165": {
+                "start": 7,
+                "end": 15
+            },
+            "ERC165": {
+                "start": 22,
+                "end": 56
+            },
+            "IERC721": {
+                "start": 62,
+                "end": 69
+            },
+            "IERC721Receiver": {
+                "start": 76,
+                "end": 93
+            },
+            "SafeMath": {
+                "start": 99,
+                "end": 152
+            },
+            "Address": {
+                "start": 157,
+                "end": 177
+            },
+            "ERC721": {
+                "start": 183,
+                "end": 295
+            },
+            "IERC721Metadata": {
+                "start": 301,
+                "end": 305
+            },
+            "ERC721Metadata": {
+                "start": 307,
+                "end": 414
+            },
+            "GatherStandardTrophies": {
+                "start": 422,
+                "end": 527
+            }
+        },
+        "0x504c53cbd44b68001ec8a2728679c07bb78283f0.sol": {
+            "ItemsStorage": {
+                "start": 3,
+                "end": 270
+            }
+        },
+        "0x309a758f5f33bd4418876b32d38c8d15c59c7799.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 65
+            },
+            "IERC20": {
+                "start": 73,
+                "end": 89
+            },
+            "ERC20": {
+                "start": 105,
+                "end": 277
+            },
+            "Controller": {
+                "start": 286,
+                "end": 379
+            },
+            "LobefyToken": {
+                "start": 389,
+                "end": 474
+            }
+        },
+        "0x719ca90842a9f4d4fb52251db88703e4bc4a07ca.sol": {
+            "ERC20Interface": {
+                "start": 11,
+                "end": 37
+            },
+            "SafeMath": {
+                "start": 39,
+                "end": 97
+            },
+            "DAIX": {
+                "start": 99,
+                "end": 233
+            }
+        },
+        "0x634ca6a844a172c053b3fdee8827c449f849fb16.sol": {
+            "Ownable": {
+                "start": 20,
+                "end": 85
+            },
+            "Pausable": {
+                "start": 89,
+                "end": 127
+            },
+            "IERC20": {
+                "start": 130,
+                "end": 146
+            },
+            "ERC20": {
+                "start": 148,
+                "end": 276
+            },
+            "ERC20Pausable": {
+                "start": 281,
+                "end": 301
+            },
+            "MBTCcontract": {
+                "start": 308,
+                "end": 356
+            },
+            "MBTCToken": {
+                "start": 362,
+                "end": 381
+            },
+            "SafeMath": {
+                "start": 385,
+                "end": 444
+            }
+        },
+        "0x546aa2eae2514494eeadb7bbb35243348983c59d.sol": {
+            "AbstractENS": {
+                "start": 3,
+                "end": 23
+            },
+            "IPublicResolver": {
+                "start": 25,
+                "end": 31
+            },
+            "IFIFSResolvingRegistrar": {
+                "start": 33,
+                "end": 36
+            },
+            "FIFSResolvingRegistrar": {
+                "start": 44,
+                "end": 101
+            }
+        },
+        "0x662b67d00a13faf93254714dd601f5ed49ef2f51.sol": {
+            "owned": {
+                "start": 3,
+                "end": 18
+            },
+            "ORCToken": {
+                "start": 20,
+                "end": 108
+            }
+        },
+        "0x682e075d92a0d5859abba7f3f73104725f1b3b05.sol": {
+            "SafeMath": {
+                "start": 20,
+                "end": 37
+            },
+            "ERC20Interface": {
+                "start": 44,
+                "end": 54
+            },
+            "ApproveAndCallFallBack": {
+                "start": 62,
+                "end": 64
+            },
+            "Owned": {
+                "start": 70,
+                "end": 94
+            },
+            "FixedSupplyToken": {
+                "start": 101,
+                "end": 225
+            }
+        },
+        "0x680ac5ee6db009cb7f10d745ff8c45723463edcd.sol": {
+            "ELFToken": {
+                "start": 3,
+                "end": 6
+            },
+            "ELFBurner": {
+                "start": 8,
+                "end": 16
+            }
+        },
+        "0x675f070e80f89ddcc3f2457d9fe571814741e904.sol": {
+            "DinosaurFarmer2": {
+                "start": 3,
+                "end": 98
+            },
+            "SafeMath": {
+                "start": 100,
+                "end": 141
+            }
+        },
+        "0x521d47adbf9fa743c593219685cf19952d6a0601.sol": {
+            "SafeMath": {
+                "start": 8,
+                "end": 66
+            },
+            "IERC20": {
+                "start": 72,
+                "end": 88
+            },
+            "ERC20": {
+                "start": 102,
+                "end": 274
+            },
+            "ERC20Detailed": {
+                "start": 282,
+                "end": 313
+            },
+            "ExtistenzToken": {
+                "start": 321,
+                "end": 332
+            }
+        },
+        "0x727f95ac680ccf9b5cce14bd92aed8c5c1f01040.sol": {
+            "SafeMath": {
+                "start": 15,
+                "end": 32
+            },
+            "ERC20Interface": {
+                "start": 39,
+                "end": 49
+            },
+            "ApproveAndCallFallBack": {
+                "start": 57,
+                "end": 59
+            },
+            "Owned": {
+                "start": 65,
+                "end": 89
+            },
+            "STONetwork": {
+                "start": 96,
+                "end": 253
+            }
+        },
+        "0x603fc3246ef974a840ba1d7ab43d99130e8aa774.sol": {
+            "IERC20": {
+                "start": 4,
+                "end": 9
+            },
+            "KNCLock": {
+                "start": 11,
+                "end": 13
+            },
+            "TriggerKNCLock": {
+                "start": 15,
+                "end": 36
+            }
+        },
+        "0x685bd934b371f2ee4894225064d937a57fb03974.sol": {
+            "SafeMath": {
+                "start": 17,
+                "end": 44
+            },
+            "Token": {
+                "start": 53,
+                "end": 63
+            },
+            "AbstractToken": {
+                "start": 71,
+                "end": 176
+            },
+            "BOCO": {
+                "start": 182,
+                "end": 397
+            }
+        },
+        "0x341ffd5852614e6a9189dc2931cb7ec3f10605b0.sol": {
+            "Ownable": {
+                "start": 5,
+                "end": 69
+            },
+            "SafeMath": {
+                "start": 76,
+                "end": 116
+            },
+            "CommunityVesting": {
+                "start": 118,
+                "end": 205
+            },
+            "EcosystemVesting": {
+                "start": 209,
+                "end": 293
+            },
+            "SeedPrivateAdvisorVesting": {
+                "start": 297,
+                "end": 408
+            },
+            "TeamVesting": {
+                "start": 411,
+                "end": 499
+            },
+            "TokenInterface": {
+                "start": 503,
+                "end": 508
+            },
+            "Vesting": {
+                "start": 511,
+                "end": 591
+            }
+        },
+        "0x688dde13bd594a9030feefe6fa39cb353b7351c7.sol": {
+            "SafeMath": {
+                "start": 7,
+                "end": 32
+            },
+            "ERC20": {
+                "start": 34,
+                "end": 44
+            },
+            "UpgradeAgent": {
+                "start": 47,
+                "end": 53
+            },
+            "CVEN": {
+                "start": 55,
+                "end": 255
+            }
+        },
+        "0x532d85bd4bd0233dfa0eed5b3fe8bcfbba0420a4.sol": {
+            "MerklIO": {
+                "start": 4,
+                "end": 34
+            }
+        },
+        "0x664fb2cba871e42a7e86dba388c2e6dff68264b1.sol": {
+            "Maths": {
+                "start": 7,
+                "end": 170
+            },
+            "Manageable": {
+                "start": 175,
+                "end": 226
+            },
+            "ERC20Basic": {
+                "start": 233,
+                "end": 238
+            },
+            "ERC20": {
+                "start": 244,
+                "end": 249
+            },
+            "BasicToken": {
+                "start": 255,
+                "end": 293
+            },
+            "StandardToken": {
+                "start": 302,
+                "end": 389
+            },
+            "MintableToken": {
+                "start": 397,
+                "end": 434
+            },
+            "XPToken": {
+                "start": 436,
+                "end": 443
+            }
+        }
+    }
+}
