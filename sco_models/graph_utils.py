@@ -222,7 +222,6 @@ def convert_edge_data_to_tensor(dict_egdes):
 def generate_hetero_graph_data(nx_graph):
     nx_g = nx_graph
     dict_three_cannonical_egdes = dict()
-    node_tracker = {}
     for source, target, data in nx_g.edges(data=True):
         edge_type = data['edge_type']
         source_node_type = nx_g.nodes[source]['node_type']
@@ -297,7 +296,7 @@ def reflect_graph(nx_g_data):
 def get_symmatrical_metapaths(symmetrical_global_graph):
     meta_paths = []
     for mt in symmetrical_global_graph.canonical_etypes:
-        if mt[0] == mt[1]:
+        if mt[0] == mt[-1]:
             ref_mt = [mt]
         else:
             ref_mt = [mt, mt[::-1]]

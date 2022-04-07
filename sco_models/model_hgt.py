@@ -332,30 +332,30 @@ class HGTVulNodeClassifier(nn.Module):
 
 
 class HGTVulGraphClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu'):
+    def __init__(self, compressed_global_graph_path, feature_extractor=None, node_feature='han', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu'):
         super(HGTVulGraphClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
         self.num_heads = num_heads
-        self.source_path = source_path
-        self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
-        self.filename_mapping = {file: idx for idx, file in enumerate(self.extracted_graph)}
+        # self.source_path = source_path
+        # self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
+        # self.filename_mapping = {file: idx for idx, file in enumerate(self.extracted_graph)}
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
         self.nx_graph = nx_graph
         nx_g_data = generate_hetero_graph_data(nx_graph)
         self.total_nodes = len(nx_graph)
-        
+
         # Get Node Labels
         self.node_ids_dict = get_node_ids_dict(nx_graph)
-        _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
+        # _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
         self.node_ids_by_filename = get_node_ids_by_filename(nx_graph)
         # Reflect graph data
         self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
         self.number_of_nodes = get_number_of_nodes(nx_graph)
         self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
-        self.symmetrical_global_graph.ndata['filename'] = _node_tracker
+        # self.symmetrical_global_graph.ndata['filename'] = _node_tracker
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(device)
         self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
         # Concat the metapaths have the same begin nodetype
@@ -462,7 +462,7 @@ class HGTVulGraphClassifier(nn.Module):
             if hasattr(layer, 'reset_parameters'):
                     layer.reset_parameters()
 
-    def forward(self, batched_g_name):
+    def forward(self, batched_g_name, save_featrues=None):
         h = {}
         hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
         for ntype in self.symmetrical_global_graph.ntypes:
@@ -478,6 +478,8 @@ class HGTVulGraphClassifier(nn.Module):
             node_list = self.node_ids_by_filename[g_name]
             batched_graph_embedded.append(hiddens[node_list].mean(0).tolist())
         batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
+        if save_featrues:
+            torch.save(batched_graph_embedded, save_featrues)
         output = self.classify(batched_graph_embedded)
         return output, hiddens
 
