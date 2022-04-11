@@ -1,18 +1,43 @@
 import os
+import sys
+import subprocess
 import collections
 from os.path import join
 from copy import deepcopy
 
-import json
+import re
 import dgl
-from numpy import source
+import json
 import torch
 import networkx as nx
 from tqdm import tqdm
+from slither.slither import Slither
+from numpy import source
 
 
 EDGE_DICT = {('None', 'None', 'None'): '0', ('None', 'None', 'orange'): '1', ('Msquare', 'None', 'gold'): '2', ('None', 'None', 'lemonchiffon'): '3', ('Msquare', 'crimson', 'crimson'): '4', ('None', 'None', 'crimson'): '5', ('Msquare', 'crimson', 'None'): '6', ('Msquare', 'crimson', 'lemonchiffon'): '7'}
 DRY_RUNS = 0
+
+
+def get_solc_version(source):
+    PATTERN = re.compile(r"pragma solidity\s*(?:\^|>=|<=)?\s*(\d+\.\d+\.\d+)")
+    solc_select = '/home/minhnn/.solc-select/artifacts'
+    solc_version = [v.split('-')[-1] for v in os.listdir(solc_select)]
+    with open(join(source), encoding="utf8") as file_desc:
+        buf = file_desc.read()
+    version = PATTERN.findall(buf)
+    version = '0.4.25' if len(version) == 0 else version[0]
+    if version not in solc_version:
+        if version.startswith('0.4.'):
+            solc_path = join(solc_select, 'solc-' + '0.4.25')
+        elif version.startswith('0.5.'):
+            solc_path = join(solc_select, 'solc-' + '0.5.11')
+        else:
+            solc_path = join(solc_select, 'solc-' + '0.8.6')
+    else:
+        solc_path = join(solc_select, 'solc-' + version)
+    return solc_path
+
 
 def creat_node_label(g,d):
     nodes = g.nodes()
@@ -92,7 +117,6 @@ def dot2gpickle(dot_file, gpickle_file):
     # node_lables = creat_node_label(nx_g, EDGE_DICT)
     # edge_labels = creat_edge_label(nx_g)
     node_lables, edge_labels = createLabel(nx_g, EDGE_DICT)
-    print(edge_labels)
     nx.set_node_attributes(nx_g, node_lables, name='node_type')
     nx.set_node_attributes(nx_g, source_file, name='source_file')
     nx.set_edge_attributes(nx_g, edge_labels)
@@ -107,7 +131,7 @@ def merge_byte_code_cfg(source_path, graph_list, output):
             merged_graph = deepcopy(nx_graph)
         else:
             merged_graph = nx.disjoint_union(merged_graph, nx_graph)
-    nx.write_gpickle(merged_graph, output)
+    nx.write_gpickle(merged_graph, join(output, 'cfg_compressed_graphs.gpickle'))
 
 
 def travelsalDir(filepath):
@@ -156,25 +180,243 @@ def forencis_gpickle(graph_path):
         # print(source, target, data)
 
 
+def generate_crytic_evm(sourcecode_path, output):
+    os.makedirs(output, exist_ok=True)
+    PATTERN = re.compile(r"pragma solidity\s*(?:\^|>=|<=)?\s*(\d+\.\d+\.\d+)")
+    contracts = [f for f in os.listdir(sourcecode_path) if f.endswith('.sol')]
+    solc_select = '/home/minhnn/.solc-select/artifacts'
+    solc_version = [v.split('-')[-1] for v in os.listdir(solc_select)]
+    for sc in contracts:
+            sc_path = join(sourcecode_path, sc)
+            with open(join(sourcecode_path, sc), encoding="utf8") as file_desc:
+                buf = file_desc.read()
+            version = PATTERN.findall(buf)
+            version = '0.4.25' if len(version) == 0 else version[0]
+            if version not in solc_version:
+                if version.startswith('0.4.'):
+                    solc_path = join(solc_select, 'solc-' + '0.4.25')
+                elif version.startswith('0.5.'):
+                    solc_path = join(solc_select, 'solc-' + '0.5.11')
+                else:
+                    solc_path = join(solc_select, 'solc-' + '0.8.6')
+            else:
+                solc_path = join(solc_select, 'solc-' + version)
+            subprocess.run(['crytic-compile', sc_path, '--export-format', 'standard', '--export-dir', output, '--solc-solcs-bin', solc_path])
+
+
+def generate_evm(crytic_evm_path, creation_output, runtime_output):
+    os.makedirs(creation_output, exist_ok=True)
+    os.makedirs(runtime_output, exist_ok=True)
+    byte_codes = [f for f in os.listdir(crytic_evm_path) if f.endswith('.json')]
+    for bc in byte_codes:
+        with open(join(crytic_evm_path, bc), 'r') as f:
+            annotation = json.load(f)
+        details = list(annotation['compilation_units'].values())[0]['contracts']
+        for sc in details.keys():
+            creation_code = details[sc]['bin']
+            runtime_code = details[sc]['bin-runtime']
+            if len(creation_code) == 0:
+                assert len(creation_code) == len(runtime_code)
+                continue
+            creation_file_name = bc.replace('.sol.json', f'-{sc}.evm')
+            runtime_file_name = bc.replace('.sol.json', f'-{sc}.evm')
+            with open(join(creation_output, creation_file_name), 'w') as f:
+                f.write(creation_code)
+            with open(join(runtime_output, runtime_file_name), 'w') as f:
+                f.write(runtime_code)
+
+
+def generate_graph_from_evm(evm_path, output, evm_type):
+    os.makedirs(output, exist_ok=True)
+    code_type = '-c' if evm_type == 'creation' else '-r'
+    evm_files = [f for f in os.listdir(evm_path) if f.endswith('.evm')]
+    for evm in evm_files:
+        evm_file = join(evm_path, evm)
+        subprocess.run(['java', '-jar', 'EtherSolve.jar', code_type, '-d', '-o', join(output, evm.replace('.evm', '.dot')), evm_file])
+
+
+## Dump to file to save time
+def get_contract_code_line(source_files, output=None):
+    # Init slither
+    solc_compiler = get_solc_version(source_files)
+    slither = Slither(source_files, solc=solc_compiler)
+    # Get the contract
+    contract_lines = {}
+    for contract in slither.contracts:
+        lines = contract.source_mapping['lines']
+        contract_lines[contract.name] = {'start': min(lines), 'end': max(lines)}
+    if output:
+        with open(output, 'w') as f:
+            json.dump(contract_lines, f, indent=4)
+    return contract_lines
+
+
+def create_source_code_category(source_path, clean_source_files, output):
+    contract_files = [f for f in os.listdir(source_path) if f.endswith('.sol')]
+    source_category = {'curated': [], 'solidifi': [], 'clean': []}
+    for s in contract_files:
+        if s in clean_source_files:
+            source_category['clean'].append(s)
+        elif s.startswith('buggy_'):
+            source_category['solidifi'].append(s)
+        else:
+            source_category['curated'].append(s)
+    contract_detail = {'curated': {}, 'solidifi': {}, 'clean': {}}
+    for cate, contracts in source_category.items():
+        for sc in contracts:
+            contract_lines = get_contract_code_line(join(source_path, sc))
+            contract_detail[cate][sc] = contract_lines
+    if output:
+        with open(output, 'w') as f:
+            json.dump(contract_detail, f, indent=4)
+    return contract_detail
+
+
+def generate_evm_annotations(source_code_category, curated_annotaion, solidifi_annotation, bug_type, output):
+    annotations = []
+    for cat, source_files in source_code_category.items():
+        for source, contracts in source_files.items():
+            for sc, loc in contracts.items():
+                contract_annotation = {}
+                contract_annotation['contract_name'] = source.replace('.sol', f'-{sc}.sol')
+                if cat == 'curated':
+                    contract_annotation['targets'] = int(len(set(range(loc['start'], loc['end'])) & set(curated_annotaion[source][bug_type])) > 0)
+                elif cat == 'solidifi':
+                    contract_annotation['targets'] = int(len(set(range(loc['start'], loc['end'])) & set(solidifi_annotation[source][bug_type])) > 0)
+                else:
+                    contract_annotation['targets'] = 0
+                annotations.append(contract_annotation)
+    with open(output, 'w') as f:
+        json.dump(annotations, f, indent=4)
+
+
+def _convert_curated_annotation_to_dict(curated_annotation, output=None):
+    with open(curated_annotation, 'r') as f:
+        annotation = json.load(f)
+    curated_dict = {}
+    for anno in annotation:
+        anno_dict = {}
+        bug_type = None
+        for vul in anno['vulnerabilities']:
+            bug_type = vul['category']
+            if bug_type not in anno_dict:
+                anno_dict[bug_type] = vul['lines']
+            else:
+                anno_dict[bug_type] += vul['lines']
+        if bug_type is not None and anno['name'] not in curated_dict:
+            curated_dict[anno['name']] = anno_dict
+        else:
+            curated_dict[anno['name']].update(anno_dict)
+    if output:
+        with open(output, 'w') as f:
+            json.dump(curated_dict, f, indent=4)
+    return curated_dict
+
+
+def _convert_solidifi_annotation_to_dict(solidifi_annotation, output=None):
+    with open(solidifi_annotation, 'r') as f:
+        annotation = json.load(f)
+    solidifi_dict = {}
+    for anno in annotation:
+        anno_dict = {}
+        for vul in anno['vulnerabilities']:
+            bug_type = vul['category']
+            if bug_type not in anno_dict:
+                anno_dict[bug_type] = vul['lines']
+            else:
+                anno_dict[bug_type] += vul['lines']
+        solidifi_dict[anno['name']] = anno_dict
+    if output:
+        with open(output, 'w') as f:
+            json.dump(solidifi_dict, f, indent=4)
+    return solidifi_dict
+
+
 if __name__ == '__main__':
-    graph_path = '../HAN_DGL/data/bytecode_cfg_set'
-    gpickle_path = './experiments/ge-sc-data/byte_code/ethor/'
-    merge_graph_output_path = './experiments/ge-sc-data/byte_code/ethor/compressed_graphs'
-    compressed_graph = join(merge_graph_output_path, 'cfg_compressed_graphs.gpickle')
-    os.makedirs(merge_graph_output_path, exist_ok=True)
-    dot_files = [f for f in os.listdir(graph_path) if f.endswith('.dot')]
-    print(len(dot_files))
-    SCALE = DRY_RUNS if DRY_RUNS else len(dot_files)
-
-    # # Convert dot to gpickle
-    # for dot in dot_files[:SCALE]:
-    #     dot2gpickle(join(graph_path, dot), join(gpickle_path, dot.replace('.dot', '.sol')))
-
-    # Merge gpickle files
-    gpickle_files = [f for f in os.listdir(gpickle_path) if f.endswith('.sol')]
-    merge_byte_code_cfg(gpickle_path, gpickle_files, compressed_graph)
+    bug_type = {'access_control': 57, 'arithmetic': 60, 'denial_of_service': 46,
+              'front_running': 44, 'reentrancy': 71, 'time_manipulation': 50, 
+              'unchecked_low_level_calls': 95}
 
     # # Forencis gpickle graph
     # source_compressed_graph = './experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/cfg_compressed_graphs.gpickle'
     # # forencis_gpickle(source_compressed_graph)
     # forencis_gpickle(compressed_graph)
+    
+    # Create annotation file
+    clean_source_code = './ge-sc-data/smartbugs-wild-clean-contracts'
+    clean_source_files = [f for f in os.listdir(clean_source_code) if f.endswith('.sol')]
+    curated_annotation_path = './data/smartbug-dataset/vulnerabilities.json'
+    # CURATED_DICT = _convert_curated_annotation_to_dict(curated_annotation_path, join('./experiments/ge-sc-data/source_code', 'curated_labels.json'))
+    with open(join('./experiments/ge-sc-data/source_code', 'curated_labels.json'), 'r') as f:
+        CURATED_DICT = json.load(f)
+    for bug, count in bug_type.items():
+        sourcecode_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/'
+        output_label = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}'
+        os.makedirs(output_label, exist_ok=True)
+        output_label = join(output_label, 'contract_labels.json')
+        # output_label = join(sourcecode_path, 'contract_labels.json')
+        solidifi_annotation_path = f'./data/solidifi_buggy_contracts/{bug}/vulnerabilities.json'
+        # SOLIDIFI_DICT = _convert_solidifi_annotation_to_dict(solidifi_annotation_path, join(sourcecode_path, 'solidifi_labels.json'))
+        with open(join(sourcecode_path, 'solidifi_labels.json'), 'r') as f:
+            SOLIDIFI_DICT = json.load(f)
+        # source_code_category = create_source_code_category(sourcecode_path, clean_source_files, join(sourcecode_path, 'contract_details.json'))
+        source_code_category_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/source_code_category.json'
+        with open(source_code_category_path, 'r') as f:
+            source_code_category = json.load(f)
+        generate_evm_annotations(source_code_category, CURATED_DICT, SOLIDIFI_DICT, bug, output_label)
+
+
+    # get_contract_code_line('./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/0x0a5dc2204dfc6082ef3bbcfc3a468f16318c4168.sol')
+
+    # # Generate crytic evm files
+    # for bug, counter in bug_type.items():
+    #     sourcecode_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{counter}_buggy_curated_0'
+    #     output = f'./experiments/ge-sc-data/byte_code/smartbugs/crytic_evm/{bug}/clean_{counter}_buggy_curated_0'
+    #     generate_crytic_evm(sourcecode_path, output)
+
+    # # Generate creation & runtime evm files
+    # for bug, counter in bug_type.items():
+    #     crytic_evm_path = f'./experiments/ge-sc-data/byte_code/smartbugs/crytic_evm/{bug}/clean_{counter}_buggy_curated_0'
+    #     creation_output = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/evm/{bug}/clean_{counter}_buggy_curated_0'
+    #     runtime_output = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/evm/{bug}/clean_{counter}_buggy_curated_0'
+    #     generate_evm(crytic_evm_path, creation_output, runtime_output)
+
+    # # Generate graph from evm files by EtherSolve
+    # for bug, counter in bug_type.items():
+    #     creation_path = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/evm/{bug}/clean_{counter}_buggy_curated_0'
+    #     creation_output = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/graphs/{bug}/clean_{counter}_buggy_curated_0'
+    #     generate_graph_from_evm(creation_path, creation_output, 'creation')
+    #     runtime_path = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/evm/{bug}/clean_{counter}_buggy_curated_0'
+    #     runtime_output = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/graphs/{bug}/clean_{counter}_buggy_curated_0'
+    #     generate_graph_from_evm(runtime_path, runtime_output, 'runtime')        
+
+
+    # # Convert dot to gpickle
+    # for bug, counter in bug_type.items():
+    #     creation_graph_path = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/graphs/{bug}/clean_{counter}_buggy_curated_0'
+    #     runtime_graph_path = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/graphs/{bug}/clean_{counter}_buggy_curated_0'
+    #     creation_dot_files = [f for f in os.listdir(creation_graph_path) if f.endswith('.dot')]
+    #     runtime_dot_files = [f for f in os.listdir(runtime_graph_path) if f.endswith('.dot')]
+    #     creation_gpickle_output = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{counter}_buggy_curated_0'
+    #     runtime_gpickle_output = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{counter}_buggy_curated_0'
+    #     os.makedirs(creation_gpickle_output, exist_ok=True)
+    #     os.makedirs(runtime_gpickle_output, exist_ok=True)
+    #     for dot in creation_dot_files:
+    #         dot2gpickle(join(creation_graph_path, dot), join(creation_gpickle_output, dot.replace('.dot', '.gpickle')))
+    #     for dot in runtime_dot_files:
+    #         dot2gpickle(join(runtime_graph_path, dot), join(runtime_gpickle_output, dot.replace('.dot', '.gpickle')))
+
+    # # Merge gpickle files
+    # for bug, counter in bug_type.items():
+    #     creation_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{counter}_buggy_curated_0'
+    #     runtime_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{counter}_buggy_curated_0'
+    #     creation_output = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{counter}_buggy_curated_0/compressed_graphs'
+    #     runtime_output = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{counter}_buggy_curated_0/compressed_graphs'
+    #     os.makedirs(creation_output, exist_ok=True)
+    #     os.makedirs(runtime_output, exist_ok=True)
+    #     creation_gpickle_files = [f for f in os.listdir(creation_gpickle_path) if f.endswith('.gpickle')]
+    #     runtime_gpickle_files = [f for f in os.listdir(runtime_gpickle_path) if f.endswith('.gpickle')]
+    #     merge_byte_code_cfg(creation_gpickle_path, creation_gpickle_files, creation_output)
+    #     merge_byte_code_cfg(runtime_gpickle_path, runtime_gpickle_files, runtime_output)
+
+    
