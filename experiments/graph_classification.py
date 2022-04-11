@@ -43,7 +43,7 @@ TASK = "graph_classification"
 STRUCTURE = 'hgt'
 COMPRESSED_GRAPH = 'cfg'
 DATASET = 'smartbugs'
-BYTECODE = 'creation'
+BYTECODE = 'runtime'
 TRAIN_RATE = 0.7
 VAL_RATE = 0.3
 ratio = 1
@@ -54,7 +54,7 @@ ratio = 1
 #             'front_running', 'reentrancy', 'time_manipulation', 
 #             'unchecked_low_level_calls']
 # models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_2', 'random_8', 'random_16', 'random_32', 'random_64', 'random_128', 'zeros_2', 'zeros_8', 'zeros_16', 'zeros_32', 'zeros_64', 'zeros_128']
-models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_32', 'random_64', 'zeros_32', 'zeros_64']
+models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_32', 'random_64', 'random_128', 'zeros_32', 'zeros_64', 'zeros_128']
 # feature_dim_list = [2, 8, 16, 32, 64, 128]
 feature_dim_list = [32, 64]
 # bug_list = ['ethor']
@@ -641,13 +641,14 @@ def get_results():
             macro_f1_row.append('%.2f'%macro_f1 + '%' if isinstance(macro_f1, float) else macro_f1)
         data.append([model, 'Buggy-F1'] + buggy_f1_row)
         data.append([model, 'Macro-F1'] + macro_f1_row)
+        print(' ', end=' ')
+        print(' \t'.join(buggy_f1_row), end=r'')
+        print()
+        print(' ', end=' ')
+        print(' \t'.join(macro_f1_row), end=r'')
+        print()
+    print()
     print(tabulate(data, headers=bug_list, tablefmt='orgtbl'))
-        # print(' ', end=' ')
-        # print(' \t'.join(buggy_f1_row), end=r'')
-        # print()
-        # print(' ', end=' ')
-        # print(' \t'.join(macro_f1_row), end=r'')
-        # print()
 
 
 if __name__ == '__main__':
