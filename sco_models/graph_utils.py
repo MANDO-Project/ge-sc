@@ -270,6 +270,10 @@ def generate_hetero_subgraph_data(nx_graph):
     return subgraph_dict
 
 
+def generate_filename_ids(nx_graph):
+    return {node_data['source_file']: idx for idx, node_data in nx_graph.nodes(data=True)}
+
+
 def filename_mapping(extracted_graph):
     return {file: idx for idx, file in enumerate(extracted_graph)}
 
