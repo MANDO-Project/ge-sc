@@ -6,8 +6,10 @@ from os.path import join
 from copy import deepcopy
 
 import re
+from textwrap import indent
 import dgl
 import json
+from matplotlib.font_manager import json_load
 import torch
 import networkx as nx
 from tqdm import tqdm
@@ -131,7 +133,7 @@ def merge_byte_code_cfg(source_path, graph_list, output):
             merged_graph = deepcopy(nx_graph)
         else:
             merged_graph = nx.disjoint_union(merged_graph, nx_graph)
-    nx.write_gpickle(merged_graph, join(output, 'cfg_compressed_graphs.gpickle'))
+    nx.write_gpickle(merged_graph, output)
 
 
 def travelsalDir(filepath):
@@ -342,28 +344,28 @@ if __name__ == '__main__':
     # # forencis_gpickle(source_compressed_graph)
     # forencis_gpickle(compressed_graph)
     
-    # Create annotation file
-    clean_source_code = './ge-sc-data/smartbugs-wild-clean-contracts'
-    clean_source_files = [f for f in os.listdir(clean_source_code) if f.endswith('.sol')]
-    curated_annotation_path = './data/smartbug-dataset/vulnerabilities.json'
-    # CURATED_DICT = _convert_curated_annotation_to_dict(curated_annotation_path, join('./experiments/ge-sc-data/source_code', 'curated_labels.json'))
-    with open(join('./experiments/ge-sc-data/source_code', 'curated_labels.json'), 'r') as f:
-        CURATED_DICT = json.load(f)
-    for bug, count in bug_type.items():
-        sourcecode_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/'
-        output_label = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}'
-        os.makedirs(output_label, exist_ok=True)
-        output_label = join(output_label, 'contract_labels.json')
-        # output_label = join(sourcecode_path, 'contract_labels.json')
-        solidifi_annotation_path = f'./data/solidifi_buggy_contracts/{bug}/vulnerabilities.json'
-        # SOLIDIFI_DICT = _convert_solidifi_annotation_to_dict(solidifi_annotation_path, join(sourcecode_path, 'solidifi_labels.json'))
-        with open(join(sourcecode_path, 'solidifi_labels.json'), 'r') as f:
-            SOLIDIFI_DICT = json.load(f)
-        # source_code_category = create_source_code_category(sourcecode_path, clean_source_files, join(sourcecode_path, 'contract_details.json'))
-        source_code_category_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/source_code_category.json'
-        with open(source_code_category_path, 'r') as f:
-            source_code_category = json.load(f)
-        generate_evm_annotations(source_code_category, CURATED_DICT, SOLIDIFI_DICT, bug, output_label)
+    # # Create annotation file
+    # clean_source_code = './ge-sc-data/smartbugs-wild-clean-contracts'
+    # clean_source_files = [f for f in os.listdir(clean_source_code) if f.endswith('.sol')]
+    # curated_annotation_path = './data/smartbug-dataset/vulnerabilities.json'
+    # # CURATED_DICT = _convert_curated_annotation_to_dict(curated_annotation_path, join('./experiments/ge-sc-data/source_code', 'curated_labels.json'))
+    # with open(join('./experiments/ge-sc-data/source_code', 'curated_labels.json'), 'r') as f:
+    #     CURATED_DICT = json.load(f)
+    # for bug, count in bug_type.items():
+    #     sourcecode_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/'
+    #     output_label = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}'
+    #     os.makedirs(output_label, exist_ok=True)
+    #     output_label = join(output_label, 'contract_labels.json')
+    #     # output_label = join(sourcecode_path, 'contract_labels.json')
+    #     solidifi_annotation_path = f'./data/solidifi_buggy_contracts/{bug}/vulnerabilities.json'
+    #     # SOLIDIFI_DICT = _convert_solidifi_annotation_to_dict(solidifi_annotation_path, join(sourcecode_path, 'solidifi_labels.json'))
+    #     with open(join(sourcecode_path, 'solidifi_labels.json'), 'r') as f:
+    #         SOLIDIFI_DICT = json.load(f)
+    #     # source_code_category = create_source_code_category(sourcecode_path, clean_source_files, join(sourcecode_path, 'contract_details.json'))
+    #     source_code_category_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/source_code_category.json'
+    #     with open(source_code_category_path, 'r') as f:
+    #         source_code_category = json.load(f)
+    #     generate_evm_annotations(source_code_category, CURATED_DICT, SOLIDIFI_DICT, bug, output_label)
 
 
     # get_contract_code_line('./experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/0x0a5dc2204dfc6082ef3bbcfc3a468f16318c4168.sol')
@@ -406,17 +408,84 @@ if __name__ == '__main__':
     #     for dot in runtime_dot_files:
     #         dot2gpickle(join(runtime_graph_path, dot), join(runtime_gpickle_output, dot.replace('.dot', '.gpickle')))
 
+    # Filter dataset
+    HAVE_CLEAN = True
+    for bug, count in bug_type.items():
+        source_code_category_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/source_code_category.json'
+        creation_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/graphs/{bug}/clean_{count}_buggy_curated_0'
+        creation_gpickle_files = [f for f in os.listdir(creation_gpickle_path) if f.endswith('.gpickle')]
+        runtime_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/graphs/{bug}/clean_{count}_buggy_curated_0'
+        runtim_gpickle_files = [f for f in os.listdir(runtime_gpickle_path) if f.endswith('.gpickle')]
+        with open(source_code_category_path, 'r') as f:
+                source_code_category = json.load(f)
+        curated_files = list(source_code_category['curated'].keys())
+        solidifi_files = list(source_code_category['solidifi'].keys())
+        clean_files = list(source_code_category['clean'].keys())
+        annotation_path = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/contract_labels.json'
+        with open(annotation_path, 'r') as f:
+            contract_labels = json.load(f)
+        creation_balance_dataset = []
+        runtime_balance_dataset = []
+        creation_buggy_count = 0
+        runtime_buggy_count = 0
+        for contract in contract_labels:
+            source_name = contract['contract_name'].split('-')[0] + '.sol'
+            gpickle_name = contract['contract_name'].replace('.sol', '.gpickle')
+            if source_name in curated_files or source_name in solidifi_files:
+                if gpickle_name in creation_gpickle_files:
+                    creation_balance_dataset.append(contract)
+                    creation_buggy_count += contract['targets']
+                if gpickle_name in runtim_gpickle_files:
+                    runtime_balance_dataset.append(contract)
+                    runtime_buggy_count += contract['targets']
+
+        if HAVE_CLEAN:
+            for contract in contract_labels:
+                if creation_buggy_count/len(creation_balance_dataset) <= 0.5:
+                    break
+                source_name = contract['contract_name'].split('-')[0] + '.sol'
+                if source_name in clean_files:
+                    creation_balance_dataset.append(contract)
+            for contract in contract_labels:
+                if runtime_buggy_count/len(runtime_balance_dataset) <= 0.5:
+                    break
+                source_name = contract['contract_name'].split('-')[0] + '.sol'
+                if source_name in clean_files:
+                    runtime_balance_dataset.append(contract)
+        creation_balanced_output = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/creation_balanced_contract_labels.json'
+        with open(creation_balanced_output, 'w') as f:
+            json.dump(creation_balance_dataset, f, indent=4)
+        runtime_balanced_output = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/runtime_balanced_contract_labels.json'
+        with open(runtime_balanced_output, 'w') as f:
+            json.dump(runtime_balance_dataset, f, indent=4)
+        
+
+
     # # Merge gpickle files
-    # for bug, counter in bug_type.items():
-    #     creation_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{counter}_buggy_curated_0'
-    #     runtime_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{counter}_buggy_curated_0'
-    #     creation_output = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{counter}_buggy_curated_0/compressed_graphs'
-    #     runtime_output = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{counter}_buggy_curated_0/compressed_graphs'
-    #     os.makedirs(creation_output, exist_ok=True)
-    #     os.makedirs(runtime_output, exist_ok=True)
-    #     creation_gpickle_files = [f for f in os.listdir(creation_gpickle_path) if f.endswith('.gpickle')]
-    #     runtime_gpickle_files = [f for f in os.listdir(runtime_gpickle_path) if f.endswith('.gpickle')]
-    #     merge_byte_code_cfg(creation_gpickle_path, creation_gpickle_files, creation_output)
-    #     merge_byte_code_cfg(runtime_gpickle_path, runtime_gpickle_files, runtime_output)
+    # for bug, count in bug_type.items():
+    #     creation_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{count}_buggy_curated_0'
+    #     runtime_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{count}_buggy_curated_0'
+        # creation_output = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{count}_buggy_curated_0/compressed_graphs'
+        # runtime_output = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{count}_buggy_curated_0/compressed_graphs'
+        # os.makedirs(creation_output, exist_ok=True)
+        # os.makedirs(runtime_output, exist_ok=True)
+        # creation_gpickle_files = [f for f in os.listdir(creation_gpickle_path) if f.endswith('.gpickle')]
+        # runtime_gpickle_files = [f for f in os.listdir(runtime_gpickle_path) if f.endswith('.gpickle')]
+
+        # Try to balance dataset
+        # buggy_curated_labels = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/buggy_curated_contract_labels.json'
+        # balanced_labels = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/balanced_contract_labels.json'
+        # creation_compressed_graph = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{count}_buggy_curated_0/compressed_graphs'
+        # creation_buggy_curated_graph = join(creation_compressed_graph, 'buggy_curated_compressed_graphs.gpickle')
+        # creation_balanced_graph = join(creation_compressed_graph, 'balanced_compressed_graphs.gpickle')
+        # runtime_compressed_graph = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{count}_buggy_curated_0/compressed_graphs'
+        # runtime_buggy_curated_graph = join(runtime_compressed_graph, 'buggy_curated_compressed_graphs.gpickle')
+        # runtime_balanced_graph = join(runtime_compressed_graph, 'balanced_compressed_graphs.gpickle')
+        # creation_gpickle_files = [f for f in os.listdir(creation_gpickle_path) if f.endswith('.gpickle')]
+
+        # creation_balanced_gpickle_files = [f for f in os.listdir(creation_gpickle_path) if f.endswith('.gpickle')]
+        # runtime_files = [f for f in os.listdir(runtime_gpickle_path) if f.endswith('.gpickle')]
+        # merge_byte_code_cfg(creation_gpickle_path, creation_buggy_curated_gpickle_files, creation_buggy_curated_graph)
+        # merge_byte_code_cfg(runtime_gpickle_path, runtime_gpickle_files, runtime_output)
 
     
