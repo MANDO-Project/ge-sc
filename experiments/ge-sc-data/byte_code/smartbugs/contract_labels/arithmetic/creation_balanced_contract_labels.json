@@ -1,0 +1,810 @@
+[
+    {
+        "contract_name": "timelock-TimeLock.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "tokensalechallenge-TokenSaleChallenge.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "overflow_simple_add-Overflow_Add.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "overflow_single_tx-IntegerOverflowSingleTransaction.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "integer_overflow_multitx_multifunc_feasible-IntegerOverflowMultiTxMultiFuncFeasible.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "insecure_transfer-IntegerOverflowAdd.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "token-Token.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "integer_overflow_add-IntegerOverflowAdd.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "integer_overflow_multitx_onefunc_feasible-IntegerOverflowMultiTxOneFuncFeasible.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "integer_overflow_benign_1-IntegerOverflowBenign1.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "integer_overflow_mapping_sym_1-IntegerOverflowMappingSym1.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "integer_overflow_mul-IntegerOverflowMul.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "integer_overflow_minimal-IntegerOverflowMinimal.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "BECToken-BasicToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "BECToken-StandardToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "BECToken-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "BECToken-Pausable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "BECToken-PausableToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "BECToken-BecToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "integer_overflow_1-Overflow.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_8-Ownable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_8-TokenERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_8-YFT.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_50-digitalNotary.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_18-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_18-_Yesbuzz.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_29-RaffleTokenExchange.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_30-ERC777.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_30-SKYBITToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_21-StableDEX.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_48-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_48-QurasToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_4-PHO.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_15-MD.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_19-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_19-ethBank.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_22-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_22-tokenRecipient.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_22-MindsyncPlatform.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_20-Stoppable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_20-RampInstantEthPool.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_45-StockBet.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_31-FeeTransactionManager.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_26-UBBCToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-EventMetadata.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-Operated.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-ProofHashes.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-MultiHashWrapper.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-Template.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-Feed.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_27-Ownable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_27-DanPanCoin.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_24-FomoFeast.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-EventMetadata.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-Operated.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-MultiHashWrapper.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-ProofHash.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-Template.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-Post.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_40-ERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_40-SimpleSwapCoin.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_47-AcunarToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_47-AcunarIEO.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_49-TAMC.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_3-CareerOnToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_23-ERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_23-ERC20Burnable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_23-AGR.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_5-Ownable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_5-TokenERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_5-TTC.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_38-BIGBOMBv2.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_34-Ownable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_34-LollypopToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_35-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_35-BitpayerDEX.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_36-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_36-tokenRecipient.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_36-MindsyncPlatform.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_7-AccountWallet.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_6-ChannelWallet.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_11-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_11-ForTheBlockchain.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_16-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_16-ExclusivePlatform.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_9-Ownable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_9-TokenERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_9-XLToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_33-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_33-Staking.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_28-HYDROGEN.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_2-CareerOnToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_32-ERC20Token.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_32-AsseteGram.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_17-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_17-TokenERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_17-AZT.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_39-TAMCContract.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_14-ERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_14-SaveWon.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_12-ERC223Token.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_12-Grand.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_1-HotDollarsToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_42-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_42-Staking.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_25-WhiteBetting.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-IErc20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-Monetary.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-IPriceOracle.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-Require.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-Math.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-Time.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-IMakerOracle.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-IOasisDex.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x787f552bdc17332c98aa360748884513e3cb401a-DaiPriceOracle.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0597edbd535f2c76780818cd55cae87d7e035f5b-ERC20Basic.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0597edbd535f2c76780818cd55cae87d7e035f5b-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0597edbd535f2c76780818cd55cae87d7e035f5b-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0597edbd535f2c76780818cd55cae87d7e035f5b-BasicToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0597edbd535f2c76780818cd55cae87d7e035f5b-StandardToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0597edbd535f2c76780818cd55cae87d7e035f5b-MOONToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x888fb65bde90ca5ac865acb7c8904e607475c41c-MyToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x869b1f57380ae501d387b19262efd3c0eb7501b0-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x869b1f57380ae501d387b19262efd3c0eb7501b0-ERC20Interface.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x869b1f57380ae501d387b19262efd3c0eb7501b0-Owned.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x869b1f57380ae501d387b19262efd3c0eb7501b0-Pausable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x869b1f57380ae501d387b19262efd3c0eb7501b0-OxyCoin.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-StandardToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-UpgradeAgent.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-SafeMathLib.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-UpgradeableToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-ReleasableToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-MintableToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x807b9487aaf00629b674bd6d02e4917453bc5939-CrowdsaleToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x708ba31efde01cc53901248e7c174e0a74a822a0-IERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x708ba31efde01cc53901248e7c174e0a74a822a0-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x708ba31efde01cc53901248e7c174e0a74a822a0-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x708ba31efde01cc53901248e7c174e0a74a822a0-BasementOperationRealm.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x609d6f40eed97ec8a96cb9bca78d73caa6225b8a-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x609d6f40eed97ec8a96cb9bca78d73caa6225b8a-IERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x609d6f40eed97ec8a96cb9bca78d73caa6225b8a-Claimable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x609d6f40eed97ec8a96cb9bca78d73caa6225b8a-Keeper.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-ERC20Basic.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-BasicToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-StandardToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-Pausable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-PausableToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-MintableToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x543a5514c5cd08dd08228f54fbc79ba9b5a47187-MyAdvancedToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x748d84c273334af1349ebee96bb48c2a17b3b416-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x748d84c273334af1349ebee96bb48c2a17b3b416-owned.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x748d84c273334af1349ebee96bb48c2a17b3b416-Verification.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0695a5d83639c4ec38244768e0e93bde775488dc-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0695a5d83639c4ec38244768e0e93bde775488dc-IERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0695a5d83639c4ec38244768e0e93bde775488dc-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0695a5d83639c4ec38244768e0e93bde775488dc-Roles.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0695a5d83639c4ec38244768e0e93bde775488dc-MinterRole.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0695a5d83639c4ec38244768e0e93bde775488dc-ERC20Mintable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0695a5d83639c4ec38244768e0e93bde775488dc-ERC20Burnable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0695a5d83639c4ec38244768e0e93bde775488dc-INOMIX.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x646b41183bb0d18c01f75f630688d613a5774dc7-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x646b41183bb0d18c01f75f630688d613a5774dc7-ERC20Interface.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x646b41183bb0d18c01f75f630688d613a5774dc7-ApproveAndCallFallBack.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x646b41183bb0d18c01f75f630688d613a5774dc7-Owned.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x646b41183bb0d18c01f75f630688d613a5774dc7-BLUEKEY.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x882fb4240f9a11e197923d0507de9a983ed69239-ClassicCheck.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-ERC20Basic.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-BasicToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-StandardToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-BurnableToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-StandardBurnableToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x735af341f2d9ce3663616cd84ff522dbf62fbc1f-Amplify.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x676abde481967851b0c28e81bde8561e756d75e8-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x676abde481967851b0c28e81bde8561e756d75e8-ModulumInvestorsWhitelist.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x755cdba6ae4f479f7164792b318b2a06c759833b-DAO.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x755cdba6ae4f479f7164792b318b2a06c759833b-WithdrawDAO.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x684ae11a577080ec13877c6d28ac4f45b7c00966-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x684ae11a577080ec13877c6d28ac4f45b7c00966-Manageable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x684ae11a577080ec13877c6d28ac4f45b7c00966-MytilcoinStorage.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x598c9a4f069dc076984868873c01e78a905d50e6-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x598c9a4f069dc076984868873c01e78a905d50e6-IERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x598c9a4f069dc076984868873c01e78a905d50e6-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x598c9a4f069dc076984868873c01e78a905d50e6-LedgeriumToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x664e6db4044f23c95de63ec299aaa9b39c59328d-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x664e6db4044f23c95de63ec299aaa9b39c59328d-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x664e6db4044f23c95de63ec299aaa9b39c59328d-CutdownToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x664e6db4044f23c95de63ec299aaa9b39c59328d-ApproveAndCallFallback.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x664e6db4044f23c95de63ec299aaa9b39c59328d-DigitizeCoin.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0821d33c50d2d2d1381b5dfca34900bacad909a7-Owned.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0821d33c50d2d2d1381b5dfca34900bacad909a7-Callable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x0821d33c50d2d2d1381b5dfca34900bacad909a7-EternalStorage.sol",
+        "targets": 0
+    }
+]

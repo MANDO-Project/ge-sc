@@ -9,7 +9,6 @@ import re
 from textwrap import indent
 import dgl
 import json
-from matplotlib.font_manager import json_load
 import torch
 import networkx as nx
 from tqdm import tqdm
@@ -409,12 +408,12 @@ if __name__ == '__main__':
     #         dot2gpickle(join(runtime_graph_path, dot), join(runtime_gpickle_output, dot.replace('.dot', '.gpickle')))
 
     # Filter dataset
-    HAVE_CLEAN = True
+    HAVE_CLEAN = False
     for bug, count in bug_type.items():
         source_code_category_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/source_code_category.json'
-        creation_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/graphs/{bug}/clean_{count}_buggy_curated_0'
+        creation_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/creation/gpickles/{bug}/clean_{count}_buggy_curated_0'
         creation_gpickle_files = [f for f in os.listdir(creation_gpickle_path) if f.endswith('.gpickle')]
-        runtime_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/graphs/{bug}/clean_{count}_buggy_curated_0'
+        runtime_gpickle_path = f'./experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/{bug}/clean_{count}_buggy_curated_0'
         runtim_gpickle_files = [f for f in os.listdir(runtime_gpickle_path) if f.endswith('.gpickle')]
         with open(source_code_category_path, 'r') as f:
                 source_code_category = json.load(f)
@@ -452,10 +451,10 @@ if __name__ == '__main__':
                 source_name = contract['contract_name'].split('-')[0] + '.sol'
                 if source_name in clean_files:
                     runtime_balance_dataset.append(contract)
-        creation_balanced_output = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/creation_balanced_contract_labels.json'
+        creation_balanced_output = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/creation_buggy_curated_contract_labels.json'
         with open(creation_balanced_output, 'w') as f:
             json.dump(creation_balance_dataset, f, indent=4)
-        runtime_balanced_output = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/runtime_balanced_contract_labels.json'
+        runtime_balanced_output = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/runtime_buggy_curated_contract_labels.json'
         with open(runtime_balanced_output, 'w') as f:
             json.dump(runtime_balance_dataset, f, indent=4)
         

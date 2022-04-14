@@ -132,7 +132,8 @@ if __name__ == '__main__':
         contract_category_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/source_code_category.json'
         with open(contract_category_path, 'r') as f:
             contract_category = json.load(f)
-        annotation_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/contract_labels.json'
+        # annotation_path = f'./experiments/ge-sc-data/source_code/{bug}/clean_{count}_buggy_curated_0/contract_labels.json'
+        annotation_path = f'./experiments/ge-sc-data/byte_code/smartbugs/contract_labels/{bug}/creation_balanced_contract_labels.json'
         with open(annotation_path, 'r') as f:
             annotations = json.load(f)
         contract_counter = {'curated': {}, 'solidifi': {}, 'clean': {}}

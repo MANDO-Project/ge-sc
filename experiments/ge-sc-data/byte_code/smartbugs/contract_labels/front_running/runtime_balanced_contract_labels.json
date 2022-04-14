@@ -1,0 +1,626 @@
+[
+    {
+        "contract_name": "ERC20-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "ERC20-ERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "odds_and_evens-OddsAndEvens.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "eth_tx_order_dependence_minimal-EthTxOrderDependenceMinimal.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "FindThisHash-FindThisHash.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_50-digitalNotary.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_18-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_18-ExtendedMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_18-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_18-_Yesbuzz.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_29-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_29-RaffleTokenExchange.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_30-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_30-Address.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_30-ERC777.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_30-Roles.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_30-SKYBITToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_21-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_21-StableDEX.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_48-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_48-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_48-QurasToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_4-PHO.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_15-MD.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_19-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_19-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_19-ethBank.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_22-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_22-tokenRecipient.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_22-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_22-MindsyncPlatform.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_20-Stoppable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_20-RampInstantEthPool.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_45-StockBet.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_31-ECDSA.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_31-FeeTransactionManager.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_26-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_26-UBBCToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-EventMetadata.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-Operated.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-ProofHashes.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-MultiHashWrapper.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-Template.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_44-Feed.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_27-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_27-Ownable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_27-DanPanCoin.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_24-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_24-FomoFeast.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-EventMetadata.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-Operated.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-MultiHashWrapper.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-ProofHash.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-Template.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_43-Post.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_40-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_40-ERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_40-SimpleSwapCoin.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_47-AcunarToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_47-AcunarIEO.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_49-TAMC.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_3-CareerOnToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_23-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_23-ERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_23-ERC20Burnable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_23-AGR.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_38-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_38-BIGBOMBv2.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_34-Ownable.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_34-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_34-LollypopToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_35-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_35-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_35-BitpayerDEX.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_36-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_36-tokenRecipient.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_36-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_36-MindsyncPlatform.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_7-AccountWallet.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_6-ChannelWallet.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_11-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_11-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_11-ForTheBlockchain.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_16-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_16-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_16-ExclusivePlatform.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_33-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_33-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_33-Staking.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_28-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_28-HYDROGEN.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_2-CareerOnToken.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_32-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_32-ERC20Token.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_32-AsseteGram.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_17-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_17-owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_17-TokenERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_17-AZT.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_39-TAMCContract.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_14-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_14-ERC20.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_14-SaveWon.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_42-Owned.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_42-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "buggy_42-Staking.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "buggy_25-WhiteBetting.sol",
+        "targets": 1
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-IERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-Roles.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-MinterRole.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-ERC20Mintable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-ERC20Burnable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x24edca5a57fc259427574e0c9cfdf630a3136d34-HadacoinV18.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x37abeac8c47c2e806ff98d9ffef9e945f96699e7-CrowdsaleToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x37abeac8c47c2e806ff98d9ffef9e945f96699e7-CrowdsaleState.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x37abeac8c47c2e806ff98d9ffef9e945f96699e7-HardCap.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x37abeac8c47c2e806ff98d9ffef9e945f96699e7-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x37abeac8c47c2e806ff98d9ffef9e945f96699e7-ERC20Allowance.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x37abeac8c47c2e806ff98d9ffef9e945f96699e7-CryptoPoliceProxy.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x27a1ad307808acf4a0b70935a082456a3c12ec6d-Token.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x27a1ad307808acf4a0b70935a082456a3c12ec6d-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x27a1ad307808acf4a0b70935a082456a3c12ec6d-AbstractToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x27a1ad307808acf4a0b70935a082456a3c12ec6d-CatenaToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x26a572eeb6036ae1af510d561f59520f626857b9-ERC20Basic.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x26a572eeb6036ae1af510d561f59520f626857b9-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x26a572eeb6036ae1af510d561f59520f626857b9-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x26a572eeb6036ae1af510d561f59520f626857b9-Relay.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x20b1bc618f79d9977b7cce3f0523128178ea6a7b-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x20b1bc618f79d9977b7cce3f0523128178ea6a7b-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x20b1bc618f79d9977b7cce3f0523128178ea6a7b-Roles.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x20b1bc618f79d9977b7cce3f0523128178ea6a7b-PauserRole.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x20b1bc618f79d9977b7cce3f0523128178ea6a7b-Pausable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x20b1bc618f79d9977b7cce3f0523128178ea6a7b-INiftyTradingCardCreator.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x20b1bc618f79d9977b7cce3f0523128178ea6a7b-INiftyFootballTradingCardGenerator.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x20b1bc618f79d9977b7cce3f0523128178ea6a7b-NiftyFootballAdmin.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x25cdc98b4b04810c9a23cffc4db730f4f3286920-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x25cdc98b4b04810c9a23cffc4db730f4f3286920-ERC20Interface.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x25cdc98b4b04810c9a23cffc4db730f4f3286920-ApproveAndCallFallBack.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x25cdc98b4b04810c9a23cffc4db730f4f3286920-Owned.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x25cdc98b4b04810c9a23cffc4db730f4f3286920-Moveo.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x37d66ec1271cdc2e247ca580cee751abc4c962b4-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x37d66ec1271cdc2e247ca580cee751abc4c962b4-GivingLog.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x21d5a14e625d767ce6b7a167491c2d18e0785fda-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x21d5a14e625d767ce6b7a167491c2d18e0785fda-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x21d5a14e625d767ce6b7a167491c2d18e0785fda-Ownable.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x21d5a14e625d767ce6b7a167491c2d18e0785fda-MultiToken.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x30f886284e51f8148ca799650f9ec6b41e504d63-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x30f886284e51f8148ca799650f9ec6b41e504d63-ERC20.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x30f886284e51f8148ca799650f9ec6b41e504d63-CentralBankofSeychelles.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x27eba2a67b906eb4341dfe54ce78083a611a0222-SafeMath.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x27eba2a67b906eb4341dfe54ce78083a611a0222-ERC20Interface.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x27eba2a67b906eb4341dfe54ce78083a611a0222-ApproveAndCallFallBack.sol",
+        "targets": 0
+    },
+    {
+        "contract_name": "0x27eba2a67b906eb4341dfe54ce78083a611a0222-Owned.sol",
+        "targets": 0
+    }
+]
