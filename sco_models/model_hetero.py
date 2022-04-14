@@ -10,7 +10,7 @@ from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
-from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, get_symmatrical_metapaths, map_node_embedding, generate_filename_ids
+from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, get_symmatrical_metapaths, map_node_embedding, generate_filename_ids, generate_zeros_node_features, generate_random_node_features
 
 
 class SemanticAttention(nn.Module):
@@ -182,6 +182,16 @@ class MANDOGraphClassifier(nn.Module):
                 embedding = pickle.load(f, encoding="utf8")
             embedding = torch.tensor(embedding, device=device)
             features = map_node_embedding(nx_graph, embedding)
+        elif node_feature == 'random':
+            embedding_dim = int(feature_extractor)
+            self.in_size = embedding_dim
+            features = generate_random_node_features(nx_graph, self.in_size)
+            features = {k: v.to(self.device) for k, v in features.items()}
+        elif node_feature == 'zeros':
+            embedding_dim = int(feature_extractor)
+            self.in_size = embedding_dim
+            features = generate_zeros_node_features(nx_graph, self.in_size)
+            features = {k: v.to(self.device) for k, v in features.items()}
 
         # self.symmetrical_global_graph = self.symmetrical_global_graph.to('cpu')
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
@@ -236,7 +246,7 @@ class MANDOGraphClassifier(nn.Module):
         if save_featrues:
             torch.save(batched_graph_embedded, save_featrues)
         output = self.classify(batched_graph_embedded)
-        return output, features
+        return output, batched_graph_embedded
 
 
 if __name__ == '__main__':
