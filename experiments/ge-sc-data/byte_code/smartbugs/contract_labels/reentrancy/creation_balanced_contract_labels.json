@@ -1,834 +1,834 @@
 [
     {
-        "contract_name": "0xcead721ef5b11f1a7b530171aab69b16c5e66b6e-WALLET.sol",
+        "contract_name": "0xcead721ef5b11f1a7b530171aab69b16c5e66b6e-WALLET.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0xcead721ef5b11f1a7b530171aab69b16c5e66b6e-Log.sol",
+        "contract_name": "0xcead721ef5b11f1a7b530171aab69b16c5e66b6e-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f-PERSONAL_BANK.sol",
+        "contract_name": "0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f-PERSONAL_BANK.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f-LogFile.sol",
+        "contract_name": "0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f-LogFile.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f-ETH_VAULT.sol",
+        "contract_name": "0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f-ETH_VAULT.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f-Log.sol",
+        "contract_name": "0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x4e73b32ed6c35f570686b89848e5f39f20ecc106-PRIVATE_ETH_CELL.sol",
+        "contract_name": "0x4e73b32ed6c35f570686b89848e5f39f20ecc106-PRIVATE_ETH_CELL.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x4e73b32ed6c35f570686b89848e5f39f20ecc106-LogFile.sol",
+        "contract_name": "0x4e73b32ed6c35f570686b89848e5f39f20ecc106-LogFile.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4-PrivateBank.sol",
+        "contract_name": "0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4-PrivateBank.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4-Log.sol",
+        "contract_name": "0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888-MONEY_BOX.sol",
+        "contract_name": "0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888-MONEY_BOX.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888-Log.sol",
+        "contract_name": "0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1-ACCURAL_DEPOSIT.sol",
+        "contract_name": "0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1-ACCURAL_DEPOSIT.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1-LogFile.sol",
+        "contract_name": "0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1-LogFile.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839-Ownable.sol",
+        "contract_name": "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839-Token.sol",
+        "contract_name": "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839-Token.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839-TokenBank.sol",
+        "contract_name": "0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839-TokenBank.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "reentrancy_cross_function-Reentrancy_cross_function.sol",
+        "contract_name": "reentrancy_cross_function-Reentrancy_cross_function.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x561eac93c92360949ab1f1403323e6db345cbf31-BANK_SAFE.sol",
+        "contract_name": "0x561eac93c92360949ab1f1403323e6db345cbf31-BANK_SAFE.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x561eac93c92360949ab1f1403323e6db345cbf31-LogFile.sol",
+        "contract_name": "0x561eac93c92360949ab1f1403323e6db345cbf31-LogFile.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8-DEP_BANK.sol",
+        "contract_name": "0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8-DEP_BANK.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8-LogFile.sol",
+        "contract_name": "0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8-LogFile.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "reentrance-Reentrance.sol",
+        "contract_name": "reentrance-Reentrance.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3-W_WALLET.sol",
+        "contract_name": "0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3-W_WALLET.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3-Log.sol",
+        "contract_name": "0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "reentrancy_insecure-Reentrancy_insecure.sol",
+        "contract_name": "reentrancy_insecure-Reentrancy_insecure.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "etherstore-EtherStore.sol",
+        "contract_name": "etherstore-EtherStore.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "modifier_reentrancy-ModifierEntrancy.sol",
+        "contract_name": "modifier_reentrancy-ModifierEntrancy.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "modifier_reentrancy-Bank.sol",
+        "contract_name": "modifier_reentrancy-Bank.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "modifier_reentrancy-attack.sol",
+        "contract_name": "modifier_reentrancy-attack.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x7541b76cb60f4c60af330c208b0623b7f54bf615-U_BANK.sol",
+        "contract_name": "0x7541b76cb60f4c60af330c208b0623b7f54bf615-U_BANK.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x7541b76cb60f4c60af330c208b0623b7f54bf615-Log.sol",
+        "contract_name": "0x7541b76cb60f4c60af330c208b0623b7f54bf615-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12-Private_Bank.sol",
+        "contract_name": "0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12-Private_Bank.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12-Log.sol",
+        "contract_name": "0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "etherbank-EtherBank.sol",
+        "contract_name": "etherbank-EtherBank.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "reentrancy_simple-Reentrance.sol",
+        "contract_name": "reentrancy_simple-Reentrance.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "reentrancy_dao-ReentrancyDAO.sol",
+        "contract_name": "reentrancy_dao-ReentrancyDAO.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x7a8721a9d64c74da899424c1b52acbf58ddc9782-PrivateDeposit.sol",
+        "contract_name": "0x7a8721a9d64c74da899424c1b52acbf58ddc9782-PrivateDeposit.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x7a8721a9d64c74da899424c1b52acbf58ddc9782-Log.sol",
+        "contract_name": "0x7a8721a9d64c74da899424c1b52acbf58ddc9782-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x93c32845fae42c83a70e5f06214c8433665c2ab5-X_WALLET.sol",
+        "contract_name": "0x93c32845fae42c83a70e5f06214c8433665c2ab5-X_WALLET.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x93c32845fae42c83a70e5f06214c8433665c2ab5-Log.sol",
+        "contract_name": "0x93c32845fae42c83a70e5f06214c8433665c2ab5-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b-PENNY_BY_PENNY.sol",
+        "contract_name": "0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b-PENNY_BY_PENNY.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b-LogFile.sol",
+        "contract_name": "0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b-LogFile.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xf015c35649c82f5467c9c74b7f28ee67665aad68-MY_BANK.sol",
+        "contract_name": "0xf015c35649c82f5467c9c74b7f28ee67665aad68-MY_BANK.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0xf015c35649c82f5467c9c74b7f28ee67665aad68-Log.sol",
+        "contract_name": "0xf015c35649c82f5467c9c74b7f28ee67665aad68-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x941d225236464a25eb18076df7da6a91d0f95e9e-ETH_FUND.sol",
+        "contract_name": "0x941d225236464a25eb18076df7da6a91d0f95e9e-ETH_FUND.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x941d225236464a25eb18076df7da6a91d0f95e9e-Log.sol",
+        "contract_name": "0x941d225236464a25eb18076df7da6a91d0f95e9e-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "spank_chain_payment-StandardToken.sol",
+        "contract_name": "spank_chain_payment-StandardToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "spank_chain_payment-HumanStandardToken.sol",
+        "contract_name": "spank_chain_payment-HumanStandardToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e-PrivateBank.sol",
+        "contract_name": "0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e-PrivateBank.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e-Log.sol",
+        "contract_name": "0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x8c7777c45481dba411450c228cb692ac3d550344-ETH_VAULT.sol",
+        "contract_name": "0x8c7777c45481dba411450c228cb692ac3d550344-ETH_VAULT.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0x8c7777c45481dba411450c228cb692ac3d550344-Log.sol",
+        "contract_name": "0x8c7777c45481dba411450c228cb692ac3d550344-Log.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "simple_dao-SimpleDAO.sol",
+        "contract_name": "simple_dao-SimpleDAO.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "reentrancy_bonus-Reentrancy_bonus.sol",
+        "contract_name": "reentrancy_bonus-Reentrancy_bonus.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_50-digitalNotary.sol",
+        "contract_name": "buggy_50-digitalNotary.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_18-Owned.sol",
+        "contract_name": "buggy_18-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_18-_Yesbuzz.sol",
+        "contract_name": "buggy_18-_Yesbuzz.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_29-RaffleTokenExchange.sol",
+        "contract_name": "buggy_29-RaffleTokenExchange.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_30-ERC777.sol",
+        "contract_name": "buggy_30-ERC777.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_30-SKYBITToken.sol",
+        "contract_name": "buggy_30-SKYBITToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_21-StableDEX.sol",
+        "contract_name": "buggy_21-StableDEX.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_48-Owned.sol",
+        "contract_name": "buggy_48-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_48-QurasToken.sol",
+        "contract_name": "buggy_48-QurasToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_4-PHO.sol",
+        "contract_name": "buggy_4-PHO.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_15-MD.sol",
+        "contract_name": "buggy_15-MD.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_19-owned.sol",
+        "contract_name": "buggy_19-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_19-ethBank.sol",
+        "contract_name": "buggy_19-ethBank.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_22-owned.sol",
+        "contract_name": "buggy_22-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_22-tokenRecipient.sol",
+        "contract_name": "buggy_22-tokenRecipient.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_22-MindsyncPlatform.sol",
+        "contract_name": "buggy_22-MindsyncPlatform.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_20-Stoppable.sol",
+        "contract_name": "buggy_20-Stoppable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_20-RampInstantEthPool.sol",
+        "contract_name": "buggy_20-RampInstantEthPool.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_45-StockBet.sol",
+        "contract_name": "buggy_45-StockBet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_31-FeeTransactionManager.sol",
+        "contract_name": "buggy_31-FeeTransactionManager.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_26-UBBCToken.sol",
+        "contract_name": "buggy_26-UBBCToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-EventMetadata.sol",
+        "contract_name": "buggy_44-EventMetadata.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-Operated.sol",
+        "contract_name": "buggy_44-Operated.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-ProofHashes.sol",
+        "contract_name": "buggy_44-ProofHashes.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-MultiHashWrapper.sol",
+        "contract_name": "buggy_44-MultiHashWrapper.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-Template.sol",
+        "contract_name": "buggy_44-Template.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-Feed.sol",
+        "contract_name": "buggy_44-Feed.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_27-Ownable.sol",
+        "contract_name": "buggy_27-Ownable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_27-DanPanCoin.sol",
+        "contract_name": "buggy_27-DanPanCoin.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_24-FomoFeast.sol",
+        "contract_name": "buggy_24-FomoFeast.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-EventMetadata.sol",
+        "contract_name": "buggy_43-EventMetadata.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-Operated.sol",
+        "contract_name": "buggy_43-Operated.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-MultiHashWrapper.sol",
+        "contract_name": "buggy_43-MultiHashWrapper.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-ProofHash.sol",
+        "contract_name": "buggy_43-ProofHash.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-Template.sol",
+        "contract_name": "buggy_43-Template.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-Post.sol",
+        "contract_name": "buggy_43-Post.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_40-ERC20.sol",
+        "contract_name": "buggy_40-ERC20.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_40-SimpleSwapCoin.sol",
+        "contract_name": "buggy_40-SimpleSwapCoin.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_47-AcunarToken.sol",
+        "contract_name": "buggy_47-AcunarToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_47-AcunarIEO.sol",
+        "contract_name": "buggy_47-AcunarIEO.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_49-TAMC.sol",
+        "contract_name": "buggy_49-TAMC.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_3-CareerOnToken.sol",
+        "contract_name": "buggy_3-CareerOnToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_23-ERC20.sol",
+        "contract_name": "buggy_23-ERC20.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_23-ERC20Burnable.sol",
+        "contract_name": "buggy_23-ERC20Burnable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_23-AGR.sol",
+        "contract_name": "buggy_23-AGR.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_38-BIGBOMBv2.sol",
+        "contract_name": "buggy_38-BIGBOMBv2.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_34-Ownable.sol",
+        "contract_name": "buggy_34-Ownable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_34-LollypopToken.sol",
+        "contract_name": "buggy_34-LollypopToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_35-owned.sol",
+        "contract_name": "buggy_35-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_35-BitpayerDEX.sol",
+        "contract_name": "buggy_35-BitpayerDEX.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_36-owned.sol",
+        "contract_name": "buggy_36-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_36-tokenRecipient.sol",
+        "contract_name": "buggy_36-tokenRecipient.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_36-MindsyncPlatform.sol",
+        "contract_name": "buggy_36-MindsyncPlatform.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_7-AccountWallet.sol",
+        "contract_name": "buggy_7-AccountWallet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_6-ChannelWallet.sol",
+        "contract_name": "buggy_6-ChannelWallet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_11-Owned.sol",
+        "contract_name": "buggy_11-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_11-ForTheBlockchain.sol",
+        "contract_name": "buggy_11-ForTheBlockchain.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_16-Owned.sol",
+        "contract_name": "buggy_16-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_16-ExclusivePlatform.sol",
+        "contract_name": "buggy_16-ExclusivePlatform.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_33-Owned.sol",
+        "contract_name": "buggy_33-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_33-Staking.sol",
+        "contract_name": "buggy_33-Staking.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_28-HYDROGEN.sol",
+        "contract_name": "buggy_28-HYDROGEN.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_2-CareerOnToken.sol",
+        "contract_name": "buggy_2-CareerOnToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_32-ERC20Token.sol",
+        "contract_name": "buggy_32-ERC20Token.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_32-AsseteGram.sol",
+        "contract_name": "buggy_32-AsseteGram.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_17-owned.sol",
+        "contract_name": "buggy_17-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_17-TokenERC20.sol",
+        "contract_name": "buggy_17-TokenERC20.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_17-AZT.sol",
+        "contract_name": "buggy_17-AZT.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_39-TAMCContract.sol",
+        "contract_name": "buggy_39-TAMCContract.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_14-ERC20.sol",
+        "contract_name": "buggy_14-ERC20.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_14-SaveWon.sol",
+        "contract_name": "buggy_14-SaveWon.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_42-Owned.sol",
+        "contract_name": "buggy_42-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_42-Staking.sol",
+        "contract_name": "buggy_42-Staking.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_25-WhiteBetting.sol",
+        "contract_name": "buggy_25-WhiteBetting.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "0xa9f5ccdd11178ac90746ad76153bb9d0915edd9f-IERC20.sol",
+        "contract_name": "0xa9f5ccdd11178ac90746ad76153bb9d0915edd9f-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa9f5ccdd11178ac90746ad76153bb9d0915edd9f-Ownable.sol",
+        "contract_name": "0x198482924b5ed2c8dd5a0c824fcd618c6b49e6e8-Owned.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa9f5ccdd11178ac90746ad76153bb9d0915edd9f-SafeMath.sol",
+        "contract_name": "0x198482924b5ed2c8dd5a0c824fcd618c6b49e6e8-RICHToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa9f5ccdd11178ac90746ad76153bb9d0915edd9f-CyberNerve.sol",
+        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x198482924b5ed2c8dd5a0c824fcd618c6b49e6e8-IERC20.sol",
+        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-BasicToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x198482924b5ed2c8dd5a0c824fcd618c6b49e6e8-SafeMath.sol",
+        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-StandardToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x198482924b5ed2c8dd5a0c824fcd618c6b49e6e8-Owned.sol",
+        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-MintableToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x198482924b5ed2c8dd5a0c824fcd618c6b49e6e8-RICHToken.sol",
+        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-CappedToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-SafeMath.sol",
+        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-GambioToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-Ownable.sol",
+        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-ERC20Basic.sol",
+        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-Pausable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-BasicToken.sol",
+        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-RBAC.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-ERC20.sol",
+        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-Exchange.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-StandardToken.sol",
+        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-BasicToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-MintableToken.sol",
+        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-StandardToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-CappedToken.sol",
+        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa0008f510fe9ee696e7e320c9e5cbf61e27791ee-GambioToken.sol",
+        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-Pausable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-SafeMath.sol",
+        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-PausableToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-R.sol",
+        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-CirilloChain.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-Rationals.sol",
+        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-ERC20.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-Ownable.sol",
+        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-ERC20Pausable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-Pausable.sol",
+        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-LevelToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-Roles.sol",
+        "contract_name": "0x892697720ad461f019fd1f4bc4d52447a59c0687-ERC20.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-RBAC.sol",
+        "contract_name": "0x892697720ad461f019fd1f4bc4d52447a59c0687-BitCore.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-ERC20Basic.sol",
+        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-ERC20Mintable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-ERC20.sol",
+        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-TuneTradeToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa2d75fdceb750cc0fd96b3d6c10780ef1a12c58b-Exchange.sol",
+        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-WhitelistedRole.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-ERC20Basic.sol",
+        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-TeamRole.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-SafeMath.sol",
+        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-SwapContract.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-BasicToken.sol",
+        "contract_name": "0xa3cd2dd81c0115d801282f1711e9656ae2770566-database.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-ERC20.sol",
+        "contract_name": "0xa3cd2dd81c0115d801282f1711e9656ae2770566-arbits_presale.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-StandardToken.sol",
+        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-BasicToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-Ownable.sol",
+        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-StandardToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-Pausable.sol",
+        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-realimmocoin.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-PausableToken.sol",
+        "contract_name": "0xa7c58385b66e5d9905fef9dc43d7fb270e527497-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-DetailedERC20.sol",
+        "contract_name": "0xa7c58385b66e5d9905fef9dc43d7fb270e527497-TokenWhitelist.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x634446285f22aa660b36424ecd27455ab9bde51c-CirilloChain.sol",
+        "contract_name": "0xa6fd6f9b44127dbdc02fa1712fbedd21d14b4f20-BCE.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-IERC20.sol",
+        "contract_name": "0xa8ec550c291993a450ea525d90863e61a7ebef5c-UnitedStatesFederalReserveSystem.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-SafeMath.sol",
+        "contract_name": "0xa5e5916a380fea1e633df88d7b5e1835a85b8262-owned.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-ERC20.sol",
+        "contract_name": "0xa5e5916a380fea1e633df88d7b5e1835a85b8262-BrewerscoinToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-Roles.sol",
+        "contract_name": "0x501202610ce02b97fcbd406157431214ca55ec75-BasicToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-PauserRole.sol",
+        "contract_name": "0x501202610ce02b97fcbd406157431214ca55ec75-StandardToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-Pausable.sol",
+        "contract_name": "0x501202610ce02b97fcbd406157431214ca55ec75-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-ERC20Pausable.sol",
+        "contract_name": "0x501202610ce02b97fcbd406157431214ca55ec75-VIRToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8eda9d4aee0eb882f8752c6ba7e16d9233c9ad2-LevelToken.sol",
+        "contract_name": "0x7714365713c0167e07d1c19a168ba9a2c392d84b-HashStore.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x892697720ad461f019fd1f4bc4d52447a59c0687-BitCreditCore.sol",
+        "contract_name": "0x6817178368e30a0cd92662442a966b428e8f2d49-theCyberGatekeeper.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x892697720ad461f019fd1f4bc4d52447a59c0687-SafeMath.sol",
+        "contract_name": "0x6817178368e30a0cd92662442a966b428e8f2d49-GateProxy.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x892697720ad461f019fd1f4bc4d52447a59c0687-ERC20.sol",
+        "contract_name": "0x416768387836bd8715d127ef9065975325cfad14-GoTDragonFarm.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0x892697720ad461f019fd1f4bc4d52447a59c0687-BitCore.sol",
+        "contract_name": "0x980358360409b1cc913a916bc0bf6f52f775242a-KNCLock.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-SafeMath.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-IERC20.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-RBAC.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-ERC20.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-BasicToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-Roles.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-StandardToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-MinterRole.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-Pausable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-ERC20Mintable.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-PausableToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-ERC20Burnable.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-BlackListToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-TuneTradeToken.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-TwoPhaseToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-WhitelistAdminRole.sol",
+        "contract_name": "0x6064997937870a11b97490350dfc68e18685f8b1-WithToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-WhitelistedRole.sol",
+        "contract_name": "0x759685437c6d4658b00b5cebdf907dfdeba52357-MyToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-TeamRole.sol",
+        "contract_name": "0x67793426747f8c79332520c1291c4fc6443c8407-CELLCrowdsale.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-SafeERC20.sol",
+        "contract_name": "0x2492644798cb3b5162159a6e7d261fe74435eeea-ProofOfLove.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa1c32fcbb0a0d4bda9451950b6c5c1a9106b8afc-SwapContract.sol",
+        "contract_name": "0x618737029ae07215dfc2c0b4204b8f91e9909366-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa3cd2dd81c0115d801282f1711e9656ae2770566-SafeMath.sol",
+        "contract_name": "0x618737029ae07215dfc2c0b4204b8f91e9909366-InvestorWhiteList.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa3cd2dd81c0115d801282f1711e9656ae2770566-database.sol",
+        "contract_name": "0x311118596fe611e3ffe0be3b616f60e891c6877e-ERC20Standard.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa3cd2dd81c0115d801282f1711e9656ae2770566-topl_database_lib.sol",
+        "contract_name": "0x311118596fe611e3ffe0be3b616f60e891c6877e-BIP.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa3cd2dd81c0115d801282f1711e9656ae2770566-arbits_presale.sol",
+        "contract_name": "0x4927643162fe6d18c7f046b3d155d8da0eee80e8-Owned.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-SafeMath.sol",
+        "contract_name": "0x4927643162fe6d18c7f046b3d155d8da0eee80e8-IGCToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-ERC20Basic.sol",
+        "contract_name": "0x96870071f10cd91825f6ba416a41a65359c6e3e2-A.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-ERC20.sol",
+        "contract_name": "0x96870071f10cd91825f6ba416a41a65359c6e3e2-B.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-BasicToken.sol",
+        "contract_name": "0xa6f3594ab9982c09885ecf7506f7e356f2f89454-CliffTokenVesting.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-StandardToken.sol",
+        "contract_name": "0xa08b00eb41a452540c44e953d9ee86f86793af55-Ownable.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8bf8d59fac7134a822ab47bf2d4506438530964-realimmocoin.sol",
+        "contract_name": "0xa08b00eb41a452540c44e953d9ee86f86793af55-AccountRegistry.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa7c58385b66e5d9905fef9dc43d7fb270e527497-Ownable.sol",
+        "contract_name": "0x9341097483f88fbb65bfc6ea4c26a04e0c4429a0-Owned.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa7c58385b66e5d9905fef9dc43d7fb270e527497-TokenWhitelist.sol",
+        "contract_name": "0x9341097483f88fbb65bfc6ea4c26a04e0c4429a0-Mortal.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa6fd6f9b44127dbdc02fa1712fbedd21d14b4f20-SafeMath.sol",
+        "contract_name": "0x9341097483f88fbb65bfc6ea4c26a04e0c4429a0-CoquinhoERC20.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa6fd6f9b44127dbdc02fa1712fbedd21d14b4f20-BCE.sol",
+        "contract_name": "0x678042580304a7f32dd03b027d90083818dc16a1-EtherealFoundationOwned.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8ec550c291993a450ea525d90863e61a7ebef5c-SafeMath.sol",
+        "contract_name": "0x678042580304a7f32dd03b027d90083818dc16a1-EtherealTipJar.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8ec550c291993a450ea525d90863e61a7ebef5c-ERC20.sol",
+        "contract_name": "0xa4d1dbfe6850b4e9b8935c8b80ae11b1c12a0927-BasicToken.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "0xa8ec550c291993a450ea525d90863e61a7ebef5c-UnitedStatesFederalReserveSystem.sol",
+        "contract_name": "0xa4d1dbfe6850b4e9b8935c8b80ae11b1c12a0927-StandardToken.gpickle",
         "targets": 0
     }
 ]

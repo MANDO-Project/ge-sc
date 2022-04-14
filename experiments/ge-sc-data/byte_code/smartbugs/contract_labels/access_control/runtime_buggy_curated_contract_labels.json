@@ -1,490 +1,490 @@
 [
     {
-        "contract_name": "phishable-Phishable.sol",
+        "contract_name": "phishable-Phishable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "rubixi-Rubixi.sol",
+        "contract_name": "rubixi-Rubixi.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "proxy-Proxy.sol",
+        "contract_name": "proxy-Proxy.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "wallet_02_refund_nosub-Wallet.sol",
+        "contract_name": "wallet_02_refund_nosub-Wallet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "simple_suicide-SimpleSuicide.sol",
+        "contract_name": "simple_suicide-SimpleSuicide.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "unprotected0-Unprotected.sol",
+        "contract_name": "unprotected0-Unprotected.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "incorrect_constructor_name1-Missing.sol",
+        "contract_name": "incorrect_constructor_name1-Missing.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "wallet_03_wrong_constructor-Wallet.sol",
+        "contract_name": "wallet_03_wrong_constructor-Wallet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "parity_wallet_bug_2-WalletEvents.sol",
+        "contract_name": "parity_wallet_bug_2-WalletEvents.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "parity_wallet_bug_2-WalletLibrary.sol",
+        "contract_name": "parity_wallet_bug_2-WalletLibrary.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "incorrect_constructor_name3-Missing.sol",
+        "contract_name": "incorrect_constructor_name3-Missing.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "FibonacciBalance-FibonacciBalance.sol",
+        "contract_name": "FibonacciBalance-FibonacciBalance.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "FibonacciBalance-FibonacciLib.sol",
+        "contract_name": "FibonacciBalance-FibonacciLib.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "mapping_write-Map.sol",
+        "contract_name": "mapping_write-Map.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "multiowned_vulnerable-MultiOwnable.sol",
+        "contract_name": "multiowned_vulnerable-MultiOwnable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "multiowned_vulnerable-TestContract.sol",
+        "contract_name": "multiowned_vulnerable-TestContract.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "incorrect_constructor_name2-Missing.sol",
+        "contract_name": "incorrect_constructor_name2-Missing.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "arbitrary_location_write_simple-Wallet.sol",
+        "contract_name": "arbitrary_location_write_simple-Wallet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "mycontract-MyContract.sol",
+        "contract_name": "mycontract-MyContract.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "wallet_04_confused_sign-Wallet.sol",
+        "contract_name": "wallet_04_confused_sign-Wallet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_50-digitalNotary.sol",
+        "contract_name": "buggy_50-digitalNotary.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_18-SafeMath.sol",
+        "contract_name": "buggy_18-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_18-ExtendedMath.sol",
+        "contract_name": "buggy_18-ExtendedMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_18-Owned.sol",
+        "contract_name": "buggy_18-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_18-_Yesbuzz.sol",
+        "contract_name": "buggy_18-_Yesbuzz.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_29-SafeMath.sol",
+        "contract_name": "buggy_29-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_29-RaffleTokenExchange.sol",
+        "contract_name": "buggy_29-RaffleTokenExchange.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_30-SafeMath.sol",
+        "contract_name": "buggy_30-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_30-Address.sol",
+        "contract_name": "buggy_30-Address.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_30-ERC777.sol",
+        "contract_name": "buggy_30-ERC777.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_30-Roles.sol",
+        "contract_name": "buggy_30-Roles.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_30-SKYBITToken.sol",
+        "contract_name": "buggy_30-SKYBITToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_21-SafeMath.sol",
+        "contract_name": "buggy_21-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_21-StableDEX.sol",
+        "contract_name": "buggy_21-StableDEX.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_48-SafeMath.sol",
+        "contract_name": "buggy_48-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_48-Owned.sol",
+        "contract_name": "buggy_48-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_48-QurasToken.sol",
+        "contract_name": "buggy_48-QurasToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_4-PHO.sol",
+        "contract_name": "buggy_4-PHO.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_15-MD.sol",
+        "contract_name": "buggy_15-MD.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_19-SafeMath.sol",
+        "contract_name": "buggy_19-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_19-owned.sol",
+        "contract_name": "buggy_19-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_19-ethBank.sol",
+        "contract_name": "buggy_19-ethBank.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_22-owned.sol",
+        "contract_name": "buggy_22-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_22-tokenRecipient.sol",
+        "contract_name": "buggy_22-tokenRecipient.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_22-SafeMath.sol",
+        "contract_name": "buggy_22-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_22-MindsyncPlatform.sol",
+        "contract_name": "buggy_22-MindsyncPlatform.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_20-Stoppable.sol",
+        "contract_name": "buggy_20-Stoppable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_20-RampInstantEthPool.sol",
+        "contract_name": "buggy_20-RampInstantEthPool.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_45-StockBet.sol",
+        "contract_name": "buggy_45-StockBet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_31-ECDSA.sol",
+        "contract_name": "buggy_31-ECDSA.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_31-FeeTransactionManager.sol",
+        "contract_name": "buggy_31-FeeTransactionManager.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_26-SafeMath.sol",
+        "contract_name": "buggy_26-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_26-UBBCToken.sol",
+        "contract_name": "buggy_26-UBBCToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-EventMetadata.sol",
+        "contract_name": "buggy_44-EventMetadata.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-Operated.sol",
+        "contract_name": "buggy_44-Operated.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-ProofHashes.sol",
+        "contract_name": "buggy_44-ProofHashes.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-MultiHashWrapper.sol",
+        "contract_name": "buggy_44-MultiHashWrapper.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-Template.sol",
+        "contract_name": "buggy_44-Template.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_44-Feed.sol",
+        "contract_name": "buggy_44-Feed.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_27-SafeMath.sol",
+        "contract_name": "buggy_27-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_27-Ownable.sol",
+        "contract_name": "buggy_27-Ownable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_27-DanPanCoin.sol",
+        "contract_name": "buggy_27-DanPanCoin.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_24-SafeMath.sol",
+        "contract_name": "buggy_24-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_24-FomoFeast.sol",
+        "contract_name": "buggy_24-FomoFeast.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-EventMetadata.sol",
+        "contract_name": "buggy_43-EventMetadata.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-Operated.sol",
+        "contract_name": "buggy_43-Operated.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-MultiHashWrapper.sol",
+        "contract_name": "buggy_43-MultiHashWrapper.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-ProofHash.sol",
+        "contract_name": "buggy_43-ProofHash.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-Template.sol",
+        "contract_name": "buggy_43-Template.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_43-Post.sol",
+        "contract_name": "buggy_43-Post.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_40-SafeMath.sol",
+        "contract_name": "buggy_40-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_40-ERC20.sol",
+        "contract_name": "buggy_40-ERC20.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_40-SimpleSwapCoin.sol",
+        "contract_name": "buggy_40-SimpleSwapCoin.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_47-AcunarToken.sol",
+        "contract_name": "buggy_47-AcunarToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_47-AcunarIEO.sol",
+        "contract_name": "buggy_47-AcunarIEO.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_49-TAMC.sol",
+        "contract_name": "buggy_49-TAMC.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_3-CareerOnToken.sol",
+        "contract_name": "buggy_3-CareerOnToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_23-SafeMath.sol",
+        "contract_name": "buggy_23-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_23-ERC20.sol",
+        "contract_name": "buggy_23-ERC20.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_23-ERC20Burnable.sol",
+        "contract_name": "buggy_23-ERC20Burnable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_23-AGR.sol",
+        "contract_name": "buggy_23-AGR.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_38-SafeMath.sol",
+        "contract_name": "buggy_38-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_38-BIGBOMBv2.sol",
+        "contract_name": "buggy_38-BIGBOMBv2.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_34-Ownable.sol",
+        "contract_name": "buggy_34-Ownable.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_34-SafeMath.sol",
+        "contract_name": "buggy_34-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_34-LollypopToken.sol",
+        "contract_name": "buggy_34-LollypopToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_35-SafeMath.sol",
+        "contract_name": "buggy_35-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_35-owned.sol",
+        "contract_name": "buggy_35-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_35-BitpayerDEX.sol",
+        "contract_name": "buggy_35-BitpayerDEX.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_36-owned.sol",
+        "contract_name": "buggy_36-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_36-tokenRecipient.sol",
+        "contract_name": "buggy_36-tokenRecipient.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_36-SafeMath.sol",
+        "contract_name": "buggy_36-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_36-MindsyncPlatform.sol",
+        "contract_name": "buggy_36-MindsyncPlatform.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_7-AccountWallet.sol",
+        "contract_name": "buggy_7-AccountWallet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_6-ChannelWallet.sol",
+        "contract_name": "buggy_6-ChannelWallet.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_11-SafeMath.sol",
+        "contract_name": "buggy_11-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_11-Owned.sol",
+        "contract_name": "buggy_11-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_11-ForTheBlockchain.sol",
+        "contract_name": "buggy_11-ForTheBlockchain.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_16-SafeMath.sol",
+        "contract_name": "buggy_16-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_16-Owned.sol",
+        "contract_name": "buggy_16-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_16-ExclusivePlatform.sol",
+        "contract_name": "buggy_16-ExclusivePlatform.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_33-Owned.sol",
+        "contract_name": "buggy_33-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_33-SafeMath.sol",
+        "contract_name": "buggy_33-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_33-Staking.sol",
+        "contract_name": "buggy_33-Staking.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_28-SafeMath.sol",
+        "contract_name": "buggy_28-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_28-HYDROGEN.sol",
+        "contract_name": "buggy_28-HYDROGEN.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_2-CareerOnToken.sol",
+        "contract_name": "buggy_2-CareerOnToken.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_32-SafeMath.sol",
+        "contract_name": "buggy_32-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_32-ERC20Token.sol",
+        "contract_name": "buggy_32-ERC20Token.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_32-AsseteGram.sol",
+        "contract_name": "buggy_32-AsseteGram.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_17-SafeMath.sol",
+        "contract_name": "buggy_17-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_17-owned.sol",
+        "contract_name": "buggy_17-owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_17-TokenERC20.sol",
+        "contract_name": "buggy_17-TokenERC20.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_17-AZT.sol",
+        "contract_name": "buggy_17-AZT.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_39-TAMCContract.sol",
+        "contract_name": "buggy_39-TAMCContract.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_14-SafeMath.sol",
+        "contract_name": "buggy_14-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_14-ERC20.sol",
+        "contract_name": "buggy_14-ERC20.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_14-SaveWon.sol",
+        "contract_name": "buggy_14-SaveWon.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_42-Owned.sol",
+        "contract_name": "buggy_42-Owned.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_42-SafeMath.sol",
+        "contract_name": "buggy_42-SafeMath.gpickle",
         "targets": 0
     },
     {
-        "contract_name": "buggy_42-Staking.sol",
+        "contract_name": "buggy_42-Staking.gpickle",
         "targets": 1
     },
     {
-        "contract_name": "buggy_25-WhiteBetting.sol",
+        "contract_name": "buggy_25-WhiteBetting.gpickle",
         "targets": 1
     }
 ]
