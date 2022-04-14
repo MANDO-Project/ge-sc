@@ -481,7 +481,7 @@ class HGTVulGraphClassifier(nn.Module):
         if save_featrues:
             torch.save(batched_graph_embedded, save_featrues)
         output = self.classify(batched_graph_embedded)
-        return output, hiddens
+        return output, batched_graph_embedded
 
 
 if __name__ == '__main__':

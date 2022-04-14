@@ -10,7 +10,7 @@ from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
-from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, get_symmatrical_metapaths, map_node_embedding
+from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, get_symmatrical_metapaths, map_node_embedding, generate_filename_ids
 
 
 class SemanticAttention(nn.Module):
@@ -107,18 +107,20 @@ class HAN(nn.Module):
 
 
 class MANDOGraphClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='nodetype', hidden_size=32, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
+    def __init__(self, compressed_global_graph_path, feature_extractor=None, node_feature='nodetype', hidden_size=32, out_size=2,num_heads=8, dropout=0.6, device='cpu'):
         super(MANDOGraphClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
-        self.source_path = source_path
-        self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
-        self.filename_mapping = {file: idx for idx, file in enumerate(self.extracted_graph)}
+        # self.source_path = source_path
+        # self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
+        # self.filename_mapping = {file: idx for idx, file in enumerate(self.extracted_graph)}
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
         nx_g_data = generate_hetero_graph_data(nx_graph)
+        self.filename_mapping = generate_filename_ids(nx_graph)
         _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
+
 
         # Reflect graph data
         self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
@@ -218,7 +220,7 @@ class MANDOGraphClassifier(nn.Module):
             if hasattr(layer, 'reset_parameters'):
                     layer.reset_parameters()
 
-    def forward(self, batched_g_name):
+    def forward(self, batched_g_name, save_featrues=None):
         features = self.get_assemble_node_features()
         batched_graph_embedded = []
         for g_name in batched_g_name:
@@ -231,6 +233,8 @@ class MANDOGraphClassifier(nn.Module):
             # if not isinstance(graph_embedded, int):
             batched_graph_embedded.append(graph_embedded.tolist())
         batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
+        if save_featrues:
+            torch.save(batched_graph_embedded, save_featrues)
         output = self.classify(batched_graph_embedded)
         return output, features
 

@@ -43,7 +43,7 @@ TASK = "graph_classification"
 STRUCTURE = 'hgt'
 COMPRESSED_GRAPH = 'cfg'
 DATASET = 'smartbugs'
-BYTECODE = 'runtime'
+BYTECODE = 'creation'
 TRAIN_RATE = 0.7
 VAL_RATE = 0.3
 ratio = 1
@@ -93,6 +93,17 @@ def get_node_id_by_file_name(nx_graph):
         else:
             file_name_dict[source_name].append(idx)
     return file_name_dict
+
+
+def save_last_hidden(hiddens, targets, contract_name, output):
+    assert hiddens.shape[0] == targets.shape[0] == len(contract_name)
+    logger = []
+    for i in range(hiddens.shape[0]):
+        logger.append({'contract_name': contract_name[i],
+                       'hiddens': hiddens[i].tolist()  ,
+                       'targets': targets[i].tolist()})
+    with open(output, 'w') as f:
+        json.dump(logger, f, indent=4)
 
 
 def base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device):
@@ -317,10 +328,11 @@ def nodetype(compressed_graph, dataset, feature_extractor, bugtype, device):
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
-        logits, _ = model(X_val)
+        logits, hiddens = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    save_last_hidden(hiddens, y_val, X_val, join(logs, 'last_hiddens.json'))
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -350,10 +362,11 @@ def metapath2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
-        logits, _ = model(X_val)
+        logits, hiddens = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    save_last_hidden(hiddens, y_val, X_val, join(logs, 'last_hiddens.json'))
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -383,10 +396,11 @@ def gae(compressed_graph, dataset, feature_extractor, bugtype, device):
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
-        logits, _ = model(X_val)
+        logits, hiddens = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    save_last_hidden(hiddens, y_val, X_val, join(logs, 'last_hiddens.json'))
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -416,10 +430,11 @@ def line(compressed_graph, dataset, feature_extractor, bugtype, device):
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
-        logits, _ = model(X_val)
+        logits, hiddens = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    save_last_hidden(hiddens, y_val, X_val, join(logs, 'last_hiddens.json'))
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -449,10 +464,11 @@ def node2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
-        logits, _ = model(X_val)
+        logits, hiddens = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    save_last_hidden(hiddens, y_val, X_val, join(logs, 'last_hiddens.json'))
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -483,10 +499,11 @@ def random(compressed_graph, dataset, feature_dims, bugtype, device):
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
-        logits, _ = model(X_val)
+        logits, hiddens = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    save_last_hidden(hiddens, y_val, X_val, join(logs, 'last_hiddens.json'))
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -517,10 +534,11 @@ def zeros(compressed_graph, dataset, feature_dims, bugtype, device):
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
-        logits, _ = model(X_val)
+        logits, hiddens = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    save_last_hidden(hiddens, y_val, X_val, join(logs, 'last_hiddens.json'))
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -536,23 +554,25 @@ def main(device):
         print('Bugtype {}'.format(bugtype))
         for i in range(REPEAT):
             print(f'Train bugtype {bugtype} {i}-th')
-            compressed_graph = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/compressed_graphs/{COMPRESSED_GRAPH}_compressed_graphs.gpickle'
+            compressed_graph = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/compressed_graphs/{BYTECODE}_balanced_compressed_graphs.gpickle'
             nx_graph = nx.read_gpickle(compressed_graph)
             file_name_dict = get_node_id_by_file_name(nx_graph)
             # label = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/graph_labels.json'
-            label = f'{ROOT}/ge-sc-data/byte_code/smartbugs/contract_labels/{bugtype}/contract_labels.json'
-            source_path = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/'
+            label = f'{ROOT}/ge-sc-data/byte_code/smartbugs/contract_labels/{bugtype}/{BYTECODE}_balanced_contract_labels.json'
+            # source_path = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/'
             with open(label, 'r') as f:
                 annotations = json.load(f)
-            total_files = [f for f in os.listdir(source_path) if f.endswith('.gpickle')]
+            # total_files = [f for f in os.listdir(source_path) if f.endswith('.gpickle')]
+            total_files = [anno['contract_name'] for anno in annotations]
             assert len(total_files) <= len(annotations)
-            targets = []
-            for file in total_files:
-                try:
-                    target = next(anno['targets'] for anno in annotations if anno['contract_name'] == file.replace('.gpickle', '.sol'))
-                except StopIteration:
-                    raise f'{file} not found!'
-                targets.append(target)
+            # targets = []
+            # for file in total_files:
+            #     try:
+            #         target = next(anno['targets'] for anno in annotations if anno['contract_name'] == file.replace('.gpickle', '.sol'))
+            #     except StopIteration:
+            #         raise f'{file} not found!'
+            #     targets.append(target)
+            targets = [anno['targets'] for anno in annotations]
             targets = torch.tensor(targets, device=device)
             assert len(total_files) == len(targets)
             print(len(total_files), len(targets))
@@ -560,9 +580,8 @@ def main(device):
             dataset = (tuple(X_train), tuple(X_val), y_train, y_val)
             print('Start training with {}/{} train/val smart contracts'.format(len(X_train), len(X_val)))
             gae_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
-            line_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
-            node2vec_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
-
+            line_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/balanced/matrix_line_dim128_of_core_graph_of_{bugtype}_{BYTECODE}_balanced_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
+            node2vec_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/balanced/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{BYTECODE}_balanced_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
             # Run experiments
             # Base lines
             base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device)
