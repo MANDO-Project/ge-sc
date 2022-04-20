@@ -43,7 +43,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = MANDONodeClassifier(args['feature_compressed_graph'], args['dataset'], feature_extractor=args['cfg_feature_extractor'], node_feature='gae', device=args['device'])
+        feature_extractor = MANDONodeClassifier(args['feature_compressed_graph'], feature_extractor=args['cfg_feature_extractor'], node_feature='gae', device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()
@@ -52,7 +52,7 @@ def main(args):
 
     nx_graph = nx.read_gpickle(args['compressed_graph'])
     number_of_nodes = len(nx_graph)
-    model = MANDONodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+    model = MANDONodeClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
     total_train_files = [f for f in os.listdir(args['dataset']) if f.endswith('.sol')]
     total_test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
     total_train_files = list(set(total_train_files).difference(set(total_test_files)))
@@ -243,7 +243,7 @@ if __name__ == '__main__':
         nx_graph = nx.read_gpickle(args['compressed_graph'])
         number_of_nodes = len(nx_graph)
         test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
-        model = MANDONodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=None, node_feature=args['node_feature'], device=args['device'])
+        model = MANDONodeClassifier(args['compressed_graph'], feature_extractor=None, node_feature=args['node_feature'], device=args['device'])
         model.load_state_dict(torch.load(args['feature_extractor']))
         model.eval()
         model.to(args['device'])

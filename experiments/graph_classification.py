@@ -17,8 +17,6 @@ from timebudget import timebudget
 from sklearn.model_selection import train_test_split
 from statistics import mean
 
-from sco_models.model_hetero import MANDOGraphClassifier
-from sco_models.model_hgt import HGTVulGraphClassifier
 from sco_models.utils import get_classification_report
 from sco_models.graph_utils import reveert_map_node_embedding, load_hetero_nx_graph
 
@@ -31,8 +29,18 @@ parser.add_argument('-e', '--epochs', type=int, default=2,
                     help='Number of ephocs')
 parser.add_argument('-rep', '--repeat', type=int, default=2,
                     help='Number of repetitions')
+parser.add_argument('-m', '--model', type=str, default='hgt',
+                    help='Kind of model')
+parser.add_argument('-b', '--bytecode', type=str, default='runtime',
+                    help='Kind of bytecode')
+                    
 parser.add_argument('-r', '--result', action='store_true')
 args = parser.parse_args().__dict__
+
+if args['model'] == 'han':
+    from sco_models.model_hetero import MANDOGraphClassifier as GraphClassifier
+elif args['model'] == 'hgt':
+    from sco_models.model_hgt import HGTVulGraphClassifier as GraphClassifier
 
 torch.manual_seed(args['seed'])
 ROOT = './experiments'
@@ -40,10 +48,13 @@ DATA_ID = 0
 REPEAT = args['repeat']
 EPOCHS = args['epochs']
 TASK = "graph_classification"
-STRUCTURE = 'hgt'
+STRUCTURE = 'han'
 COMPRESSED_GRAPH = 'cfg'
 DATASET = 'smartbugs'
-BYTECODE = 'creation'
+if args['bytecode'] == 'creation':
+    BYTECODE = 'creation'
+elif args['bytecode'] == 'runtime':
+    BYTECODE = 'runtime'
 TRAIN_RATE = 0.7
 VAL_RATE = 0.3
 ratio = 1
@@ -113,7 +124,7 @@ def base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device
     output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=None, 
+    model = GraphClassifier(compressed_graph, feature_extractor=None, 
                                  node_feature='metapath2vec', device=device)
     features = model.symmetrical_global_graph.ndata['feat']
     nx_graph = load_hetero_nx_graph(compressed_graph)
@@ -318,7 +329,7 @@ def nodetype(compressed_graph, dataset, feature_extractor, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = feature_extractor
     node_feature = 'nodetype'
-    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
+    model = GraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -352,7 +363,7 @@ def metapath2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = feature_extractor
     node_feature = 'metapath2vec'
-    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
+    model = GraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -386,7 +397,7 @@ def gae(compressed_graph, dataset, feature_extractor, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = feature_extractor
     node_feature = 'gae'
-    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
+    model = GraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -420,7 +431,7 @@ def line(compressed_graph, dataset, feature_extractor, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = feature_extractor
     node_feature = 'line'
-    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
+    model = GraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -454,7 +465,7 @@ def node2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = feature_extractor
     node_feature = 'node2vec'
-    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
+    model = GraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
@@ -488,7 +499,7 @@ def random(compressed_graph, dataset, feature_dims, bugtype, device):
         os.makedirs(output_models, exist_ok=True)
     feature_extractor = feature_dims
     node_feature = 'random'
-    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
+    model = GraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     # model = nn.DataParallel(model)
@@ -523,7 +534,7 @@ def zeros(compressed_graph, dataset, feature_dims, bugtype, device):
         os.makedirs(output_models, exist_ok=True)
     feature_extractor = feature_dims
     node_feature = 'zeros'
-    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
+    model = GraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     # model = nn.DataParallel(model)

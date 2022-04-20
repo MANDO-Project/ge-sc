@@ -7,8 +7,8 @@ from dgl.data import DGLDataset
 
 
 class EthIdsDataset(DGLDataset):
-    def __init__(self, data_path, label, raw_dir=None, force_reload=True, verbose=False):
-        self._data_path = data_path
+    def __init__(self, label, raw_dir=None, force_reload=True, verbose=False):
+        # self._data_path = data_path
         self._label = label
         super(EthIdsDataset, self).__init__(name='ethscids',
                                             raw_dir=raw_dir,
@@ -18,23 +18,23 @@ class EthIdsDataset(DGLDataset):
     def process(self):
         # Get labels
         with open(self._label, 'r') as f:
-            content = json.load(f)
-        self.label_dict = {}
-        for sc in content:
-            self.label_dict[sc['contract_name']] = sc['targets']
+            self._annotations = json.load(f)
+        # self.label_dict = {}
+        # for sc in annotations:
+        #     self.label_dict[sc['contract_name']] = sc['targets']
          # Get source names
-        self.extracted_graph = [f for f in os.listdir(self._data_path) if f.endswith('.sol')]
-        self.num_graphs = len(self.extracted_graph)
+        # self.extracted_graph = [f for f in os.listdir(self._data_path) if f.endswith('.sol')]
+        self.num_graphs = len(self._annotations)
         self.graphs, self.label = self._load_graph()
         # Get filename ids
-        self.filename_mapping = {file: idx for idx, file in enumerate(self.extracted_graph)}
+        # self.filename_mapping = {file: idx for idx, file in enumerate(self.extracted_graph)}
 
     def _load_graph(self):
         graphs = []
         labels = []
-        for i in range(self.num_graphs):
-            graphs.append(self.extracted_graph[i])
-            labels.append(int(self.label_dict[self.extracted_graph[i]]))
+        for contract in self._annotations:
+            graphs.append(contract['contract_name'])
+            labels.append(int(contract['targets']))
         labels = torch.tensor(labels, dtype=torch.int64)
         return graphs, labels
 

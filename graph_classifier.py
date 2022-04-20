@@ -91,14 +91,14 @@ def main(args):
     epochs = args['num_epochs']
     k_folds = args['k_folds']
     device = args['device']
-    ethdataset = EthIdsDataset(args['dataset'], args['label'])
+    ethdataset = EthIdsDataset(args['label'])
     kfold = KFold(n_splits=k_folds, shuffle=True)
     train_results = {}
     val_results = {}
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = MANDOGraphClassifier(args['feature_compressed_graph'], ethdataset.filename_mapping, node_feature='nodetype', hidden_size=16, device=args['device'])
+        feature_extractor = MANDOGraphClassifier(args['feature_compressed_graph'], node_feature='nodetype', hidden_size=16, device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()
@@ -130,7 +130,7 @@ def main(args):
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
         print('Start training fold {} with {}/{}/{} train/val/test smart contracts'.format(fold, len(train_subsampler), len(val_subsampler), len(test_ids)))
         total_steps = epochs
-        model = HGTVulGraphClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+        model = MANDOGraphClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
         model.reset_parameters()
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
@@ -212,12 +212,12 @@ if __name__ == '__main__':
     args = parser.parse_args().__dict__
 
     default_configure = {
-    'lr': 0.0005,             # Learning rate
+    'lr': 0.001,             # Learning rate
     'num_heads': 8,        # Number of attention heads for node-level attention
     'hidden_units': 8,
     'dropout': 0.6,
     'weight_decay': 0.001,
-    'num_epochs': 100,
+    'num_epochs': 50,
     'batch_size': 256,
     'patience': 100,
     'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
