@@ -5,6 +5,7 @@ package-lock.json
 *.pyc
 *.pth
 *.zip
+.DS_Store
 
 .ipynb_checkpoints
 outputs/*
