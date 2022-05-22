@@ -88,9 +88,9 @@ def compress_full_smart_contracts(smart_contracts, input_graph, output, vulnerab
     for sc in tqdm(smart_contracts):
         sc_version = get_solc_version(sc)
         print(f'{sc} - {sc_version}')
-        solc_compiler = f'/home/eric/.solc-select/artifacts/solc-{sc_version}'
+        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
         if not os.path.exists(solc_compiler):
-            solc_compiler = f'/home/eric/.solc-select/artifacts/solc-0.4.25'
+            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
         bug_type = sc.split('/')[-2]
         try:
@@ -309,17 +309,32 @@ def extract_graph(source_path, output, vulnerabilities=None):
 
 if __name__ == '__main__':
 
-    smart_contract_path = 'data/clean_71_buggy_curated_0'
-    input_graph = None
-    output_path = 'data/clean_71_buggy_curated_0/cfg_compress_graphs.gpickle'
-    smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
+    # smart_contract_path = 'data/clean_71_buggy_curated_0'
+    # input_graph = None
+    # output_path = 'data/clean_71_buggy_curated_0/cfg_compress_graphs.gpickle'
+    # smart_contracts = [join(smart_contract_path, f) for f in os.listdir(smart_contract_path) if f.endswith('.sol')]
 
-    data_vulnerabilities = None
-    list_vulnerabilities_json_files = [
-        'data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
+    # data_vulnerabilities = None
+    # list_vulnerabilities_json_files = [
+    #     'data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
+    #     # 'data/solidifi_buggy_contracts/access_control/vulnerabilities.json',
+    #     'data/smartbug-dataset/vulnerabilities.json']
+    
+    # data_vulnerabilities = merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files)
+    
+    # compress_full_smart_contracts(smart_contracts, input_graph, output_path, vulnerabilities=data_vulnerabilities)
+
+    ROOT = './experiments/ge-sc-data/source_code'
+    bug_type = {'access_control': 57, 'arithmetic': 60, 'denial_of_service': 46,
+              'front_running': 44, 'reentrancy': 71, 'time_manipulation': 50, 
+              'unchecked_low_level_calls': 95}
+    for bug, counter in bug_type.items():
+        source = f'{ROOT}/{bug}/buggy_curated'
+        output = f'{ROOT}/{bug}/buggy_curated/cfg_compressed_graphs.gpickle'
+        smart_contracts = [join(source, f) for f in os.listdir(source) if f.endswith('.sol')]
+        data_vulnerabilities = None
+        list_vulnerabilities_json_files = ['data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
         # 'data/solidifi_buggy_contracts/access_control/vulnerabilities.json',
         'data/smartbug-dataset/vulnerabilities.json']
-    
-    data_vulnerabilities = merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files)
-    
-    compress_full_smart_contracts(smart_contracts, input_graph, output_path, vulnerabilities=data_vulnerabilities)
+        data_vulnerabilities = merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files)
+        compress_full_smart_contracts(smart_contracts, None, output, vulnerabilities=data_vulnerabilities)
