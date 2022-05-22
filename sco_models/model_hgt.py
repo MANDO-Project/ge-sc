@@ -17,7 +17,8 @@ from .graph_utils import load_hetero_nx_graph, \
                          get_node_label, get_node_ids_dict, \
                          map_node_embedding, get_symmatrical_metapaths, \
                          reflect_graph, get_node_tracker, get_node_ids_by_filename, \
-                         generate_random_node_features, generate_zeros_node_features
+                         generate_random_node_features, generate_zeros_node_features, \
+                         get_length_3_metapath, get_length_2_metapath
 
 
 class HGTLayer(nn.Module):
@@ -353,11 +354,17 @@ class HGTVulGraphClassifier(nn.Module):
         self.node_ids_by_filename = get_node_ids_by_filename(nx_graph)
         # Reflect graph data
         self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
+        # self.symmetrical_global_graph_data = nx_g_data
         self.number_of_nodes = get_number_of_nodes(nx_graph)
         self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
         # self.symmetrical_global_graph.ndata['filename'] = _node_tracker
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(device)
         self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
+        # print(self.meta_paths)
+        # self.length_3_meta_paths = get_length_3_metapath(self.symmetrical_global_graph)
+        # self.length_2_meta_paths = get_length_2_metapath(self.symmetrical_global_graph)
+        # self.meta_paths = self.length_3_meta_paths
+        # self.meta_paths = self.length_2_meta_paths + self.length_3_meta_paths
         # Concat the metapaths have the same begin nodetype
         self.full_metapath = {}
         for metapath in self.meta_paths:
@@ -486,13 +493,12 @@ class HGTVulGraphClassifier(nn.Module):
 
 if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-
-    compressed_graph = './experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0/cfg_cg_compressed_graphs.gpickle'
+    compressed_graph = './experiments/ge-sc-data/byte_code/smartbugs/runtime/gpickles/access_control/clean_57_buggy_curated_0/compressed_graphs/runtime_balanced_compressed_graphs.gpickle'
     dataset = './experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0'
     node_feature = 'nodetype'
     feature_extractor = None
-    model = HGTVulGraphClassifier(compressed_graph,
-                                 dataset, feature_extractor=None, node_feature='nodetype', device=device).to(device)
-    model.train()
+    model = HGTVulGraphClassifier(compressed_graph, feature_extractor=None, node_feature=node_feature, device=device).to(device)
+    # model.train()
     # logits = model()
-    # print(logits.shape)
+    # print(model.meta_paths)
+    print(len(model.length_3_meta_paths))

@@ -10,7 +10,7 @@ from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
-from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, get_symmatrical_metapaths, map_node_embedding, generate_filename_ids, generate_zeros_node_features, generate_random_node_features
+from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, get_symmatrical_metapaths, map_node_embedding, generate_filename_ids, generate_zeros_node_features, generate_random_node_features, get_length_2_metapath, get_length_3_metapath
 
 
 class SemanticAttention(nn.Module):
@@ -128,6 +128,10 @@ class MANDOGraphClassifier(nn.Module):
         self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
         self.symmetrical_global_graph.ndata['filename'] = _node_tracker
         self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
+        # self.length_3_meta_paths = get_length_3_metapath(self.symmetrical_global_graph)
+        # self.length_2_meta_paths = get_length_2_metapath(self.symmetrical_global_graph)
+        # self.meta_paths = self.length_3_meta_paths
+        # self.meta_paths = self.length_2_meta_paths + self.length_3_meta_paths
         # Concat the metapaths have the same begin nodetype
         self.full_metapath = {}
         for metapath in self.meta_paths:

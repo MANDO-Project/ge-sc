@@ -309,6 +309,59 @@ def get_symmatrical_metapaths(symmetrical_global_graph):
     return meta_paths
 
 
+def get_length_2_metapath(symmetrical_global_graph):
+    begin_by = {}
+    end_by = {}
+    for mt in symmetrical_global_graph.canonical_etypes:
+        if mt[0] not in begin_by:
+            begin_by[mt[0]] = [mt]
+        else:
+            begin_by[mt[0]].append(mt)
+        if mt[-1] not in end_by:
+            end_by[mt[-1]] = [mt]
+        else:
+            end_by[mt[-1]].append(mt)
+    metapath_list = []
+    for mt_0 in symmetrical_global_graph.canonical_etypes:
+        source = mt_0[0]
+        dest = mt_0[-1]
+        if source == dest:
+            metapath_list.append([mt_0])
+        first_metapath = [mt_0]
+        for mt_1 in begin_by[dest]:
+            if mt_1 != mt_0 and mt_1[-1] == source:
+                second_metapath = first_metapath + [mt_1]
+                metapath_list.append(second_metapath)
+    return metapath_list
+
+
+def get_length_3_metapath(symmetrical_global_graph):
+    begin_by = {}
+    end_by = {}
+    for mt in symmetrical_global_graph.canonical_etypes:
+        if mt[0] not in begin_by:
+            begin_by[mt[0]] = [mt]
+        else:
+            begin_by[mt[0]].append(mt)
+        if mt[-1] not in end_by:
+            end_by[mt[-1]] = [mt]
+        else:
+            end_by[mt[-1]].append(mt)
+    metapath_list = []
+    for mt_0 in symmetrical_global_graph.canonical_etypes:
+        source = mt_0[0]
+        first_metapath = [mt_0]
+        for mt_1 in begin_by[mt_0[-1]]:
+            if mt_1 != mt_0:
+                second_metapath = first_metapath + [mt_1]
+                intermediate = mt_1[-1]
+                for mt_2 in end_by[source]:
+                    if mt_2[0] == intermediate and mt_1 != mt_2:
+                        third_metapath = second_metapath + [mt_2]
+                        metapath_list.append(third_metapath)
+    return metapath_list
+
+
 def get_subgraph_by_metapath(nx_graph, dgl_graph, metapath):
     nx_g = nx_graph
     number_of_nodes = 0
@@ -329,3 +382,16 @@ def get_subgraph_by_metapath(nx_graph, dgl_graph, metapath):
     # print(source_nodes)
     # print(target_nodes)
     return dgl.edge_subgraph(dgl_graph, {metapath: edges}, preserve_nodes=True)
+
+# if __name__ == '__main__':
+#     canonical_edges = [('0', 'a', '0'), ('0', 'a', '1'), ('1', 'a', '0'),
+#                        ('1', 'b', '1'), ('1', 'b', '0'),('0', 'b', '1'), 
+#                        ('1', 'a', '2'),('2', 'a', '1'),('1', 'a', '3'),('3', 'a', '1'),
+#                        ('0', 'a', '3'), ('3', 'a', '0'), ('2', 'b', '3'), ('3', 'b', '2')]
+#     print('canonical_etypes: ', len(canonical_edges))
+#     metapath_length_2 = get_length_2_metpath(canonical_edges)
+#     metapath_length_3 = get_length_3_metapath(canonical_edges)
+#     print('Meta path length <=2: ', len(metapath_length_2))
+#     print(metapath_length_2)
+#     print('Meta path length 3', len(metapath_length_3))
+#     print(metapath_length_3)
