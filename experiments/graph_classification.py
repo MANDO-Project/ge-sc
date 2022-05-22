@@ -48,13 +48,10 @@ DATA_ID = 0
 REPEAT = args['repeat']
 EPOCHS = args['epochs']
 TASK = "graph_classification"
-STRUCTURE = 'han'
 COMPRESSED_GRAPH = 'cfg'
 DATASET = 'smartbugs'
-if args['bytecode'] == 'creation':
-    BYTECODE = 'creation'
-elif args['bytecode'] == 'runtime':
-    BYTECODE = 'runtime'
+STRUCTURE = args['model']
+BYTECODE = args['bytecode']
 TRAIN_RATE = 0.7
 VAL_RATE = 0.3
 ratio = 1
@@ -65,13 +62,20 @@ ratio = 1
 #             'front_running', 'reentrancy', 'time_manipulation', 
 #             'unchecked_low_level_calls']
 # models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_2', 'random_8', 'random_16', 'random_32', 'random_64', 'random_128', 'zeros_2', 'zeros_8', 'zeros_16', 'zeros_32', 'zeros_64', 'zeros_128']
-models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_32', 'random_64', 'random_128', 'zeros_32', 'zeros_64', 'zeros_128']
+# models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_32', 'random_64', 'random_128', 'zeros_32', 'zeros_64', 'zeros_128']
+models = ['lstm']
 # feature_dim_list = [2, 8, 16, 32, 64, 128]
 feature_dim_list = [32, 64]
 # bug_list = ['ethor']
-bug_list = ['access_control', 'arithmetic', 'denial_of_service',
-            'front_running', 'reentrancy', 'time_manipulation', 
-            'unchecked_low_level_calls']
+bug_list = [
+            'access_control', 
+            # 'arithmetic',
+            # 'denial_of_service',
+            # 'front_running', 
+            # 'reentrancy', 
+            # 'time_manipulation', 
+            # 'unchecked_low_level_calls'
+            ]
 file_counter = {'access_control': 57, 'arithmetic': 60, 'denial_of_service': 46,
                 'front_running': 44, 'reentrancy': 71, 'time_manipulation': 50, 
                 'unchecked_low_level_calls': 95}
@@ -490,6 +494,41 @@ def node2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
         json.dump(report, f, indent=2)
 
 
+def lstm(compressed_graph, dataset, bugtype, device):
+    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/lstm/{bugtype}/'
+    if not os.path.exists(logs):
+        os.makedirs(logs, exist_ok=True)
+    output_models = f'{ROOT}/models/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/lstm/{bugtype}/'
+    if not os.path.exists(output_models):
+        os.makedirs(output_models, exist_ok=True)
+    feature_extractor = 256
+    node_feature = 'lstm'
+    model = GraphClassifier(compressed_graph, feature_extractor=feature_extractor, 
+                                 node_feature=node_feature, device=device)
+    model.reset_parameters()
+    # model = nn.DataParallel(model)
+    model.to(device)
+    X_train, X_val, y_train, y_val = dataset
+    model = train(model, X_train, y_train, device)
+    save_path = os.path.join(output_models, f'hgt.pth')
+    torch.save(model.state_dict(), save_path)
+    model.eval()
+    with torch.no_grad():
+        logits, hiddens = model(X_val)
+        logits = logits.to(device)
+        # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
+        test_results = get_classification_report(y_val, logits, output_dict=True)
+    save_last_hidden(hiddens, y_val, X_val, join(logs, 'last_hiddens.json'))
+    if os.path.isfile(join(logs, 'test_report.json')):
+        with open(join(logs, 'test_report.json'), 'r') as f:
+            report = json.load(f)
+        report.append(test_results)
+    else:
+        report = [test_results]
+    with open(join(logs, 'test_report.json'), 'w') as f:
+        json.dump(report, f, indent=2)
+
+
 def random(compressed_graph, dataset, feature_dims, bugtype, device):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/random_{feature_dims}/{bugtype}/'
     if not os.path.exists(logs):
@@ -595,28 +634,29 @@ def main(device):
             node2vec_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/balanced/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{BYTECODE}_balanced_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
             # Run experiments
             # Base lines
-            base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device)
-            base_line(dataset, bugtype, line_embedded, file_name_dict, device)
-            base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device)
+            # base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device)
+            # base_line(dataset, bugtype, line_embedded, file_name_dict, device)
+            # base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device)
 
             ## Out models
-            nodetype(compressed_graph, dataset, None, bugtype, device)
-            metapath2vec(compressed_graph, dataset, None, bugtype, device)
+            # nodetype(compressed_graph, dataset, None, bugtype, device)
+            # metapath2vec(compressed_graph, dataset, None, bugtype, device)
             # gae(compressed_graph, dataset, line_embedded, bugtype, device)
-            line(compressed_graph, dataset, line_embedded, bugtype, device)
-            node2vec(compressed_graph, dataset, node2vec_embedded, bugtype, device)
+            # line(compressed_graph, dataset, line_embedded, bugtype, device)
+            # node2vec(compressed_graph, dataset, node2vec_embedded, bugtype, device)
+            lstm(compressed_graph, dataset, bugtype, device)
             # random(compressed_graph, dataset, 2, bugtype, device)
             # random(compressed_graph, dataset, 8, bugtype, device)
             # random(compressed_graph, dataset, 16, bugtype, device)
-            random(compressed_graph, dataset, 32, bugtype, device)
-            random(compressed_graph, dataset, 64, bugtype, device)
-            random(compressed_graph, dataset, 128, bugtype, device)
+            # random(compressed_graph, dataset, 32, bugtype, device)
+            # random(compressed_graph, dataset, 64, bugtype, device)
+            # random(compressed_graph, dataset, 128, bugtype, device)
             # zeros(compressed_graph, dataset, 2, bugtype, device)
             # zeros(compressed_graph, dataset, 8, bugtype, device)
             # zeros(compressed_graph, dataset, 16, bugtype, device)
-            zeros(compressed_graph, dataset, 32, bugtype, device)
-            zeros(compressed_graph, dataset, 64, bugtype, device)
-            zeros(compressed_graph, dataset, 128, bugtype, device)
+            # zeros(compressed_graph, dataset, 32, bugtype, device)
+            # zeros(compressed_graph, dataset, 64, bugtype, device)
+            # zeros(compressed_graph, dataset, 128, bugtype, device)
 
 
 
@@ -683,6 +723,7 @@ def get_results():
 
 if __name__ == '__main__':
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+    mps_device = 'mps'
     if args['result']:
             get_results()
     else:

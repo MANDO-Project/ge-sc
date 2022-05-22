@@ -1,7 +1,10 @@
+from audioop import avg
 from numpy.core.fromnumeric import mean
 import torch
 import networkx as nx
 import dgl
+
+from .opcodes import int2op
 
 
 def add_hetero_ids(nx_graph):
@@ -87,6 +90,40 @@ def generate_zeros_node_features(nx_graph, feature_dims):
             features[node_type] = torch.zeros((1, feature_dims))
         else:
             features[node_type] = torch.cat((features[node_type], torch.zeros((1, feature_dims))))
+    return features
+
+
+def op2onehot(op):
+    s = '0123456789abcdef'
+    str2int = {s[i]: i for i in range(len(s))}
+    onehot_line = [0 for _ in range(256)]
+    if op != 'EXIT BLOCK':
+        op2int = {int2op[key]:key for key in int2op}
+        hexstr = op2int[op]
+        number = str2int[hexstr[0]] * 16 + str2int[hexstr[1]]
+        onehot_line[number] = 1
+    return onehot_line
+
+def generate_lstm_node_features(nx_graph):
+    nx_g = nx_graph
+    graph_seq_feature = []
+    features = {}
+    for node_idx, node_data in nx_g.nodes(data=True):
+        node_type = node_data['node_type']
+        node_seq_feature = []
+        seq = node_data.get('label', '').split(':')[1:]
+        for unit in seq:
+            op = unit[1:unit.find('\\')]
+            if 'PUSH' in op:
+                op = op.split(' ')[0]
+            node_seq_feature.append(op2onehot(op))
+        avg_seq_node = torch.mean(torch.tensor(node_seq_feature, dtype=torch.float), 0)
+        # print(avg_seq_node.shape)
+        # graph_seq_feature.append(torch.tensor([node_seq_feature]).float())
+        if node_type not in features:
+            features[node_type] = avg_seq_node.unsqueeze(0)
+        else:
+            features[node_type] = torch.cat((features[node_type], avg_seq_node.unsqueeze(0)))
     return features
 
 

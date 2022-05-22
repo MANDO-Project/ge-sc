@@ -10,8 +10,12 @@ from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
-from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, get_symmatrical_metapaths, map_node_embedding, generate_filename_ids, generate_zeros_node_features, generate_random_node_features, get_length_2_metapath, get_length_3_metapath
-
+from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, \
+        get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, \
+        get_symmatrical_metapaths, map_node_embedding, generate_filename_ids, \
+        generate_zeros_node_features, generate_random_node_features, \
+        generate_lstm_node_features
+from .dataloader import EthNodeDataset
 
 class SemanticAttention(nn.Module):
     def __init__(self, in_size, hidden_size=128):
@@ -196,9 +200,14 @@ class MANDOGraphClassifier(nn.Module):
             self.in_size = embedding_dim
             features = generate_zeros_node_features(nx_graph, self.in_size)
             features = {k: v.to(self.device) for k, v in features.items()}
+        elif node_feature == 'lstm':
+            embedding_dim = int(feature_extractor)
+            self.in_size = embedding_dim
+            features = generate_lstm_node_features(nx_graph)
+            features = {k: v for k, v in features.items()}
 
         # self.symmetrical_global_graph = self.symmetrical_global_graph.to('cpu')
-        self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
+        # self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.symmetrical_global_graph.ndata['feat'] = features
 
         # Init Model
@@ -217,7 +226,7 @@ class MANDOGraphClassifier(nn.Module):
         features = {}
         for han in self.layers:
             ntype = han.meta_paths[0][0][0]
-            feature = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+            feature = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype])
             if ntype not in features.keys():
                 features[ntype] = feature.unsqueeze(0)
             else:
