@@ -1,0 +1,33 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+156 [label="156: RETURNDATASIZE\l157: PUSH1 0x00\l159: DUP1\l160: RETURNDATACOPY\l161: RETURNDATASIZE\l162: PUSH1 0x00\l164: REVERT\l" shape=Msquare color=crimson ];
+56 [label="56: JUMPDEST\l57: PUSH1 0x40\l59: MLOAD\l60: DUP1\l61: DUP3\l62: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l83: AND\l84: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l105: AND\l106: DUP2\l107: MSTORE\l108: PUSH1 0x20\l110: ADD\l111: SWAP2\l112: POP\l113: POP\l114: PUSH1 0x40\l116: MLOAD\l117: DUP1\l118: SWAP2\l119: SUB\l120: SWAP1\l121: RETURN\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+12 [label="12: PUSH1 0x00\l14: DUP1\l15: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+43 [label="43: JUMPDEST\l44: PUSH1 0x00\l46: DUP1\l47: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+165 [label="165: JUMPDEST\l166: POP\l167: SWAP1\l168: POP\l169: DUP1\l170: SWAP2\l171: POP\l172: POP\l173: SWAP1\l174: JUMP\l" ];
+48 [label="48: JUMPDEST\l49: PUSH2 0x0038\l52: PUSH2 0x007a\l55: JUMP\l" fillcolor=lemonchiffon ];
+122 [label="122: JUMPDEST\l123: PUSH1 0x00\l125: DUP1\l126: PUSH1 0x40\l128: MLOAD\l129: PUSH2 0x0089\l132: SWAP1\l133: PUSH2 0x00af\l136: JUMP\l" ];
+175 [label="175: JUMPDEST\l176: PUSH1 0x9c\l178: DUP1\l179: PUSH2 0x00bc\l182: DUP4\l183: CODECOPY\l184: ADD\l185: SWAP1\l186: JUMP\l" ];
+0 [label="0: PUSH1 0x80\l2: PUSH1 0x40\l4: MSTORE\l5: CALLVALUE\l6: DUP1\l7: ISZERO\l8: PUSH2 0x0010\l11: JUMPI\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+16 [label="16: JUMPDEST\l17: POP\l18: PUSH1 0x04\l20: CALLDATASIZE\l21: LT\l22: PUSH2 0x002b\l25: JUMPI\l" fillcolor=lemonchiffon ];
+26 [label="26: PUSH1 0x00\l28: CALLDATALOAD\l29: PUSH1 0xe0\l31: SHR\l32: DUP1\l33: PUSH4 0xaa95b440\l38: EQ\l39: PUSH2 0x0030\l42: JUMPI\l" fillcolor=lemonchiffon ];
+187 [label="187: EXIT BLOCK\l" fillcolor=crimson ];
+137 [label="137: JUMPDEST\l138: PUSH1 0x40\l140: MLOAD\l141: DUP1\l142: SWAP2\l143: SUB\l144: SWAP1\l145: PUSH1 0x00\l147: CREATE\l148: DUP1\l149: ISZERO\l150: DUP1\l151: ISZERO\l152: PUSH2 0x00a5\l155: JUMPI\l" ];
+16 -> 26;
+0 -> 16;
+122 -> 175;
+48 -> 122;
+26 -> 48;
+175 -> 137;
+137 -> 165;
+56 -> 187;
+0 -> 12;
+16 -> 43;
+26 -> 43;
+43 -> 187;
+12 -> 187;
+165 -> 56;
+137 -> 156;
+156 -> 187;
+}

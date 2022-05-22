@@ -1,0 +1,24 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+0 [label="0: PUSH1 0x80\l2: PUSH1 0x40\l4: MSTORE\l5: PUSH1 0x04\l7: CALLDATASIZE\l8: LT\l9: PUSH1 0x3f\l11: JUMPI\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+68 [label="68: JUMPDEST\l69: CALLVALUE\l70: DUP1\l71: ISZERO\l72: PUSH1 0x4f\l74: JUMPI\l" fillcolor=lemonchiffon ];
+79 [label="79: JUMPDEST\l80: POP\l81: PUSH1 0x82\l83: PUSH1 0x04\l85: DUP1\l86: CALLDATASIZE\l87: SUB\l88: DUP2\l89: ADD\l90: SWAP1\l91: DUP1\l92: DUP1\l93: CALLDATALOAD\l94: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l115: AND\l116: SWAP1\l117: PUSH1 0x20\l119: ADD\l120: SWAP1\l121: SWAP3\l122: SWAP2\l123: SWAP1\l124: POP\l125: POP\l126: POP\l127: PUSH1 0x9c\l129: JUMP\l" fillcolor=lemonchiffon ];
+63 [label="63: JUMPDEST\l64: PUSH1 0x00\l66: DUP1\l67: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+75 [label="75: PUSH1 0x00\l77: DUP1\l78: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+156 [label="156: JUMPDEST\l157: PUSH1 0x00\l159: PUSH1 0x20\l161: MSTORE\l162: DUP1\l163: PUSH1 0x00\l165: MSTORE\l166: PUSH1 0x40\l168: PUSH1 0x00\l170: SHA3\l171: PUSH1 0x00\l173: SWAP2\l174: POP\l175: SLOAD\l176: SWAP1\l177: PUSH2 0x0100\l180: EXP\l181: SWAP1\l182: DIV\l183: PUSH1 0xff\l185: AND\l186: DUP2\l187: JUMP\l" ];
+12 [label="12: PUSH1 0x00\l14: CALLDATALOAD\l15: PUSH29 0x0100000000000000000000000000000000000000000000000000000000\l45: SWAP1\l46: DIV\l47: PUSH4 0xffffffff\l52: AND\l53: DUP1\l54: PUSH4 0xb9181611\l59: EQ\l60: PUSH1 0x44\l62: JUMPI\l" fillcolor=lemonchiffon ];
+188 [label="188: EXIT BLOCK\l" fillcolor=crimson ];
+130 [label="130: JUMPDEST\l131: PUSH1 0x40\l133: MLOAD\l134: DUP1\l135: DUP3\l136: ISZERO\l137: ISZERO\l138: ISZERO\l139: ISZERO\l140: DUP2\l141: MSTORE\l142: PUSH1 0x20\l144: ADD\l145: SWAP2\l146: POP\l147: POP\l148: PUSH1 0x40\l150: MLOAD\l151: DUP1\l152: SWAP2\l153: SUB\l154: SWAP1\l155: RETURN\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+130 -> 188;
+79 -> 156;
+156 -> 130;
+12 -> 63;
+63 -> 188;
+75 -> 188;
+12 -> 68;
+0 -> 63;
+0 -> 12;
+68 -> 79;
+68 -> 75;
+}

@@ -1,0 +1,24 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+0 [label="0: PUSH1 0x80\l2: PUSH1 0x40\l4: MSTORE\l5: PUSH1 0x04\l7: CALLDATASIZE\l8: LT\l9: PUSH1 0x3f\l11: JUMPI\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+68 [label="68: JUMPDEST\l69: CALLVALUE\l70: DUP1\l71: ISZERO\l72: PUSH1 0x4f\l74: JUMPI\l" fillcolor=lemonchiffon ];
+213 [label="213: EXIT BLOCK\l" fillcolor=crimson ];
+118 [label="118: JUMPDEST\l119: PUSH1 0x40\l121: MLOAD\l122: DUP1\l123: DUP3\l124: DUP2\l125: MSTORE\l126: PUSH1 0x20\l128: ADD\l129: SWAP2\l130: POP\l131: POP\l132: PUSH1 0x40\l134: MLOAD\l135: DUP1\l136: SWAP2\l137: SUB\l138: SWAP1\l139: RETURN\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+79 [label="79: JUMPDEST\l80: POP\l81: PUSH1 0x76\l83: PUSH1 0x04\l85: DUP1\l86: CALLDATASIZE\l87: SUB\l88: DUP2\l89: ADD\l90: SWAP1\l91: DUP1\l92: DUP1\l93: CALLDATALOAD\l94: SWAP1\l95: PUSH1 0x20\l97: ADD\l98: SWAP1\l99: SWAP3\l100: SWAP2\l101: SWAP1\l102: DUP1\l103: CALLDATALOAD\l104: SWAP1\l105: PUSH1 0x20\l107: ADD\l108: SWAP1\l109: SWAP3\l110: SWAP2\l111: SWAP1\l112: POP\l113: POP\l114: POP\l115: PUSH1 0x8c\l117: JUMP\l" fillcolor=lemonchiffon ];
+63 [label="63: JUMPDEST\l64: PUSH1 0x00\l66: DUP1\l67: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+75 [label="75: PUSH1 0x00\l77: DUP1\l78: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+12 [label="12: PUSH1 0x00\l14: CALLDATALOAD\l15: PUSH29 0x0100000000000000000000000000000000000000000000000000000000\l45: SWAP1\l46: DIV\l47: PUSH4 0xffffffff\l52: AND\l53: DUP1\l54: PUSH4 0x165c4a16\l59: EQ\l60: PUSH1 0x44\l62: JUMPI\l" fillcolor=lemonchiffon ];
+140 [label="140: JUMPDEST\l141: PUSH1 0x00\l143: DUP1\l144: DUP3\l145: DUP5\l146: MUL\l147: SWAP1\l148: POP\l149: PUSH32 0xe6b0eaf167941d76b35201b3db00a829111d73cb68ec136d57dadeef4a0fdb6a\l182: DUP2\l183: PUSH1 0x40\l185: MLOAD\l186: DUP1\l187: DUP3\l188: DUP2\l189: MSTORE\l190: PUSH1 0x20\l192: ADD\l193: SWAP2\l194: POP\l195: POP\l196: PUSH1 0x40\l198: MLOAD\l199: DUP1\l200: SWAP2\l201: SUB\l202: SWAP1\l203: LOG1\l204: DUP1\l205: SWAP2\l206: POP\l207: POP\l208: SWAP3\l209: SWAP2\l210: POP\l211: POP\l212: JUMP\l" ];
+118 -> 213;
+68 -> 79;
+12 -> 63;
+140 -> 118;
+12 -> 68;
+0 -> 63;
+79 -> 140;
+0 -> 12;
+68 -> 75;
+63 -> 213;
+75 -> 213;
+}

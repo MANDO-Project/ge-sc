@@ -1,0 +1,29 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+0 [label="0: PUSH1 0x80\l2: PUSH1 0x40\l4: MSTORE\l5: PUSH1 0x04\l7: CALLDATASIZE\l8: LT\l9: PUSH1 0x3f\l11: JUMPI\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+83 [label="83: JUMPDEST\l84: STOP\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+233 [label="233: EXIT BLOCK\l" fillcolor=crimson ];
+72 [label="72: PUSH1 0x00\l74: DUP1\l75: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+76 [label="76: JUMPDEST\l77: POP\l78: PUSH1 0x53\l80: PUSH1 0x55\l82: JUMP\l" fillcolor=lemonchiffon ];
+171 [label="171: PUSH1 0x00\l173: DUP1\l174: REVERT\l" shape=Msquare color=crimson ];
+175 [label="175: JUMPDEST\l176: PUSH1 0x00\l178: DUP1\l179: SWAP1\l180: SLOAD\l181: SWAP1\l182: PUSH2 0x0100\l185: EXP\l186: SWAP1\l187: DIV\l188: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l209: AND\l210: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l231: AND\l232: SELFDESTRUCT\l" shape=Msquare color=crimson ];
+63 [label="63: JUMPDEST\l64: STOP\l" shape=Msquare color=crimson ];
+65 [label="65: JUMPDEST\l66: CALLVALUE\l67: DUP1\l68: ISZERO\l69: PUSH1 0x4c\l71: JUMPI\l" fillcolor=lemonchiffon ];
+85 [label="85: JUMPDEST\l86: PUSH1 0x00\l88: DUP1\l89: SWAP1\l90: SLOAD\l91: SWAP1\l92: PUSH2 0x0100\l95: EXP\l96: SWAP1\l97: DIV\l98: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l119: AND\l120: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l141: AND\l142: CALLER\l143: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l164: AND\l165: EQ\l166: ISZERO\l167: ISZERO\l168: PUSH1 0xaf\l170: JUMPI\l" ];
+12 [label="12: PUSH1 0x00\l14: CALLDATALOAD\l15: PUSH29 0x0100000000000000000000000000000000000000000000000000000000\l45: SWAP1\l46: DIV\l47: PUSH4 0xffffffff\l52: AND\l53: DUP1\l54: PUSH4 0x41c0e1b5\l59: EQ\l60: PUSH1 0x41\l62: JUMPI\l" fillcolor=lemonchiffon ];
+72 -> 233;
+63 -> 233;
+171 -> 233;
+175 -> 233;
+65 -> 72;
+76 -> 85;
+83 -> 233;
+0 -> 12;
+12 -> 65;
+12 -> 63;
+65 -> 76;
+85 -> 171;
+85 -> 175;
+0 -> 63;
+}

@@ -1,0 +1,34 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+96 [label="96: PUSH1 0x00\l98: DUP1\l99: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+68 [label="68: JUMPDEST\l69: CALLVALUE\l70: DUP1\l71: ISZERO\l72: PUSH1 0x4f\l74: JUMPI\l" fillcolor=lemonchiffon ];
+206 [label="206: JUMPDEST\l207: POP\l208: POP\l209: JUMP\l" ];
+75 [label="75: PUSH1 0x00\l77: DUP1\l78: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+141 [label="141: CALLER\l142: PUSH1 0x01\l144: PUSH1 0x00\l146: PUSH2 0x0100\l149: EXP\l150: DUP2\l151: SLOAD\l152: DUP2\l153: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l174: MUL\l175: NOT\l176: AND\l177: SWAP1\l178: DUP4\l179: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l200: AND\l201: MUL\l202: OR\l203: SWAP1\l204: SSTORE\l205: POP\l" ];
+121 [label="121: JUMPDEST\l122: STOP\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+0 [label="0: PUSH1 0x80\l2: PUSH1 0x40\l4: MSTORE\l5: PUSH1 0x04\l7: CALLDATASIZE\l8: LT\l9: PUSH1 0x3f\l11: JUMPI\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+210 [label="210: EXIT BLOCK\l" fillcolor=crimson ];
+79 [label="79: JUMPDEST\l80: POP\l81: PUSH1 0x79\l83: PUSH1 0x04\l85: DUP1\l86: CALLDATASIZE\l87: SUB\l88: PUSH1 0x20\l90: DUP2\l91: LT\l92: ISZERO\l93: PUSH1 0x64\l95: JUMPI\l" fillcolor=lemonchiffon ];
+100 [label="100: JUMPDEST\l101: DUP2\l102: ADD\l103: SWAP1\l104: DUP1\l105: DUP1\l106: CALLDATALOAD\l107: SWAP1\l108: PUSH1 0x20\l110: ADD\l111: SWAP1\l112: SWAP3\l113: SWAP2\l114: SWAP1\l115: POP\l116: POP\l117: POP\l118: PUSH1 0x7b\l120: JUMP\l" fillcolor=lemonchiffon ];
+12 [label="12: PUSH1 0x00\l14: CALLDATALOAD\l15: PUSH29 0x0100000000000000000000000000000000000000000000000000000000\l45: SWAP1\l46: DIV\l47: PUSH4 0xffffffff\l52: AND\l53: DUP1\l54: PUSH4 0x621563eb\l59: EQ\l60: PUSH1 0x44\l62: JUMPI\l" fillcolor=lemonchiffon ];
+63 [label="63: JUMPDEST\l64: PUSH1 0x00\l66: DUP1\l67: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+123 [label="123: JUMPDEST\l124: PUSH1 0x00\l126: TIMESTAMP\l127: SWAP1\l128: POP\l129: DUP1\l130: PUSH3 0x069780\l134: DUP4\l135: ADD\l136: EQ\l137: ISZERO\l138: PUSH1 0xce\l140: JUMPI\l" ];
+12 -> 63;
+79 -> 100;
+0 -> 12;
+63 -> 210;
+100 -> 123;
+206 -> 121;
+141 -> 206;
+0 -> 63;
+68 -> 75;
+123 -> 141;
+79 -> 96;
+96 -> 210;
+68 -> 79;
+75 -> 210;
+123 -> 206;
+12 -> 68;
+121 -> 210;
+}

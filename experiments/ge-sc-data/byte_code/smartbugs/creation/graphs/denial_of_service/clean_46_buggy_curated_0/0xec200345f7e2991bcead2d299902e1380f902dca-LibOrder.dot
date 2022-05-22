@@ -1,0 +1,36 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+160 [label="160: EXIT BLOCK\l" fillcolor=crimson ];
+86 [label="86: JUMPDEST\l87: PUSH1 0x40\l89: MLOAD\l90: PUSH1 0x61\l92: SWAP2\l93: SWAP1\l94: PUSH1 0x7d\l96: JUMP\l" fillcolor=lemonchiffon ];
+68 [label="68: JUMPDEST\l69: CALLVALUE\l70: DUP1\l71: ISZERO\l72: PUSH1 0x4f\l74: JUMPI\l" fillcolor=lemonchiffon ];
+79 [label="79: JUMPDEST\l80: POP\l81: PUSH1 0x56\l83: PUSH1 0x6a\l85: JUMP\l" fillcolor=lemonchiffon ];
+112 [label="112: JUMPDEST\l113: PUSH1 0x77\l115: DUP2\l116: PUSH1 0x96\l118: JUMP\l" ];
+144 [label="144: JUMPDEST\l145: SWAP3\l146: SWAP2\l147: POP\l148: POP\l149: JUMP\l" ];
+75 [label="75: PUSH1 0x00\l77: DUP1\l78: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+119 [label="119: JUMPDEST\l120: DUP3\l121: MSTORE\l122: POP\l123: POP\l124: JUMP\l" ];
+97 [label="97: JUMPDEST\l98: PUSH1 0x40\l100: MLOAD\l101: DUP1\l102: SWAP2\l103: SUB\l104: SWAP1\l105: RETURN\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+12 [label="12: PUSH1 0x00\l14: CALLDATALOAD\l15: PUSH29 0x0100000000000000000000000000000000000000000000000000000000\l45: SWAP1\l46: DIV\l47: PUSH4 0xffffffff\l52: AND\l53: DUP1\l54: PUSH4 0xe306f779\l59: EQ\l60: PUSH1 0x44\l62: JUMPI\l" fillcolor=lemonchiffon ];
+0 [label="0: PUSH1 0x80\l2: PUSH1 0x40\l4: MSTORE\l5: PUSH1 0x04\l7: CALLDATASIZE\l8: LT\l9: PUSH1 0x3f\l11: JUMPI\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+150 [label="150: JUMPDEST\l151: PUSH1 0x00\l153: DUP2\l154: SWAP1\l155: POP\l156: SWAP2\l157: SWAP1\l158: POP\l159: JUMP\l" ];
+63 [label="63: JUMPDEST\l64: PUSH1 0x00\l66: DUP1\l67: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+106 [label="106: JUMPDEST\l107: PUSH1 0x00\l109: SLOAD\l110: DUP2\l111: JUMP\l" ];
+125 [label="125: JUMPDEST\l126: PUSH1 0x00\l128: PUSH1 0x20\l130: DUP3\l131: ADD\l132: SWAP1\l133: POP\l134: PUSH1 0x90\l136: PUSH1 0x00\l138: DUP4\l139: ADD\l140: DUP5\l141: PUSH1 0x70\l143: JUMP\l" ];
+119 -> 144;
+68 -> 79;
+144 -> 97;
+0 -> 63;
+75 -> 160;
+12 -> 68;
+97 -> 160;
+68 -> 75;
+12 -> 63;
+125 -> 112;
+106 -> 86;
+63 -> 160;
+79 -> 106;
+86 -> 125;
+112 -> 150;
+0 -> 12;
+150 -> 119;
+}

@@ -1,0 +1,7 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+32 [label="32: EXIT BLOCK\l" fillcolor=crimson ];
+0 [label="0: PUSH20 0x0000000000000000000000000000000000000000\l21: ADDRESS\l22: EQ\l23: PUSH1 0x60\l25: PUSH1 0x40\l27: MSTORE\l28: PUSH1 0x00\l30: DUP1\l31: REVERT\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+0 -> 32;
+}

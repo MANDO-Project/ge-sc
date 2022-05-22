@@ -1,0 +1,24 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+196 [label="196: JUMPDEST\l197: STOP\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+198 [label="198: JUMPDEST\l199: POP\l200: POP\l201: POP\l202: JUMP\l" ];
+68 [label="68: JUMPDEST\l69: CALLVALUE\l70: ISZERO\l71: PUSH1 0x4e\l73: JUMPI\l" fillcolor=lemonchiffon ];
+63 [label="63: JUMPDEST\l64: PUSH1 0x00\l66: DUP1\l67: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+203 [label="203: EXIT BLOCK\l" fillcolor=crimson ];
+74 [label="74: PUSH1 0x00\l76: DUP1\l77: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+78 [label="78: JUMPDEST\l79: PUSH1 0xc4\l81: PUSH1 0x04\l83: DUP1\l84: DUP1\l85: CALLDATALOAD\l86: PUSH20 0xffffffffffffffffffffffffffffffffffffffff\l107: AND\l108: SWAP1\l109: PUSH1 0x20\l111: ADD\l112: SWAP1\l113: SWAP2\l114: SWAP1\l115: DUP1\l116: CALLDATALOAD\l117: SWAP1\l118: PUSH1 0x20\l120: ADD\l121: SWAP1\l122: SWAP2\l123: SWAP1\l124: DUP1\l125: CALLDATALOAD\l126: SWAP1\l127: PUSH1 0x20\l129: ADD\l130: SWAP1\l131: DUP3\l132: ADD\l133: DUP1\l134: CALLDATALOAD\l135: SWAP1\l136: PUSH1 0x20\l138: ADD\l139: SWAP1\l140: DUP1\l141: DUP1\l142: PUSH1 0x1f\l144: ADD\l145: PUSH1 0x20\l147: DUP1\l148: SWAP2\l149: DIV\l150: MUL\l151: PUSH1 0x20\l153: ADD\l154: PUSH1 0x40\l156: MLOAD\l157: SWAP1\l158: DUP2\l159: ADD\l160: PUSH1 0x40\l162: MSTORE\l163: DUP1\l164: SWAP4\l165: SWAP3\l166: SWAP2\l167: SWAP1\l168: DUP2\l169: DUP2\l170: MSTORE\l171: PUSH1 0x20\l173: ADD\l174: DUP4\l175: DUP4\l176: DUP1\l177: DUP3\l178: DUP5\l179: CALLDATACOPY\l180: DUP3\l181: ADD\l182: SWAP2\l183: POP\l184: POP\l185: POP\l186: POP\l187: POP\l188: POP\l189: SWAP2\l190: SWAP1\l191: POP\l192: POP\l193: PUSH1 0xc6\l195: JUMP\l" fillcolor=lemonchiffon ];
+0 [label="0: PUSH1 0x60\l2: PUSH1 0x40\l4: MSTORE\l5: PUSH1 0x04\l7: CALLDATASIZE\l8: LT\l9: PUSH1 0x3f\l11: JUMPI\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+12 [label="12: PUSH1 0x00\l14: CALLDATALOAD\l15: PUSH29 0x0100000000000000000000000000000000000000000000000000000000\l45: SWAP1\l46: DIV\l47: PUSH4 0xffffffff\l52: AND\l53: DUP1\l54: PUSH4 0xc0ee0b8a\l59: EQ\l60: PUSH1 0x44\l62: JUMPI\l" fillcolor=lemonchiffon ];
+74 -> 203;
+0 -> 12;
+63 -> 203;
+68 -> 74;
+0 -> 63;
+12 -> 63;
+68 -> 78;
+12 -> 68;
+198 -> 196;
+78 -> 198;
+196 -> 203;
+}

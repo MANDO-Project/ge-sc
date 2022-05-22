@@ -1,0 +1,24 @@
+digraph G {
+bgcolor=transparent rankdir=UD;
+node [shape=box style=filled color=black fillcolor=white fontname=arial fontcolor=black];
+0 [label="0: PUSH1 0x80\l2: PUSH1 0x40\l4: MSTORE\l5: PUSH1 0x04\l7: CALLDATASIZE\l8: LT\l9: PUSH1 0x3f\l11: JUMPI\l" fillcolor=lemonchiffon shape=Msquare fillcolor=gold ];
+12 [label="12: PUSH1 0x00\l14: CALLDATALOAD\l15: PUSH29 0x0100000000000000000000000000000000000000000000000000000000\l45: SWAP1\l46: DIV\l47: PUSH4 0xffffffff\l52: AND\l53: DUP1\l54: PUSH4 0x6d6f385c\l59: EQ\l60: PUSH1 0x44\l62: JUMPI\l" fillcolor=lemonchiffon ];
+68 [label="68: JUMPDEST\l69: CALLVALUE\l70: DUP1\l71: ISZERO\l72: PUSH1 0x4f\l74: JUMPI\l" fillcolor=lemonchiffon ];
+112 [label="112: JUMPDEST\l113: PUSH1 0x00\l115: PUSH4 0x5c2aad80\l120: TIMESTAMP\l121: LT\l122: ISZERO\l123: SWAP1\l124: POP\l125: SWAP1\l126: JUMP\l" ];
+79 [label="79: JUMPDEST\l80: POP\l81: PUSH1 0x56\l83: PUSH1 0x70\l85: JUMP\l" fillcolor=lemonchiffon ];
+63 [label="63: JUMPDEST\l64: PUSH1 0x00\l66: DUP1\l67: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+75 [label="75: PUSH1 0x00\l77: DUP1\l78: REVERT\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+86 [label="86: JUMPDEST\l87: PUSH1 0x40\l89: MLOAD\l90: DUP1\l91: DUP3\l92: ISZERO\l93: ISZERO\l94: ISZERO\l95: ISZERO\l96: DUP2\l97: MSTORE\l98: PUSH1 0x20\l100: ADD\l101: SWAP2\l102: POP\l103: POP\l104: PUSH1 0x40\l106: MLOAD\l107: DUP1\l108: SWAP2\l109: SUB\l110: SWAP1\l111: RETURN\l" fillcolor=lemonchiffon shape=Msquare color=crimson ];
+127 [label="127: EXIT BLOCK\l" fillcolor=crimson ];
+0 -> 12;
+12 -> 68;
+63 -> 127;
+75 -> 127;
+86 -> 127;
+0 -> 63;
+12 -> 63;
+68 -> 79;
+112 -> 86;
+68 -> 75;
+79 -> 112;
+}
