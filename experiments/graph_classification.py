@@ -1,6 +1,7 @@
 import os
 import argparse
 from os.path import join
+from time import time
 
 import pickle
 import json
@@ -33,7 +34,7 @@ DATA_ID = 0
 REPEAT = args['repeat']
 EPOCHS = args['epochs']
 TASK = "graph_classification"
-STRUCTURE = 'hgt'
+STRUCTURE = 'han'
 COMPRESSED_GRAPH = 'cfg_cg'
 DATASET = 'clean_50_buggy_curated'
 TRAIN_RATE = 0.7
@@ -86,7 +87,7 @@ def base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bu
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/clean_{ratio*file_counter[bugtype]}_buggy_curated_{DATA_ID}/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=None, 
+    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=None, 
                                  node_feature='metapath2vec', device=device)
     features = model.symmetrical_global_graph.ndata['feat']
     nx_graph = load_hetero_nx_graph(compressed_graph)
@@ -108,6 +109,7 @@ def base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bu
     targets = torch.tensor(y_train, device=device)
     loss_fcn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=0.0005)
+    t0 = time()
     for _ in range(EPOCHS):
         optimizer.zero_grad()
         logits = classifier(X_embedded_train)
@@ -118,10 +120,14 @@ def base_metapath2vec(compressed_graph, source_path, file_name_dict, dataset, bu
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(classifier.state_dict(), save_path)
     classifier.eval()
+    t1 = time()
     with torch.no_grad():
         logits = classifier(X_embedded_val)
         logits = logits.to(device)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -158,6 +164,7 @@ def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
     targets = torch.tensor(y_train, device=device)
     loss_fcn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=0.0005)
+    t0 = time()
     for _ in range(EPOCHS):
         optimizer.zero_grad()
         logits = classifier(X_embedded_train)
@@ -168,10 +175,14 @@ def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(classifier.state_dict(), save_path)
     classifier.eval()
+    t1 = time()
     with torch.no_grad():
         logits = classifier(X_embedded_val)
         logits = logits.to(device)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -208,6 +219,7 @@ def base_line(dataset, bugtype, gae_embedded, file_name_dict, device):
     targets = torch.tensor(y_train, device=device)
     loss_fcn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=0.0005)
+    t0 = time()
     for _ in range(EPOCHS):
         optimizer.zero_grad()
         logits = classifier(X_embedded_train)
@@ -218,10 +230,14 @@ def base_line(dataset, bugtype, gae_embedded, file_name_dict, device):
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(classifier.state_dict(), save_path)
     classifier.eval()
+    t1 = time()
     with torch.no_grad():
         logits = classifier(X_embedded_val)
         logits = logits.to(device)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -258,6 +274,7 @@ def base_node2vec(dataset, bugtype, gae_embedded, file_name_dict, device):
     targets = torch.tensor(y_train, device=device)
     loss_fcn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=0.0005)
+    t0 = time()
     for _ in range(EPOCHS):
         optimizer.zero_grad()
         logits = classifier(X_embedded_train)
@@ -268,10 +285,14 @@ def base_node2vec(dataset, bugtype, gae_embedded, file_name_dict, device):
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(classifier.state_dict(), save_path)
     classifier.eval()
+    t1 = time()
     with torch.no_grad():
         logits = classifier(X_embedded_val)
         logits = logits.to(device)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -291,20 +312,25 @@ def nodetype(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = None
     node_feature = 'nodetype'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
+    t0 = time()
     model = train(model, X_train, y_train, device)
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
+    t1 = time()
     with torch.no_grad():
         logits, _ = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -324,20 +350,25 @@ def metapath2vec(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = None
     node_feature = 'metapath2vec'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
+    t0 = time()
     model = train(model, X_train, y_train, device)
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
+    t1 = time()
     with torch.no_grad():
         logits, _ = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -357,20 +388,25 @@ def gae(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'gae'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
+    t0 = time()
     model = train(model, X_train, y_train, device)
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
+    t1 = time()
     with torch.no_grad():
         logits, _ = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -390,20 +426,25 @@ def line(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'line'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
+    t0 = time()
     model = train(model, X_train, y_train, device)
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
+    t1 = time()
     with torch.no_grad():
         logits, _ = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -423,20 +464,25 @@ def node2vec(compressed_graph, source_path, dataset, bugtype, device):
         os.makedirs(output_models)
     feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'node2vec'
-    model = HGTVulGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
+    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     model.reset_parameters()
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
+    t0 = time()
     model = train(model, X_train, y_train, device)
     save_path = os.path.join(output_models, f'hgt.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
+    t1 = time()
     with torch.no_grad():
         logits, _ = model(X_val)
         logits = logits.to(device)
         # test_acc, test_micro_f1, test_macro_f1 = score(y_val, logits)
         test_results = get_classification_report(y_val, logits, output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
