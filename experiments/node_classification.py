@@ -2,6 +2,7 @@ import os
 import random
 import argparse
 from os.path import join
+from time import time
 
 import pickle
 import json
@@ -96,7 +97,7 @@ def base_metapath2vec(compressed_graph, source_path, bugtype, device):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    model = MANDOGraphClassifier(compressed_graph, source_path, feature_extractor=None, node_feature='metapath2vec', device=device)
+    model = MANDOGraphClassifier(compressed_graph, feature_extractor=None, node_feature='metapath2vec', device=device)
     features = model.symmetrical_global_graph.ndata['feat']
     nx_graph = load_hetero_nx_graph(compressed_graph)
     embedding = reveert_map_node_embedding(nx_graph, features)
@@ -116,6 +117,7 @@ def base_metapath2vec(compressed_graph, source_path, bugtype, device):
     targets = torch.tensor(targets, device=device)
     loss_fcn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=LR)
+    t0 = time()
     for epoch in range(EPOCHS):
         optimizer.zero_grad()
         logits = classifier(embedding)
@@ -123,7 +125,11 @@ def base_metapath2vec(compressed_graph, source_path, bugtype, device):
         train_loss = loss_fcn(logits[train_mask], targets[train_mask])
         train_loss.backward()
         optimizer.step()
+    t1 = time()
     test_results = get_classification_report(targets[test_mask], logits[test_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -159,6 +165,7 @@ def base_gae(nx_graph, embedded, bugtype, device):
     targets = torch.tensor(targets, device=device)
     loss_fcn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=LR)
+    t0 = time()
     for epoch in range(EPOCHS):
         optimizer.zero_grad()
         logits = classifier(embedding)
@@ -166,7 +173,11 @@ def base_gae(nx_graph, embedded, bugtype, device):
         train_loss = loss_fcn(logits[train_mask], targets[train_mask])
         train_loss.backward()
         optimizer.step()
+    t1 = time()
     test_results = get_classification_report(targets[test_mask], logits[test_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -199,6 +210,7 @@ def base_line(nx_graph, embedded, bugtype, device):
     targets = torch.tensor(targets, device=device)
     loss_fcn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=LR)
+    t0 = time()
     for epoch in range(EPOCHS):
         optimizer.zero_grad()
         logits = classifier(embedding)
@@ -206,7 +218,11 @@ def base_line(nx_graph, embedded, bugtype, device):
         train_loss = loss_fcn(logits[train_mask], targets[train_mask])
         train_loss.backward()
         optimizer.step()
+    t1 = time()
     test_results = get_classification_report(targets[test_mask], logits[test_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -239,6 +255,7 @@ def base_node2vec(nx_graph, embedded, bugtype, device):
     targets = torch.tensor(targets, device=device)
     loss_fcn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=LR)
+    t0 = time()
     for epoch in range(EPOCHS):
         optimizer.zero_grad()
         logits = classifier(embedding)
@@ -246,7 +263,11 @@ def base_node2vec(nx_graph, embedded, bugtype, device):
         train_loss = loss_fcn(logits[train_mask], targets[train_mask])
         train_loss.backward()
         optimizer.step()
+    t1 = time()
     test_results = get_classification_report(targets[test_mask], logits[test_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -290,14 +311,19 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
     targets = torch.tensor(model.node_labels, device=device)
     model.to(device)
     model.reset_parameters()
+    t0 = time()
     model = train(model, train_mask, targets, device)
     save_path = os.path.join(output_models, f'han.pth')
     torch.save(model.state_dict(), save_path)
+    t1 = time()
     model.eval()
     with torch.no_grad():
         logits = model()
         logits = logits.to(device)
         test_results = get_classification_report(targets[val_mask], logits[val_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -325,14 +351,19 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
     targets = torch.tensor(model.node_labels, device=device)
     model.to(device)
     model.reset_parameters()
+    t0 = time()
     model = train(model, train_mask, targets, device)
     save_path = os.path.join(output_models, f'han.pth')
     torch.save(model.state_dict(), save_path)
+    t1 = time()
     model.eval()
     with torch.no_grad():
         logits = model()
         logits = logits.to(device)
         test_results = get_classification_report(targets[val_mask], logits[val_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -360,14 +391,19 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
     targets = torch.tensor(model.node_labels, device=device)
     model.to(device)
     model.reset_parameters()
+    t0 = time()
     model = train(model, train_mask, targets, device)
     save_path = os.path.join(output_models, f'han.pth')
     torch.save(model.state_dict(), save_path)
+    t1 = time()
     model.eval()
     with torch.no_grad():
         logits = model()
         logits = logits.to(device)
         test_results = get_classification_report(targets[val_mask], logits[val_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -395,14 +431,19 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
     targets = torch.tensor(model.node_labels, device=device)
     model.to(device)
     model.reset_parameters()
+    t0 = time()
     model = train(model, train_mask, targets, device)
     save_path = os.path.join(output_models, f'han.pth')
     torch.save(model.state_dict(), save_path)
+    t1 = time()
     model.eval()
     with torch.no_grad():
         logits = model()
         logits = logits.to(device)
         test_results = get_classification_report(targets[val_mask], logits[val_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -430,14 +471,19 @@ def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype,
     targets = torch.tensor(model.node_labels, device=device)
     model.to(device)
     model.reset_parameters()
+    t0 = time()
     model = train(model, train_mask, targets, device)
     save_path = os.path.join(output_models, f'han.pth')
     torch.save(model.state_dict(), save_path)
+    t1 = time()
     model.eval()
     with torch.no_grad():
         logits = model()
         logits = logits.to(device)
         test_results = get_classification_report(targets[val_mask], logits[val_mask], output_dict=True)
+    t2 = time()
+    test_results['train_time'] = str(t1 - t0)
+    test_results['test_time'] = str(t2 - t1)
     if os.path.isfile(join(logs, 'test_report.json')):
         with open(join(logs, 'test_report.json'), 'r') as f:
             report = json.load(f)
@@ -558,6 +604,7 @@ def get_results():
 if __name__ == '__main__':
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     if args['result']:
-            get_results()
+        get_results()
     else:
+        print(device)
         main(device)

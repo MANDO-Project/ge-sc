@@ -207,7 +207,7 @@ class MANDOGraphClassifier(nn.Module):
             features = {k: v for k, v in features.items()}
 
         # self.symmetrical_global_graph = self.symmetrical_global_graph.to('cpu')
-        # self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
+        self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.symmetrical_global_graph.ndata['feat'] = features
 
         # Init Model
