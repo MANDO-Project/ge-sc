@@ -3,7 +3,7 @@ import os
 import re
 import subprocess
 
-pattern =  re.compile(r'\d.\d.\d+')
+pattern =  re.compile(r"pragma solidity\s*(?:\^|>=|<=)?\s*(\d+\.\d+\.\d+)")
 def get_solc_version(source):
     with open(source, 'r') as f:
         line = f.readline()
