@@ -1,4 +1,6 @@
+from doctest import debug_script
 import os
+from tkinter import N
 
 import torch
 import networkx as nx
@@ -7,6 +9,10 @@ from sklearn.model_selection import KFold
 from sco_models.model_hgt import HGTVulNodeClassifier
 from sco_models.utils import score, get_classification_report, get_confusion_matrix, dump_result
 from sco_models.visualization import visualize_average_k_folds
+from process_graphs.byte_code_control_flow_graph_generator import get_solc_version
+from process_graphs import control_flow_graph_generator as cfg_engine
+from process_graphs import call_graph_generator as cg_engine
+from process_graphs import combination_call_graph_and_control_flow_graph_helper as combine_engine
 
 
 def get_binary_mask(total_size, indices):
@@ -34,7 +40,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = HGTVulNodeClassifier(args['feature_compressed_graph'], args['dataset'], feature_extractor=args['cfg_feature_extractor'], node_feature='gae', device=args['device'])
+        feature_extractor = HGTVulNodeClassifier(args['feature_compressed_graph'], feature_extractor=args['cfg_feature_extractor'], node_feature='gae', device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()
@@ -43,7 +49,7 @@ def main(args):
 
     nx_graph = nx.read_gpickle(args['compressed_graph'])
     number_of_nodes = len(nx_graph)
-    model = HGTVulNodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+    model = HGTVulNodeClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
     total_train_files = [f for f in os.listdir(args['dataset']) if f.endswith('.sol')]
     total_test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
     total_train_files = list(set(total_train_files).difference(set(total_test_files)))
@@ -53,8 +59,8 @@ def main(args):
     total_train_files = list(set(total_train_files).difference(set(total_clean_files)))
 
     # Train valid split data
-    train_rate = 0.6
-    val_rate = 0.2
+    train_rate = 0.8
+    val_rate = 0.1
     rand_train_ids = torch.randperm(len(total_train_files)).tolist()
     rand_test_ids = torch.randperm(len(total_test_files)).tolist()
     rand_clean_ids = torch.randperm(len(total_clean_files)).tolist()
@@ -153,8 +159,9 @@ def main(args):
         val_results[fold]['macro_f1'].append(val_macro_f1)
         val_results[fold]['acc'].append(val_acc)
     print('Saving model fold {}'.format(fold))
-    dump_result(targets[val_mask], logits[val_mask], os.path.join(args['output_models'], f'confusion_{fold}.csv'))
-    save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
+    # dump_result(targets[val_mask], logits[val_mask], os.path.join(args['output_models'], f'confusion_{fold}.csv'))
+    bugtype = args['log_dir'].split('/')[-1]
+    save_path = os.path.join(args['output_models'], f'{bugtype}_hgt.pth')
     torch.save(model.state_dict(), save_path)
     print('Testing phase')
     print(f'Testing on {len(test_ids)} nodes')
@@ -176,7 +183,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--seed', type=int, default=1,
                         help='Random seed')
     archive_params = parser.add_argument_group(title='Storage', description='Directories for util results')
-    archive_params.add_argument('-ld', '--log-dir', type=str, default='./logs', help='Directory for saving training logs and visualization')
+    archive_params.add_argument('-ld', '--log_dir', type=str, default='./logs', help='Directory for saving training logs and visualization')
     archive_params.add_argument('--output_models', type=str, default='./models/call_graph_rgcn',
                         help='Where you want to save your models')
 
@@ -196,7 +203,7 @@ if __name__ == '__main__':
                         help='If "node_feature" is han, feature_extractor is a checkpoint of the first HAN layer')
     node_feature_params.add_argument('--feature_extractor', type=str, default='./models/metapath2vec_cfg/han_fold_1.pth',
                         help='If "node_feature" is "GAE" or "LINE" or "Node2vec", we need a extracted features from those models')
-    node_feature_params.add_argument('--node_feature', type=str, default='metapath2vec',
+    node_feature_params.add_argument('--node_feature', type=str, default='nodetype',
                         help='Kind of node features we want to use, here is one of "nodetype", "metapath2vec", "han", "gae", "line", "node2vec"')
     
     train_option_params = parser.add_argument_group(title='Optional configures', description='Advanced options')
@@ -204,6 +211,9 @@ if __name__ == '__main__':
     train_option_params.add_argument('--test', action='store_true', help='Set true if you only want to run test phase')
     train_option_params.add_argument('--non_visualize', action='store_true',
                         help='Wheather you want to visualize the metrics')
+
+    extra_test_params = parser.add_argument_group(title='Testing optional', description='Add more comprehensive testing')
+    extra_test_params.add_argument('--extra_test', action='store_true', help='Set true if want to extra test')
     args = parser.parse_args().__dict__
 
     default_configure = {
@@ -212,7 +222,7 @@ if __name__ == '__main__':
     'hidden_units': 8,
     'dropout': 0.6,
     'weight_decay': 0.001,
-    'num_epochs': 100,
+    'num_epochs': 50,
     'batch_size': 256,
     'patience': 100,
     'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
@@ -236,23 +246,62 @@ if __name__ == '__main__':
         nx_graph = nx.read_gpickle(args['compressed_graph'])
         number_of_nodes = len(nx_graph)
         test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
-        model = HGTVulNodeClassifier(args['compressed_graph'], args['dataset'], feature_extractor=None, node_feature=args['node_feature'], device=args['device'])
-        model.load_state_dict(torch.load(args['feature_extractor']))
+        model = HGTVulNodeClassifier(args['compressed_graph'], feature_extractor=None, node_feature=args['node_feature'], device=args['device'])
+        bugtype = args['log_dir'].split('/')[-1]
+        model.load_state_dict(torch.load(os.path.join(args['output_models'], f'{bugtype}_hgt.pth')))
         model.eval()
         model.to(args['device'])
         test_ids = get_node_ids(nx_graph, test_files)
         targets = torch.tensor(model.node_labels, device=args['device'])
         buggy_node_ids = torch.nonzero(targets).squeeze().tolist()
         test_buggy_node_ids = set(buggy_node_ids) & set(test_ids)
-        print('Buggy nodes in test: {}/{} ({}%)'.format(len(test_buggy_node_ids), len(test_ids), 100*len(test_buggy_node_ids)/len(test_ids)))
+        # print('Buggy nodes in test: {}/{} ({}%)'.format(len(test_buggy_node_ids), len(test_ids), 100*len(test_buggy_node_ids)/len(test_ids)))
         test_mask = get_binary_mask(number_of_nodes, test_ids)
         if hasattr(torch, 'BoolTensor'):
             test_mask = test_mask.bool()
-        print(f"Testing on {len(test_ids)} nodes")
+        # print(f"Testing on {len(test_ids)} nodes")
+        # print('Node type: ', model.ntypes_dict)
+        if args['extra_test']:
+            list_vulnerabilities_json_files = ['data/solidifi_buggy_contracts/access_control/vulnerabilities.json',
+                'data/smartbug-dataset/vulnerabilities.json']
+            extra_graph_path = [f'/Users/minh/Documents/2022/smart_contract/mando/ge-sc/experiments/ge-sc-data/source_code/access_control/buggy/buggy_20.sol']
+            extra_cfg_output = f'/Users/minh/Documents/2022/smart_contract/mando/ge-sc/experiments/ge-sc-data/source_code/access_control/buggy/cfg_buggy_20.gpickle'
+            extra_cg_output = f'/Users/minh/Documents/2022/smart_contract/mando/ge-sc/experiments/ge-sc-data/source_code/access_control/buggy/cg_buggy_20.gpickle'
+            annotation_vulnerabilities = cfg_engine.merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files)
+            cfg_engine.compress_full_smart_contracts(extra_graph_path, None, extra_cfg_output, vulnerabilities=annotation_vulnerabilities)
+            cg_engine.compress_full_smart_contracts(extra_graph_path, extra_cg_output, vulnerabilities=annotation_vulnerabilities)
+
+            input_cfg = nx.read_gpickle(extra_cfg_output)
+            print('cfg graph: ', len(input_cfg))
+            input_call_graph = nx.read_gpickle(extra_cg_output)
+            print('cg graph: ', len(input_call_graph))
+            dict_node_label_cfg_and_cg = combine_engine.mapping_cfg_and_cg_node_labels(input_cfg, input_call_graph)
+            merged_graph = combine_engine.add_new_cfg_edges_from_call_graph(input_cfg, dict_node_label_cfg_and_cg, input_call_graph)
+            extra_cfg_cg_output = f'/Users/minh/Documents/2022/smart_contract/mando/ge-sc/experiments/ge-sc-data/source_code/access_control/buggy/cfg_cg_buggy_20.gpickle'
+            combine_engine.update_cfg_node_types_by_call_graph_node_types(merged_graph, dict_node_label_cfg_and_cg)
+            nx.write_gpickle(merged_graph, extra_cfg_cg_output)
+            print('cfg + cg graph: ', len(merged_graph))
+            bug_count = 0
+            for i, n in merged_graph.nodes(data=True):
+                if n['node_info_vulnerabilities'] is not None:
+                    bug_count += 1
+            print('Bug percentage: ', 100 * bug_count/len(merged_graph))
+            extra_graph = nx.disjoint_union(model.nx_graph, merged_graph)
+            print('Length of new graph: ', len(extra_graph))
+
+            number_of_nodes = len(extra_graph)
+            test_ids = get_node_ids(extra_graph, ['buggy_20.sol'])
+            test_mask = get_binary_mask(number_of_nodes, test_ids)
+            if hasattr(torch, 'BoolTensor'):
+                test_mask = test_mask.bool()
+            print(f"Testing on {len(test_ids)} nodes")
+            print('Node type: ', model.ntypes_dict)
+
         with torch.no_grad():
-            logits = model()
+            logits, node_labels = model.extend_forward(extra_graph)
+            targets = torch.tensor(node_labels, device=args['device'])
             logits = logits.to(args['device'])
-            print(torch.nonzero(targets, as_tuple=True)[0].shape)
+            # print(torch.nonzero(targets, as_tuple=True)[0].shape)
             test_acc, test_micro_f1, test_macro_f1 = score(targets[test_mask], logits[test_mask])
             print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
             print('Classification report', '\n', get_classification_report(targets[test_mask], logits[test_mask]))

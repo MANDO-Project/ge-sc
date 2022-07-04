@@ -11,7 +11,7 @@ from dgl.dataloading import GraphDataLoader
 from torch.utils.tensorboard import SummaryWriter
 
 from sco_models.dataloader import EthIdsDataset
-from sco_models.model_hetero import HAN, MANDOGraphClassifier
+from sco_models.model_hetero import MANDOGraphClassifier
 from sco_models.model_hgt import HGTVulGraphClassifier
 from sco_models.visualization import visualize_average_k_folds, visualize_k_folds
 from sco_models.utils import score, get_classification_report, get_confusion_matrix
@@ -98,7 +98,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = MANDOGraphClassifier(args['feature_compressed_graph'], node_feature='nodetype', hidden_size=16, device=args['device'])
+        feature_extractor = HGTVulGraphClassifier(args['feature_compressed_graph'], node_feature='nodetype', hidden_size=16, device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()
@@ -130,7 +130,7 @@ def main(args):
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
         print('Start training fold {} with {}/{}/{} train/val/test smart contracts'.format(fold, len(train_subsampler), len(val_subsampler), len(test_ids)))
         total_steps = epochs
-        model = MANDOGraphClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+        model = HGTVulGraphClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
         model.reset_parameters()
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
@@ -164,8 +164,11 @@ def main(args):
 
         confusion_matrix_total_report.append(confusion_report)
         print('Saving model fold {}'.format(fold))
-        save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
+        # save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
+        bugtype = args['log_dir'].split('/')[-1]
+        save_path = os.path.join(args['output_models'], f'{bugtype}_hgt.pth')
         torch.save(model.state_dict(), save_path)
+        break
     
     headers = ['precision', 'recall', 'f1-score', 'avg_support']
     classification_tabular_report = []
@@ -182,7 +185,7 @@ def main(args):
 
 
 def load_model(model_path):
-    model = MANDOGraphClassifier()
+    model = HGTVulGraphClassifier()
     model.load_state_dict(torch.load(model_path))
     return model.eval()
 
@@ -212,12 +215,12 @@ if __name__ == '__main__':
     args = parser.parse_args().__dict__
 
     default_configure = {
-    'lr': 0.001,             # Learning rate
+    'lr': 0.0005,             # Learning rate
     'num_heads': 8,        # Number of attention heads for node-level attention
     'hidden_units': 8,
     'dropout': 0.6,
     'weight_decay': 0.001,
-    'num_epochs': 50,
+    'num_epochs': 25,
     'batch_size': 256,
     'patience': 100,
     'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
@@ -239,13 +242,13 @@ if __name__ == '__main__':
     # Testing
     else:
         print('Testing phase')
-        ethdataset = EthIdsDataset(args['dataset'], args['label'])
-        smartbugs_ids = [ethdataset.filename_mapping[sc] for sc in os.listdir(args['testset'])]
-        test_dataloader = GraphDataLoader(ethdataset, batch_size=256, drop_last=False, sampler=smartbugs_ids)
-        for i in args['k_folds']:
-            model = MANDOGraphClassifier(args['compressed_graph'], args['dataset'], feature_extractor=args['feature_extractor'], node_feature=args['node_feature'], device=args['device'])
-            model.load_state_dict(torch.load(args['checkpoint']))
+        # ethdataset = EthIdsDataset(args['dataset'], args['label'])
+        # smartbugs_ids = [ethdataset.filename_mapping[sc] for sc in os.listdir(args['testset'])]
+        # test_dataloader = GraphDataLoader(ethdataset, batch_size=256, drop_last=False, sampler=smartbugs_ids)
+        for i in range(args['k_folds']):
+            model = HGTVulGraphClassifier('/Users/minh/Documents/2022/smart_contract/mando/ge-sc-machine/sco/graphs/graph_detection/reentrancy_cfg_cg_compressed_graphs.gpickle', feature_extractor=args['feature_extractor'], node_feature=args['node_feature'], device=args['device'])
+            model.load_state_dict(torch.load('/Users/minh/Documents/2022/smart_contract/mando/ge-sc-machine/sco/models/graph_detection/nodetype/reentrancy_hgt.pth'))
             model.to(args['device'])
             model.eval()
-            test_micro_f1, test_macro_f1, test_acc = test(args, model, test_dataloader)
-            print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
+            # test_micro_f1, test_macro_f1, test_acc = test(args, model, test_dataloader)
+            # print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
