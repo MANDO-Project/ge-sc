@@ -1,3 +1,4 @@
+from math import ceil
 import os
 import random
 import argparse
@@ -599,6 +600,46 @@ def get_results():
         data.append([model, 'Buggy-F1'] + buggy_f1_row)
         data.append([model, 'Macro-F1'] + macro_f1_row)
     print(tabulate(data, headers=bug_list, tablefmt='orgtbl'))
+
+
+def get_exp_time(report_path):
+    with open(report_path, 'r') as f:
+        results = json.load(f)
+    train_time = []
+    test_time = []
+    for i in range(len(results)):
+        train_time.append(float(results[i]['train_time']))
+        test_time.append(float(results[i]['test_time']))
+    return round(mean(train_time), 2), round(mean(test_time), 2)
+
+def get_runtime_result():
+    train_time_report = {}
+    test_time_report = {}
+    for bugtype in bug_list:
+        for model in models:
+            report_path = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/{model}/{bugtype}/buggy_curated/test_report.json'
+            train_time, test_time = get_exp_time(report_path)
+            # train_time, test_time = get_max_results(report_path)
+            if model not in train_time_report:
+                train_time_report[model] = [train_time]
+                test_time_report[model] = [test_time]
+            else:
+                train_time_report[model].append(train_time)
+                test_time_report[model].append(test_time)
+    avg_train_time = []
+    avg_test_time = []
+    for i in range(len(bug_list)):
+        bug_train_list = []
+        bug_test_list = []
+        for model in models[-5:]:
+            bug_train_list.append(train_time_report[model][i])
+            bug_test_list.append(test_time_report[model][i])
+        avg_train_time.append(mean(bug_train_list))
+        avg_test_time.append(mean(bug_test_list))
+    print(avg_train_time)
+    for i in range(len(bug_list)):
+        print(f'{ceil(avg_train_time[i])}/{ceil(avg_test_time[i])}', end=' ')
+        print('&', end = ' ')
 
 
 if __name__ == '__main__':

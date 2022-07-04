@@ -1,3 +1,4 @@
+from math import ceil
 import os
 import argparse
 import multiprocessing as mp
@@ -48,7 +49,7 @@ DATA_ID = 0
 REPEAT = args['repeat']
 EPOCHS = args['epochs']
 TASK = "graph_classification"
-COMPRESSED_GRAPH = 'cfg'
+COMPRESSED_GRAPH = 'cfg_cg'
 DATASET = 'smartbugs'
 STRUCTURE = args['model']
 BYTECODE = args['bytecode']
@@ -57,24 +58,24 @@ VAL_RATE = 0.3
 ratio = 1
 
 
-# models = ['base_metapath2vec', 'base_gae', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'gae', 'line', 'node2vec']
+models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec']
 # bug_list = ['access_control', 'arithmetic', 'denial_of_service',
 #             'front_running', 'reentrancy', 'time_manipulation', 
 #             'unchecked_low_level_calls']
 # models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_2', 'random_8', 'random_16', 'random_32', 'random_64', 'random_128', 'zeros_2', 'zeros_8', 'zeros_16', 'zeros_32', 'zeros_64', 'zeros_128']
 # models = ['base_metapath2vec', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'line', 'node2vec', 'random_32', 'random_64', 'random_128', 'zeros_32', 'zeros_64', 'zeros_128']
-models = ['lstm']
+# models = ['base_lstm', 'lstm']
 # feature_dim_list = [2, 8, 16, 32, 64, 128]
 feature_dim_list = [32, 64]
 # bug_list = ['ethor']
 bug_list = [
             'access_control', 
-            # 'arithmetic',
-            # 'denial_of_service',
-            # 'front_running', 
-            # 'reentrancy', 
-            # 'time_manipulation', 
-            # 'unchecked_low_level_calls'
+            'arithmetic',
+            'denial_of_service',
+            'front_running', 
+            'reentrancy', 
+            'time_manipulation',
+            'unchecked_low_level_calls'
             ]
 file_counter = {'access_control': 57, 'arithmetic': 60, 'denial_of_service': 46,
                 'front_running': 44, 'reentrancy': 71, 'time_manipulation': 50, 
@@ -721,10 +722,50 @@ def get_results():
     print(tabulate(data, headers=bug_list, tablefmt='orgtbl'))
 
 
+def get_exp_time(report_path):
+    with open(report_path, 'r') as f:
+        results = json.load(f)
+    train_time = []
+    test_time = []
+    for i in range(len(results)):
+        train_time.append(float(results[i]['train_time']))
+        test_time.append(float(results[i]['test_time']))
+    return round(mean(train_time), 2), round(mean(test_time), 2)
+
+def get_runtime_result():
+    train_time_report = {}
+    test_time_report = {}
+    for bugtype in bug_list:
+        for model in models:
+            report_path = f'{ROOT}/logs/{TASK}/source_code/{STRUCTURE}/{COMPRESSED_GRAPH}/{model}/{bugtype}/clean_{file_counter[bugtype]}_buggy_curated_0/test_report.json'
+            train_time, test_time = get_exp_time(report_path)
+            # train_time, test_time = get_max_results(report_path)
+            if model not in train_time_report:
+                train_time_report[model] = [train_time]
+                test_time_report[model] = [test_time]
+            else:
+                train_time_report[model].append(train_time)
+                test_time_report[model].append(test_time)
+    avg_train_time = []
+    avg_test_time = []
+    for i in range(len(bug_list)):
+        bug_train_list = []
+        bug_test_list = []
+        for model in models[-5:]:
+            bug_train_list.append(train_time_report[model][i])
+            bug_test_list.append(test_time_report[model][i])
+        avg_train_time.append(mean(bug_train_list))
+        avg_test_time.append(mean(bug_test_list))
+    print(avg_train_time)
+    for i in range(len(bug_list)):
+        print(f'{ceil(avg_train_time[i])}/{ceil(avg_test_time[i])}', end=' ')
+        print('&', end = ' ')
+
+
 if __name__ == '__main__':
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     mps_device = 'mps'
     if args['result']:
-            get_results()
+            get_runtime_result()
     else:
         main(device)
