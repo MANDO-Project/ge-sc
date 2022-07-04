@@ -4,21 +4,23 @@ import pickle
 import dgl
 import math
 import torch
+import networkx as nx
 import torch.nn as nn
-import torch.nn.functional as F
 import dgl.function as fn
+import torch.nn.functional as F
 from dgl.nn.functional import edge_softmax
 from torch_geometric.nn import MetaPath2Vec
 
-
-from .graph_utils import load_hetero_nx_graph, \
+from .graph_utils import add_hetero_ids, \
+                         load_hetero_nx_graph, \
                          generate_hetero_graph_data, \
                          get_number_of_nodes, add_cfg_mapping, \
                          get_node_label, get_node_ids_dict, \
                          map_node_embedding, get_symmatrical_metapaths, \
                          reflect_graph, get_node_tracker, get_node_ids_by_filename, \
                          generate_random_node_features, generate_zeros_node_features, \
-                         get_length_3_metapath, get_length_2_metapath
+                         get_length_3_metapath, get_length_2_metapath, \
+                         generate_lstm_node_features
 
 
 class HGTLayer(nn.Module):
@@ -195,13 +197,13 @@ class HeteroRGCN(nn.Module):
 
 
 class HGTVulNodeClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu'):
+    def __init__(self, compressed_global_graph_path, feature_extractor=None, node_feature='han', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu'):
         super(HGTVulNodeClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
         self.num_heads = num_heads
-        self.source_path = source_path
-        self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
+        # self.source_path = source_path
+        # self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
@@ -237,6 +239,7 @@ class HGTVulNodeClassifier(nn.Module):
                         dtype=torch.long, device=device) * self.etypes_dict[etype]
 
         # Create input node features
+        self.node_feature = node_feature
         features = {}
         if node_feature == 'nodetype':
             for ntype in self.symmetrical_global_graph.ntypes:
@@ -299,6 +302,44 @@ class HGTVulNodeClassifier(nn.Module):
             self.gcs.append(HGTLayer(self.hidden_size, self.hidden_size, self.ntypes_dict, self.etypes_dict, self.num_heads, use_norm=use_norm))
         self.classify = nn.Linear(self.hidden_size, self.out_size)
 
+    def extend_forward(self, new_graph):
+        nx_graph = new_graph
+        nx_graph = nx.convert_node_labels_to_integers(nx_graph)
+        nx_graph = add_hetero_ids(nx_graph)
+        nx_g_data = generate_hetero_graph_data(nx_graph)
+
+        # Get Node Labels
+        node_labels, labeled_node_ids, label_ids = get_node_label(nx_graph)
+        print('Bug dict: ', label_ids)
+        node_ids_dict = get_node_ids_dict(nx_graph)
+
+        # Reflect graph data
+        symmetrical_global_graph_data = reflect_graph(nx_g_data)
+        number_of_nodes = get_number_of_nodes(nx_graph)
+        symmetrical_global_graph = dgl.heterograph(symmetrical_global_graph_data, num_nodes_dict=number_of_nodes, device=self.device)
+        # Create input node features
+        features = {}
+        if self.node_feature == 'nodetype':
+            for ntype in self.symmetrical_global_graph.ntypes:
+                features[ntype] = self._nodetype2onehot(ntype).repeat(symmetrical_global_graph.num_nodes(ntype), 1).to(self.device)
+            self.in_size = len(self.node_types)
+        for ntype in self.symmetrical_global_graph.ntypes:
+            emb = nn.Parameter(features[ntype], requires_grad = False)
+            symmetrical_global_graph.nodes[ntype].data['inp'] = emb.to(self.device)
+
+        h = {}
+        hiddens = torch.zeros((symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
+        for ntype in symmetrical_global_graph.ntypes:
+            n_id = self.ntypes_dict[ntype]
+            h[ntype] = F.gelu(self.adapt_ws[n_id](symmetrical_global_graph.nodes[ntype].data['inp']))
+        for i in range(self.num_layers):
+            h = self.gcs[i](symmetrical_global_graph, h)
+        for ntype, feature in h.items():
+            assert len(node_ids_dict[ntype]) == feature.shape[0]
+            hiddens[node_ids_dict[ntype]] = feature
+        output = self.classify(hiddens)
+        return output, node_labels
+
     def _nodetype2onehot(self, ntype):
         feature = torch.zeros(len(self.ntypes_dict), dtype=torch.float)
         feature[self.ntypes_dict[ntype]] = 1
@@ -333,7 +374,7 @@ class HGTVulNodeClassifier(nn.Module):
 
 
 class HGTVulGraphClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, feature_extractor=None, node_feature='han', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu'):
+    def __init__(self, compressed_global_graph_path, feature_extractor=None, node_feature='nodetype', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu'):
         super(HGTVulGraphClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
@@ -421,6 +462,11 @@ class HGTVulGraphClassifier(nn.Module):
             self.in_size = embedding_dim
             features = generate_zeros_node_features(nx_graph, self.in_size)
             features = {k: v.to(self.device) for k, v in features.items()}
+        elif node_feature == 'lstm':
+            embedding_dim = int(feature_extractor)
+            self.in_size = embedding_dim
+            features = generate_lstm_node_features(nx_graph)
+            features = {k: v for k, v in features.items()}
 
         self.symmetrical_global_graph = self.symmetrical_global_graph.to(self.device)
         self.symmetrical_global_graph.ndata['feat'] = features
