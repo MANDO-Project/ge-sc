@@ -7,7 +7,7 @@ import torch
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
-import pygraphviz as pgv
+# import pygraphviz as pgv
 from matplotlib.collections import PolyCollection
 from matplotlib import cm
 from scipy.stats import poisson
@@ -132,39 +132,39 @@ if __name__ == '__main__':
 
 ## PCA last hidden state
     # plt.figure(figsize=(20, 18), dpi=80)
-    models = ['metapath2vec', 'nodetype', 'line', 'node2vec', 'random_32', 'random_64', 'random_128', 'zeros_32', 'zeros_64', 'zeros_128']
-    for idx, (bug, count) in enumerate(bug_type.items()):
-        fig, axes = plt.subplots(nrows=3, ncols=4, figsize=(20,13), dpi=100)
-        for model_idx, model in enumerate(models):
-            ax = axes[int(model_idx/4), int(model_idx%4)]
-            last_hidden = f'./experiments/logs/graph_classification/byte_code/smartbugs/runtime/han/cfg/{model}/{bug}/last_hiddens.json'
-            with open(last_hidden, 'r') as f:
-                content = json.load(f)
-            hiddens_0 = [ann['hiddens'] for ann in content if ann['targets'] == 0]
-            targets_0 = [ann['targets'] for ann in content if ann['targets'] == 0]
-            contract_names_0 = [ann['contract_name'] for ann in content if ann['targets'] == 0]
-            hiddens_1 = [ann['hiddens'] for ann in content if ann['targets'] == 1]
-            targets_1 = [ann['targets'] for ann in content if ann['targets'] == 1]
-            contract_names_1 = [ann['contract_name'] for ann in content if ann['targets'] == 1]
-            assert len(hiddens_0) + len(hiddens_1) == len(content)
-            print(len(hiddens_0)/(len(content)))
+    # models = ['metapath2vec', 'nodetype', 'line', 'node2vec', 'random_32', 'random_64', 'random_128', 'zeros_32', 'zeros_64', 'zeros_128']
+    # for idx, (bug, count) in enumerate(bug_type.items()):
+    #     fig, axes = plt.subplots(nrows=3, ncols=4, figsize=(20,13), dpi=100)
+    #     for model_idx, model in enumerate(models):
+    #         ax = axes[int(model_idx/4), int(model_idx%4)]
+    #         last_hidden = f'./experiments/logs/graph_classification/byte_code/smartbugs/runtime/han/cfg/{model}/{bug}/last_hiddens.json'
+    #         with open(last_hidden, 'r') as f:
+    #             content = json.load(f)
+    #         hiddens_0 = [ann['hiddens'] for ann in content if ann['targets'] == 0]
+    #         targets_0 = [ann['targets'] for ann in content if ann['targets'] == 0]
+    #         contract_names_0 = [ann['contract_name'] for ann in content if ann['targets'] == 0]
+    #         hiddens_1 = [ann['hiddens'] for ann in content if ann['targets'] == 1]
+    #         targets_1 = [ann['targets'] for ann in content if ann['targets'] == 1]
+    #         contract_names_1 = [ann['contract_name'] for ann in content if ann['targets'] == 1]
+    #         assert len(hiddens_0) + len(hiddens_1) == len(content)
+    #         print(len(hiddens_0)/(len(content)))
 
-            # fig = plt.figure()
-            # ax = fig.add_subplot(projection='3d')
-            # ax = fig.add_subplot()
-            # fig = plt.figure(1, figsize=(8, 6))
-            # ax = Axes3D(fig, elev=-150, azim=110)
-            # x_3dims = PCA(n_components=3).fit_transform(hiddens)
-            hidden_0_2dims = PCA(n_components=2).fit_transform(np.array(hiddens_0))
-            hidden_1_2dims = PCA(n_components=2).fit_transform(np.array(hiddens_1))
-            # ax.scatter(x_3dims[:, 0], x_3dims[:, 1], x_3dims[:, 2], marker='o')
-            ax.scatter(hidden_0_2dims[:, 0], hidden_0_2dims[:, 1], marker='o', label='normal')
-            ax.scatter(hidden_1_2dims[:, 0], hidden_1_2dims[:, 1], marker='^', label='buggy')
-            ax.set_title(f'{model}', fontsize=15)
-            # ax.set_zlabel('Z Label')
-        forensic_path = f'./forensics/last_hiddens/runtime/han/{bug}_last_hiddent.png'
-        axes[0, 0].legend(ncol=1, bbox_to_anchor=(0, 1), loc='lower center', fontsize=15)
-        plt.savefig(forensic_path)
+    #         # fig = plt.figure()
+    #         # ax = fig.add_subplot(projection='3d')
+    #         # ax = fig.add_subplot()
+    #         # fig = plt.figure(1, figsize=(8, 6))
+    #         # ax = Axes3D(fig, elev=-150, azim=110)
+    #         # x_3dims = PCA(n_components=3).fit_transform(hiddens)
+    #         hidden_0_2dims = PCA(n_components=2).fit_transform(np.array(hiddens_0))
+    #         hidden_1_2dims = PCA(n_components=2).fit_transform(np.array(hiddens_1))
+    #         # ax.scatter(x_3dims[:, 0], x_3dims[:, 1], x_3dims[:, 2], marker='o')
+    #         ax.scatter(hidden_0_2dims[:, 0], hidden_0_2dims[:, 1], marker='o', label='normal')
+    #         ax.scatter(hidden_1_2dims[:, 0], hidden_1_2dims[:, 1], marker='^', label='buggy')
+    #         ax.set_title(f'{model}', fontsize=15)
+    #         # ax.set_zlabel('Z Label')
+    #     forensic_path = f'./forensics/last_hiddens/runtime/han/{bug}_last_hiddent.png'
+    #     axes[0, 0].legend(ncol=1, bbox_to_anchor=(0, 1), loc='lower center', fontsize=15)
+    #     plt.savefig(forensic_path)
 
     # ax.scatter(
     #     X_reduced[:, 0],
@@ -265,3 +265,17 @@ if __name__ == '__main__':
     # axes[0].legend(ncol=5, bbox_to_anchor=(0, 1),
     #           loc='lower left', fontsize=8)
     # plt.show()
+
+    # Graph statistics
+    for bug, count in bug_type.items():
+        compressed_graph = f'./experiments/ge-sc-data/source_code/{bug}/buggy_curated/cfg_cg_compressed_graphs.gpickle'
+        print(bug, ' : ', count)
+        nx_graph = nx.read_gpickle(compressed_graph)
+        print('num of nodes: ', len(nx_graph.nodes()))
+        print('num of edges: ', len(nx_graph.edges()))
+        bug_node = 0
+        for n, data in nx_graph.nodes(data=True):
+            if data['node_info_vulnerabilities'] is None:
+                continue
+            bug_node += 1
+        print('bug node: ', bug_node)
