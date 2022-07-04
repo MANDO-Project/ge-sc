@@ -1,12 +1,14 @@
+import pandas as pd
 import torch
+from torch import nn
 from sklearn.metrics import f1_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
-import pandas as pd
 
 
 def score(labels, logits):
+    logits = nn.functional.softmax(logits)
     _, indices = torch.max(logits, dim=1)
     prediction = indices.long().cpu().numpy()
     labels = labels.cpu().numpy()
@@ -21,6 +23,7 @@ def accuracy(labels, preds):
 
 
 def get_classification_report(labels, logits, output_dict=False):
+    logits = nn.functional.softmax(logits)
     _, indices = torch.max(logits, dim=1)
     prediction = indices.long().cpu().numpy()
     labels = labels.cpu().numpy()
@@ -28,6 +31,7 @@ def get_classification_report(labels, logits, output_dict=False):
 
 
 def get_confusion_matrix(labels, logits):
+    logits = nn.functional.softmax(logits)
     _, indices = torch.max(logits, dim=1)
     prediction = indices.long().cpu().numpy()
     labels = labels.cpu().numpy()  
@@ -37,6 +41,7 @@ def get_confusion_matrix(labels, logits):
 def dump_result(labels, logits, output):
     print('Confusion matrix', '\n', get_confusion_matrix(labels, logits))
     print('Classification report', '\n', get_classification_report(labels, logits))
+    logits = nn.functional.softmax(logits)
     _, indices = torch.max(logits, dim=1)
     prediction = indices.long().cpu().numpy()
     labels = labels.cpu().numpy()  
