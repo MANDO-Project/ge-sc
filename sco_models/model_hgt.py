@@ -72,6 +72,7 @@ class HGTLayer(nn.Module):
 
     def forward(self, G, h ):
         with G.local_scope():
+            attention_score = {}
             node_dict, edge_dict = self.node_dict, self.edge_dict
             for srctype, etype, dsttype in G.canonical_etypes:
                 sub_graph = G[srctype, etype, dsttype]
@@ -102,7 +103,7 @@ class HGTLayer(nn.Module):
                 attn_score = edge_softmax(sub_graph, attn_score, norm_by='dst')
 
                 sub_graph.edata['t'] = attn_score.unsqueeze(-1)
-
+                attention_score[canonical_etype] = attn_score
             G.multi_update_all({etype : (fn.u_mul_e('v_%d' % e_id, 't', 'm'), fn.sum('m', 't')) \
                                 for etype, e_id in edge_dict.items()}, cross_reducer = 'mean')
 
@@ -121,7 +122,7 @@ class HGTLayer(nn.Module):
                     new_h[ntype] = self.norms[n_id](trans_out)
                 else:
                     new_h[ntype] = trans_out
-            return new_h
+            return new_h, attention_score
 
 
 class HGT(nn.Module):
@@ -317,6 +318,7 @@ class HGTVulNodeClassifier(nn.Module):
         symmetrical_global_graph_data = reflect_graph(nx_g_data)
         number_of_nodes = get_number_of_nodes(nx_graph)
         symmetrical_global_graph = dgl.heterograph(symmetrical_global_graph_data, num_nodes_dict=number_of_nodes, device=self.device)
+        self.symmetrical_global_graph = symmetrical_global_graph
         # Create input node features
         features = {}
         if self.node_feature == 'nodetype':
@@ -332,13 +334,15 @@ class HGTVulNodeClassifier(nn.Module):
         for ntype in symmetrical_global_graph.ntypes:
             n_id = self.ntypes_dict[ntype]
             h[ntype] = F.gelu(self.adapt_ws[n_id](symmetrical_global_graph.nodes[ntype].data['inp']))
+        attention_layer = {}
         for i in range(self.num_layers):
-            h = self.gcs[i](symmetrical_global_graph, h)
+            h, att_ = self.gcs[i](symmetrical_global_graph, h)
+            attention_layer[i] = att_
         for ntype, feature in h.items():
             assert len(node_ids_dict[ntype]) == feature.shape[0]
             hiddens[node_ids_dict[ntype]] = feature
         output = self.classify(hiddens)
-        return output, node_labels
+        return output, node_labels, attention_layer
 
     def _nodetype2onehot(self, ntype):
         feature = torch.zeros(len(self.ntypes_dict), dtype=torch.float)
@@ -365,7 +369,7 @@ class HGTVulNodeClassifier(nn.Module):
             n_id = self.ntypes_dict[ntype]
             h[ntype] = F.gelu(self.adapt_ws[n_id](self.symmetrical_global_graph.nodes[ntype].data['inp']))
         for i in range(self.num_layers):
-            h = self.gcs[i](self.symmetrical_global_graph, h)
+            h, _ = self.gcs[i](self.symmetrical_global_graph, h)
         for ntype, feature in h.items():
             assert len(self.node_ids_dict[ntype]) == feature.shape[0]
             hiddens[self.node_ids_dict[ntype]] = feature
@@ -515,26 +519,48 @@ class HGTVulGraphClassifier(nn.Module):
             if hasattr(layer, 'reset_parameters'):
                     layer.reset_parameters()
 
+    def get_hidden_by_node_type(self, g_name, hiddens):
+        graph_hidden = {}
+        node_list = self.node_ids_by_filename[g_name]
+        for n_idx in node_list:
+            ntype = self.nx_graph.nodes[n_idx]['node_type']
+            node_id = self.node_ids_dict[ntype].index(n_idx)
+            if node_id is None:
+                hid = torch.zeros(1, 128)
+            else:
+                hid = hiddens[ntype][node_id].unsqueeze(0)
+            if ntype not in graph_hidden:
+                graph_hidden[ntype] = hid
+            else:
+                graph_hidden[ntype] = torch.cat((graph_hidden[ntype], hid))
+        for k in self.node_ids_dict.keys():
+            if k in graph_hidden:
+                graph_hidden[k] = torch.mean(graph_hidden[k], dim=0)
+            else:
+                graph_hidden[k] = torch.zeros(128)
+        return graph_hidden
+
     def forward(self, batched_g_name, save_featrues=None):
-        h = {}
+        graph_hiddens = {}
         hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
         for ntype in self.symmetrical_global_graph.ntypes:
             n_id = self.ntypes_dict[ntype]
             h[ntype] = F.gelu(self.adapt_ws[n_id](self.symmetrical_global_graph.nodes[ntype].data['inp']))
         for i in range(self.num_layers):
-            h = self.gcs[i](self.symmetrical_global_graph, h)
+            h, att_ = self.gcs[i](self.symmetrical_global_graph, h)
         for ntype, feature in h.items():
             assert len(self.node_ids_dict[ntype]) == feature.shape[0]
             hiddens[self.node_ids_dict[ntype]] = feature
         batched_graph_embedded = []
         for g_name in batched_g_name:
+            graph_hiddens[g_name] = self.get_hidden_by_node_type(g_name, h)
             node_list = self.node_ids_by_filename[g_name]
             batched_graph_embedded.append(hiddens[node_list].mean(0).tolist())
         batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
         if save_featrues:
             torch.save(batched_graph_embedded, save_featrues)
         output = self.classify(batched_graph_embedded)
-        return output, batched_graph_embedded
+        return output, batched_graph_embedded, graph_hiddens
 
 
 if __name__ == '__main__':

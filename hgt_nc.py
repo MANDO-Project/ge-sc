@@ -1,14 +1,17 @@
-from doctest import debug_script
 import os
 from tkinter import N
 
 import torch
+import numpy as np
 import networkx as nx
 from sklearn.model_selection import KFold
+from matplotlib import pyplot as plt
 
 from sco_models.model_hgt import HGTVulNodeClassifier
 from sco_models.utils import score, get_classification_report, get_confusion_matrix, dump_result
 from sco_models.visualization import visualize_average_k_folds
+from sco_models.graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, get_node_label, \
+                                   get_node_ids_dict, get_number_of_nodes
 from process_graphs.byte_code_control_flow_graph_generator import get_solc_version
 from process_graphs import control_flow_graph_generator as cfg_engine
 from process_graphs import call_graph_generator as cg_engine
@@ -176,6 +179,61 @@ def main(args):
     return train_results, val_results
 
 
+def draw_graph(graph, edge_attention, cm='Oranges', layout='shell', node_size=50, edgewidth_=0.5):
+    """
+    Draw a graph with node features and labels
+    """
+    edgecolors = [0.3, 0.3, 0.3, 0.1]
+    labels = {}
+    for idx, n_data in graph.nodes(data=True):
+        labels[idx] = n_data['node_type'][:5]
+    if layout == 'spring':
+        pos = nx.spring_layout(graph)
+    elif layout == 'shell':
+        pos = nx.shell_layout(graph)
+    else:
+        raise NotImplementedError(layout)
+    for i in range(1):
+    # First ======================================================================================
+        # plt.subplot(int(f'42{i+1}'))
+        nx.draw_networkx_labels(graph, pos, labels, font_size=4, font_color="black", font_weight='bold')
+        edge_att_ = [edge_attention[1][_idx][0] for _idx in range(len(graph.edges))]
+        edge_att_ = np.arange(len(graph.edges)) / (float(np.sum(np.arange(len(graph.edges)))) + 1e-7)
+        cmap = plt.cm.get_cmap(cm, len(edge_att_))
+        vmin = edge_att_.min()
+        vmax = edge_att_.max()
+        nx.draw_networkx(graph, pos, edge_color=edge_att_, with_labels=False, node_size=node_size,
+                        width=edgewidth_, edge_cmap=cmap, vmin=vmin, vmax=vmax)
+        plt.title(f'Attention score header {i+1}th', fontsize=5)
+        
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin = vmin, vmax=vmax))
+    sm._A = []
+    ticks = np.linspace(0, edge_att_.max(), 5)
+    cbar = plt.colorbar(sm, ticks=ticks, format='%.2f', fraction=0.02, pad=0.04) 
+    cbar.ax.tick_params(labelsize=14)
+    plt.axis('off')
+    plt.savefig('./graph_attention_test/att_header_1_layer_2.png', dpi=800)
+    # plt.show()
+
+
+def get_node_types(graph):
+    node_types = []
+    for i, data in graph.nodes(data=True):
+        node_types.append(data['node_type'])
+    return list(set(node_types))
+
+
+def get_edge_types(graph):
+    edge_types = []
+    for source, target, data in graph.edges(data=True):
+        edge_type = data['edge_type']
+        source_node_type = graph.nodes[source]['node_type']
+        target_node_type = graph.nodes[target]['node_type']
+        three_cannonical_egde = (source_node_type, edge_type, target_node_type)
+        edge_types.append(three_cannonical_egde)
+    return list(set(edge_types))
+
+
 if __name__ == '__main__':
     import argparse
 
@@ -222,7 +280,7 @@ if __name__ == '__main__':
     'hidden_units': 8,
     'dropout': 0.6,
     'weight_decay': 0.001,
-    'num_epochs': 50,
+    'num_epochs': 30,
     'batch_size': 256,
     'patience': 100,
     'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
@@ -290,7 +348,7 @@ if __name__ == '__main__':
             print('Length of new graph: ', len(extra_graph))
 
             number_of_nodes = len(extra_graph)
-            test_ids = get_node_ids(extra_graph, ['buggy_20.sol'])
+            test_ids = get_node_ids(extra_graph, ['0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol'])
             test_mask = get_binary_mask(number_of_nodes, test_ids)
             if hasattr(torch, 'BoolTensor'):
                 test_mask = test_mask.bool()
@@ -298,11 +356,55 @@ if __name__ == '__main__':
             print('Node type: ', model.ntypes_dict)
 
         with torch.no_grad():
-            logits, node_labels = model.extend_forward(extra_graph)
-            targets = torch.tensor(node_labels, device=args['device'])
-            logits = logits.to(args['device'])
-            # print(torch.nonzero(targets, as_tuple=True)[0].shape)
-            test_acc, test_micro_f1, test_macro_f1 = score(targets[test_mask], logits[test_mask])
-            print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
-            print('Classification report', '\n', get_classification_report(targets[test_mask], logits[test_mask]))
-            print('Confusion matrix', '\n', get_confusion_matrix(targets[test_mask], logits[test_mask]))
+            logits, node_labels, attention_layer = model.extend_forward(extra_graph)
+            edge_attr = set()
+            node_attr = set()
+            symmetrical_global_graph = model.symmetrical_global_graph
+            # print(attention_layer)
+            # print(graph.ndata.keys())
+            node_types = get_node_types(merged_graph)
+            edge_types = get_edge_types(merged_graph)
+            print(node_types)
+            print(edge_types)
+            att_score = {0: [], 1: []}
+            for idx, edge in enumerate(edge_types):
+                print(edge)
+                # print(attention_layer[0][edge], attention_layer[0][edge].shape)
+                # print(symmetrical_global_graph.edges(etype=edge), symmetrical_global_graph.edges(etype=edge)[0].shape)
+                source_ = symmetrical_global_graph.edges(etype=edge)[0]
+                for n_id in test_ids:
+                    if n_id in symmetrical_global_graph.edges(etype=edge)[0]:
+                        att_idx = (source_ == n_id).nonzero(as_tuple=True)[0].tolist()
+                        print('attent shape: ', attention_layer[0][edge][att_idx].shape)
+                        att_score[0] += attention_layer[0][edge][att_idx].tolist()
+                        att_score[1] += attention_layer[1][edge][att_idx].tolist()
+            print(len(att_score[0]))
+            print(len(att_score[1]))
+
+            # for n_id in symmetrical_global_graph.nodes:
+            #     if n_id in test_ids:
+            #         print(symmetrical_global_graph.nodes[i])
+            # print(merged_graph.edges)
+            for source, dest, e_data in merged_graph.edges(data=True):
+                # print(e_data)
+                canonical_edge = (merged_graph.nodes[source]['node_type'], e_data['edge_type'], merged_graph.nodes[dest]['node_type'])
+                # print('attention score ===: ', att_score[0][canonical_edge])
+
+
+            # print(len(merged_graph.edges))
+            # draw_graph(merged_graph, att_score)
+            # for src, dst, data in graph.edges(data=True):
+            #     edge_attr.update(data.keys())
+            # for n, data in graph.nodes(data=True):
+            #     node_attr.update(data.keys())
+            # print('Edge attributes: ', edge_attr)
+            # print('Node attributes: ', node_attr)
+                # data['edge_type'] = model.edge_types_dict[data['edge_type']]
+            # targets = torch.tensor(node_labels, device=args['device'])
+            # logits = logits.to(args['device'])
+            # # print(torch.nonzero(targets, as_tuple=True)[0].shape)
+            # test_acc, test_micro_f1, test_macro_f1 = score(targets[test_mask], logits[test_mask])
+            # print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
+            # print('Classification report', '\n', get_classification_report(targets[test_mask], logits[test_mask]))
+            # print('Confusion matrix', '\n', get_confusion_matrix(targets[test_mask], logits[test_mask]))
+            

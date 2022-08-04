@@ -1,9 +1,15 @@
+from asyncio.unix_events import BaseChildWatcher
 import os
 from sys import abiflags
+import matplotlib
 
+import pandas as pd
 import numpy as np
 import torch
+import lightgbm as lgb
+import shap
 from tabulate import tabulate
+from torch import nn
 from torch.nn.functional import cross_entropy
 from sklearn.metrics import f1_score, precision_recall_fscore_support
 from sklearn.model_selection import KFold
@@ -27,7 +33,7 @@ def train(args, model, train_loader, optimizer, loss_fcn, epoch):
     for idx, (batched_graph, labels) in enumerate(train_loader):
         labels = labels.to(args['device'])
         optimizer.zero_grad()
-        logits, _ = model(batched_graph)
+        logits, _ , _ = model(batched_graph)
         loss = loss_fcn(logits, labels)
         train_acc, train_micro_f1, train_macro_f1 = score(labels, logits)
         loss.backward()
@@ -51,7 +57,7 @@ def validate(args, model, val_loader, loss_fcn):
     with torch.no_grad():
         for idx, (batched_graph, labels) in enumerate(val_loader):
             labels = labels.to(args['device'])
-            logits, _ = model(batched_graph)
+            logits, _, _ = model(batched_graph)
             loss = loss_fcn(logits, labels)
             total_loss += loss.item()
             val_acc, val_micro_f1, val_macro_f1 = score(labels, logits)
@@ -72,7 +78,7 @@ def test(args, model, test_loader):
     with torch.no_grad():
         for idx, (batched_graph, labels) in enumerate(test_loader):
             labels = labels.to(args['device'])
-            logits, _ = model(batched_graph, './forensics/graph_hiddens/reentrancy/creation_last_attention.pt')
+            logits, _, _ = model(batched_graph, './forensics/graph_hiddens/reentrancy/creation_last_attention.pt')
             total_logits += logits.tolist()
             total_target += labels.tolist()
             test_acc, test_micro_f1, test_macro_f1 = score(labels, logits)
@@ -98,7 +104,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = HGTVulGraphClassifier(args['feature_compressed_graph'], node_feature='nodetype', hidden_size=16, device=args['device'])
+        feature_extractor = GraphClassifier(args['feature_compressed_graph'], node_feature='nodetype', hidden_size=16, device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()
@@ -130,7 +136,7 @@ def main(args):
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
         print('Start training fold {} with {}/{}/{} train/val/test smart contracts'.format(fold, len(train_subsampler), len(val_subsampler), len(test_ids)))
         total_steps = epochs
-        model = HGTVulGraphClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+        model = GraphClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
         model.reset_parameters()
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
@@ -185,7 +191,7 @@ def main(args):
 
 
 def load_model(model_path):
-    model = HGTVulGraphClassifier()
+    model = GraphClassifier()
     model.load_state_dict(torch.load(model_path))
     return model.eval()
 
@@ -194,6 +200,8 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser('MANDO Graph Classifier')
+    parser.add_argument('-m', '--model', type=str, default='hgt',
+                    help='Kind of model')
     parser.add_argument('-s', '--seed', type=int, default=1,
                         help='Random seed')
     archive_params = parser.add_argument_group(title='Storage', description='Directories for util results')
@@ -231,6 +239,11 @@ if __name__ == '__main__':
     if not os.path.exists(args['output_models']):
         os.makedirs(args['output_models'])
 
+    if args['model'] == 'han':
+        from sco_models.model_hetero import MANDOGraphClassifier as GraphClassifier
+    elif args['model'] == 'hgt':
+        print(args['model'])
+        from sco_models.model_hgt import HGTVulGraphClassifier as GraphClassifier
     # Training
     if not args['test']:
         print('Training phase')
@@ -242,13 +255,85 @@ if __name__ == '__main__':
     # Testing
     else:
         print('Testing phase')
-        # ethdataset = EthIdsDataset(args['dataset'], args['label'])
+        ethdataset = EthIdsDataset(args['label'])
+        test_dataset = GraphDataLoader(ethdataset)
         # smartbugs_ids = [ethdataset.filename_mapping[sc] for sc in os.listdir(args['testset'])]
-        # test_dataloader = GraphDataLoader(ethdataset, batch_size=256, drop_last=False, sampler=smartbugs_ids)
-        for i in range(args['k_folds']):
-            model = HGTVulGraphClassifier('/Users/minh/Documents/2022/smart_contract/mando/ge-sc-machine/sco/graphs/graph_detection/reentrancy_cfg_cg_compressed_graphs.gpickle', feature_extractor=args['feature_extractor'], node_feature=args['node_feature'], device=args['device'])
-            model.load_state_dict(torch.load('/Users/minh/Documents/2022/smart_contract/mando/ge-sc-machine/sco/models/graph_detection/nodetype/reentrancy_hgt.pth'))
-            model.to(args['device'])
-            model.eval()
-            # test_micro_f1, test_macro_f1, test_acc = test(args, model, test_dataloader)
-            # print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
+        dataloader = GraphDataLoader(ethdataset, batch_size=256, drop_last=False)
+        model = GraphClassifier(args['compressed_graph'], feature_extractor=args['feature_extractor'], node_feature=args['node_feature'], device=args['device'])
+        model.load_state_dict(torch.load(args['checkpoint']))
+        model.to(args['device'])
+        model.eval()
+        # batch_graph_name = list(model.node_ids_by_filename.keys())
+        with torch.no_grad():
+            for _, (batch_graph_name, labels) in enumerate(dataloader):
+                # continue
+                hiddens = model.get_batch_hidden_by_metapath(batch_graph_name)
+
+            # for _, (batched_graph, labels) in enumerate(dataloader):
+            #     logits, _, hiddens = model(batched_graph)
+        data_frame_ = []
+        for g, h in hiddens.items():
+            data_frame_.append(h.mean(1).tolist())
+        X_train = pd.DataFrame(np.array(data_frame_), columns=[f'{mt[0][0]}_{mt[0][1]}_{mt[0][2]}' for mt in model.meta_paths])
+        X_train.insert(0, 'filename', [g for g in hiddens.keys()])
+        X_train.to_csv('./graph_attention_test/hiddens_mean.csv', index=False)
+        X_train = pd.read_csv('./graph_attention_test/hiddens_mean.csv')
+        X_train = X_train.replace(0, -np.Inf)
+        X_train.to_csv('./graph_attention_test/hiddens_nan.csv', index=False)
+        X_train = X_train.loc[:, X_train.columns != 'filename']
+        # print(X_train)
+        assert len(X_train) == len(labels)
+        d_train = lgb.Dataset(X_train, label=labels.tolist())
+        params = {
+            "max_bin": 512,
+            "learning_rate": 0.05,
+            "boosting_type": "gbdt",
+            "objective": "binary",
+            "metric": "binary_logloss",
+            "num_leaves": 10,
+            "verbose": -1,
+            "min_data": 100,
+            "boost_from_average": True
+        }
+        from sklearn.model_selection import train_test_split
+        def f(graphs):
+            logits, _, _ = model(graphs)
+            logits = nn.functional.softmax(logits)
+            _, indices = torch.max(logits, dim=1)
+            prediction = indices.long().cpu().numpy()
+            return prediction
+        model = lgb.train(params, d_train, 1000, verbose_eval=10)
+        explainer = shap.TreeExplainer(model)
+        shap_values = explainer.shap_values(X_train)
+        shap.force_plot(explainer.expected_value[1], shap_values[1][0,:], X_train.iloc[0,:], matplotlib=True)
+        shap.summary_plot(shap_values, X_train)
+        print(shap_values)
+        # X_train, X_valid, y_train, y_valid = train_test_split(X_train, labels, test_size=0.2, random_state=7)
+        # # build model
+        # input_els = []
+        # encoded_els = []
+        # for k,dtype in dtypes:
+        #     input_els.append(Input(shape=(1,)))
+        #     if dtype == "int8":
+        #         e = Flatten()(Embedding(X_train[k].max()+1, 1)(input_els[-1]))
+        #     else:
+        #         e = input_els[-1]
+        #     encoded_els.append(e)
+        # encoded_els = concatenate(encoded_els)
+        # layer1 = Dropout(0.5)(Dense(100, activation="relu")(encoded_els))
+        # out = Dense(1)(layer1)
+
+        # # train model
+        # regression = Model(inputs=input_els, outputs=[out])
+        # regression.compile(optimizer="adam", loss='binary_crossentropy')
+        # regression.fit(
+        #     [X_train[k].values for k,t in dtypes],
+        #     y_train,
+        #     epochs=50,
+        #     batch_size=512,
+        #     shuffle=True,
+        #     validation_data=([X_valid[k].values for k,t in dtypes], y_valid)
+        # )
+        # explainer = shap.KernelExplainer(f, X_train.iloc[:50,:])
+        # shap_values = explainer.shap_values(X_train.iloc[12,:], nsamples=100)
+        # shap.force_plot(explainer.expected_value, shap_values, X_train.iloc[12,:], matplotlib=True)

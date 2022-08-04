@@ -1,6 +1,7 @@
 import os
 
 import pickle
+from sys import meta_path
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -14,7 +15,9 @@ from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, \
         get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, \
         get_symmatrical_metapaths, map_node_embedding, generate_filename_ids, \
         generate_zeros_node_features, generate_random_node_features, \
-        generate_lstm_node_features
+        generate_lstm_node_features, \
+        get_node_ids_by_filename, \
+        get_node_label, get_node_ids_dict
 from .dataloader import EthNodeDataset
 
 class SemanticAttention(nn.Module):
@@ -66,7 +69,7 @@ class HANLayer(nn.Module):
         self.gat_layers = nn.ModuleList()
         for i in range(len(meta_paths)):
             self.gat_layers.append(GATConv(in_size, out_size, layer_num_heads,
-                                           dropout, dropout, activation=F.elu,
+                                           dropout, dropout, activation=F.relu,
                                            allow_zero_in_degree=True))
         self.semantic_attention = SemanticAttention(in_size=out_size * layer_num_heads)
         self.meta_paths = list(tuple(meta_path) for meta_path in meta_paths)
@@ -121,10 +124,15 @@ class MANDOGraphClassifier(nn.Module):
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
+        self.nx_graph = nx_graph
         nx_g_data = generate_hetero_graph_data(nx_graph)
         self.filename_mapping = generate_filename_ids(nx_graph)
         _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
+        self.node_ids_by_filename = get_node_ids_by_filename(nx_graph)
 
+        # Get Node Labels
+        self.node_labels, self.labeled_node_ids, self.label_ids = get_node_label(nx_graph)
+        self.node_ids_dict = get_node_ids_dict(nx_graph)
 
         # Reflect graph data
         self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
@@ -242,6 +250,50 @@ class MANDOGraphClassifier(nn.Module):
         for layer in self.classify.children():
             if hasattr(layer, 'reset_parameters'):
                     layer.reset_parameters()
+
+    # Get metapath embedding
+    def get_metapath_embeddings(self):
+        metapath_embeddings = {}
+        for han in self.layers:
+            metatpath = han.meta_paths[0][0]
+            ntype = han.meta_paths[0][0][0]
+            feature = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+            metapath_embeddings[metatpath] = feature.unsqueeze(0)
+        return metapath_embeddings
+    
+    def get_hidden_by_metapath(self, g_name):
+        metapath_embeddings = {}
+        node_list = self.node_ids_by_filename[g_name]
+        for han in self.layers:
+            metatpath = han.meta_paths[0][0]
+            ntype = han.meta_paths[0][0][0]
+            # intersection of 2 lists
+            feature = han(self.symmetrical_global_graph, self.symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+            node_ids = list(set(node_list) & set(self.node_ids_dict[ntype]) & set(range(len(feature))))
+            if len(node_ids) == 0:
+                continue
+            feature = feature[node_ids]
+            if metatpath not in metapath_embeddings:
+                metapath_embeddings[metatpath] = feature.unsqueeze(0)
+            else:
+                metapath_embeddings[metatpath] = torch.cat((metapath_embeddings[metatpath], feature.unsqueeze(0)))
+            # print(metapath_embeddings[metatpath].shape)
+        for _meta_path in self.meta_paths:
+            meta_path = _meta_path[0]
+            # print(meta_path)
+            if meta_path in metapath_embeddings:
+                metapath_embeddings[meta_path] = torch.mean(metapath_embeddings[meta_path], dim=1).squeeze()
+            else:
+                metapath_embeddings[meta_path] = torch.zeros(256)
+        return metapath_embeddings
+
+    def get_batch_hidden_by_metapath(self, batched_g_name):
+        batch_metapath_embeddings = {}
+        for g in batched_g_name:
+            hiddens_ = self.get_hidden_by_metapath(g)
+            stacked_hiddens = torch.stack([hiddens_[mt[0]] for mt in self.meta_paths])
+            batch_metapath_embeddings[g] = stacked_hiddens
+        return batch_metapath_embeddings
 
     def forward(self, batched_g_name, save_featrues=None):
         features = self.get_assemble_node_features()
