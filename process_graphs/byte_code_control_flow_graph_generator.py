@@ -23,7 +23,7 @@ DRY_RUNS = 0
 
 def get_solc_version(source):
     PATTERN = re.compile(r"pragma solidity\s*(?:\^|>=|<=)?\s*(\d+\.\d+\.\d+)")
-    solc_select = '/home/minhnn/.solc-select/artifacts'
+    solc_select = '.solc-select/artifacts'
     solc_version = [v.split('-')[-1] for v in os.listdir(solc_select)]
     with open(join(source), encoding="utf8") as file_desc:
         buf = file_desc.read()

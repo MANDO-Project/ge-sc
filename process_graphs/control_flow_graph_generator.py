@@ -88,9 +88,9 @@ def compress_full_smart_contracts(smart_contracts, input_graph, output, vulnerab
     for sc in tqdm(smart_contracts):
         sc_version = get_solc_version(sc)
         print(f'{sc} - {sc_version}')
-        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
+        solc_compiler = f'.solc-select/artifacts/solc-{sc_version}'
         if not os.path.exists(solc_compiler):
-            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
+            solc_compiler = f'.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
         bug_type = sc.split('/')[-2]
         try:

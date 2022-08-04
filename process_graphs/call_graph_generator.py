@@ -390,9 +390,9 @@ def get_vulnerabilities_of_node_by_source_code_line(source_code_lines, list_vul_
 
 def extract_graph(source_path, output, vulnerabilities=None):
     sc_version = get_solc_version(source_path)
-    solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
+    solc_compiler = f'.solc-select/artifacts/solc-{sc_version}'
     if not os.path.exists(solc_compiler):
-        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
+        solc_compiler = f'.solc-select/artifacts/solc-0.4.25'
     file_name_sc = source_path.split('/')[-1]
     try:
         slither = Slither(source_path, solc=solc_compiler)
@@ -412,9 +412,9 @@ def compress_full_smart_contracts(smart_contracts, output, vulnerabilities=None)
     for sc in tqdm(smart_contracts):
         print(sc)
         sc_version = get_solc_version(sc)
-        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
+        solc_compiler = f'.solc-select/artifacts/solc-{sc_version}'
         if not os.path.exists(solc_compiler):
-            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
+            solc_compiler = f'.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
         try:
             slither = Slither(sc, solc=solc_compiler)
