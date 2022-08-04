@@ -299,7 +299,7 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/buggy_curated/'
+    output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/buggy_curated/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     if not os.path.exists(output_models):
