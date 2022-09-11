@@ -88,9 +88,9 @@ def compress_full_smart_contracts(smart_contracts, input_graph, output, vulnerab
     for sc in tqdm(smart_contracts):
         sc_version = get_solc_version(sc)
         print(f'{sc} - {sc_version}')
-        solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-{sc_version}'
+        solc_compiler = f'.solc-select/artifacts/solc-{sc_version}'
         if not os.path.exists(solc_compiler):
-            solc_compiler = f'/home/minhnn/.solc-select/artifacts/solc-0.4.25'
+            solc_compiler = f'.solc-select/artifacts/solc-0.4.25'
         file_name_sc = sc.split('/')[-1:][0]
         bug_type = sc.split('/')[-2]
         try:
@@ -190,7 +190,7 @@ def compress_full_smart_contracts(smart_contracts, input_graph, output, vulnerab
     #     if node_data['node_info_vulnerabilities'] is not None:
     #         print('Node has vulnerabilities:', node, node_data)
     print(f'{count}/{len(smart_contracts)}')
-    nx.nx_agraph.write_dot(full_graph, output.replace('.gpickle', '.dot'))
+    # nx.nx_agraph.write_dot(full_graph, output.replace('.gpickle', '.dot'))
     nx.write_gpickle(full_graph, output)
 
 def merge_data_from_vulnerabilities_json_files(list_vulnerabilities_json_files):
@@ -329,8 +329,10 @@ if __name__ == '__main__':
               'front_running': 44, 'reentrancy': 71, 'time_manipulation': 50, 
               'unchecked_low_level_calls': 95}
     for bug, counter in bug_type.items():
-        source = f'{ROOT}/{bug}/buggy_curated'
-        output = f'{ROOT}/{bug}/buggy_curated/cfg_compressed_graphs.gpickle'
+        # source = f'{ROOT}/{bug}/buggy_curated'
+        # output = f'{ROOT}/{bug}/buggy_curated/cfg_compressed_graphs.gpickle'
+        source = f'{ROOT}/{bug}/curated'
+        output = f'{ROOT}/{bug}/curated/cfg_compressed_graphs.gpickle'
         smart_contracts = [join(source, f) for f in os.listdir(source) if f.endswith('.sol')]
         data_vulnerabilities = None
         list_vulnerabilities_json_files = ['data/solidifi_buggy_contracts/reentrancy/vulnerabilities.json',
