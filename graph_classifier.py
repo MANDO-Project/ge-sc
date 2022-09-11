@@ -1,5 +1,5 @@
 import os
-from sys import abiflags
+from shutil import rmtree
 
 import numpy as np
 import torch
@@ -29,7 +29,7 @@ def train(args, model, train_loader, optimizer, loss_fcn, epoch):
         optimizer.zero_grad()
         logits, _ = model(batched_graph)
         loss = loss_fcn(logits, labels)
-        train_acc, train_micro_f1, train_macro_f1 = score(labels, logits)
+        train_acc, train_micro_f1, train_macro_f1, train_buggy_f1 = score(labels, logits)
         loss.backward()
         # torch.nn.utils.clip_grad_norm_(model.parameters(), 1e-3)
         optimizer.step()
@@ -39,7 +39,7 @@ def train(args, model, train_loader, optimizer, loss_fcn, epoch):
         total_loss += loss.item()
         circle_lrs.append(optimizer.param_groups[0]["lr"])
     steps = idx + 1
-    return model, total_loss/steps, total_micro_f1/steps, train_macro_f1/steps, total_accucracy/steps, circle_lrs
+    return model, total_loss/steps, total_micro_f1/steps, train_macro_f1/steps, total_accucracy/steps, train_buggy_f1/steps, circle_lrs
 
 
 def validate(args, model, val_loader, loss_fcn):
@@ -54,12 +54,12 @@ def validate(args, model, val_loader, loss_fcn):
             logits, _ = model(batched_graph)
             loss = loss_fcn(logits, labels)
             total_loss += loss.item()
-            val_acc, val_micro_f1, val_macro_f1 = score(labels, logits)
+            val_acc, val_micro_f1, val_macro_f1, val_buggy_f1 = score(labels, logits)
             total_accucracy += val_acc
             total_micro_f1 += val_micro_f1
             total_macro_f1 += val_macro_f1
     steps = idx + 1
-    return total_loss/steps, total_micro_f1/steps, val_macro_f1/steps, total_accucracy/steps
+    return total_loss/steps, total_micro_f1/steps, val_macro_f1/steps, total_accucracy/steps, val_buggy_f1/steps
 
 
 def test(args, model, test_loader):
@@ -75,7 +75,7 @@ def test(args, model, test_loader):
             logits, _ = model(batched_graph, './forensics/graph_hiddens/reentrancy/creation_last_attention.pt')
             total_logits += logits.tolist()
             total_target += labels.tolist()
-            test_acc, test_micro_f1, test_macro_f1 = score(labels, logits)
+            test_acc, test_micro_f1, test_macro_f1, _ = score(labels, logits)
             total_accucracy += test_acc
             total_micro_f1 += test_micro_f1
             total_macro_f1 += test_macro_f1
@@ -98,7 +98,7 @@ def main(args):
     # Get feature extractor
     print('Getting features')
     if args['node_feature'] == 'han':
-        feature_extractor = HGTVulGraphClassifier(args['feature_compressed_graph'], node_feature='nodetype', hidden_size=16, device=args['device'])
+        feature_extractor = MANDOGraphClassifier(args['feature_compressed_graph'], node_feature='nodetype', hidden_size=16, device=args['device'])
         feature_extractor.load_state_dict(torch.load(args['feature_extractor']))
         feature_extractor.to(args['device'])
         feature_extractor.eval()
@@ -122,15 +122,15 @@ def main(args):
         assert len(test_ids) + len(train_ids) + len(val_ids) == len(ethdataset)
         assert len(set(test_ids) & set(train_ids)) == 0
         assert len(set(test_ids) & set(val_ids)) == 0
-        train_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'lrs': []}
-        val_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': []}
+        train_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'buggy_f1': [], 'lrs': []}
+        val_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'buggy_f1': []}
         train_subsampler = torch.utils.data.SubsetRandomSampler(train_ids)
         val_subsampler = torch.utils.data.SubsetRandomSampler(val_ids)
         train_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=train_subsampler)
         val_dataloader = GraphDataLoader(ethdataset,batch_size=args['batch_size'],drop_last=False,sampler=val_subsampler)
         print('Start training fold {} with {}/{}/{} train/val/test smart contracts'.format(fold, len(train_subsampler), len(val_subsampler), len(test_ids)))
         total_steps = epochs
-        model = HGTVulGraphClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
+        model = MANDOGraphClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
         model.reset_parameters()
         model.to(device)
         loss_fcn = torch.nn.CrossEntropyLoss()
@@ -139,10 +139,10 @@ def main(args):
         lrs = []
         for epoch in range(epochs):
             print('Fold {} - Epochs {}'.format(fold, epoch))
-            model, train_loss, train_micro_f1, train_macro_f1, train_acc, lrs = train(args, model, train_dataloader, optimizer, loss_fcn, epoch)
+            model, train_loss, train_micro_f1, train_macro_f1, train_acc, train_buggy_f1, lrs = train(args, model, train_dataloader, optimizer, loss_fcn, epoch)
             print('Train Loss: {:.4f} | Train Micro f1: {:.4f} | Train Macro f1: {:.4f} | Train Accuracy: {:.4f}'.format(
                     train_loss, train_micro_f1, train_macro_f1, train_acc))
-            val_loss, val_micro_f1, val_macro_f1, val_acc = validate(args, model, val_dataloader, loss_fcn)
+            val_loss, val_micro_f1, val_macro_f1, val_acc, val_buggy_f1 = validate(args, model, val_dataloader, loss_fcn)
             print('Val Loss:   {:.4f} | Val Micro f1:   {:.4f} | Val Macro f1:   {:.4f} | Val Accuracy:   {:.4f}'.format(
                     val_loss, val_micro_f1, val_macro_f1, val_acc))
             scheduler.step()
@@ -150,11 +150,13 @@ def main(args):
             train_results[fold]['micro_f1'].append(train_micro_f1)
             train_results[fold]['macro_f1'].append(train_macro_f1)
             train_results[fold]['acc'].append(train_acc)
+            train_results[fold]['buggy_f1'].append(train_buggy_f1)
             train_results[fold]['lrs'] += lrs
 
             val_results[fold]['loss'].append(val_loss)
             val_results[fold]['micro_f1'].append(val_micro_f1)
             val_results[fold]['macro_f1'].append(val_macro_f1)
+            val_results[fold]['buggy_f1'].append(val_buggy_f1)
             val_results[fold]['acc'].append(val_acc)
 
         _, _, _, classification_report, confusion_report = test(args, model, val_dataloader)
@@ -164,11 +166,10 @@ def main(args):
 
         confusion_matrix_total_report.append(confusion_report)
         print('Saving model fold {}'.format(fold))
-        # save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
+        save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
         bugtype = args['log_dir'].split('/')[-1]
-        save_path = os.path.join(args['output_models'], f'{bugtype}_hgt.pth')
+        # save_path = os.path.join(args['output_models'])
         torch.save(model.state_dict(), save_path)
-        break
     
     headers = ['precision', 'recall', 'f1-score', 'avg_support']
     classification_tabular_report = []
@@ -176,7 +177,7 @@ def main(args):
         row = [category]
         for metric in metrics.keys():
             std = np.std(classification_total_report[category][metric])
-            classification_total_report[category][metric] = np.mean(classification_total_report[category][metric])
+            classification_total_report[category][metric] = np.max(classification_total_report[category][metric])
             row.append(f'{classification_total_report[category][metric]}(#{classification_total_report[category][metric]*std:.2f})')
         classification_tabular_report.append(row)
     print(tabulate(classification_tabular_report, headers=headers))
@@ -185,7 +186,7 @@ def main(args):
 
 
 def load_model(model_path):
-    model = HGTVulGraphClassifier()
+    model = MANDOGraphClassifier()
     model.load_state_dict(torch.load(model_path))
     return model.eval()
 
@@ -197,7 +198,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--seed', type=int, default=1,
                         help='Random seed')
     archive_params = parser.add_argument_group(title='Storage', description='Directories for util results')
-    archive_params.add_argument('-ld', '--log-dir', type=str, default='./logs/graph_classification', help='Directory for saving training logs and visualization')
+    archive_params.add_argument('-ld', '--log_dir', type=str, default='./logs/graph_classification', help='Directory for saving training logs and visualization')
     archive_params.add_argument('--output_models', type=str, default='./models/call_graph', help='Where you want to save your models')
     dataset_params = parser.add_argument_group(title='Dataset', description='Dataset paths')
     dataset_params.add_argument('--compressed_graph', type=str, default='./dataset/call_graph/compressed_graph/compress_call_graphs_no_solidity_calls.gpickle', help='Compressed graphs of dataset which was extracted by graph helper tools')
@@ -220,7 +221,7 @@ if __name__ == '__main__':
     'hidden_units': 8,
     'dropout': 0.6,
     'weight_decay': 0.001,
-    'num_epochs': 25,
+    'num_epochs': 20,
     'batch_size': 256,
     'patience': 100,
     'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
@@ -237,8 +238,10 @@ if __name__ == '__main__':
         train_results, val_results = main(args)
         if not args['non_visualize']:
             print('Visualizing')
-            visualize_average_k_folds(args, train_results, val_results)
-            # visualize_k_folds(args, train_results, val_results)
+            if os.path.exists(args['log_dir']):
+                rmtree(args['log_dir'])
+            # visualize_average_k_folds(args, train_results, val_results)
+            visualize_k_folds(args, train_results, val_results)
     # Testing
     else:
         print('Testing phase')
@@ -246,7 +249,7 @@ if __name__ == '__main__':
         # smartbugs_ids = [ethdataset.filename_mapping[sc] for sc in os.listdir(args['testset'])]
         # test_dataloader = GraphDataLoader(ethdataset, batch_size=256, drop_last=False, sampler=smartbugs_ids)
         for i in range(args['k_folds']):
-            model = HGTVulGraphClassifier('/Users/minh/Documents/2022/smart_contract/mando/ge-sc-machine/sco/graphs/graph_detection/reentrancy_cfg_cg_compressed_graphs.gpickle', feature_extractor=args['feature_extractor'], node_feature=args['node_feature'], device=args['device'])
+            model = MANDOGraphClassifier('/Users/minh/Documents/2022/smart_contract/mando/ge-sc-machine/sco/graphs/graph_detection/reentrancy_cfg_cg_compressed_graphs.gpickle', feature_extractor=args['feature_extractor'], node_feature=args['node_feature'], device=args['device'])
             model.load_state_dict(torch.load('/Users/minh/Documents/2022/smart_contract/mando/ge-sc-machine/sco/models/graph_detection/nodetype/reentrancy_hgt.pth'))
             model.to(args['device'])
             model.eval()

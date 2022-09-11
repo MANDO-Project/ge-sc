@@ -6,7 +6,9 @@ could not reproduce the result in HAN as they did not provide the preprocessing 
 constructed another dataset from ACM with a different set of papers, connections, features and
 labels.
 """
+from ast import arg
 import os
+from shutil import rmtree
 
 import torch
 import networkx as nx
@@ -14,6 +16,7 @@ from sklearn.model_selection import KFold
 
 from sco_models.model_hetero import MANDOGraphClassifier
 from sco_models.model_node_classification import MANDONodeClassifier
+from sco_models.model_hgt import HGTVulNodeClassifier
 from sco_models.utils import score, get_classification_report, get_confusion_matrix, dump_result
 from sco_models.visualization import visualize_average_k_folds
 
@@ -62,8 +65,8 @@ def main(args):
     total_train_files = list(set(total_train_files).difference(set(total_clean_files)))
 
     # Train valid split data
-    train_rate = 0.6
-    val_rate = 0.2
+    train_rate = 0.9
+    val_rate = 0.05
     rand_train_ids = torch.randperm(len(total_train_files)).tolist()
     rand_test_ids = torch.randperm(len(total_test_files)).tolist()
     rand_clean_ids = torch.randperm(len(total_clean_files)).tolist()
@@ -108,8 +111,8 @@ def main(args):
     fold = 0
     model.reset_parameters()
     model.to(device)
-    train_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'lrs': []}
-    val_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': []}
+    train_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'buggy_f1': [], 'lrs': []}
+    val_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'buggy_f1': []}
     train_buggy_node_ids = set(buggy_node_ids).intersection(set(train_ids))
     print('Buggy nodes in train: {}/{} ({}%)'.format(len(train_buggy_node_ids), len(train_ids), 100*len(train_buggy_node_ids)/len(train_ids)))
     val_buggy_node_ids = set(buggy_node_ids).intersection(set(val_ids))
@@ -139,39 +142,42 @@ def main(args):
         optimizer.zero_grad()
         logits = model()
         logits = logits.to(args['device'])
-        train_loss = loss_fcn(logits[train_mask], targets[train_mask]) 
+        train_loss = loss_fcn(logits[train_mask], targets[train_mask])
         train_loss.backward(retain_graph=retain_graph)
         optimizer.step()
         scheduler.step()
-        train_acc, train_micro_f1, train_macro_f1 = score(targets[train_mask], logits[train_mask])
-        print('Train Loss: {:.4f} | Train Micro f1: {:.4f} | Train Macro f1: {:.4f} | Train Accuracy: {:.4f}'.format(
-                train_loss.item(), train_micro_f1, train_macro_f1, train_acc))
+        train_acc, train_micro_f1, train_macro_f1, train_buggy_f1 = score(targets[train_mask], logits[train_mask])
+        # print('Train Loss: {:.4f} | Train Micro f1: {:.4f} | Train Macro f1: {:.4f} | Train Accuracy: {:.4f}'.format(
+        #         train_loss.item(), train_micro_f1, train_macro_f1, train_acc))
         val_loss = loss_fcn(logits[val_mask], targets[val_mask]) 
-        val_acc, val_micro_f1, val_macro_f1 = score(targets[val_mask], logits[val_mask])
+        val_acc, val_micro_f1, val_macro_f1, val_buggy_f1 = score(targets[val_mask], logits[val_mask])
         print('Val Loss:   {:.4f} | Val Micro f1:   {:.4f} | Val Macro f1:   {:.4f} | Val Accuracy:   {:.4f}'.format(
                 val_loss.item(), val_micro_f1, val_macro_f1, val_acc))
 
         train_results[fold]['loss'].append(train_loss)
         train_results[fold]['micro_f1'].append(train_micro_f1)
         train_results[fold]['macro_f1'].append(train_macro_f1)
+        train_results[fold]['buggy_f1'].append(train_buggy_f1)
         train_results[fold]['acc'].append(train_acc)
         train_results[fold]['lrs'] += scheduler.get_last_lr()
 
         val_results[fold]['loss'].append(val_loss)
         val_results[fold]['micro_f1'].append(val_micro_f1)
         val_results[fold]['macro_f1'].append(val_macro_f1)
+        val_results[fold]['buggy_f1'].append(val_buggy_f1)
         val_results[fold]['acc'].append(val_acc)
     print('Saving model fold {}'.format(fold))
-    dump_result(targets[val_mask], logits[val_mask], os.path.join(args['output_models'], f'confusion_{fold}.csv'))
-    save_path = os.path.join(args['output_models'], f'han_fold_{fold}.pth')
-    torch.save(model.state_dict(), save_path)
+    # dump_result(targets[val_mask], logits[val_mask], os.path.join(args['output_models'], f'confusion_{fold}.csv'))
+    # save_path = os.path.join(args['output_models'])
+    # torch.save(model.state_dict(), save_path)
+    torch.save(model.state_dict(), args['output_models'])
     print('Testing phase')
     print(f'Testing on {len(test_ids)} nodes')
     model.eval()
     with torch.no_grad():
         logits = model()
         logits = logits.to(args['device'])
-        test_acc, test_micro_f1, test_macro_f1 = score(targets[test_mask], logits[test_mask])
+        test_acc, test_micro_f1, test_macro_f1, test_buggy_f1 = score(targets[test_mask], logits[test_mask])
         print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
         print('Classification report', '\n', get_classification_report(targets[test_mask], logits[test_mask]))
         print('Confusion matrix', '\n', get_confusion_matrix(targets[test_mask], logits[test_mask]))
@@ -185,7 +191,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--seed', type=int, default=1,
                         help='Random seed')
     archive_params = parser.add_argument_group(title='Storage', description='Directories for util results')
-    archive_params.add_argument('-ld', '--log-dir', type=str, default='./logs/node_classification', help='Directory for saving training logs and visualization')
+    archive_params.add_argument('-ld', '--log_dir', type=str, default='./logs/node_classification', help='Directory for saving training logs and visualization')
     archive_params.add_argument('--output_models', type=str, default='./models/call_graph_rgcn',
                         help='Where you want to save your models')
 
@@ -227,8 +233,8 @@ if __name__ == '__main__':
     args.update(default_configure)
     torch.manual_seed(args['seed'])
 
-    if not os.path.exists(args['output_models']):
-        os.makedirs(args['output_models'])
+    # if not os.path.exists(args['output_models']):
+    #     os.makedirs(args['output_models'])
 
     # Training
     if not args['test']:
@@ -236,6 +242,8 @@ if __name__ == '__main__':
         train_results, val_results = main(args)
         if not args['non_visualize']:
             print('Visualizing')
+            if os.path.exists(args['log_dir']):
+                rmtree(args['log_dir'])
             visualize_average_k_folds(args, train_results, val_results)
     # Testing
     else:

@@ -1,4 +1,5 @@
 from doctest import debug_script
+import json
 import os
 from tkinter import N
 
@@ -50,8 +51,14 @@ def main(args):
     nx_graph = nx.read_gpickle(args['compressed_graph'])
     number_of_nodes = len(nx_graph)
     model = HGTVulNodeClassifier(args['compressed_graph'], feature_extractor=feature_extractor, node_feature=args['node_feature'], device=device)
-    total_train_files = [f for f in os.listdir(args['dataset']) if f.endswith('.sol')]
-    total_test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
+    # total_train_files = [f for f in os.listdir(args['dataset']) if f.endswith('.sol')]
+    # total_test_files = [f for f in os.listdir(args['testset']) if f.endswith('.sol')]
+    total_train_files = []
+    for id, node in model.nx_graph.nodes(data=True):
+        total_train_files.append(node['source_file'])
+    with open('./experiments/ge-sc-data/source_code/curated_labels.json', 'r') as f:
+        curated = json.load(f)
+    total_test_files = list(curated.keys())
     total_train_files = list(set(total_train_files).difference(set(total_test_files)))
     clean_smart_contract = './ge-sc-data/smartbugs_wild/clean_50'
     # total_clean_files = [f for f in os.listdir(clean_smart_contract) if f.endswith('.sol')]
