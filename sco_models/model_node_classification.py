@@ -6,13 +6,16 @@ import torch.nn as nn
 import torch.nn.functional as F
 import networkx as nx
 import dgl
+from sklearn import metrics
 from dgl.nn.pytorch import GATConv
 from torch.nn.modules.sparse import Embedding
 from torch_geometric.nn import MetaPath2Vec
 
+from .utils import load_meta_paths, get_binary_mask
 from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, \
                          get_number_of_nodes, add_cfg_mapping, get_node_label, \
-                         get_node_ids_dict, map_node_embedding, get_symmatrical_metapaths, reflect_graph
+                         get_node_ids_dict, map_node_embedding, get_symmatrical_metapaths, reflect_graph, \
+                         get_length_2_metapath, get_node_ids, add_hetero_ids
 
 
 class SemanticAttention(nn.Module):
@@ -91,13 +94,13 @@ class HANLayer(nn.Module):
 
 
 class MANDONodeClassifier(nn.Module):
-    def __init__(self, compressed_global_graph_path, source_path, feature_extractor=None, node_feature='han', hidden_size=32, num_heads=8, dropout=0.6, device='cpu'):
+    def __init__(self, compressed_global_graph_path, feature_extractor=None, node_feature='han', hidden_size=32, num_heads=8, dropout=0.6, device='cpu'):
         super(MANDONodeClassifier, self).__init__()
         self.compressed_global_graph_path = compressed_global_graph_path
         self.hidden_size = hidden_size
         self.num_heads = num_heads
-        self.source_path = source_path
-        self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
+        # self.source_path = source_path
+        # self.extracted_graph = [f for f in os.listdir(self.source_path) if f.endswith('.sol')]
         self.device = device
         # Get Global graph
         nx_graph = load_hetero_nx_graph(compressed_global_graph_path)
@@ -113,7 +116,9 @@ class MANDONodeClassifier(nn.Module):
         self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
         self.number_of_nodes = get_number_of_nodes(nx_graph)
         self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
-        self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
+        # self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
+        self.meta_paths = get_length_2_metapath(self.symmetrical_global_graph)
+        # self.meta_paths = load_meta_paths('./metapath_length_2.txt')
         # Concat the metapaths have the same begin nodetype
         self.full_metapath = {}
         for metapath in self.meta_paths:
@@ -126,7 +131,7 @@ class MANDONodeClassifier(nn.Module):
         self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
         features = {}
         if node_feature == 'nodetype':
-            for ntype in self.symmetrical_global_graph.ntypes:
+            for ntype in self.node_types:
                 features[ntype] = self._nodetype2onehot(ntype).repeat(self.symmetrical_global_graph.num_nodes(ntype), 1).to(self.device)
             self.in_size = len(self.node_types)
         elif node_feature == 'metapath2vec':
@@ -236,24 +241,78 @@ class MANDONodeClassifier(nn.Module):
         output = self.classify(hiddens)
         return output
 
+    def extend_forward(self, new_graph):
+        nx_graph = new_graph
+        nx_graph = nx.convert_node_labels_to_integers(nx_graph)
+        nx_graph = add_hetero_ids(nx_graph)
+        nx_g_data = generate_hetero_graph_data(nx_graph)
+
+        # Get Node Labels
+        node_labels, labeled_node_ids, label_ids = get_node_label(nx_graph)
+        node_ids_dict = get_node_ids_dict(nx_graph)
+
+        # Reflect graph data
+        symmetrical_global_graph_data = reflect_graph(nx_g_data)
+        number_of_nodes = get_number_of_nodes(nx_graph)
+        symmetrical_global_graph = dgl.heterograph(symmetrical_global_graph_data, num_nodes_dict=number_of_nodes, device=self.device)
+        # Create input node features
+        features = {}
+        if self.node_feature == 'nodetype':
+            for ntype in symmetrical_global_graph.ntypes:
+                features[ntype] = self._nodetype2onehot(ntype).repeat(symmetrical_global_graph.num_nodes(ntype), 1).to(self.device)
+            self.in_size = len(self.node_types)
+        symmetrical_global_graph = symmetrical_global_graph.to(self.device)
+        symmetrical_global_graph.ndata['feat'] = features
+        # Assemble features
+        _features = {}
+        for han in self.layers:
+            ntype = han.meta_paths[0][0][0]
+            feature = han(symmetrical_global_graph, symmetrical_global_graph.ndata['feat'][ntype].to(self.device))
+            if ntype not in _features.keys():
+                _features[ntype] = feature.unsqueeze(0)
+            else:
+                _features[ntype] = torch.cat((_features[ntype], feature.unsqueeze(0)))
+        # Use mean for aggregate node hidden features
+        features =  {k: torch.mean(v, dim=0) for k, v in _features.items()}
+        hiddens = torch.zeros((symmetrical_global_graph.number_of_nodes(), self.last_hidden_size), device=self.device)
+        for ntype, feature in features.items():
+            hiddens[node_ids_dict[ntype]] = feature
+        output = self.classify(hiddens)
+        return output, node_labels
+
 
 if __name__ == '__main__':
     # from dataloader import EthNodeDataset, EthIdsDataset
     # from dgl.dataloading import GraphDataLoader
-    dataset = './ge-sc-data/solidifi_buggy_contracts/aggregate/source_code'
-    compressed_graph = './ge-sc-data/solidifi_buggy_contracts/aggregate/compressed_graphs/compress_graphs.gpickle'
+    bug = 'reentrancy'
+    dataset = f'./experiments/ge-sc-data/source_code/{bug}/curated/'
+    compressed_graph = f'./experiments/ge-sc-data/source_code/{bug}/buggy_curated/cfg_cg_compressed_graphs.gpickle'
+    checkpoint = f'/Users/minh/Documents/2022/smart_contract/mando/ge-sc-machine/sco/models/node_detection/nodetype/{bug}_han.pth'
     # labels = './dataset/aggregate/labels.json'
     # Get feature extractor
     print('Getting features')
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-    nx_graph = load_hetero_nx_graph(compressed_graph)
-    node_labels, label_ids = get_node_label(nx_graph)
-    print(node_labels)
-    print(label_ids) 
-    # model = MANDONodeClassifier(compressed_graph, dataset, node_feature='nodetype', device=device)
-    # model.to(device)
-    # print(model.meta_paths)
-    # logits, targets = model()
-    # print(logits.shape)
-    # print(targets.shape)
-    # print(model.symmetrical_global_graph.number_of_nodes())
+    # nx_graph = load_hetero_nx_graph(compressed_graph)
+    # node_labels, label_ids = get_node_label(nx_graph)
+    model = MANDONodeClassifier(compressed_graph, dataset, node_feature='nodetype', device=device)
+    model.load_state_dict(torch.load(checkpoint))
+    model.eval()
+    with torch.no_grad():
+        logits = model()
+    logits = nn.functional.softmax(logits, dim=1)
+    _, indices = torch.max(logits, dim=1)
+    preds = indices.long().cpu().numpy()
+
+    nx_graph = model.nx_graph
+    targets = torch.tensor(model.node_labels, device=device).cpu().numpy()
+    curated_files = [f for f in os.listdir(dataset) if f.endswith('.sol')]
+    for sc in curated_files:
+        print(sc)
+        node_ids = get_node_ids(nx_graph, [sc])
+        node_mask = get_binary_mask(len(nx_graph), node_ids)
+        if hasattr(torch, 'BoolTensor'):
+            node_mask = node_mask.bool()
+        print(targets[node_mask])
+        print(preds[node_mask])
+        prec_score = metrics.precision_score(targets[node_mask], preds[node_mask])
+        print(prec_score)

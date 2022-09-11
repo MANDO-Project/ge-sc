@@ -1,5 +1,5 @@
-from audioop import avg
-from numpy.core.fromnumeric import mean
+from collections import defaultdict
+
 import torch
 import networkx as nx
 import dgl
@@ -156,13 +156,32 @@ def get_node_label(nx_graph):
             bug_type = node_label[0]['category']
             if bug_type not in label_ids:
                 label_ids[bug_type] = len(label_ids)
-            # target = label_ids[bug_type]
+            target = label_ids[bug_type]
             # if bug_type == 'time_manipulation':
             #     target = 1
             target = 1
             labeled_node_ids['buggy'].append(node_id)
         node_labels.append(target)
     return node_labels, labeled_node_ids, label_ids
+
+
+def get_node_label_by_nodetype(nx_graph):
+    node_labels = defaultdict(list)
+    for _, node_data in nx_graph.nodes(data=True):
+        node_type = node_data['node_type']
+        node_label = node_data['node_info_vulnerabilities']
+        target = 0 if node_label is None else 1
+        node_labels[node_type].append(target)
+    return node_labels
+
+
+def get_node_ids(graph, source_files):
+    file_ids = []
+    for node_ids, node_data in graph.nodes(data=True):
+        filename = node_data['source_file']
+        if filename in source_files:
+            file_ids.append(node_ids)
+    return file_ids
 
 
 def get_node_tracker(nx_graph, filename_mapping):
@@ -308,8 +327,13 @@ def generate_hetero_subgraph_data(nx_graph):
 
 
 def generate_filename_ids(nx_graph):
-    return {node_data['source_file']: idx for idx, node_data in nx_graph.nodes(data=True)}
-
+    file_ids = {}
+    for _, node_data in nx_graph.nodes(data=True):
+        filename = node_data['source_file']
+        if filename not in file_ids:
+            file_ids[filename] = len(file_ids)
+    return file_ids
+    # return {node_data['source_file']: idx for idx, node_data in nx_graph.nodes(data=True)}
 
 def filename_mapping(extracted_graph):
     return {file: idx for idx, file in enumerate(extracted_graph)}
@@ -365,10 +389,11 @@ def get_length_2_metapath(symmetrical_global_graph):
         if source == dest:
             metapath_list.append([mt_0])
         first_metapath = [mt_0]
-        for mt_1 in begin_by[dest]:
-            if mt_1 != mt_0 and mt_1[-1] == source:
-                second_metapath = first_metapath + [mt_1]
-                metapath_list.append(second_metapath)
+        if dest in begin_by:
+            for mt_1 in begin_by[dest]:
+                if mt_1 != mt_0 and mt_1[-1] == source:
+                    second_metapath = first_metapath + [mt_1]
+                    metapath_list.append(second_metapath)
     return metapath_list
 
 

@@ -12,7 +12,8 @@ from torch_geometric.nn import MetaPath2Vec
 
 from .graph_utils import load_hetero_nx_graph, generate_hetero_graph_data, \
         get_number_of_nodes, add_cfg_mapping, get_node_tracker, reflect_graph, \
-        get_symmatrical_metapaths, map_node_embedding, generate_filename_ids, \
+        get_symmatrical_metapaths, get_length_2_metapath, \
+        map_node_embedding, generate_filename_ids, \
         generate_zeros_node_features, generate_random_node_features, \
         generate_lstm_node_features
 from .dataloader import EthNodeDataset
@@ -125,17 +126,16 @@ class MANDOGraphClassifier(nn.Module):
         self.filename_mapping = generate_filename_ids(nx_graph)
         _node_tracker = get_node_tracker(nx_graph, self.filename_mapping)
 
-
         # Reflect graph data
         self.symmetrical_global_graph_data = reflect_graph(nx_g_data)
         self.number_of_nodes = get_number_of_nodes(nx_graph)
         self.symmetrical_global_graph = dgl.heterograph(self.symmetrical_global_graph_data, num_nodes_dict=self.number_of_nodes)
         self.symmetrical_global_graph.ndata['filename'] = _node_tracker
-        self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
+        # self.meta_paths = get_symmatrical_metapaths(self.symmetrical_global_graph)
         # self.length_3_meta_paths = get_length_3_metapath(self.symmetrical_global_graph)
-        # self.length_2_meta_paths = get_length_2_metapath(self.symmetrical_global_graph)
+        self.length_2_meta_paths = get_length_2_metapath(self.symmetrical_global_graph)
         # self.meta_paths = self.length_3_meta_paths
-        # self.meta_paths = self.length_2_meta_paths + self.length_3_meta_paths
+        self.meta_paths = self.length_2_meta_paths
         # Concat the metapaths have the same begin nodetype
         self.full_metapath = {}
         for metapath in self.meta_paths:
@@ -144,8 +144,10 @@ class MANDOGraphClassifier(nn.Module):
                 self.full_metapath[ntype] = [metapath]
             else:
                 self.full_metapath[ntype].append(metapath)
-        self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
-        self.edge_types = set([meta_path[0][1] for meta_path in self.meta_paths])
+        # self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
+        # self.edge_types = set([meta_path[0][1] for meta_path in self.meta_paths])
+        self.node_types = self.symmetrical_global_graph.ntypes
+        self.edge_types = self.symmetrical_global_graph.etypes
         self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
         features = {}
         if node_feature == 'nodetype':

@@ -10,6 +10,7 @@ def visualize_average_k_folds(args, train_results, val_results):
     avg_train_result['acc'] = torch.mean(torch.tensor([train_results[fold]['acc'] for fold in range(args['k_folds'])]), dim=0).tolist()
     avg_train_result['micro_f1'] = torch.mean(torch.tensor([train_results[fold]['micro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
     avg_train_result['macro_f1'] = torch.mean(torch.tensor([train_results[fold]['macro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_train_result['buggy_f1'] = torch.mean(torch.tensor([train_results[fold]['buggy_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
     avg_train_result['loss'] = torch.mean(torch.tensor([train_results[fold]['loss'] for fold in range(args['k_folds'])]), dim=0).tolist()
     avg_train_result['lrs'] = torch.mean(torch.tensor([train_results[fold]['lrs'] for fold in range(args['k_folds'])]), dim=0).tolist()
     avg_train_result['lrs'] = train_results[0]['lrs']
@@ -18,6 +19,7 @@ def visualize_average_k_folds(args, train_results, val_results):
     avg_val_result['acc'] = torch.mean(torch.tensor([val_results[fold]['acc'] for fold in range(args['k_folds'])]), dim=0).tolist()
     avg_val_result['micro_f1'] = torch.mean(torch.tensor([val_results[fold]['micro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
     avg_val_result['macro_f1'] = torch.mean(torch.tensor([val_results[fold]['macro_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
+    avg_val_result['buggy_f1'] = torch.mean(torch.tensor([val_results[fold]['buggy_f1'] for fold in range(args['k_folds'])]), dim=0).tolist()
     avg_val_result['loss'] = torch.mean(torch.tensor([val_results[fold]['loss'] for fold in range(args['k_folds'])]), dim=0).tolist()
     writer = SummaryWriter(args['log_dir'])
     for idx in range(args['num_epochs']):
@@ -27,6 +29,12 @@ def visualize_average_k_folds(args, train_results, val_results):
                                     f'valid_avg': avg_val_result['micro_f1'][idx]}, idx)
         writer.add_scalars('Macro_f1', {f'train_avg': avg_train_result['macro_f1'][idx],
                                     f'valid_avg': avg_val_result['macro_f1'][idx]}, idx)
+        writer.add_scalars('Buggy_f1', {f'train_avg': avg_train_result['buggy_f1'][idx],
+                                    f'valid_avg': avg_val_result['buggy_f1'][idx]}, idx)
+        writer.add_scalars('Train_results', {f'buggy_f1': avg_train_result['buggy_f1'][idx],
+                                    f'macro_f1': avg_train_result['macro_f1'][idx]}, idx)
+        writer.add_scalars('Val_results', {f'buggy_f1': avg_val_result['buggy_f1'][idx],
+                                    f'macro_f1': avg_val_result['macro_f1'][idx]}, idx)
         writer.add_scalars('Loss', {f'train_avg': avg_train_result['loss'][idx],
                                     f'valid_avg': avg_val_result['loss'][idx]}, idx)
     for idx, lr in enumerate(avg_train_result['lrs']):
@@ -45,6 +53,10 @@ def visualize_k_folds(args, train_results, val_results):
                                         f'valid_{fold+1}': val_results[fold]['micro_f1'][idx]}, idx)
             writer.add_scalars('Macro_f1', {f'train_{fold+1}': train_results[fold]['macro_f1'][idx],
                                         f'valid_{fold+1}': val_results[fold]['macro_f1'][idx]}, idx)
+            writer.add_scalars('Train_results', {f'buggy_f1_{fold+1}': train_results[fold]['buggy_f1'][idx],
+                                                 f'macro_f1_{fold+1}': train_results[fold]['macro_f1'][idx]}, idx)
+            writer.add_scalars('Val_results', {f'buggy_f1_{fold+1}': val_results[fold]['buggy_f1'][idx],
+                                               f'macro_f1_{fold+1}': val_results[fold]['macro_f1'][idx]}, idx)
             writer.add_scalars('Loss', {f'train_{fold+1}': train_results[fold]['loss'][idx],
                                         f'valid_{fold+1}': val_results[fold]['loss'][idx]}, idx)
     for idx, lr in enumerate(train_results[0]['lrs']):
