@@ -83,7 +83,7 @@ def visualize_subgraph(model, node_idx, edge_index, edge_mask, num_hops, y=None,
                         device=edge_index.device)
     else:
         y = y[subset].to(torch.float) / y.max().item()
-
+    print('edge mask: ', edge_mask[edge_mask!=0])
     data = Data(edge_index=edge_index, att=edge_mask[edge_mask!=0], y=y,
                 num_nodes=y.size(0)).to('cpu')
     G = to_networkx(data, node_attrs=['y'], edge_attrs=['att'])
@@ -102,6 +102,8 @@ def visualize_subgraph(model, node_idx, edge_index, edge_mask, num_hops, y=None,
     ax = plt.gca()
     for source, target, data in G.edges(data=True):
         print(data['att'])
+        if np.isnan(data['att']):
+            data['att'] = 0
         ax.annotate(
             '', xy=pos[target], xycoords='data', xytext=pos[source],
             textcoords='data', arrowprops=dict(

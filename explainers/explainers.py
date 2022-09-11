@@ -89,10 +89,10 @@ class GraphSVX():
         """
         # Time
         start = time.time()
-
         # Explain several nodes sequentially 
         phi_list = []
         for node_index in node_indexes:
+            print('Node ids: ', node_index)
 
             # Compute true prediction for original instance via explained GNN model
             if self.gpu: 
@@ -194,7 +194,7 @@ class GraphSVX():
             # Append explanations for this node to list of expl.
             phi_list.append(phi)
             self.base_values.append(base_value)
-
+        print('shapley values: ', phi_list)
         return phi_list
 
     def explain_graphs(self,
@@ -1630,22 +1630,24 @@ class GraphSVX():
                     bbox_inches='tight')
 
         # Other visualisation
-        G = denoise_graph(self.data, mask, phi[self.F:], self.neighbours,
+        try:
+            G = denoise_graph(self.data, mask, phi[self.F:], self.neighbours,
                   node_index, feat=None, label=self.data.y, threshold_num=10)
+            log_graph(G,
+                    identify_self=True,
+                    nodecolor="label",
+                    epoch=0,
+                    fig_size=(4, 3),
+                    dpi=300,
+                    label_node_feat=False,
+                    edge_vmax=None,
+                    args=None)
 
-        log_graph(G,
-                  identify_self=True,
-                  nodecolor="label",
-                  epoch=0,
-                  fig_size=(4, 3),
-                  dpi=300,
-                  label_node_feat=False,
-                  edge_vmax=None,
-                  args=None)
-
-        plt.savefig('results/GS_{}_{}_{}'.format(self.data.name,
-                                                 self.model.__class__.__name__,
-                                                 node_index),
-                    bbox_inches='tight')
-
+            plt.savefig('results/GS_{}_{}_{}'.format(self.data.name,
+                                                    self.model.__class__.__name__,
+                                                    node_index),
+                        bbox_inches='tight')
+        except:
+            pass
+    
         #plt.show()

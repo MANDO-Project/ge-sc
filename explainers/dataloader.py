@@ -1,4 +1,5 @@
 from collections import defaultdict
+from operator import index
 
 import networkx as nx
 import torch
@@ -9,12 +10,10 @@ from torch_geometric.utils import from_networkx
 from sco_models.model_hgt import HGTVulGraphClassifier as GraphClassifier
 
 
-EDGES = {'next': 0, 'if_true': 1, 'external_call': 2, 'internal_call': 3, 'if_false': 4}
-
-
 class GESCData:
     def __init__(self, input_graph, split=None ,gpu=None):
         self.nx_graph = nx.read_gpickle(input_graph)
+        self.original_graph = self.nx_graph.copy()
         if split is not None:
             amount_nodes = int(split  * len(self.nx_graph))
             self.nx_graph = self.nx_graph.subgraph(range(amount_nodes))
@@ -27,7 +26,8 @@ class GESCData:
         self.process_edge_attribution()
         self.data = from_networkx(self.nx_graph, group_node_attrs=self._get_node_attribution(), group_edge_attrs=self._get_edge_attribution())
         self.data.update({'y': torch.tensor(targets, dtype=torch.int64),
-                          'name': 'GeSc'})
+                          'name': 'GeSc',
+                          'num_classes': 2})
 
     def get_edge_types(self):
         for edge in self.nx_graph.edges(data=True):
@@ -72,6 +72,13 @@ class GESCData:
         onehot = torch.zeros(len(self.etypes))
         onehot[self.etypes_idx[edgetype]] = 1
         return onehot
+
+    def get_nodes_of_source(self, source_file):
+        indexes = []
+        for id, node in self.original_graph.nodes(data=True):
+            if node['source_file'] == source_file:
+                indexes.append(id)       
+        return indexes
 
 
 if __name__ == '__main__':
