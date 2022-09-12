@@ -544,11 +544,11 @@ def main(device):
             # base_node2vec(nx_graph, gae_embedded, bugtype, device)
 
             # Our models
-            # nodetype(compressed_graph, source_path, dataset, bugtype, device)
-            # metapath2vec(compressed_graph, source_path, dataset, bugtype, device)
+            nodetype(compressed_graph, source_path, dataset, bugtype, device)
+            metapath2vec(compressed_graph, source_path, dataset, bugtype, device)
             gae(compressed_graph, source_path, dataset, gae_embedded, bugtype, device)
-            # line(compressed_graph, source_path,  dataset, line_embedded, bugtype, device)
-            # node2vec(compressed_graph, source_path, dataset, line_embedded, bugtype, device)
+            line(compressed_graph, source_path,  dataset, line_embedded, bugtype, device)
+            node2vec(compressed_graph, source_path, dataset, line_embedded, bugtype, device)
 
 
 def get_avg_results(report_path, top_rate=0.5):
