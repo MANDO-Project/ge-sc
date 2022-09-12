@@ -112,8 +112,8 @@ def main(args):
     fold = 0
     model.reset_parameters()
     model.to(device)
-    train_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'lrs': []}
-    val_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': []}
+    train_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'buggy_f1': [], 'lrs': []}
+    val_results[fold] = {'loss': [], 'acc': [], 'micro_f1': [], 'macro_f1': [], 'buggy_f1': []}
     train_buggy_node_ids = set(buggy_node_ids).intersection(set(train_ids))
     print('Buggy nodes in train: {}/{} ({}%)'.format(len(train_buggy_node_ids), len(train_ids), 100*len(train_buggy_node_ids)/len(train_ids)))
     val_buggy_node_ids = set(buggy_node_ids).intersection(set(val_ids))
@@ -147,23 +147,25 @@ def main(args):
         train_loss.backward(retain_graph=retain_graph)
         optimizer.step()
         scheduler.step()
-        train_acc, train_micro_f1, train_macro_f1, _ = score(targets[train_mask], logits[train_mask])
+        train_acc, train_micro_f1, train_macro_f1, train_buggy_f1 = score(targets[train_mask], logits[train_mask])
         print('Train Loss: {:.4f} | Train Micro f1: {:.4f} | Train Macro f1: {:.4f} | Train Accuracy: {:.4f}'.format(
                 train_loss.item(), train_micro_f1, train_macro_f1, train_acc))
         val_loss = loss_fcn(logits[val_mask], targets[val_mask]) 
-        val_acc, val_micro_f1, val_macro_f1, _ = score(targets[val_mask], logits[val_mask])
+        val_acc, val_micro_f1, val_macro_f1, val_buggy_f1 = score(targets[val_mask], logits[val_mask])
         print('Val Loss:   {:.4f} | Val Micro f1:   {:.4f} | Val Macro f1:   {:.4f} | Val Accuracy:   {:.4f}'.format(
                 val_loss.item(), val_micro_f1, val_macro_f1, val_acc))
 
         train_results[fold]['loss'].append(train_loss)
         train_results[fold]['micro_f1'].append(train_micro_f1)
         train_results[fold]['macro_f1'].append(train_macro_f1)
+        train_results[fold]['buggy_f1'].append(train_buggy_f1)
         train_results[fold]['acc'].append(train_acc)
         train_results[fold]['lrs'] += scheduler.get_last_lr()
 
         val_results[fold]['loss'].append(val_loss)
         val_results[fold]['micro_f1'].append(val_micro_f1)
         val_results[fold]['macro_f1'].append(val_macro_f1)
+        val_results[fold]['buggy_f1'].append(val_buggy_f1)
         val_results[fold]['acc'].append(val_acc)
     print('Saving model fold {}'.format(fold))
     # dump_result(targets[val_mask], logits[val_mask], os.path.join(args['output_models'], f'confusion_{fold}.csv'))
@@ -176,7 +178,7 @@ def main(args):
     with torch.no_grad():
         logits = model()
         logits = logits.to(args['device'])
-        test_acc, test_micro_f1, test_macro_f1 = score(targets[test_mask], logits[test_mask])
+        test_acc, test_micro_f1, test_macro_f1, _ = score(targets[test_mask], logits[test_mask])
         print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
         print('Classification report', '\n', get_classification_report(targets[test_mask], logits[test_mask]))
         print('Confusion matrix', '\n', get_confusion_matrix(targets[test_mask], logits[test_mask]))
@@ -218,7 +220,8 @@ if __name__ == '__main__':
     train_option_params.add_argument('--test', action='store_true', help='Set true if you only want to run test phase')
     train_option_params.add_argument('--non_visualize', action='store_true',
                         help='Wheather you want to visualize the metrics')
-
+    train_option_params.add_argument('--num_epochs', type=int,
+                        help='Number of epochs')
     extra_test_params = parser.add_argument_group(title='Testing optional', description='Add more comprehensive testing')
     extra_test_params.add_argument('--extra_test', action='store_true', help='Set true if want to extra test')
     args = parser.parse_args().__dict__
@@ -229,7 +232,7 @@ if __name__ == '__main__':
     'hidden_units': 8,
     'dropout': 0.6,
     'weight_decay': 0.001,
-    'num_epochs': 50,
+    # 'num_epochs': 50,
     'batch_size': 256,
     'patience': 100,
     'device': 'cuda:0' if torch.cuda.is_available() else 'cpu'
@@ -309,7 +312,7 @@ if __name__ == '__main__':
             targets = torch.tensor(node_labels, device=args['device'])
             logits = logits.to(args['device'])
             # print(torch.nonzero(targets, as_tuple=True)[0].shape)
-            test_acc, test_micro_f1, test_macro_f1 = score(targets[test_mask], logits[test_mask])
+            test_acc, test_micro_f1, test_macro_f1, _ = score(targets[test_mask], logits[test_mask])
             print('Test Micro f1:   {:.4f} | Test Macro f1:   {:.4f} | Test Accuracy:   {:.4f}'.format(test_micro_f1, test_macro_f1, test_acc))
             print('Classification report', '\n', get_classification_report(targets[test_mask], logits[test_mask]))
             print('Confusion matrix', '\n', get_confusion_matrix(targets[test_mask], logits[test_mask]))
