@@ -302,10 +302,14 @@ class HGTVulNodeClassifier(nn.Module):
         self.out_size = 2
         self.num_layers = num_layers
         self.adapt_ws  = nn.ModuleList()
-        for t in range(len(self.ntypes_dict)):
+        for _ in range(len(self.ntypes_dict)):
             self.adapt_ws.append(nn.Linear(self.in_size, self.hidden_size))
         for _ in range(self.num_layers):
             self.gcs.append(HGTLayer(self.hidden_size, self.hidden_size, self.ntypes_dict, self.etypes_dict, self.num_heads, use_norm=use_norm))
+<<<<<<< HEAD
+=======
+
+>>>>>>> b975e3b6 (Switch to single hgt layer)
         # self.layers_dict = nn.ModuleDict()
         # for ntype in self.node_types:
         #     self.gcs = nn.ModuleList()
@@ -513,20 +517,20 @@ class HGTVulGraphClassifier(nn.Module):
         self.out_size = 2
         self.num_layers = num_layers
         self.adapt_ws  = nn.ModuleList()
-        for t in range(len(self.ntypes_dict)):
+        for _ in range(len(self.ntypes_dict)):
             self.adapt_ws.append(nn.Linear(self.in_size, self.hidden_size))
-        # for _ in range(self.num_layers):
-        #     self.gcs.append(HGTLayer(self.hidden_size, self.hidden_size, self.ntypes_dict, self.etypes_dict, self.num_heads, use_norm=use_norm))
-        # self.classify = nn.Linear(self.hidden_size, self.out_size)
-
-        # Init Model Dict
-        self.layers_dict = nn.ModuleDict()
-        for ntype in self.node_types:
-            self.gcs = nn.ModuleList()
-            for _ in range(self.num_layers):
-                self.gcs.append(HGTLayer(self.hidden_size, self.hidden_size, self.ntypes_dict, self.etypes_dict, self.num_heads, use_norm=use_norm))
-            self.layers_dict.update({ntype: self.gcs})
+        for _ in range(self.num_layers):
+            self.gcs.append(HGTLayer(self.hidden_size, self.hidden_size, self.ntypes_dict, self.etypes_dict, self.num_heads, use_norm=use_norm))
         self.classify = nn.Linear(self.hidden_size, self.out_size)
+
+        # # Init Model Dict
+        # self.layers_dict = nn.ModuleDict()
+        # for ntype in self.node_types:
+        #     self.gcs = nn.ModuleList()
+        #     for _ in range(self.num_layers):
+        #         self.gcs.append(HGTLayer(self.hidden_size, self.hidden_size, self.ntypes_dict, self.etypes_dict, self.num_heads, use_norm=use_norm))
+        #     self.layers_dict.update({ntype: self.gcs})
+        # self.classify = nn.Linear(self.hidden_size, self.out_size)
 
     def _nodetype2onehot(self, ntype):
         feature = torch.zeros(len(self.ntypes_dict), dtype=torch.float)
@@ -570,31 +574,10 @@ class HGTVulGraphClassifier(nn.Module):
             features[ntype] = h[ntype]
         return features
 
-    def forward(self, batched_g_name, save_featrues=None):
-        features = self.get_assemble_node_features()
-        hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
-        for ntype, feature in features.items():
-            assert len(self.node_ids_dict[ntype]) == feature.shape[0]
-            hiddens[self.node_ids_dict[ntype]] = feature
-        batched_graph_embedded = []
-        for g_name in batched_g_name:
-            node_list = self.node_ids_by_filename[g_name]
-            batched_graph_embedded.append(hiddens[node_list].mean(0).tolist())
-        batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
-        if save_featrues:
-            torch.save(batched_graph_embedded, save_featrues)
-        output = self.classify(batched_graph_embedded)
-        return output, batched_graph_embedded
-
     # def forward(self, batched_g_name, save_featrues=None):
-    #     h = {}
+    #     features = self.get_assemble_node_features()
     #     hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
-    #     for ntype in self.symmetrical_global_graph.ntypes:
-    #         n_id = self.ntypes_dict[ntype]
-    #         h[ntype] = F.gelu(self.adapt_ws[n_id](self.symmetrical_global_graph.nodes[ntype].data['inp']))
-    #     for i in range(self.num_layers):
-    #         h = self.gcs[i](self.symmetrical_global_graph, h)
-    #     for ntype, feature in h.items():
+    #     for ntype, feature in features.items():
     #         assert len(self.node_ids_dict[ntype]) == feature.shape[0]
     #         hiddens[self.node_ids_dict[ntype]] = feature
     #     batched_graph_embedded = []
@@ -606,6 +589,27 @@ class HGTVulGraphClassifier(nn.Module):
     #         torch.save(batched_graph_embedded, save_featrues)
     #     output = self.classify(batched_graph_embedded)
     #     return output, batched_graph_embedded
+
+    def forward(self, batched_g_name, save_featrues=None):
+        h = {}
+        hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
+        for ntype in self.symmetrical_global_graph.ntypes:
+            n_id = self.ntypes_dict[ntype]
+            h[ntype] = F.gelu(self.adapt_ws[n_id](self.symmetrical_global_graph.nodes[ntype].data['inp']))
+        for i in range(self.num_layers):
+            h = self.gcs[i](self.symmetrical_global_graph, h)
+        for ntype, feature in h.items():
+            assert len(self.node_ids_dict[ntype]) == feature.shape[0]
+            hiddens[self.node_ids_dict[ntype]] = feature
+        batched_graph_embedded = []
+        for g_name in batched_g_name:
+            node_list = self.node_ids_by_filename[g_name]
+            batched_graph_embedded.append(hiddens[node_list].mean(0).tolist())
+        batched_graph_embedded = torch.tensor(batched_graph_embedded).to(self.device)
+        if save_featrues:
+            torch.save(batched_graph_embedded, save_featrues)
+        output = self.classify(batched_graph_embedded)
+        return output, batched_graph_embedded
 
 
 if __name__ == '__main__':
