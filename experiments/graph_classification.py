@@ -842,6 +842,6 @@ if __name__ == '__main__':
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     mps_device = 'mps'
     if args['result']:
-            get_runtime_result()
+            get_results()
     else:
         main(device)
