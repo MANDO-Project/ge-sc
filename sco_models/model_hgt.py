@@ -306,10 +306,6 @@ class HGTVulNodeClassifier(nn.Module):
             self.adapt_ws.append(nn.Linear(self.in_size, self.hidden_size))
         for _ in range(self.num_layers):
             self.gcs.append(HGTLayer(self.hidden_size, self.hidden_size, self.ntypes_dict, self.etypes_dict, self.num_heads, use_norm=use_norm))
-<<<<<<< HEAD
-=======
-
->>>>>>> b975e3b6 (Switch to single hgt layer)
         # self.layers_dict = nn.ModuleDict()
         # for ntype in self.node_types:
         #     self.gcs = nn.ModuleList()

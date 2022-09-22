@@ -309,13 +309,8 @@ def train(model, train_mask, targets, device):
     return model
 
 
-<<<<<<< HEAD
 def nodetype(compressed_graph, source_code, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/buggy_curated/'
-=======
-def nodetype(compressed_graph, source_code, dataset, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/buggy_curated/'
->>>>>>> 3dd485bc (Update graph classifier for byte code)
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/buggy_curated/'
@@ -352,13 +347,8 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-<<<<<<< HEAD
 def metapath2vec(compressed_graph, source_code, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/buggy_curated/'
-=======
-def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/buggy_curated/'
->>>>>>> 3dd485bc (Update graph classifier for byte code)
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/buggy_curated/'
@@ -395,13 +385,8 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-<<<<<<< HEAD
 def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/buggy_curated/'
-=======
-def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/buggy_curated/'
->>>>>>> 3dd485bc (Update graph classifier for byte code)
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/buggy_curated/'
@@ -438,13 +423,8 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
         json.dump(report, f, indent=2)
 
 
-<<<<<<< HEAD
 def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/buggy_curated/'
-=======
-def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/buggy_curated/'
->>>>>>> 3dd485bc (Update graph classifier for byte code)
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/buggy_curated/'
@@ -481,13 +461,8 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
         json.dump(report, f, indent=2)
 
 
-<<<<<<< HEAD
 def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/buggy_curated/'
-=======
-def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
-    logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/buggy_curated/'
->>>>>>> 3dd485bc (Update graph classifier for byte code)
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/buggy_curated/'
@@ -568,19 +543,11 @@ def main(device):
             # base_node2vec(nx_graph, gae_embedded, bugtype, device)
 
             # Our models
-<<<<<<< HEAD
             nodetype(compressed_graph, source_path, dataset, bugtype, device, i)
             metapath2vec(compressed_graph, source_path, dataset, bugtype, device, i)
             gae(compressed_graph, source_path, dataset, gae_embedded, bugtype, device, i)
             line(compressed_graph, source_path,  dataset, line_embedded, bugtype, device, i)
             node2vec(compressed_graph, source_path, dataset, line_embedded, bugtype, device, i)
-=======
-            nodetype(compressed_graph, source_path, dataset, bugtype, device)
-            metapath2vec(compressed_graph, source_path, dataset, bugtype, device)
-            gae(compressed_graph, source_path, dataset, gae_embedded, bugtype, device)
-            line(compressed_graph, source_path,  dataset, line_embedded, bugtype, device)
-            node2vec(compressed_graph, source_path, dataset, node2vec_embedded, bugtype, device)
->>>>>>> 3dd485bc (Update graph classifier for byte code)
 
 
 def get_avg_results(report_path, top_rate=0.5):
