@@ -122,7 +122,7 @@ def save_last_hidden(hiddens, targets, contract_name, output):
         json.dump(logger, f, indent=4)
 
 
-def base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device):
+def base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -158,7 +158,7 @@ def base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device
         train_loss = loss_fcn(logits, targets)
         train_loss.backward()
         optimizer.step()
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(classifier.state_dict(), save_path)
     classifier.eval()
     with torch.no_grad():
@@ -175,7 +175,7 @@ def base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device
         json.dump(report, f, indent=2)
 
 
-def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
+def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_gae/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -208,7 +208,7 @@ def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
         train_loss = loss_fcn(logits, targets)
         train_loss.backward()
         optimizer.step()
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(classifier.state_dict(), save_path)
     classifier.eval()
     with torch.no_grad():
@@ -225,7 +225,7 @@ def base_gae(dataset, bugtype, gae_embedded, file_name_dict, device):
         json.dump(report, f, indent=2)
 
 
-def base_line(dataset, bugtype, line_embedded, file_name_dict, device):
+def base_line(dataset, bugtype, line_embedded, file_name_dict, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_line/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -258,7 +258,7 @@ def base_line(dataset, bugtype, line_embedded, file_name_dict, device):
         train_loss = loss_fcn(logits, targets)
         train_loss.backward()
         optimizer.step()
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(classifier.state_dict(), save_path)
     classifier.eval()
     with torch.no_grad():
@@ -275,7 +275,7 @@ def base_line(dataset, bugtype, line_embedded, file_name_dict, device):
         json.dump(report, f, indent=2)
 
 
-def base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device):
+def base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_node2vec/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -308,7 +308,7 @@ def base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device):
         train_loss = loss_fcn(logits, targets)
         train_loss.backward()
         optimizer.step()
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(classifier.state_dict(), save_path)
     classifier.eval()
     with torch.no_grad():
@@ -325,7 +325,7 @@ def base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device):
         json.dump(report, f, indent=2)
 
 
-def nodetype(compressed_graph, dataset, feature_extractor, bugtype, device):
+def nodetype(compressed_graph, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -340,7 +340,7 @@ def nodetype(compressed_graph, dataset, feature_extractor, bugtype, device):
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -359,7 +359,7 @@ def nodetype(compressed_graph, dataset, feature_extractor, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def metapath2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
+def metapath2vec(compressed_graph, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -374,7 +374,7 @@ def metapath2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -393,7 +393,7 @@ def metapath2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def gae(compressed_graph, dataset, feature_extractor, bugtype, device):
+def gae(compressed_graph, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -408,7 +408,7 @@ def gae(compressed_graph, dataset, feature_extractor, bugtype, device):
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -427,7 +427,7 @@ def gae(compressed_graph, dataset, feature_extractor, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def line(compressed_graph, dataset, feature_extractor, bugtype, device):
+def line(compressed_graph, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -442,7 +442,7 @@ def line(compressed_graph, dataset, feature_extractor, bugtype, device):
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -461,7 +461,7 @@ def line(compressed_graph, dataset, feature_extractor, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def node2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
+def node2vec(compressed_graph, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -476,7 +476,7 @@ def node2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -495,7 +495,7 @@ def node2vec(compressed_graph, dataset, feature_extractor, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def lstm(compressed_graph, dataset, bugtype, device):
+def lstm(compressed_graph, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/lstm/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs, exist_ok=True)
@@ -511,7 +511,7 @@ def lstm(compressed_graph, dataset, bugtype, device):
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -530,7 +530,7 @@ def lstm(compressed_graph, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def random(compressed_graph, dataset, feature_dims, bugtype, device):
+def random(compressed_graph, dataset, feature_dims, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/random_{feature_dims}/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs, exist_ok=True)
@@ -546,7 +546,7 @@ def random(compressed_graph, dataset, feature_dims, bugtype, device):
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -565,7 +565,7 @@ def random(compressed_graph, dataset, feature_dims, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def zeros(compressed_graph, dataset, feature_dims, bugtype, device):
+def zeros(compressed_graph, dataset, feature_dims, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/byte_code/{DATASET}/{BYTECODE}/{STRUCTURE}/{COMPRESSED_GRAPH}/zeros_{feature_dims}/{bugtype}/'
     if not os.path.exists(logs):
         os.makedirs(logs, exist_ok=True)
@@ -581,7 +581,7 @@ def zeros(compressed_graph, dataset, feature_dims, bugtype, device):
     model.to(device)
     X_train, X_val, y_train, y_val = dataset
     model = train(model, X_train, y_train, device)
-    save_path = os.path.join(output_models, f'hgt.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     model.eval()
     with torch.no_grad():
@@ -635,29 +635,29 @@ def main(device):
             node2vec_embedded = f'{ROOT}/ge-sc-data/byte_code/{DATASET}/{BYTECODE}/gpickles/gesc_matrices_node_embedding/balanced/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{BYTECODE}_balanced_{COMPRESSED_GRAPH}_compressed_graphs.pkl'
             # Run experiments
             # Base lines
-            # base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device)
-            # base_line(dataset, bugtype, line_embedded, file_name_dict, device)
-            # base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device)
+            # base_metapath2vec(compressed_graph, file_name_dict, dataset, bugtype, device, i)
+            # base_line(dataset, bugtype, line_embedded, file_name_dict, device, i)
+            # base_node2vec(dataset, bugtype, node2vec_embedded, file_name_dict, device, i)
 
             ## Out models
-            # nodetype(compressed_graph, dataset, None, bugtype, device)
-            # metapath2vec(compressed_graph, dataset, None, bugtype, device)
-            # gae(compressed_graph, dataset, line_embedded, bugtype, device)
-            # line(compressed_graph, dataset, line_embedded, bugtype, device)
-            # node2vec(compressed_graph, dataset, node2vec_embedded, bugtype, device)
-            lstm(compressed_graph, dataset, bugtype, device)
-            # random(compressed_graph, dataset, 2, bugtype, device)
-            # random(compressed_graph, dataset, 8, bugtype, device)
-            # random(compressed_graph, dataset, 16, bugtype, device)
-            # random(compressed_graph, dataset, 32, bugtype, device)
-            # random(compressed_graph, dataset, 64, bugtype, device)
-            # random(compressed_graph, dataset, 128, bugtype, device)
-            # zeros(compressed_graph, dataset, 2, bugtype, device)
-            # zeros(compressed_graph, dataset, 8, bugtype, device)
-            # zeros(compressed_graph, dataset, 16, bugtype, device)
-            # zeros(compressed_graph, dataset, 32, bugtype, device)
-            # zeros(compressed_graph, dataset, 64, bugtype, device)
-            # zeros(compressed_graph, dataset, 128, bugtype, device)
+            # nodetype(compressed_graph, dataset, None, bugtype, device, i)
+            # metapath2vec(compressed_graph, dataset, None, bugtype, device, i)
+            # gae(compressed_graph, dataset, line_embedded, bugtype, device, i)
+            # line(compressed_graph, dataset, line_embedded, bugtype, device, i)
+            # node2vec(compressed_graph, dataset, node2vec_embedded, bugtype, device, i)
+            lstm(compressed_graph, dataset, bugtype, device, i)
+            # random(compressed_graph, dataset, 2, bugtype, device, i)
+            # random(compressed_graph, dataset, 8, bugtype, device, i)
+            # random(compressed_graph, dataset, 16, bugtype, device, i)
+            # random(compressed_graph, dataset, 32, bugtype, device, i)
+            # random(compressed_graph, dataset, 64, bugtype, device, i)
+            # random(compressed_graph, dataset, 128, bugtype, device, i)
+            # zeros(compressed_graph, dataset, 2, bugtype, device, i)
+            # zeros(compressed_graph, dataset, 8, bugtype, device, i)
+            # zeros(compressed_graph, dataset, 16, bugtype, device, i)
+            # zeros(compressed_graph, dataset, 32, bugtype, device, i)
+            # zeros(compressed_graph, dataset, 64, bugtype, device, i)
+            # zeros(compressed_graph, dataset, 128, bugtype, device, i)
 
 
 

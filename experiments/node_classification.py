@@ -295,7 +295,7 @@ def train(model, train_mask, targets, device):
     return model
 
 
-def nodetype(compressed_graph, source_code, dataset, bugtype, device):
+def nodetype(compressed_graph, source_code, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -312,7 +312,7 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -333,7 +333,7 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
+def metapath2vec(compressed_graph, source_code, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -350,7 +350,7 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -371,7 +371,7 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
+def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -388,7 +388,7 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -409,7 +409,7 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
         json.dump(report, f, indent=2)
 
 
-def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
+def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -426,7 +426,7 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -447,7 +447,7 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
         json.dump(report, f, indent=2)
 
 
-def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
+def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
@@ -464,7 +464,7 @@ def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype,
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -529,11 +529,11 @@ def main(device):
             base_node2vec(nx_graph, gae_embedded, bugtype, device)
 
             # Our models
-            nodetype(compressed_graph, source_path, dataset, bugtype, device)
-            metapath2vec(compressed_graph, source_path, dataset, bugtype, device)
-            gae(compressed_graph, source_path, dataset, gae_embedded, bugtype, device)
-            line(compressed_graph, source_path,  dataset, line_embedded, bugtype, device)
-            node2vec(compressed_graph, source_path, dataset, line_embedded, bugtype, device)
+            nodetype(compressed_graph, source_path, dataset, bugtype, device, i)
+            metapath2vec(compressed_graph, source_path, dataset, bugtype, device, i)
+            gae(compressed_graph, source_path, dataset, gae_embedded, bugtype, device, i)
+            line(compressed_graph, source_path,  dataset, line_embedded, bugtype, device, i)
+            node2vec(compressed_graph, source_path, dataset, line_embedded, bugtype, device, i)
 
 
 def get_avg_results(report_path, top_rate=0.5):
