@@ -147,11 +147,11 @@ def main(args):
         train_loss.backward(retain_graph=retain_graph)
         optimizer.step()
         scheduler.step()
-        train_acc, train_micro_f1, train_macro_f1 = score(targets[train_mask], logits[train_mask])
+        train_acc, train_micro_f1, train_macro_f1, _ = score(targets[train_mask], logits[train_mask])
         print('Train Loss: {:.4f} | Train Micro f1: {:.4f} | Train Macro f1: {:.4f} | Train Accuracy: {:.4f}'.format(
                 train_loss.item(), train_micro_f1, train_macro_f1, train_acc))
         val_loss = loss_fcn(logits[val_mask], targets[val_mask]) 
-        val_acc, val_micro_f1, val_macro_f1 = score(targets[val_mask], logits[val_mask])
+        val_acc, val_micro_f1, val_macro_f1, _ = score(targets[val_mask], logits[val_mask])
         print('Val Loss:   {:.4f} | Val Micro f1:   {:.4f} | Val Macro f1:   {:.4f} | Val Accuracy:   {:.4f}'.format(
                 val_loss.item(), val_micro_f1, val_macro_f1, val_acc))
 
