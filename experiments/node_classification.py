@@ -302,8 +302,6 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/buggy_curated/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     feature_extractor = None
     node_feature = 'nodetype'
     model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
@@ -314,7 +312,7 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -342,8 +340,6 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/buggy_curated/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     feature_extractor = None
     node_feature = 'metapath2vec'
     model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
@@ -354,7 +350,7 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -382,8 +378,6 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/buggy_curated/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'gae'
     model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
@@ -394,7 +388,7 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -422,8 +416,6 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/buggy_curated/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'line'
     model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
@@ -434,7 +426,7 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -462,8 +454,6 @@ def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype,
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/buggy_curated/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'node2vec'
     model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
@@ -474,7 +464,7 @@ def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype,
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
