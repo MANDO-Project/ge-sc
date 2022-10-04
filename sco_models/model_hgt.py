@@ -1,3 +1,4 @@
+from operator import attrgetter
 import os
 
 import pickle
@@ -71,7 +72,9 @@ class HGTLayer(nn.Module):
         nn.init.xavier_uniform_(self.relation_att)
         nn.init.xavier_uniform_(self.relation_msg)
 
-    def forward(self, G, h ):
+    def forward(self, G, h , get_attn=False):
+        if get_attn:
+            edge_attn = {}
         with G.local_scope():
             node_dict, edge_dict = self.node_dict, self.edge_dict
             for srctype, etype, dsttype in G.canonical_etypes:
@@ -101,13 +104,18 @@ class HGTLayer(nn.Module):
                 sub_graph.apply_edges(fn.v_dot_u('q', 'k', 't'))
                 attn_score = sub_graph.edata.pop('t').sum(-1) * relation_pri / self.sqrt_dk
                 attn_score = edge_softmax(sub_graph, attn_score, norm_by='dst')
-
+                # print(attn_score.unsqueeze(-1))
                 sub_graph.edata['t'] = attn_score.unsqueeze(-1)
+                edge_attn[canonical_etype] = attn_score.unsqueeze(-1)
 
             G.multi_update_all({etype : (fn.u_mul_e('v_%d' % e_id, 't', 'm'), fn.sum('m', 't')) \
                                 for etype, e_id in edge_dict.items()}, cross_reducer = 'mean')
+            # print(G.edata['t'])
+            # for k, v in G.edata['t'].items():
+            #     print(f'k: {k}, v shape: {v}')
 
             new_h = {}
+            trans_attn = {}
             for ntype in G.ntypes:
                 '''
                     Step 3: Target-specific Aggregation
@@ -117,12 +125,17 @@ class HGTLayer(nn.Module):
                 alpha = torch.sigmoid(self.skip[n_id])
                 t = G.nodes[ntype].data['t'].view(-1, self.out_dim)
                 trans_out = self.drop(self.a_linears[n_id](t))
+                if get_attn:
+                    trans_attn[ntype] = trans_out
                 trans_out = trans_out * alpha + h[ntype] * (1-alpha)
                 if self.use_norm:
                     new_h[ntype] = self.norms[n_id](trans_out)
                 else:
                     new_h[ntype] = trans_out
-            return new_h
+            if get_attn:
+                return new_h, edge_attn
+            else:
+                return new_h
 
 
 class HGT(nn.Module):
@@ -233,7 +246,7 @@ class HGTVulNodeClassifier(nn.Module):
                 self.full_metapath[ntype] = [metapath]
             else:
                 self.full_metapath[ntype].append(metapath)
-        self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
+        # self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
         self.node_types = list(self.symmetrical_global_graph.ntypes)
         # node/edge dictionaries
         self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
@@ -364,18 +377,25 @@ class HGTVulNodeClassifier(nn.Module):
             if hasattr(layer, 'reset_parameters'):
                     layer.reset_parameters()
 
-    def forward(self):
+    def forward(self, get_attn=False):
         h = {}
         hiddens = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
+        # if get_attn:
+        #     last_attn = torch.zeros((self.symmetrical_global_graph.number_of_nodes(), self.hidden_size), device=self.device)
         for ntype in self.symmetrical_global_graph.ntypes:
             n_id = self.ntypes_dict[ntype]
             h[ntype] = F.gelu(self.adapt_ws[n_id](self.symmetrical_global_graph.nodes[ntype].data['inp']))
         for i in range(self.num_layers):
-            h = self.gcs[i](self.symmetrical_global_graph, h)
+            h, last_trans_attn = self.gcs[i](self.symmetrical_global_graph, h, get_attn=True)
         for ntype, feature in h.items():
             assert len(self.node_ids_dict[ntype]) == feature.shape[0]
             hiddens[self.node_ids_dict[ntype]] = feature
+            # if get_attn:
+            #     last_attn[self.node_ids_dict[ntype]] = last_trans_attn[ntype]
         output = self.classify(hiddens)
+        if get_attn:
+            # output_attn = self.classify(last_attn)
+            return output, last_trans_attn
         return output
 
 
@@ -420,7 +440,7 @@ class HGTVulGraphClassifier(nn.Module):
                 self.full_metapath[ntype] = [metapath]
             else:
                 self.full_metapath[ntype].append(metapath)
-        self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
+        # self.node_types = set([meta_path[0][0] for meta_path in self.meta_paths])
         self.node_types = list(self.symmetrical_global_graph.ntypes)
         # node/edge dictionaries
         self.ntypes_dict = {k: v for v, k in enumerate(self.node_types)}
@@ -547,12 +567,16 @@ class HGTVulGraphClassifier(nn.Module):
 if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     compressed_graph = './experiments/ge-sc-data/source_code/reentrancy/buggy_curated/cfg_cg_compressed_graphs.gpickle'
-    dataset = './experiments/ge-sc-data/source_code/access_control/clean_57_buggy_curated_0'
+    dataset = './experiments/ge-sc-data/source_code/reentrancy/simple_dao.sol'
     node_feature = 'nodetype'
     feature_extractor = None
     model = HGTVulNodeClassifier(compressed_graph, feature_extractor=None, node_feature=node_feature, device=device).to(device)
-    # model.train()
-    # logits = model()
+    model.eval()
+    print(model.number_of_nodes)
+    print(model.etypes_dict)
+    with torch.no_grad():
+        logits, attn = model(get_attn=True)
+    print(attn)
     # print(model.meta_paths)
     # print(len(model.length_3_meta_paths))
-    load_meta_paths('./metapath_length_3.txt')
+    # load_meta_paths('./metapath_length_3.txt')

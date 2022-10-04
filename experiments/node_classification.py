@@ -13,8 +13,6 @@ from tabulate import tabulate
 from sklearn.model_selection import train_test_split
 from statistics import mean
 
-from sco_models.model_hetero import MANDOGraphClassifier
-from sco_models.model_node_classification import  MANDONodeClassifier
 from sco_models.utils import get_classification_report
 from sco_models.graph_utils import reveert_map_node_embedding, load_hetero_nx_graph
 
@@ -27,6 +25,14 @@ parser.add_argument('-e', '--epochs', type=int, default=2,
                     help='Random seed')
 parser.add_argument('-rep', '--repeat', type=int, default=2,
                     help='Random seed')
+parser.add_argument('-m', '--model', type=str, default='hgt',
+                    help='Kind of model')
+parser.add_argument('-g', '--graph_type', type=str, default='cfg_cg',
+                    help='Kind of code')
+parser.add_argument('-bc', '--bytecode', type=str, default='runtime',
+                    help='Kind of bytecode')
+parser.add_argument('-b', '--codetype', type=str, default='source_code',
+                    help='Kind of code')
 parser.add_argument('-r', '--result', action='store_true')
 args = parser.parse_args().__dict__
 
@@ -38,12 +44,19 @@ REPEAT = args['repeat']
 EPOCHS = args['epochs']
 LR = 0.001
 TASK = "node_classification"
-STRUCTURE = 'han'
-COMPRESSED_GRAPH = 'cfg_cg'
+DATASET = 'smartbugs'
+STRUCTURE = args['model']
+CODETYPE = args['codetype']
+BYTECODE = args['bytecode']
+COMPRESSED_GRAPH = args['graph_type']
 TRAIN_RATE = 0.7
 VAL_RATE = 0.3
 ratio = 1
 
+if args['model'] == 'han':
+    from sco_models.model_node_classification import MANDONodeClassifier as NodeClassifier
+elif args['model'] == 'hgt':
+    from sco_models.model_hgt import HGTVulNodeClassifier as NodeClassifier
 
 models = ['base_metapath2vec', 'base_gae', 'base_line', 'base_node2vec', 'nodetype', 'metapath2vec', 'gae', 'line', 'node2vec']
 base_models = ['base_metapath2vec', 'base_gae', 'base_line', 'base_node2vec']
@@ -98,7 +111,7 @@ def base_metapath2vec(compressed_graph, source_path, bugtype, device):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/base_metapath2vec/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    model = MANDOGraphClassifier(compressed_graph, feature_extractor=None, node_feature='metapath2vec', device=device)
+    model = NodeClassifier(compressed_graph, feature_extractor=None, node_feature='metapath2vec', device=device)
     features = model.symmetrical_global_graph.ndata['feat']
     nx_graph = load_hetero_nx_graph(compressed_graph)
     embedding = reveert_map_node_embedding(nx_graph, features)
@@ -299,12 +312,12 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
-    output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/buggy_curated/'
+    output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/buggy_curated/'
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     feature_extractor = None
     node_feature = 'nodetype'
-    model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
+    model = NodeClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     train_mask, val_mask = dataset
     targets = torch.tensor(model.node_labels, device=device)
@@ -342,7 +355,7 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device, repeat
         os.makedirs(output_models)
     feature_extractor = None
     node_feature = 'metapath2vec'
-    model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
+    model = NodeClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     train_mask, val_mask = dataset
     targets = torch.tensor(model.node_labels, device=device)
@@ -380,7 +393,7 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
         os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'gae'
-    model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
+    model = NodeClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     train_mask, val_mask = dataset
     targets = torch.tensor(model.node_labels, device=device)
@@ -418,7 +431,7 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
         os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'line'
-    model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
+    model = NodeClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     train_mask, val_mask = dataset
     targets = torch.tensor(model.node_labels, device=device)
@@ -456,7 +469,7 @@ def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype,
         os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
     node_feature = 'node2vec'
-    model = MANDONodeClassifier(compressed_graph, source_code, feature_extractor=feature_extractor, 
+    model = NodeClassifier(compressed_graph, feature_extractor=feature_extractor, 
                                  node_feature=node_feature, device=device)
     train_mask, val_mask = dataset
     targets = torch.tensor(model.node_labels, device=device)
@@ -523,17 +536,17 @@ def main(device):
             line_embedded = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_buggy_curated.pkl'
             node2vec_embedded = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_buggy_curated.pkl'
             # Base line
-            base_metapath2vec(compressed_graph, source_path, bugtype, device)
-            base_gae(nx_graph, gae_embedded, bugtype, device)
-            base_line(nx_graph, line_embedded, bugtype, device)
-            base_node2vec(nx_graph, gae_embedded, bugtype, device)
+            # base_metapath2vec(compressed_graph, source_path, bugtype, device)
+            # base_gae(nx_graph, gae_embedded, bugtype, device)
+            # base_line(nx_graph, line_embedded, bugtype, device)
+            # base_node2vec(nx_graph, gae_embedded, bugtype, device)
 
             # Our models
             nodetype(compressed_graph, source_path, dataset, bugtype, device, i)
             metapath2vec(compressed_graph, source_path, dataset, bugtype, device, i)
             gae(compressed_graph, source_path, dataset, gae_embedded, bugtype, device, i)
             line(compressed_graph, source_path,  dataset, line_embedded, bugtype, device, i)
-            node2vec(compressed_graph, source_path, dataset, line_embedded, bugtype, device, i)
+            node2vec(compressed_graph, source_path, dataset, node2vec_embedded, bugtype, device, i)
 
 
 def get_avg_results(report_path, top_rate=0.5):
@@ -574,12 +587,12 @@ def get_results():
                 macro_f1_report[model].append(macro_f1)
     data = []
     for model in models:
-        # print(' ', end=' ')
-        # print(' \t'.join(['%.2f'%n for n in buggy_f1_report[model]]), end=r'')
-        # print()
-        # print(' ', end=' ')
-        # print(' \t'.join(['%.2f'%n for n in macro_f1_report[model]]), end=r'')
-        # print()
+        print(' ', end=' ')
+        print(' \t'.join(['%.2f'%n for n in buggy_f1_report[model]]), end=r'')
+        print()
+        print(' ', end=' ')
+        print(' \t'.join(['%.2f'%n for n in macro_f1_report[model]]), end=r'')
+        print()
         buggy_f1_row = []
         macro_f1_row = []
         for i in range(len(buggy_f1_report[model])):
