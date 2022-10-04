@@ -308,13 +308,11 @@ def train(model, train_mask, targets, device):
     return model
 
 
-def nodetype(compressed_graph, source_code, dataset, bugtype, device):
+def nodetype(compressed_graph, source_code, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/nodetype/buggy_curated/'
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     feature_extractor = None
@@ -327,7 +325,7 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -348,13 +346,11 @@ def nodetype(compressed_graph, source_code, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
+def metapath2vec(compressed_graph, source_code, dataset, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/metapath2vec/buggy_curated/'
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     feature_extractor = None
@@ -367,7 +363,7 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -388,13 +384,11 @@ def metapath2vec(compressed_graph, source_code, dataset, bugtype, device):
         json.dump(report, f, indent=2)
 
 
-def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
+def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/gae/buggy_curated/'
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_gae_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
@@ -407,7 +401,7 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -428,13 +422,11 @@ def gae(compressed_graph, source_code, dataset, feature_extractor, bugtype, devi
         json.dump(report, f, indent=2)
 
 
-def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
+def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/line/buggy_curated/'
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_line_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
@@ -447,7 +439,7 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
@@ -468,13 +460,11 @@ def line(compressed_graph, source_code, dataset, feature_extractor, bugtype, dev
         json.dump(report, f, indent=2)
 
 
-def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype, device):
+def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype, device, repeat):
     logs = f'{ROOT}/logs/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/{bugtype}/buggy_curated/'
     if not os.path.exists(logs):
         os.makedirs(logs)
     output_models = f'{ROOT}/models/{TASK}/{STRUCTURE}/{COMPRESSED_GRAPH}/node2vec/buggy_curated/'
-    if not os.path.exists(output_models):
-        os.makedirs(output_models)
     if not os.path.exists(output_models):
         os.makedirs(output_models)
     # feature_extractor = f'{ROOT}/ge-sc-data/source_code/gesc_matrices_node_embedding/matrix_node2vec_dim128_of_core_graph_of_{bugtype}_{COMPRESSED_GRAPH}_clean_{file_counter[bugtype]}_{DATA_ID}.pkl'
@@ -487,7 +477,7 @@ def node2vec(compressed_graph, source_code, dataset, feature_extractor, bugtype,
     model.reset_parameters()
     t0 = time()
     model = train(model, train_mask, targets, device)
-    save_path = os.path.join(output_models, f'han.pth')
+    save_path = os.path.join(output_models, f'{bugtype}_{STRUCTURE}_{repeat}.pth')
     torch.save(model.state_dict(), save_path)
     t1 = time()
     model.eval()
