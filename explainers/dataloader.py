@@ -8,11 +8,11 @@ from torch_geometric.data import Data
 from torch_geometric.utils import from_networkx
 
 from sco_models.model_hgt import HGTVulGraphClassifier as GraphClassifier
-
+from sco_models.graph_utils import load_hetero_nx_graph
 
 class GESCData:
     def __init__(self, input_graph, split=None ,gpu=None):
-        self.nx_graph = nx.read_gpickle(input_graph)
+        self.nx_graph = load_hetero_nx_graph(input_graph)
         self.original_graph = self.nx_graph.copy()
         if split is not None:
             amount_nodes = int(split  * len(self.nx_graph))

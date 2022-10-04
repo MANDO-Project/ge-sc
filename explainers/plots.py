@@ -46,7 +46,7 @@ def __flow__(model):
 
 
 def visualize_subgraph(model, node_idx, edge_index, edge_mask, num_hops, y=None,
-                       threshold=None, **kwargs):
+                       threshold=None, preds=None, **kwargs):
     """Visualizes the subgraph around :attr:`node_idx` given an edge mask
     :attr:`edge_mask`.
 
@@ -83,16 +83,22 @@ def visualize_subgraph(model, node_idx, edge_index, edge_mask, num_hops, y=None,
                         device=edge_index.device)
     else:
         y = y[subset].to(torch.float) / y.max().item()
+        node_color = ['#ff2d00' if gt else '#00a912' for gt in y]
     print('edge mask: ', edge_mask[edge_mask!=0])
-    data = Data(edge_index=edge_index, att=edge_mask[edge_mask!=0], y=y,
+    # node_type = [node['node_type'] for _, node in model.nx_graph.nodes(data=True)]
+    node_type = [model.nx_graph.nodes[i.item()]['node_type'] for i in subset]
+    node_source_code_lines = [','.join(map(str, model.nx_graph.nodes[i.item()]['node_source_code_lines'])) for i in subset]
+
+    data = Data(node_type=node_type, node_source_code_lines=node_source_code_lines, edge_index=edge_index, att=edge_mask[edge_mask!=0], y=y,
                 num_nodes=y.size(0)).to('cpu')
-    G = to_networkx(data, node_attrs=['y'], edge_attrs=['att'])
+    G = to_networkx(data, node_attrs=['y', 'node_type', 'node_source_code_lines'], edge_attrs=['att'])
     mapping = {k: i for k, i in enumerate(subset.tolist())}
     G = nx.relabel_nodes(G, mapping)
 
     node_kwargs = copy(kwargs)
     node_kwargs['node_size'] = kwargs.get('node_size') or 800
     node_kwargs['cmap'] = kwargs.get('cmap') or 'cool'
+    node_kwargs['margins'] = .5
 
     label_kwargs = copy(kwargs)
     label_kwargs['font_size'] = kwargs.get('font_size') or 10
@@ -100,10 +106,13 @@ def visualize_subgraph(model, node_idx, edge_index, edge_mask, num_hops, y=None,
     pos = nx.spring_layout(G)
     plt.switch_backend("agg")
     ax = plt.gca()
+    edge_attn = {}
     for source, target, data in G.edges(data=True):
         print(data['att'])
         if np.isnan(data['att']):
             data['att'] = 0
+        else:
+            data['att'] = round(data['att'], 3)
         ax.annotate(
             '', xy=pos[target], xycoords='data', xytext=pos[source],
             textcoords='data', arrowprops=dict(
@@ -113,8 +122,25 @@ def visualize_subgraph(model, node_idx, edge_index, edge_mask, num_hops, y=None,
                 shrinkB=sqrt(node_kwargs['node_size']) / 2.0,
                 connectionstyle="arc3,rad=0.1",
             ))
-    nx.draw_networkx_nodes(G, pos, node_color=y.tolist(), **node_kwargs)
+        edge_attn[(source, target)] = data['att']
+    node_labels = {}
+    for id, node in G.nodes(data=True):
+        # predited = logits[id][1]
+        nodetype = node['node_type'][:10]
+        node_source_code_lines = node['node_source_code_lines']
+        conf = round(preds[id][1], 4)
+        node_labels[id] = f'{id}_{nodetype}\n{conf:.3f}\n{node_source_code_lines}'
+        # gt = node['node_info_vulnerabilities']
+        # if gt:
+        #     node_color.append('#ff2d00')
+        # else:
+        #     node_color.append('#00a912')
+    label_kwargs['labels'] = node_labels
+    # label_kwargs['node_source_code_lines'] = node_source_code_lines
+
+    nx.draw_networkx_nodes(G, pos, node_color=node_color, **node_kwargs)
     nx.draw_networkx_labels(G, pos, **label_kwargs)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_attn)
 
     return ax, G
 

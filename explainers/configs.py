@@ -96,6 +96,8 @@ def arg_parse():
                         help='True if want to discard full and empty coalitions')
     parser.add_argument("--S", type=int,
                         help='Max size of coalitions sampled in priority and treated specifically')
+    parser.add_argument("--sm", "--smart_contracts", type=list,
+                        help='Interested smart contracts')
 
     # args_hv: 'compute_pred', 'compute_pred_subgraph', 'graph_classification'
     # args_feat: 'All', 'Expectation', 'Null'
@@ -108,9 +110,9 @@ def arg_parse():
                         num_samples=10,
                         fullempty=None,
                         S=1,
-                        hops=3,
+                        hops=1000,
                         hv='compute_pred',
-                        feat='Expectation',
+                        feat='All',
                         coal='SmarterSeparate',
                         g='WLR_sklearn',
                         multiclass=False,

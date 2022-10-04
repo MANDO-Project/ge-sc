@@ -5,6 +5,7 @@
 # Import packages
 import random
 import time
+from os.path import join
 from copy import deepcopy
 from itertools import combinations
 
@@ -60,7 +61,9 @@ class GraphSVX():
                 args_coal='Smarter',
                 args_g='WLS',
                 regu=None,
-                vizu=False):
+                vizu=False,
+                log_dir=None,
+                preds=None):
         """ Explain prediction for a given node - GraphSVX method
 
         Args:
@@ -92,6 +95,7 @@ class GraphSVX():
         # Explain several nodes sequentially 
         phi_list = []
         for node_index in node_indexes:
+            print('=========================================')
             print('Node ids: ', node_index)
 
             # Compute true prediction for original instance via explained GNN model
@@ -144,6 +148,8 @@ class GraphSVX():
             if regu==0 or self.F==0:
                 self.F=0
                 print('Explainations only consider graph structure')
+                if D == 0:
+                    continue
             self.M = self.F+D
 
             # Def range of endcases considered
@@ -184,7 +190,7 @@ class GraphSVX():
             # Visualise
             if vizu:
                 self.vizu(edge_mask, node_index, phi,
-                        true_pred, hops, multiclass)
+                        true_pred, hops, multiclass, log_dir, preds)
 
             # Time
             end = time.time()
@@ -1570,7 +1576,7 @@ class GraphSVX():
             print('Most influential neighbours: ', [
                   (item[0].item(), item[1].item()) for item in list(influential_nei.items())])
 
-    def vizu(self, edge_mask, node_index, phi, predicted_class, hops, multiclass):
+    def vizu(self, edge_mask, node_index, phi, predicted_class, hops, multiclass, log_dir, preds):
         """ Vizu of important nodes in subgraph around node_index
 
         Args:
@@ -1622,32 +1628,33 @@ class GraphSVX():
                                    mask,
                                    hops,
                                    y=self.data.y,
-                                   threshold=None)
+                                   threshold=None,
+                                   preds=preds)
 
-        plt.savefig('results/GS1_{}_{}_{}'.format(self.data.name,
+        plt.savefig(join(log_dir, 'GS1_{}_{}_{}'.format(self.data.name,
                                                   self.model.__class__.__name__,
-                                                  node_index),
-                    bbox_inches='tight')
-
+                                                  node_index)),
+                    bbox_inches='tight', dpi=800)
+        plt.clf()
         # Other visualisation
-        try:
-            G = denoise_graph(self.data, mask, phi[self.F:], self.neighbours,
-                  node_index, feat=None, label=self.data.y, threshold_num=10)
-            log_graph(G,
-                    identify_self=True,
-                    nodecolor="label",
-                    epoch=0,
-                    fig_size=(4, 3),
-                    dpi=300,
-                    label_node_feat=False,
-                    edge_vmax=None,
-                    args=None)
+        # try:
+        #     G = denoise_graph(self.data, mask, phi[self.F:], self.neighbours,
+        #           node_index, feat=None, label=self.data.y, threshold_num=10)
+        #     log_graph(G,
+        #             identify_self=True,
+        #             nodecolor="label",
+        #             epoch=0,
+        #             fig_size=(4, 3),
+        #             dpi=300,
+        #             label_node_feat=False,
+        #             edge_vmax=None,
+        #             args=None)
 
-            plt.savefig('results/GS_{}_{}_{}'.format(self.data.name,
-                                                    self.model.__class__.__name__,
-                                                    node_index),
-                        bbox_inches='tight')
-        except:
-            pass
+        #     plt.savefig(join(log_dir, 'GS_{}_{}_{}'.format(self.data.name,
+        #                                             self.model.__class__.__name__,
+        #                                             node_index)),
+        #                 bbox_inches='tight')
+        # except:
+        #     pass
     
         #plt.show()
