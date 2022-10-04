@@ -30,7 +30,7 @@ def main():
     # curated_bug_path = f'./experiments/ge-sc-data/source_code/access_control/curated/'
     # smart_contracts['access_control'] = [f.split('.')[0] for f in os.listdir(curated_bug_path) if f.endswith('.sol')][:1]
     bug_list = [
-                # 'access_control',
+                'access_control',
                 'arithmetic',
                 # 'denial_of_service',
                 'front_running',
