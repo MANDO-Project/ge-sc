@@ -98,10 +98,10 @@ def visualize_subgraph(model, node_idx, edge_index, edge_mask, num_hops, y=None,
     node_kwargs = copy(kwargs)
     node_kwargs['node_size'] = kwargs.get('node_size') or 800
     node_kwargs['cmap'] = kwargs.get('cmap') or 'cool'
-    node_kwargs['margins'] = .5
+    node_kwargs['margins'] = .4
 
     label_kwargs = copy(kwargs)
-    label_kwargs['font_size'] = kwargs.get('font_size') or 10
+    label_kwargs['font_size'] = kwargs.get('font_size') or 5
 
     pos = nx.spring_layout(G)
     plt.switch_backend("agg")
