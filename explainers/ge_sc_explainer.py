@@ -8,7 +8,7 @@ from shutil import copy
 from . import configs
 from .dataloader import GESCData
 from .explainers import GraphSVX
-from sco_models.model_hgt import HGTVulNodeClassifier as NodeClassifier
+from sco_models.model_node_classification import MANDONodeClassifier as NodeClassifier
 
 def main():
     args = configs.arg_parse()

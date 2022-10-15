@@ -14,9 +14,7 @@ import torch
 import networkx as nx
 from sklearn.model_selection import KFold
 
-from sco_models.model_hetero import MANDOGraphClassifier
 from sco_models.model_node_classification import MANDONodeClassifier
-from sco_models.model_hgt import HGTVulNodeClassifier
 from sco_models.utils import score, get_classification_report, get_confusion_matrix, dump_result
 from sco_models.visualization import visualize_average_k_folds
 

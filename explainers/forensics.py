@@ -4,7 +4,7 @@ import networkx as nx
 import pandas as pd
 from torch import nn
 
-from sco_models.model_hgt import HGTVulNodeClassifier as NodeClassifier
+from sco_models.model_node_classification import MANDONodeClassifier as NodeClassifier
 from sco_models.graph_utils import get_node_label
 
 MODEL = 'hgt'

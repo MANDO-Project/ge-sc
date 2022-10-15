@@ -30,7 +30,7 @@ else:
     DEVICE = 'cpu'
 # Hyper-parameters
 BYTECODE = 'runtime'
-MODEL = 'hgt'
+MODEL = 'han'
 REAPEAT = 10
 sequence_length = 28
 input_size = 28

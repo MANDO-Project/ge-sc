@@ -16,7 +16,8 @@ from mpl_toolkits.mplot3d import Axes3D
 
 from sco_models.visualization import nodes_edges_correlation
 from sco_models.visualization import nodes_edges_compressed_graph_correlation
-from sco_models.model_hgt import HGTVulGraphClassifier
+from sco_models.model_hetero import MANDOGraphClassifier
+
 
 def polygon_under_graph(x, y):
     """
@@ -28,7 +29,7 @@ def polygon_under_graph(x, y):
 
 
 def plot_graph(nxg):
-    model = HGTVulGraphClassifier(nxg, node_feature='nodetype', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu')
+    model = MANDOGraphClassifier(nxg, node_feature='nodetype', hidden_size=128, num_layers=2,num_heads=8, use_norm=True, device='cpu')
     graph = model.symmetrical_global_graph
     ag = pgv.AGraph(strict=True, directed=False)
     for u, v, k in graph.canonical_etypes:

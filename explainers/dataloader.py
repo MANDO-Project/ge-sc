@@ -7,7 +7,7 @@ from torch_geometric.data import HeteroData
 from torch_geometric.data import Data
 from torch_geometric.utils import from_networkx
 
-from sco_models.model_hgt import HGTVulGraphClassifier as GraphClassifier
+from sco_models.model_hetero import MANDOGraphClassifier as GraphClassifier
 from sco_models.graph_utils import load_hetero_nx_graph
 
 class GESCData:

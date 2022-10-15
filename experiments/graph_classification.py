@@ -20,7 +20,7 @@ from statistics import mean
 
 from sco_models.utils import get_classification_report
 from sco_models.graph_utils import reveert_map_node_embedding, load_hetero_nx_graph
-
+from sco_models.model_hetero import MANDOGraphClassifier as GraphClassifier
 
 # Arguments
 parser = argparse.ArgumentParser('MANDO Experiments')
@@ -30,18 +30,12 @@ parser.add_argument('-e', '--epochs', type=int, default=2,
                     help='Number of ephocs')
 parser.add_argument('-rep', '--repeat', type=int, default=2,
                     help='Number of repetitions')
-parser.add_argument('-m', '--model', type=str, default='hgt',
-                    help='Kind of model')
 parser.add_argument('-b', '--bytecode', type=str, default='runtime',
                     help='Kind of bytecode')
                     
 parser.add_argument('-r', '--result', action='store_true')
 args = parser.parse_args().__dict__
-
-if args['model'] == 'han':
-    from sco_models.model_hetero import MANDOGraphClassifier as GraphClassifier
-elif args['model'] == 'hgt':
-    from sco_models.model_hgt import HGTVulGraphClassifier as GraphClassifier
+    
 
 torch.manual_seed(args['seed'])
 ROOT = './experiments'
