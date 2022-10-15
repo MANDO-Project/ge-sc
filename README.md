@@ -1,7 +1,8 @@
 # Smart Contract Vulnerabilities
 [![python](https://img.shields.io/badge/python-3.7.12-blue)](https://www.python.org/)
 [![slither](https://img.shields.io/badge/slither-0.8.0-orange)](https://github.com/crytic/slither)
-[![slither](https://img.shields.io/badge/dgl-0.6.1-green)](https://www.dgl.ai/)
+[![dgl](https://img.shields.io/badge/dgl-0.6.1-green)](https://www.dgl.ai/)
+[![MIT-license](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 # Multi-Level Graph Embeddings
 [![GE-SC overview](./assets/GE-SC-components-2Predictions.svg)](https://anonymous.4open.science/r/ge-sc-FE31)
