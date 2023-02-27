@@ -9,6 +9,26 @@
 This repository is an implementation of MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities.
 The source code is based on the implementation of [HAN](https://github.com/dmlc/dgl/tree/master/examples/pytorch/han) and [GAT](https://github.com/dmlc/dgl/tree/master/examples/pytorch/gat) model using [Deep Graph Library](https://www.dgl.ai/).
 
+## Citation
+Nguyen, H. H., Nguyen, N. M., Xie, C., Ahmadi, Z., Kudendo, D., Doan, T. N., & Jiang, L. (2022, October). *MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities,* 2022 IEEE 9th International Conference on Data Science and Advanced Analytics (DSAA), Shenzhen, China, 2022, pp. 1-10. [Preprint](https://hoanghnguyen.com/assets/pdf/nguyen2022dsaa.pdf)
+
+```
+@inproceedings{nguyen2022dsaa,
+  author = {Nguyen, Hoang H. and Nguyen, Nhat-Minh and Xie, Chunyao and Ahmadi, Zahra and Kudenko, Daniel and Doan, Thanh-Nam and Jiang, Lingxiao},
+  title = {MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities},
+  year = {2022},
+  month = {10},
+  booktitle = {Proceedings of the 9th IEEE International Conference on Data Science and Advanced Analytics},
+  pages = {1-10},
+  numpages = {10},
+  keywords = {heterogeneous graphs, graph embedding, graph neural networks, vulnerability detection, smart contracts, Ethereum blockchain},
+  location = {Shenzhen, China},
+  doi = {10.1109/DSAA54385.2022.10032337},
+  series = {DSAA '22}
+}
+```
+
+
 # Table of contents
 
 - [Smart Contract Vulnerabilities](#smart-contract-vulnerabilities)
