@@ -1,4 +1,4 @@
-# MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities
+# MANDO - Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities
 [![python](https://img.shields.io/badge/python-3.7.12-blue)](https://www.python.org/)
 [![slither](https://img.shields.io/badge/slither-0.8.0-orange)](https://github.com/crytic/slither)
 [![dgl](https://img.shields.io/badge/dgl-0.6.1-green)](https://www.dgl.ai/)
