@@ -13,7 +13,7 @@ The source code is based on the implementation of [HAN](https://github.com/dmlc/
 [![GE-SC overview](./assets/GE-SC-components-2Predictions.svg)](https://github.com/MANDO-Project/ge-sc)
 
 ## Citation
-Nguyen, H. H., Nguyen, N. M., Xie, C., Ahmadi, Z., Kudendo, D., Doan, T. N., & Jiang, L. (2022, October). *MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities,* 2022 IEEE 9th International Conference on Data Science and Advanced Analytics (DSAA), Shenzhen, China, 2022, pp. 1-10. [Preprint](https://hoanghnguyen.com/assets/pdf/nguyen2022dsaa.pdf)
+Nguyen, H. H., Nguyen, N. M., Xie, C., Ahmadi, Z., Kudendo, D., Doan, T. N., & Jiang, L. (2022, October). *MANDO: Multi-Level Heterogeneous Graph Embeddings for Fine-Grained Detection of Smart Contract Vulnerabilities,* 2022 IEEE 9th International Conference on Data Science and Advanced Analytics (DSAA' 22), Shenzhen, China, 2022, pp. 1-10. [Preprint](https://hoanghnguyen.com/assets/pdf/nguyen2022dsaa.pdf)
 
 ```
 @inproceedings{nguyen2022dsaa,
